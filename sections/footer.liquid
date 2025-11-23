@@ -1,4 +1,157 @@
-<footer>
+{{ 'cora-footer.css' | asset_url | stylesheet_tag }}
+
+<section id="cora-footer-{{ section.id }}"
+  class="cora-footer"
+  role="contentinfo"
+  aria-label="{{ section.settings.aria_label | default: 'Footer' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 40 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;
+    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
+  "
+>
+  <div class="cora-footer__inner">
+
+    <div class="cora-footer__top">
+
+      {%- comment -%} BRAND COLUMN (add only one brand block) {%- endcomment -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'brand' %}
+          <div class="cora-footer__brand" role="region" aria-label="Brand">
+            {% if block.settings.logo %}
+              <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
+                <img src="{{ block.settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" loading="eager" width="200" height="60">
+              </a>
+            {% else %}
+              <!-- fallback demo image (replace with theme asset on deploy) -->
+              <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
+                <img src="/mnt/data/cba058df-45aa-475b-b397-e2adc14876f5.png" alt="{{ shop.name }}" loading="eager" width="200" height="60">
+              </a>
+            {% endif %}
+
+            {% if block.settings.description != blank %}
+              <p class="cora-footer__brand-desc">{{ block.settings.description }}</p>
+            {% endif %}
+
+            <div class="cora-footer__socials" aria-label="Follow us">
+              {% for icon_block in section.blocks %}
+                {% if icon_block.type == 'social' and icon_block.settings.icon %}
+                  <a class="cora-footer__social-link" href="{{ icon_block.settings.url | default: '#' }}" aria-label="{{ icon_block.settings.label }}" target="{{ icon_block.settings.target }}">
+                    <img src="{{ icon_block.settings.icon | img_url: '64x64' }}" alt="{{ icon_block.settings.label }}" width="40" height="40" loading="lazy">
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {%- comment -%} LINK COLUMNS (merchant can add multiple) {%- endcomment -%}
+      <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
+        {% for block in section.blocks %}
+          {% if block.type == 'link_column' %}
+            <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
+              {% if block.settings.title != blank %}
+                <h4 class="cora-footer__col-title">{{ block.settings.title }}</h4>
+              {% endif %}
+
+              {% if block.settings.menu %}
+                <ul class="cora-footer__links" aria-hidden="false">
+                  {% assign list_handle = block.settings.menu %}
+                  {% for link in linklists[list_handle].links %}
+                    <li class="cora-footer__link-item">
+                      <a class="cora-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div> <!-- /.cora-footer__top -->
+
+    <div class="cora-footer__divider" role="presentation" aria-hidden="true"></div>
+
+    <div class="cora-footer__bottom">
+      <div class="cora-footer__copyright">
+        {% if section.settings.copyright_text != blank %}
+          {{ section.settings.copyright_text }}
+        {% else %}
+          &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.
+        {% endif %}
+      </div>
+
+      <div class="cora-footer__right">
+        {% if section.settings.trust_text != blank %}
+          <div class="cora-footer__trust">{{ section.settings.trust_text }}</div>
+        {% endif %}
+
+        {% comment %} {% if section.settings.show_payment_icons %}
+          <div class="cora-footer__payments" aria-hidden="true">
+            {% for type in shop.enabled_payment_types %}
+              <span class="cora-footer__payment-icon">{% raw %}{{% endraw %} type | payment_type_svg_tag {% raw %}}{% endraw %}</span>
+            {% endfor %}
+          </div>
+        {% endif %} {% endcomment %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cora Footer ",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Footer" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (px)", "min": 0, "max": 200, "step": 2, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (px)", "min": 0, "max": 200,  "step": 2, "default": 40 },
+    { "type": "text", "id": "copyright_text", "label": "Copyright text (optional)" },
+    { "type": "text", "id": "trust_text", "label": "Right-side small text " },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
+        { "type": "textarea", "id": "description", "label": "Description (optional)" }
+      ]
+    },
+    {
+      "type": "link_column",
+      "name": "Link Column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Column title", "default": "Column" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Social Icon",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon (SVG recommended)" },
+        { "type": "text", "id": "label", "label": "Label (aria)", "default": "Social" },
+        { "type": "url", "id": "url", "label": "Link URL", "default": "/" },
+        { "type": "select", "id": "target", "label": "Open in", "options":[{"value":"_self","label":"Same window"},{"value":"_blank","label":"New tab"}], "default":"_blank" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Cora Footer ", "category": "Global" }
+  ]
+}
+{% endschema %}
+
+
+
+{% comment %} <footer>
   <div class="footer__copyright">
     &copy;
     {{ 'now' | date: '%Y' }}
@@ -54,4 +207,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %} {% endcomment %}
