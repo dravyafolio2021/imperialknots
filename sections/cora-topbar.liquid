@@ -13,12 +13,14 @@
       margin-left:calc(50% - 50vw);
       margin-right:calc(50% - 50vw);
     }
-  .shopify-section-{{ section.id }}{
+  #shopify-section-{{ section.id }}{
      background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
      background-color: {{ section.settings.bg_color_desktop }};
      background-size:cover;
+     overflow:hidden;
      background-position:center;
   }
+
     {% if section.settings.bg_image_desktop %}
     #cora-topbar-marquee-{{ section.id }}{
       background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
@@ -236,6 +238,6 @@
 
     { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false }
   ],
-  "presets": [{ "name": "Cora — Topbar Marquee (Simple)" }]
+  "presets": [{ "name": "Cora — Topbar Marquee ", "category": "Global" }]
 }
 {% endschema %}

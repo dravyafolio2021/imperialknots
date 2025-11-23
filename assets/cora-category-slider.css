@@ -1,0 +1,131 @@
+/* cora-category-slider.css - horizontal, accessible, lightweight */
+
+/* outer section */
+.cora-category-slider {
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* inner wrap keeps center alignment */
+.cora-category-slider__wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+   
+}
+
+/* horizontal track: scroll-snap for smooth keyboard + touch support */
+.cora-category-slider__track {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  padding: 6px 4px;
+}
+
+/* each item */
+.cora-category-slider__item {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* link and layout */
+.cora-category-slider__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  gap: 12px;
+}
+
+/* circular media container */
+.cora-category-slider__media {
+  width: 112px;
+  height: 112px;
+  border-radius: 9999px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06),
+    inset 0 0 0 4px rgba(20, 30, 40, 0.06);
+  border: 4px solid rgba(10, 20, 35, 0.08);
+  background: #fff;
+}
+
+.cora-category-slider__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* placeholder circle (if no image) */
+.cora-category-slider__media--placeholder {
+  background: linear-gradient(180deg, #f6f6f6, #eaeef0);
+}
+
+/* title */
+.cora-category-slider__title {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  color: rgba(10, 20, 30, 0.88);
+  margin-top: 6px;
+}
+
+/* keyboard focus */
+.cora-category-slider__link:focus {
+  outline: 3px solid rgba(0, 120, 230, 0.12);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+/* hide scrollbar visually but keep functionality */
+.cora-category-slider__track {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0) transparent;
+}
+.cora-category-slider__track::-webkit-scrollbar {
+  height: 8px;
+}
+.cora-category-slider__track::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 8px;
+}
+
+/* responsive sizes */
+@media (max-width: 900px) {
+  .cora-category-slider__media {
+    width: 84px;
+    height: 84px;
+  }
+  .cora-category-slider__title {
+    font-size: 13px;
+  }
+ 
+}
+
+/* support large screens: show more gap */
+@media (min-width: 1600px) {
+  .cora-category-slider__track {
+    gap: 36px;
+  }
+  .cora-category-slider__media {
+    width: 128px;
+    height: 128px;
+  }
+}
+
+/* utility: center-first-and-last items visually */
+.cora-category-slider__track::before,
+.cora-category-slider__track::after {
+  display: inline-block;
+
+  flex: 0 0 auto;
+}
