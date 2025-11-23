@@ -1,0 +1,255 @@
+{{ 'cora-slider.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="cora-slider-{{ section.id }}"
+  class="cora-slider"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Homepage slider' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#000' }};
+    padding-top: {{ section.settings.padding_top | default: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
+  "
+>
+  <div class="cora-slider__viewport" data-slider-id="{{ section.id }}">
+    <div class="cora-slider__track" aria-live="polite">
+      {% for block in section.blocks %}
+        <div
+          class="cora-slider__slide"
+          data-slide-index="{{ forloop.index0 }}"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="{{ block.settings.heading | escape }}"
+        >
+          {% if block.settings.image %}
+            <picture class="cora-slider__image">
+              {% if block.settings.image_mobile %}
+                <source media="(max-width: 900px)" srcset="{{ block.settings.image_mobile | img_url: '800x' }}">
+              {% endif %}
+              <img
+                src="{{ block.settings.image | img_url: '2000x' }}"
+                alt="{{ block.settings.image_alt | default: block.settings.heading }}"
+                loading="lazy"
+                width="2000"
+                height="1000"
+              >
+            </picture>
+          {% endif %}
+
+          <div
+            class="cora-slider__overlay"
+            style="background: rgba(0,0,0, {{ block.settings.overlay_opacity | default: 0.35 }} );"
+          ></div>
+
+          <div
+            class="cora-slider__content"
+            style="--cora-content-align: {{ block.settings.content_align | default: 'left' }}; --cora-content-width: {{ block.settings.content_width | default: 50 }}%;"
+          >
+            {% if block.settings.subtitle != blank %}
+              <div class="cora-slider__kicker">{{ block.settings.subtitle }}</div>
+            {% endif %}
+
+            {% if block.settings.heading != blank %}
+              <h2 class="cora-slider__heading">{{ block.settings.heading }}</h2>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <div class="cora-slider__text">{{ block.settings.text }}</div>
+            {% endif %}
+
+            <div class="cora-slider__buttons">
+              {% if block.settings.primary_button_text != blank %}
+                <a class="cora-btn cora-btn--primary" href="{{ block.settings.primary_button_link }}">
+                  {{- block.settings.primary_button_text -}}
+                </a>
+              {% endif %}
+              {% if block.settings.secondary_button_text != blank %}
+                <a class="cora-btn cora-btn--ghost" href="{{ block.settings.secondary_button_link }}">
+                  {{- block.settings.secondary_button_text -}}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- track -->
+  </div>
+  <!-- viewport -->
+
+  {% if section.settings.show_arrows %}
+    <div class="cora-slider__arrows">
+      <button class="cora-slider__arrow cora-slider__arrow--prev" aria-label="Previous slide" data-action="prev">
+        ‹
+      </button>
+      <button class="cora-slider__arrow cora-slider__arrow--next" aria-label="Next slide" data-action="next">›</button>
+    </div>
+  {% endif %}
+
+  {% if section.settings.show_dots %}
+    <div class="cora-slider__dots" data-dots-for="{{ section.id }}"></div>
+  {% endif %}
+</section>
+
+<script>
+  (function(){
+    var sliderRoot = document.querySelector('#cora-slider-{{ section.id }}');
+    if (!sliderRoot) return;
+    var viewport = sliderRoot.querySelector('.cora-slider__viewport');
+    var track = sliderRoot.querySelector('.cora-slider__track');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.cora-slider__slide'));
+    if (!slides.length) return;
+
+    var autoplay = {{ section.settings.autoplay | default: true }};
+    var interval = parseInt({{ section.settings.autoplay_speed | default: 5000 }}, 10);
+    var current = 0;
+    var timer = null;
+
+    // duplicate slides for seamless loop if requested
+    if ({{ section.settings.infinite | default: true }}) {
+      slides.forEach(function(s){ var clone = s.cloneNode(true); clone.classList.add('cora-slider__slide--clone'); track.appendChild(clone); });
+      slides = Array.prototype.slice.call(track.querySelectorAll('.cora-slider__slide'));
+    }
+
+    function updatePosition() {
+      var slideWidth = viewport.clientWidth;
+      var offset = - (current * slideWidth);
+      track.style.transform = 'translateX(' + offset + 'px)';
+      updateDots();
+    }
+
+    function prev() { current = Math.max(0, current - 1); updatePosition(); resetAutoplay(); }
+    function next() {
+      current = Math.min(slides.length - 1, current + 1);
+      updatePosition();
+      resetAutoplay();
+    }
+
+    function goto(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      updatePosition();
+      resetAutoplay();
+    }
+
+    // arrows
+    var btnPrev = sliderRoot.querySelector('[data-action="prev"]');
+    var btnNext = sliderRoot.querySelector('[data-action="next"]');
+    if (btnPrev) btnPrev.addEventListener('click', prev);
+    if (btnNext) btnNext.addEventListener('click', next);
+
+    // dots
+    var dotsContainer = sliderRoot.querySelector('[data-dots-for="{{ section.id }}"]');
+    function buildDots(){
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      var count = {{ section.blocks.size }};
+      for (var i=0;i<count;i++){
+        var b = document.createElement('button');
+        b.className = 'cora-slider__dot';
+        b.setAttribute('data-index', i);
+        b.setAttribute('aria-label','Go to slide ' + (i+1));
+        b.addEventListener('click', function(e){ goto(parseInt(this.getAttribute('data-index'),10)); });
+        dotsContainer.appendChild(b);
+      }
+    }
+    function updateDots(){
+      if (!dotsContainer) return;
+      var dots = dotsContainer.querySelectorAll('.cora-slider__dot');
+      for (var i=0;i<dots.length;i++){ dots[i].classList.toggle('is-active', i === (current % {{ section.blocks.size }})); }
+    }
+
+    buildDots();
+
+    // autoplay
+    function startAutoplay(){
+      if (!autoplay) return;
+      stopAutoplay();
+      timer = setInterval(function(){
+        current = (current + 1) % slides.length;
+        updatePosition();
+      }, interval);
+    }
+    function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+    function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+    // pause on hover / focus
+    sliderRoot.addEventListener('mouseenter', stopAutoplay);
+    sliderRoot.addEventListener('mouseleave', startAutoplay);
+    sliderRoot.addEventListener('focusin', stopAutoplay);
+    sliderRoot.addEventListener('focusout', startAutoplay);
+
+    // resize handling
+    var resizeTimeout;
+    window.addEventListener('resize', function(){ clearTimeout(resizeTimeout); resizeTimeout = setTimeout(function(){ updatePosition(); }, 120); });
+
+    // init
+    updatePosition();
+    startAutoplay();
+
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cora — Slider",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Homepage slider" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
+    { "type": "checkbox", "id": "infinite", "label": "Infinite loop", "default": true },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#000000" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (px)", "min": 0, "step": 2 , "max": 200, "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (px)", "min": 0,  "step": 2 , "max": 200, "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (optional)" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "imperial knots" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (small)" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "primary_button_text", "label": "Primary button text" },
+        { "type": "url", "id": "primary_button_link", "label": "Primary button link" },
+        { "type": "text", "id": "secondary_button_text", "label": "Secondary button text" },
+        { "type": "url", "id": "secondary_button_link", "label": "Secondary button link" },
+        {
+          "type": "select",
+          "id": "content_align",
+          "label": "Content alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "content_width",
+          "label": "Content width (% of container)",
+          "min": 30,
+          "max": 80,
+          "step": 1,
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity (0-1)",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "default": 0.4
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cora — Slider  ", "category": "Home Page" }]
+}
+{% endschema %}
