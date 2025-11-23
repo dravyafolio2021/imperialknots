@@ -1,0 +1,142 @@
+{{ 'cora-features.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{  section.id }}{
+     background-color: {{ section.settings.bg_color | default: '#000000' }};
+  }
+{%- endstyle -%}
+
+<section
+  id="cora-features-{{ section.id }}"
+  class="cora-features"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Why choose us' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 48 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 48 }}px;
+    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
+  "
+>
+  <div class="cora-features__inner">
+    {% comment %} heading block: add one heading block at top when editing {% endcomment %}
+    {% for block in section.blocks %}
+      {% if block.type == 'heading' %}
+        <header class="cora-features__header">
+          {% if block.settings.heading != blank %}
+            <h2 class="cora-features__title">{{ block.settings.heading }}</h2>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p class="cora-features__description">{{ block.settings.description }}</p>
+          {% endif %}
+        </header>
+      {% endif %}
+    {% endfor %}
+
+    <div class="cora-features__grid" role="list" aria-label="Features">
+      {% for block in section.blocks %}
+        {% if block.type == 'feature' %}
+          <div class="cora-feature" role="listitem">
+            <div class="cora-feature__icon-wrap" aria-hidden="false">
+              {% if block.settings.icon %}
+                {%- comment -%}
+                  Merchant should upload an SVG in Assets and choose it here.
+                  image_picker returns the asset — for SVGs this will render inline via <img>.
+                {%- endcomment -%}
+                <img
+                  src="{{ block.settings.icon | img_url: '200x' }}"
+                  alt="{{ block.settings.icon_alt | default: block.settings.title }}"
+                  class="cora-feature__icon"
+                  width="64"
+                  height="64"
+                  loading="eager"
+                >
+              {% else %}
+                <span class="cora-feature__icon-placeholder" aria-hidden="true"></span>
+              {% endif %}
+            </div>
+
+            <div class="cora-feature__body">
+              {% if block.settings.title != blank %}
+                <div class="cora-feature__title">{{ block.settings.title }}</div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="cora-feature__text">{{ block.settings.text }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Why choose us" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#0b1220" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid (icons above text)" },
+        { "value": "list", "label": "Vertical list (icon left, text right)" }
+      ],
+      "default": "grid"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Why Choose Luxe Rugs" },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "More than just rugs — we're committed to quality, sustainability, and craftsmanship"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon (SVG recommended)" },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text ", "default": "Imperial Knots" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Sustainably Crafted" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Every rug is made with eco-friendly materials and ethical production practices"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Why Choose Us", "category": "Home Page" }]
+}
+{% endschema %}

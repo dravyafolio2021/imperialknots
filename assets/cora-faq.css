@@ -1,0 +1,118 @@
+/* cora-faq.css - Accordion FAQ */
+
+.cora-faq {
+  box-sizing: border-box;
+  width: 100%;
+  color: #0b1220;
+}
+.cora-faq__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* header */
+.cora-faq__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.cora-faq__title {
+  font-family: "Assistant", sans-serif;
+  font-size: 24px;
+  margin: 0 0 6px 0;
+  color: inherit;
+}
+.cora-faq__description {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: rgba(10, 20, 30, 0.7);
+  margin: 0;
+}
+
+/* list */
+.cora-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* item */
+.cora-faq__item {
+  border-radius: 10px;
+  overflow: visible;
+}
+
+/* trigger button */
+.cora-faq__trigger {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0)
+  );
+  border: 1px solid rgba(10, 20, 30, 0.04);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  color: inherit;
+}
+
+/* question */
+.cora-faq__question {
+  font-weight: 600;
+}
+
+/* +/- icon */
+.cora-faq__toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(10, 20, 30, 0.04);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* panel */
+.cora-faq__panel {
+  padding: 12px 18px 18px 18px;
+  border-radius: 8px;
+  background: transparent;
+}
+.cora-faq__answer {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: rgba(10, 20, 30, 0.8);
+  line-height: 1.6;
+}
+
+/* focus */
+.cora-faq__trigger:focus {
+  outline: 3px solid rgba(0, 120, 230, 0.12);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .cora-faq__inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .cora-faq__trigger {
+    padding: 14px 14px;
+  }
+  .cora-faq__panel {
+    padding: 10px 14px 14px 14px;
+  }
+}

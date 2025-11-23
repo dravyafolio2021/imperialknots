@@ -1,0 +1,149 @@
+/* cora-features.css - Features / Why Choose Us */
+
+.cora-features {
+  box-sizing: border-box;
+  width: 100%;
+  color: #fff;
+}
+.cora-features__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* header */
+.cora-features__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.cora-features__title {
+  font-family: "Assistant", sans-serif;
+  font-size: 26px;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+.cora-features__description {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
+/* grid layout (default) */
+.cora-features__grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+}
+
+/* feature card */
+.cora-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 6px 12px;
+}
+.cora-feature__icon-wrap {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+.cora-feature__icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* text */
+.cora-feature__title {
+  font-family: Assistant, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+}
+.cora-feature__text {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.25;
+  max-width: 220px;
+}
+
+/* layout option: list (icon left, text right) */
+.cora-features[data-layout="list"] .cora-features__grid,
+.cora-features[data-layout="list"] .cora-feature {
+}
+.cora-features[data-layout="list"] .cora-features__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cora-features[data-layout="list"] .cora-feature {
+  flex-direction: row;
+  text-align: left;
+  align-items: flex-start;
+  gap: 16px;
+}
+.cora-features[data-layout="list"] .cora-feature__icon-wrap {
+  width: 48px;
+  height: 48px;
+}
+.cora-features[data-layout="list"] .cora-feature__text {
+  max-width: none;
+}
+
+/* responsive */
+@media (max-width: 1200px) {
+  .cora-features__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .cora-feature__text {
+    max-width: 200px;
+  }
+}
+@media (max-width: 900px) {
+  .cora-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .cora-feature__text {
+    max-width: 220px;
+  }
+}
+@media (max-width: 560px) {
+  .cora-features__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .cora-feature {
+    padding: 8px 6px;
+  }
+  .cora-feature__icon-wrap {
+    width: 56px;
+    height: 56px;
+  }
+  .cora-feature__icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* small accessibility focus */
+.cora-feature__icon-wrap:focus-within,
+.cora-feature__body:focus-within,
+.cora-feature:focus-within {
+  outline: 3px solid rgba(255, 255, 255, 0.08);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
