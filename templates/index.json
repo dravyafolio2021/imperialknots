@@ -268,7 +268,7 @@
           "settings": {
             "image": "shopify://shop_images/ImageWithFallback-1.png",
             "image_alt": "Imperial Knots",
-            "kicker": "Kicker",
+            "kicker": "",
             "title": "Natural Jute",
             "subtitle": "Eco-friendly",
             "cta_text": "Shop Now",
@@ -276,13 +276,12 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_eNmGW4": {
+        "card_eTK4Ty": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
-            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
             "image_alt": "Imperial Knots",
-            "kicker": "Kicker",
+            "kicker": "",
             "title": "Natural Jute",
             "subtitle": "Eco-friendly",
             "cta_text": "Shop Now",
@@ -290,13 +289,12 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_6Kjn6F": {
+        "card_Ufykqt": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
-            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
             "image_alt": "Imperial Knots",
-            "kicker": "Kicker",
+            "kicker": "",
             "title": "Natural Jute",
             "subtitle": "Eco-friendly",
             "cta_text": "Shop Now",
@@ -304,13 +302,12 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_F9YaEC": {
+        "card_WPGC8w": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
-            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
             "image_alt": "Imperial Knots",
-            "kicker": "Kicker",
+            "kicker": "",
             "title": "Natural Jute",
             "subtitle": "Eco-friendly",
             "cta_text": "Shop Now",
@@ -322,9 +319,9 @@
       "block_order": [
         "heading_TzhgTe",
         "card_PbWBY8",
-        "card_eNmGW4",
-        "card_6Kjn6F",
-        "card_F9YaEC"
+        "card_eTK4Ty",
+        "card_Ufykqt",
+        "card_WPGC8w"
       ],
       "name": "Style Grid",
       "settings": {
