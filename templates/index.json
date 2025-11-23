@@ -400,6 +400,137 @@
         "padding_top": 32,
         "padding_bottom": 32
       }
+    },
+    "cora_features_jfEBK8": {
+      "type": "cora-features",
+      "blocks": {
+        "feature_Hb37kC": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Container.svg",
+            "icon_alt": "Imperial Knots",
+            "title": "Sustainably Crafted",
+            "text": "Every rug is made with eco-friendly materials and ethical production practices"
+          }
+        },
+        "feature_jMzcAN": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Container-1.svg",
+            "icon_alt": "Imperial Knots",
+            "title": "Artisan Partners",
+            "text": "We work directly with master weavers, supporting traditional craftsmanship"
+          }
+        },
+        "feature_GWzdzb": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Container-6.svg",
+            "icon_alt": "Imperial Knots",
+            "title": "Premium Quality",
+            "text": "Hand-selected materials and rigorous quality control ensure lasting beauty"
+          }
+        },
+        "feature_WgjimX": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Container-3.svg",
+            "icon_alt": "Imperial Knots",
+            "title": "Customer First",
+            "text": "Free shipping, easy returns, and lifetime support for your investment"
+          }
+        },
+        "heading_X4qLFT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why Choose Luxe Rugs",
+            "description": "More than just rugs — we're committed to quality, sustainability, and craftsmanship"
+          }
+        }
+      },
+      "block_order": [
+        "feature_Hb37kC",
+        "feature_jMzcAN",
+        "feature_GWzdzb",
+        "feature_WgjimX",
+        "heading_X4qLFT"
+      ],
+      "name": "Why Choose Us",
+      "settings": {
+        "aria_label": "Why choose us",
+        "bg_color": "#000000",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "layout": "grid"
+      }
+    },
+    "cora_faq_KAratB": {
+      "type": "cora-faq",
+      "blocks": {
+        "heading_4cqCbw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Frequently Asked Questions",
+            "description": "Have a question? We have answers. Browse common questions below."
+          }
+        },
+        "faq_wNBUC3": {
+          "type": "faq",
+          "settings": {
+            "question": "Question goes here",
+            "answer": "Answer goes here",
+            "open": true
+          }
+        },
+        "faq_8BGYMx": {
+          "type": "faq",
+          "settings": {
+            "question": "Question goes here",
+            "answer": "Answer goes here",
+            "open": false
+          }
+        },
+        "faq_3CmA8h": {
+          "type": "faq",
+          "settings": {
+            "question": "Question goes here",
+            "answer": "Answer goes here",
+            "open": false
+          }
+        },
+        "faq_cXYMgK": {
+          "type": "faq",
+          "settings": {
+            "question": "Question goes here",
+            "answer": "Answer goes here",
+            "open": false
+          }
+        },
+        "faq_arjexG": {
+          "type": "faq",
+          "settings": {
+            "question": "Question goes here",
+            "answer": "Answer goes here",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_4cqCbw",
+        "faq_wNBUC3",
+        "faq_8BGYMx",
+        "faq_3CmA8h",
+        "faq_cXYMgK",
+        "faq_arjexG"
+      ],
+      "name": "Cora FAQ",
+      "settings": {
+        "aria_label": "FAQ",
+        "bg_color": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "accordion": true
+      }
     }
   },
   "order": [
@@ -407,6 +538,8 @@
     "cora_category_slider_9Dfbpf",
     "cora_collection_grid_JwBWdy",
     "cora_style_grid_K3RUBY",
-    "cora_product_grid_aPwt7d"
+    "cora_product_grid_aPwt7d",
+    "cora_features_jfEBK8",
+    "cora_faq_KAratB"
   ]
 }
