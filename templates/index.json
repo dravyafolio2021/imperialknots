@@ -9,12 +9,65 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "cora_slider_zddH7H": {
+      "type": "cora-slider",
+      "blocks": {
+        "slide_ribDea": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
+            "image_mobile": "shopify://shop_images/ImageWithFallback.png",
+            "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
+            "subtitle": "",
+            "heading": "Elevate your space with luxury rugsElevate your space with luxury rugs",
+            "text": "Handcrafted with premium materials and sustainable practices",
+            "primary_button_text": "Shop Rugs",
+            "primary_button_link": "",
+            "secondary_button_text": "Customize Your Rug",
+            "secondary_button_link": "",
+            "content_align": "left",
+            "content_width": 50,
+            "overlay_opacity": 0.4
+          }
+        },
+        "slide_Gx4CtH": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
+            "image_mobile": "shopify://shop_images/ImageWithFallback.png",
+            "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
+            "subtitle": "",
+            "heading": "Elevate your space with luxury rugsElevate your space with luxury rugs",
+            "text": "Handcrafted with premium materials and sustainable practices",
+            "primary_button_text": "Shop Rugs",
+            "primary_button_link": "",
+            "secondary_button_text": "Customize Your Rug",
+            "secondary_button_link": "",
+            "content_align": "left",
+            "content_width": 50,
+            "overlay_opacity": 0.4
+          }
+        }
+      },
+      "block_order": [
+        "slide_ribDea",
+        "slide_Gx4CtH"
+      ],
+      "name": "Slider  ",
+      "settings": {
+        "aria_label": "Homepage slider",
+        "autoplay": true,
+        "autoplay_speed": 5000,
+        "infinite": true,
+        "show_arrows": true,
+        "show_dots": true,
+        "bg_color": "#000000",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
-    "main"
+    "cora_slider_zddH7H"
   ]
 }
