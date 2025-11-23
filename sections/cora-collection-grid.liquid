@@ -1,0 +1,128 @@
+{{ 'cora-collection-grid.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="cora-collection-grid-{{ section.id }}"
+  class="cora-collection-grid"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Explore by styles' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 24 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 24 }}px;
+    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
+  "
+>
+  <div class="cora-collection-grid__inner">
+    {% comment %} Heading block (editor: add one heading block to control title + description) {% endcomment %}
+    {% for block in section.blocks %}
+      {% if block.type == 'heading' %}
+        <header class="cora-collection-grid__header">
+          {% if block.settings.heading != blank %}
+            <h2 class="cora-collection-grid__title">{{ block.settings.heading }}</h2>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p class="cora-collection-grid__description">{{ block.settings.description }}</p>
+          {% endif %}
+        </header>
+      {% endif %}
+    {% endfor %}
+
+    <div class="cora-collection-grid__grid" role="list">
+      {% for block in section.blocks %}
+        {% if block.type == 'card' %}
+          <div class="cora-collection-grid__card" role="listitem">
+            <a href="{{ block.settings.link | default: '#' }}" class="cora-collection-grid__card-link">
+              {% if block.settings.image %}
+                <div class="cora-collection-grid__media" aria-hidden="true">
+                  <img
+                    src="{{ block.settings.image | img_url: '720x720' }}"
+                    alt="{{ block.settings.image_alt | default: block.settings.title }}"
+                    width="720"
+                    height="720"
+                    loading="lazy"
+                  >
+                </div>
+              {% else %}
+                <div
+                  class="cora-collection-grid__media cora-collection-grid__media--placeholder"
+                  aria-hidden="true"
+                ></div>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <div class="cora-collection-grid__card-title">{{ block.settings.title }}</div>
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_link_cta and section.settings.cta_text != blank %}
+      <div class="cora-collection-grid__cta">
+        <a class="cora-collection-grid__cta-link" href="{{ section.settings.cta_url | default: '#' }}">
+          {{- section.settings.cta_text -}}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "  Collection Grid",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Explore by styles" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 24
+    },
+    { "type": "checkbox", "id": "show_link_cta", "label": "Show CTA link", "default": false },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "View all styles" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Explore by styles" },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "From classic to contemporary, find the perfect rug for your aesthetic"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Grid item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "imperial knots" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Category" },
+        { "type": "url", "id": "link", "label": "Link (collection or page)" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [{ "name": "  Collection Grid", "category": "Home Page" }]
+}
+{% endschema %}
