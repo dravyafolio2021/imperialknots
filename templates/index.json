@@ -252,11 +252,93 @@
         "cta_text": "View all styles",
         "cta_url": ""
       }
+    },
+    "cora_style_grid_K3RUBY": {
+      "type": "cora-style-grid",
+      "blocks": {
+        "heading_TzhgTe": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rugs by Color",
+            "description": ""
+          }
+        },
+        "card_PbWBY8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "Kicker",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_eNmGW4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "Kicker",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_6Kjn6F": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "Kicker",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_F9YaEC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_mobile": "shopify://shop_images/ImageWithFallback-1_1408b9bf-0ae3-4a71-a247-79d652ddb9cd.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "Kicker",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        }
+      },
+      "block_order": [
+        "heading_TzhgTe",
+        "card_PbWBY8",
+        "card_eNmGW4",
+        "card_6Kjn6F",
+        "card_F9YaEC"
+      ],
+      "name": "Style Grid",
+      "settings": {
+        "aria_label": "Rugs by color",
+        "bg_color": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     }
   },
   "order": [
     "cora_slider_zddH7H",
     "cora_category_slider_9Dfbpf",
-    "cora_collection_grid_JwBWdy"
+    "cora_collection_grid_JwBWdy",
+    "cora_style_grid_K3RUBY"
   ]
 }
