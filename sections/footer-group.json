@@ -11,15 +11,74 @@
   "type": "footer",
   "name": "t:general.footer",
   "sections": {
-    "footer": {
+    "footer_7fh9kJ": {
       "type": "footer",
+      "blocks": {
+        "link_column_eixREN": {
+          "type": "link_column",
+          "settings": {
+            "title": "Column",
+            "menu": "main-menu"
+          }
+        },
+        "link_column_9PdLah": {
+          "type": "link_column",
+          "settings": {
+            "title": "Column",
+            "menu": "main-menu"
+          }
+        },
+        "link_column_cLifNk": {
+          "type": "link_column",
+          "settings": {
+            "title": "Column",
+            "menu": "main-menu"
+          }
+        },
+        "link_column_JTRC6G": {
+          "type": "link_column",
+          "settings": {
+            "title": "Column",
+            "menu": "main-menu"
+          }
+        },
+        "social_V7f6HA": {
+          "type": "social",
+          "settings": {
+            "label": "Social",
+            "url": "/",
+            "target": "_blank"
+          }
+        },
+        "brand_nE7kPJ": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/Logo.png",
+            "description": "Handcrafted luxury rugs woven by skilled Indian artisans. Bringing heritage craftsmanship to contemporary homes worldwide."
+          }
+        }
+      },
+      "block_order": [
+        "link_column_eixREN",
+        "link_column_9PdLah",
+        "link_column_cLifNk",
+        "link_column_JTRC6G",
+        "social_V7f6HA",
+        "brand_nE7kPJ"
+      ],
+      "name": "Cora Footer ",
       "settings": {
-        "menu": "",
+        "aria_label": "Footer",
+        "bg_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "copyright_text": "© 2025 Imperial Knots. All rights reserved.",
+        "trust_text": "Handcrafted in India 🇮🇳 • Delivered Worldwide 🌍",
         "show_payment_icons": true
       }
     }
   },
   "order": [
-    "footer"
+    "footer_7fh9kJ"
   ]
 }
