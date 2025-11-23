@@ -13,7 +13,7 @@
   "sections": {
     "cora_topbar_7zr8g8": {
       "type": "cora-topbar",
-      "name": "Cora — Topbar",
+      "name": "Topbar",
       "settings": {
         "aria_label": "Announcement",
         "text": "Free Shipping on All Orders | 30-Day Returns | Sustainably Crafted",
@@ -39,6 +39,7 @@
     },
     "header_mGm9D7": {
       "type": "header",
+      "name": " Header",
       "settings": {
         "bg_color": "#ffffff",
         "text_color": "#111111",
