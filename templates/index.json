@@ -252,11 +252,90 @@
         "cta_text": "View all styles",
         "cta_url": ""
       }
+    },
+    "cora_style_grid_K3RUBY": {
+      "type": "cora-style-grid",
+      "blocks": {
+        "heading_TzhgTe": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rugs by Color",
+            "description": ""
+          }
+        },
+        "card_PbWBY8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_eTK4Ty": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_Ufykqt": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_WPGC8w": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Natural Jute",
+            "subtitle": "Eco-friendly",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        }
+      },
+      "block_order": [
+        "heading_TzhgTe",
+        "card_PbWBY8",
+        "card_eTK4Ty",
+        "card_Ufykqt",
+        "card_WPGC8w"
+      ],
+      "name": "Style Grid",
+      "settings": {
+        "aria_label": "Rugs by color",
+        "bg_color": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     }
   },
   "order": [
     "cora_slider_zddH7H",
     "cora_category_slider_9Dfbpf",
-    "cora_collection_grid_JwBWdy"
+    "cora_collection_grid_JwBWdy",
+    "cora_style_grid_K3RUBY"
   ]
 }
