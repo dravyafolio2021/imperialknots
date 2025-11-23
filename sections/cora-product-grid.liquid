@@ -1,0 +1,113 @@
+{{ 'cora-product-grid.css' | asset_url | stylesheet_tag }}
+
+<section id="cora-product-grid-{{ section.id }}"
+  class="cora-product-grid"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Trending Now' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 32 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 32 }}px;
+    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
+  "
+>
+
+  <div class="cora-product-grid__inner">
+
+    {% comment %} Heading block (add one heading block) {% endcomment %}
+    {% for block in section.blocks %}
+      {% if block.type == 'heading' %}
+        <header class="cora-product-grid__header">
+          {% if block.settings.heading != blank %}
+            <h2 class="cora-product-grid__title">{{ block.settings.heading }}</h2>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p class="cora-product-grid__description">{{ block.settings.description }}</p>
+          {% endif %}
+        </header>
+      {% endif %}
+    {% endfor %}
+
+    <div class="cora-product-grid__grid" role="list">
+      {% for block in section.blocks %}
+        {% if block.type == 'product_card' %}
+          <div class="cora-product-grid__card" role="listitem">
+            {% comment %} Use selected product via all_products[handle] (product picker returns handle/id) {% endcomment %}
+            {% if block.settings.product %}
+              <a class="cora-product-grid__card-link" href="{{ all_products[block.settings.product].url }}">
+                <div class="cora-product-grid__media-wrap">
+                  {% comment %} image override preferred; else product featured image {% endcomment %}
+                  {% if block.settings.override_image %}
+                    <img src="{{ block.settings.override_image | img_url: '720x720' }}" alt="{{ block.settings.override_image_alt | default: all_products[block.settings.product].title }}" loading="lazy" width="720" height="720">
+                  {% else %}
+                    <img src="{{ all_products[block.settings.product].featured_image | img_url: '720x720' }}" alt="{{ all_products[block.settings.product].title }}" loading="lazy" width="720" height="720">
+                  {% endif %}
+                  {% if block.settings.badge_text != blank %}
+                    <span class="cora-product-grid__badge" style="background: {{ block.settings.badge_bg | default: '#ffffff' }}; color: {{ block.settings.badge_color | default: '#111111' }};">{{ block.settings.badge_text }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="cora-product-grid__meta">
+                  <div class="cora-product-grid__title">{{ all_products[block.settings.product].title }}</div>
+
+                  {% unless block.settings.hide_price %}
+                    <div class="cora-product-grid__price">
+                      {% if all_products[block.settings.product].price %}
+                        <span class="cora-product-grid__price--current">{{ all_products[block.settings.product].price | money }}</span>
+                      {% endif %}
+                      {% if all_products[block.settings.product].compare_at_price and all_products[block.settings.product].compare_at_price > all_products[block.settings.product].price %}
+                        <span class="cora-product-grid__price--compare">{{ all_products[block.settings.product].compare_at_price | money }}</span>
+                      {% endif %}
+                    </div>
+                  {% endunless %}
+                </div>
+              </a>
+            {% else %}
+              <div class="cora-product-grid__card-empty">No product selected</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trending Product Grid ",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Trending Now" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (px)", "min": 0, "max": 200,  "step": 2, "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (px)", "min": 0, "max": 200,   "step": 2, "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Trending Now" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "From classic to contemporary, find the perfect rug for your aesthetic" }
+      ]
+    },
+    {
+      "type": "product_card",
+      "name": "Product card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Select product" },
+        { "type": "image_picker", "id": "override_image", "label": "Override image (optional)" },
+        { "type": "text", "id": "override_image_alt", "label": "Override image alt text", "default": "imperial knots" },
+        { "type": "text", "id": "badge_text", "label": "Badge text (e.g. NEW, BESTSELLER)", "default": "imperial knots" },
+        { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#ffffff" },
+        { "type": "color", "id": "badge_color", "label": "Badge text color", "default": "#111111" },
+        { "type": "checkbox", "id": "hide_price", "label": "Hide price", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Trending Product Grid", "category": "Home Page" }
+  ]
+}
+{% endschema %}
