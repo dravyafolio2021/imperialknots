@@ -1,85 +1,90 @@
 {{ 'cora-topbar.css' | asset_url | stylesheet_tag }}
 
 <style>
-  #cora-topbar-marquee-{{ section.id }}{
-    box-sizing:border-box;
-    position:relative;
-    overflow:hidden;
-    color: {{ section.settings.text_color }};
-    padding-top: {{ section.settings.padding_top_desktop }}px;
-    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-    background-color: {{ section.settings.bg_color_desktop }};
-    width:100vw;
-    margin-left:calc(50% - 50vw);
-    margin-right:calc(50% - 50vw);
-  }
-
-  {% if section.settings.bg_image_desktop %}
-  #cora-topbar-marquee-{{ section.id }}{
-    background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
-    background-size:cover;
-    background-position:center;
-  }
-  {% endif %}
-
-  #cora-topbar-marquee-{{ section.id }} .cora-topbar-marquee__inner{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding-left:12px;
-    padding-right:12px;
-  }
-
-  #cora-topbar-marquee-{{ section.id }} .cora-marquee__track{
-    animation-duration: {{ section.settings.speed }}s;
-    {% if section.settings.direction == 'right' %}
-      animation-direction: reverse;
-    {% endif %}
-  }
-
-  #cora-topbar-marquee-{{ section.id }} .cora-marquee__item{
-    margin-right: {{ section.settings.gap }}px;
-  }
-
-  #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
-    font-size: {{ section.settings.font_size_desktop }}px;
-    font-weight: {{ section.settings.font_weight }};
-    letter-spacing: {{ section.settings.letter_spacing }}px;
-    {% if section.settings.uppercase %} text-transform:uppercase; {% endif %}
-    color: {{ section.settings.text_color }};
-  }
-
-  @media (max-width:900px){
     #cora-topbar-marquee-{{ section.id }}{
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-      background-color: {{ section.settings.bg_color_mobile }};
-      width:100%;
-      margin-left:0;
-      margin-right:0;
+      box-sizing:border-box;
+      position:relative;
+      overflow:hidden;
+      color: {{ section.settings.text_color }};
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      background-color: {{ section.settings.bg_color_desktop }};
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
     }
-
-    {% if section.settings.bg_image_mobile %}
+  .shopify-section-{{ section.id }}{
+     background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
+     background-color: {{ section.settings.bg_color_desktop }};
+     background-size:cover;
+     background-position:center;
+  }
+    {% if section.settings.bg_image_desktop %}
     #cora-topbar-marquee-{{ section.id }}{
-      background-image:url({{ section.settings.bg_image_mobile | img_url: '800x' }});
+      background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
       background-size:cover;
       background-position:center;
     }
     {% endif %}
 
-    #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
-      font-size: {{ section.settings.font_size_mobile }}px;
+    #cora-topbar-marquee-{{ section.id }} .cora-topbar-marquee__inner{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding-left:12px;
+      padding-right:12px;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce){
     #cora-topbar-marquee-{{ section.id }} .cora-marquee__track{
-      animation:none !important;
-      transform:none !important;
+      animation-duration: {{ section.settings.speed }}s;
+      {% if section.settings.direction == 'right' %}
+        animation-direction: reverse;
+      {% endif %}
     }
-  }
+
+    #cora-topbar-marquee-{{ section.id }} .cora-marquee__item{
+      margin-right: {{ section.settings.gap }}px;
+    }
+
+    #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
+      font-size: {{ section.settings.font_size_desktop }}px;
+      font-weight: {{ section.settings.font_weight }};
+      letter-spacing: {{ section.settings.letter_spacing }}px;
+      {% if section.settings.uppercase %} text-transform:uppercase; {% endif %}
+      color: {{ section.settings.text_color }};
+    }
+
+    @media (max-width:900px){
+      #cora-topbar-marquee-{{ section.id }}{
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        background-color: {{ section.settings.bg_color_mobile }};
+        width:100%;
+        margin-left:0;
+        margin-right:0;
+      }
+
+      {% if section.settings.bg_image_mobile %}
+      #cora-topbar-marquee-{{ section.id }}{
+        background-image:url({{ section.settings.bg_image_mobile | img_url: '800x' }});
+        background-size:cover;
+        background-position:center;
+      }
+      {% endif %}
+
+      #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
+        font-size: {{ section.settings.font_size_mobile }}px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #cora-topbar-marquee-{{ section.id }} .cora-marquee__track{
+        animation:none !important;
+        transform:none !important;
+      }
+    }
 </style>
 
 <section
