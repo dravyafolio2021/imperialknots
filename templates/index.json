@@ -65,9 +65,143 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "cora_category_slider_9Dfbpf": {
+      "type": "cora-category-slider",
+      "blocks": {
+        "category_cRxzta": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_PyPWDb": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-2.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_Kd9PPc": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-2.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_gcbpqn": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-2.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_AVfze9": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-3.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_HMfM8q": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-4.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_4zyWYB": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-4.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_w7TADG": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_t6e6q8": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-9.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_wDgbet": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-9.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_WLwYAd": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-6.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_FeKVLc": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/ImageWithFallback-6.png",
+            "image_alt": "Imperial Knots",
+            "title": "Category",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_cRxzta",
+        "category_PyPWDb",
+        "category_Kd9PPc",
+        "category_gcbpqn",
+        "category_AVfze9",
+        "category_HMfM8q",
+        "category_4zyWYB",
+        "category_w7TADG",
+        "category_t6e6q8",
+        "category_wDgbet",
+        "category_WLwYAd",
+        "category_FeKVLc"
+      ],
+      "name": "Category Slider",
+      "settings": {
+        "aria_label": "Category slider",
+        "bg_color": "#ffffff",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
     }
   },
   "order": [
-    "cora_slider_zddH7H"
+    "cora_slider_zddH7H",
+    "cora_category_slider_9Dfbpf"
   ]
 }
