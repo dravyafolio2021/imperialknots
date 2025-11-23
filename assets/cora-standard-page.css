@@ -1,0 +1,214 @@
+/* cora-standard-page.css - layout & blocks */
+
+.cora-standard-page {
+  box-sizing: border-box;
+  width: 100%;
+  color: #0b1220;
+}
+.cora-standard-page__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* header */
+.cora-standard-page__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.cora-standard-page__title {
+  font-family: "Assistant", sans-serif;
+  font-size: 32px;
+  margin: 0 0 10px 0;
+}
+.cora-standard-page__intro {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  color: rgba(10, 20, 30, 0.7);
+  margin: 0;
+}
+
+/* rich text */
+.cora-richtext {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  color: rgba(10, 20, 30, 0.88);
+  line-height: 1.65;
+}
+.cora-richtext img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* two-column */
+.cora-block--two-column {
+  margin: 28px 0;
+}
+.cora-two-column__inner {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.cora-two-column__media {
+  flex: 1 1 48%;
+  max-width: 48%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.cora-two-column__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cora-two-column__content {
+  flex: 1 1 48%;
+  max-width: 48%;
+}
+.cora-two-column__title {
+  font-family: "Assistant", sans-serif;
+  font-size: 20px;
+  margin: 0 0 8px 0;
+}
+.cora-two-column__text {
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  color: rgba(10, 20, 30, 0.8);
+}
+
+/* full width image */
+.cora-block--full-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 18px 0;
+}
+.cora-full-image__caption {
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  color: rgba(10, 20, 30, 0.6);
+  margin-top: 8px;
+}
+
+/* icon row */
+.cora-block--icon-row {
+  margin: 28px 0;
+}
+.cora-icon-row__inner {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cora-icon {
+  width: 220px;
+  text-align: center;
+}
+.cora-icon img {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+.cora-icon__title {
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.cora-icon__text {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: rgba(10, 20, 30, 0.7);
+}
+
+/* FAQ */
+.cora-block--faq {
+  margin: 20px 0;
+}
+.cora-faq-item {
+  margin-bottom: 8px;
+}
+.cora-faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(10, 20, 30, 0.02);
+  border: 1px solid rgba(10, 20, 30, 0.04);
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+}
+.cora-faq-panel {
+  padding: 12px 16px;
+  background: transparent;
+}
+.cora-faq-q {
+  font-weight: 600;
+}
+.cora-faq-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* buttons */
+.cora-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+}
+.cora-btn--primary {
+  background: #0b1220;
+  color: #fff;
+}
+.cora-btn--secondary {
+  background: transparent;
+  border: 1px solid rgba(10, 20, 30, 0.08);
+  color: rgba(10, 20, 30, 0.9);
+}
+
+/* divider & spacer */
+.cora-divider {
+  border: none;
+  height: 1px;
+  background: rgba(10, 20, 30, 0.06);
+  margin: 12px 0;
+}
+.cora-block--spacer {
+  width: 100%;
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+  .cora-two-column__inner {
+    flex-direction: column;
+  }
+  .cora-two-column__media,
+  .cora-two-column__content {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+  .cora-two-column__media img {
+    border-radius: 10px;
+  }
+  .cora-icon {
+    width: 45%;
+  }
+}
+
+@media (max-width: 520px) {
+  .cora-standard-page__title {
+    font-size: 24px;
+  }
+  .cora-icon {
+    width: 100%;
+  }
+}

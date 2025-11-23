@@ -1,0 +1,389 @@
+{{ 'cora-standard-page.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Cora Standard Page section
+  - Block-driven layout: heading, rich_text, two_column, full_width_image, icon, faq_item, button, divider, spacer
+  - Groups consecutive icon blocks into a single icon-row
+  - Lightweight accessible FAQ accordion
+  - Fallback demo image (replace with theme asset) at /mnt/data/cba058df-45aa-475b-b397-e2adc14876f5.png
+{%- endcomment -%}
+
+<section
+  id="cora-standard-page-{{ section.id }}"
+  class="cora-standard-page"
+  role="main"
+  aria-label="{{ section.settings.aria_label | default: 'Page content' }}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 48 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 48 }}px;
+    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
+  "
+>
+  <div class="cora-standard-page__inner">
+    {%- comment -%} Optional heading block — merchants can add one heading block anywhere; we render the first one at the top if present {%- endcomment -%}
+    {% for block in section.blocks %}
+      {% if block.type == 'heading' %}
+        <header class="cora-standard-page__header">
+          {% if block.settings.title != blank %}
+            <h1 class="cora-standard-page__title">{{ block.settings.title }}</h1>
+          {% endif %}
+          {% if block.settings.intro != blank %}
+            <p class="cora-standard-page__intro">{{ block.settings.intro }}</p>
+          {% endif %}
+        </header>
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    <div class="cora-standard-page__blocks">
+      {%- comment -%}
+        Iterate through blocks in the order merchant added.
+        Special handling:
+         - consecutive 'icon' blocks will be grouped into an icon-row
+         - all other block types render inline where they occur
+      {%- endcomment -%}
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {%- when 'heading' -%}
+            {%- comment -%} if merchant placed heading block elsewhere (we already rendered top one), render it inline too {%- endcomment -%}
+            <header class="cora-standard-page__header cora-standard-page__header--inline">
+              {% if block.settings.title != blank %}
+                <h2 class="cora-standard-page__title">{{ block.settings.title }}</h2>
+              {% endif %}
+              {% if block.settings.intro != blank %}
+                <p class="cora-standard-page__intro">{{ block.settings.intro }}</p>
+              {% endif %}
+            </header>
+
+          {%- when 'rich_text' -%}
+            <div class="cora-block cora-block--richtext">
+              <div class="cora-richtext">
+                {{ block.settings.text }}
+              </div>
+            </div>
+
+          {%- when 'two_column' -%}
+            <div class="cora-block cora-block--two-column">
+              <div class="cora-two-column__inner">
+                <div class="cora-two-column__media">
+                  {% if block.settings.image %}
+                    <img
+                      src="{{ block.settings.image | img_url: '1200x' }}"
+                      alt="{{ block.settings.image_alt | default: block.settings.title }}"
+                      loading="lazy"
+                      width="1200"
+                      height="800"
+                    >
+                  {% else %}
+                    <img
+                      src="/mnt/data/cba058df-45aa-475b-b397-e2adc14876f5.png"
+                      alt="{{ block.settings.image_alt | default: block.settings.title }}"
+                      loading="lazy"
+                      width="1200"
+                      height="800"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="cora-two-column__content">
+                  {% if block.settings.title != blank %}
+                    <h3 class="cora-two-column__title">{{ block.settings.title }}</h3>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                    <div class="cora-two-column__text">{{ block.settings.text }}</div>
+                  {% endif %}
+                  {% if block.settings.button_text != blank %}
+                    <a class="cora-btn cora-btn--primary" href="{{ block.settings.button_url | default: '#' }}">
+                      {{- block.settings.button_text -}}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+          {%- when 'full_width_image' -%}
+            <div class="cora-block cora-block--full-image">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | img_url: '2000x' }}"
+                  alt="{{ block.settings.image_alt | default: block.settings.caption }}"
+                  loading="lazy"
+                  width="2000"
+                  height="800"
+                >
+              {% else %}
+                <img
+                  src="/mnt/data/cba058df-45aa-475b-b397-e2adc14876f5.png"
+                  alt="{{ block.settings.image_alt | default: block.settings.caption }}"
+                  loading="lazy"
+                  width="2000"
+                  height="800"
+                >
+              {% endif %}
+              {% if block.settings.caption != blank %}
+                <div class="cora-full-image__caption">{{ block.settings.caption }}</div>
+              {% endif %}
+            </div>
+
+          {%- when 'icon' -%}
+            {%- comment -%}
+              Group consecutive icon blocks into a single wrapper.
+              We'll open the wrapper when previous block is not an icon, and close when next block is not an icon.
+            {%- endcomment -%}
+
+            {% assign prev_index = forloop.index0 | minus: 1 %}
+            {% assign next_index = forloop.index0 | plus: 1 %}
+            {% assign prev_block = '' %}
+            {% assign next_block = '' %}
+            {% if prev_index >= 0 %}
+              {% assign prev_block = section.blocks[prev_index] %}
+            {% endif %}
+            {% if next_index < section.blocks.size %}
+              {% assign next_block = section.blocks[next_index] %}
+            {% endif %}
+
+            {% if prev_block == '' or prev_block.type != 'icon' %}
+              <div class="cora-block cora-block--icon-row">
+                <div class="cora-icon-row__inner">
+            {% endif %}
+
+            <div class="cora-icon">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | img_url: '128x' }}"
+                  alt="{{ block.settings.image_alt | default: block.settings.title }}"
+                  loading="lazy"
+                  width="64"
+                  height="64"
+                >
+              {% endif %}
+              {% if block.settings.title != blank %}
+                <div class="cora-icon__title">{{ block.settings.title }}</div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="cora-icon__text">{{ block.settings.text }}</div>
+              {% endif %}
+            </div>
+
+            {% if next_block == '' or next_block.type != 'icon' %}
+              </div>
+              {# /.cora-icon-row__inner #}
+              </div>
+              {# /.cora-block--icon-row #}
+            {% endif %}
+
+          {%- when 'faq_item' -%}
+            <div class="cora-block cora-block--faq">
+              <div class="cora-faq-item">
+                <button class="cora-faq-trigger" type="button" aria-expanded="false">
+                  <span class="cora-faq-q">{{ block.settings.question }}</span>
+                  <span class="cora-faq-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="cora-faq-panel" style="display:none;">
+                  <div class="cora-faq-a">{{ block.settings.answer }}</div>
+                </div>
+              </div>
+            </div>
+
+          {%- when 'button' -%}
+            <div class="cora-block cora-block--button">
+              <a
+                class="cora-btn {% if block.settings.style == 'secondary' %}cora-btn--secondary{% else %}cora-btn--primary{% endif %}"
+                href="{{ block.settings.url | default: '#' }}"
+              >
+                {{- block.settings.text -}}
+              </a>
+            </div>
+
+          {%- when 'divider' -%}
+            <div class="cora-block cora-block--divider"><hr class="cora-divider"></div>
+
+          {%- when 'spacer' -%}
+            <div
+              class="cora-block cora-block--spacer"
+              style="height: {{ block.settings.height | default: 24 }}px;"
+            ></div>
+
+          {%- else -%}
+            {# Unknown block type — ignore gracefully #}
+        {% endcase %}
+      {% endfor %}
+    </div>
+    {# /.cora-standard-page__blocks #}
+  </div>
+  {# /.cora-standard-page__inner #}
+</section>
+
+{%- comment -%}
+  Lightweight accordion JS for all FAQ items inside this section.
+  Supports keyboard navigation for accessibility.
+{%- endcomment -%}
+<script>
+  (function () {
+    var root = document.getElementById('cora-standard-page-{{ section.id }}');
+    if (!root) return;
+
+    // FAQ accordion
+    var triggers = root.querySelectorAll('.cora-faq-trigger');
+    triggers.forEach(function (btn, idx) {
+      var panel = btn.nextElementSibling;
+      // initialize
+      btn.setAttribute('aria-expanded', 'false');
+      btn.querySelector('.cora-faq-icon').textContent = '+';
+      panel.style.display = 'none';
+
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.querySelector('.cora-faq-icon').textContent = '+';
+          panel.style.display = 'none';
+        } else {
+          btn.setAttribute('aria-expanded', 'true');
+          btn.querySelector('.cora-faq-icon').textContent = '−';
+          panel.style.display = 'block';
+        }
+      });
+
+      // keyboard support
+      btn.addEventListener('keydown', function (e) {
+        var key = e.key || e.keyCode;
+        if (key === 'ArrowDown' || key === 'Down' || key === 40) {
+          e.preventDefault();
+          var next = triggers[(idx + 1) % triggers.length];
+          next.focus();
+        } else if (key === 'ArrowUp' || key === 'Up' || key === 38) {
+          e.preventDefault();
+          var prev = triggers[(idx - 1 + triggers.length) % triggers.length];
+          prev.focus();
+        } else if (key === 'Home') {
+          e.preventDefault();
+          triggers[0].focus();
+        } else if (key === 'End') {
+          e.preventDefault();
+          triggers[triggers.length - 1].focus();
+        } else if (key === 'Enter' || key === ' ' || key === 13 || key === 32) {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cora — Standard Page",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Page content" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Page heading",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Page title" },
+        { "type": "textarea", "id": "intro", "label": "Intro / subtitle", "default": "intro" }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Rich text",
+      "settings": [{ "type": "richtext", "id": "text", "label": "Content" }]
+    },
+    {
+      "type": "two_column",
+      "name": "Two column (image + text)",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "image_alt" },
+        { "type": "text", "id": "title", "label": "Heading", "default": "title" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_text", "label": "Button text", "default": "button_text" },
+        { "type": "url", "id": "button_url", "label": "Button URL", "default": "/" }
+      ]
+    },
+    {
+      "type": "full_width_image",
+      "name": "Full width image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Alt text", "default": "image_alt" },
+        { "type": "text", "id": "caption", "label": "Caption (optional)", "default": "caption" }
+      ]
+    },
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Icon image (SVG recommended)" },
+        { "type": "text", "id": "image_alt", "label": "Alt text", "default": "image_alt" },
+        { "type": "text", "id": "title", "label": "Title", "default": "title" },
+        { "type": "textarea", "id": "text", "label": "Text (optional)", "default": "text" }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Answer" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Button text", "default": "Learn more" },
+        { "type": "url", "id": "url", "label": "Button URL", "default": "/" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" }
+          ],
+          "default": "primary"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": []
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        { "type": "range", "id": "height", "label": "Height (px)", "min": 0, "max": 200, "step": 2, "default": 2 }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [{ "name": "Cora — Standard Page", "category": "Pages" }]
+}
+{% endschema %}

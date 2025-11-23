@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "cora-standard-page",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ],
+ }
