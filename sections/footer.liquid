@@ -1,6 +1,7 @@
 {{ 'cora-footer.css' | asset_url | stylesheet_tag }}
 
-<section id="cora-footer-{{ section.id }}"
+<section
+  id="cora-footer-{{ section.id }}"
   class="cora-footer"
   role="contentinfo"
   aria-label="{{ section.settings.aria_label | default: 'Footer' }}"
@@ -12,21 +13,31 @@
   "
 >
   <div class="cora-footer__inner">
-
     <div class="cora-footer__top">
-
       {%- comment -%} BRAND COLUMN (add only one brand block) {%- endcomment -%}
       {% for block in section.blocks %}
         {% if block.type == 'brand' %}
           <div class="cora-footer__brand" role="region" aria-label="Brand">
             {% if block.settings.logo %}
               <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
-                <img src="{{ block.settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" loading="eager" width="200" height="60">
+                <img
+                  src="{{ block.settings.logo | img_url: '300x' }}"
+                  alt="{{ shop.name }}"
+                  loading="eager"
+                  width="200"
+                  height="60"
+                >
               </a>
             {% else %}
               <!-- fallback demo image (replace with theme asset on deploy) -->
               <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
-                <img src="/mnt/data/cba058df-45aa-475b-b397-e2adc14876f5.png" alt="{{ shop.name }}" loading="eager" width="200" height="60">
+                <img
+                  src="{{ 'fallback.png' | asset_url }}"
+                  alt="{{ shop.name }}"
+                  width="200"
+                  height="60"
+                  loading="lazy"
+                >
               </a>
             {% endif %}
 
@@ -37,8 +48,19 @@
             <div class="cora-footer__socials" aria-label="Follow us">
               {% for icon_block in section.blocks %}
                 {% if icon_block.type == 'social' and icon_block.settings.icon %}
-                  <a class="cora-footer__social-link" href="{{ icon_block.settings.url | default: '#' }}" aria-label="{{ icon_block.settings.label }}" target="{{ icon_block.settings.target }}">
-                    <img src="{{ icon_block.settings.icon | img_url: '64x64' }}" alt="{{ icon_block.settings.label }}" width="40" height="40" loading="lazy">
+                  <a
+                    class="cora-footer__social-link"
+                    href="{{ icon_block.settings.url | default: '#' }}"
+                    aria-label="{{ icon_block.settings.label }}"
+                    target="{{ icon_block.settings.target }}"
+                  >
+                    <img
+                      src="{{ icon_block.settings.icon | img_url: '64x64' }}"
+                      alt="{{ icon_block.settings.label }}"
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                    >
                   </a>
                 {% endif %}
               {% endfor %}
@@ -70,8 +92,8 @@
           {% endif %}
         {% endfor %}
       </div>
-
-    </div> <!-- /.cora-footer__top -->
+    </div>
+    <!-- /.cora-footer__top -->
 
     <div class="cora-footer__divider" role="presentation" aria-hidden="true"></div>
 
@@ -80,7 +102,8 @@
         {% if section.settings.copyright_text != blank %}
           {{ section.settings.copyright_text }}
         {% else %}
-          &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.
+          &copy; {{ 'now' | date: '%Y' }}
+          {{ shop.name }}. All rights reserved.
         {% endif %}
       </div>
 
@@ -89,16 +112,17 @@
           <div class="cora-footer__trust">{{ section.settings.trust_text }}</div>
         {% endif %}
 
-        {% comment %} {% if section.settings.show_payment_icons %}
-          <div class="cora-footer__payments" aria-hidden="true">
-            {% for type in shop.enabled_payment_types %}
-              <span class="cora-footer__payment-icon">{% raw %}{{% endraw %} type | payment_type_svg_tag {% raw %}}{% endraw %}</span>
-            {% endfor %}
-          </div>
-        {% endif %} {% endcomment %}
+        {% comment %}
+          {% if section.settings.show_payment_icons %}
+            <div class="cora-footer__payments" aria-hidden="true">
+              {% for type in shop.enabled_payment_types %}
+                <span class="cora-footer__payment-icon">{% raw %}{{% endraw %} type | payment_type_svg_tag {% raw %}}{% endraw %}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endcomment %}
       </div>
     </div>
-
   </div>
 </section>
 
@@ -109,8 +133,24 @@
     { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Footer" },
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
-    { "type": "range", "id": "padding_top", "label": "Padding top (px)", "min": 0, "max": 200, "step": 2, "default": 40 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (px)", "min": 0, "max": 200,  "step": 2, "default": 40 },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    },
     { "type": "text", "id": "copyright_text", "label": "Copyright text (optional)" },
     { "type": "text", "id": "trust_text", "label": "Right-side small text " },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
@@ -139,72 +179,79 @@
         { "type": "image_picker", "id": "icon", "label": "Icon (SVG recommended)" },
         { "type": "text", "id": "label", "label": "Label (aria)", "default": "Social" },
         { "type": "url", "id": "url", "label": "Link URL", "default": "/" },
-        { "type": "select", "id": "target", "label": "Open in", "options":[{"value":"_self","label":"Same window"},{"value":"_blank","label":"New tab"}], "default":"_blank" }
+        {
+          "type": "select",
+          "id": "target",
+          "label": "Open in",
+          "options": [
+            { "value": "_self", "label": "Same window" },
+            { "value": "_blank", "label": "New tab" }
+          ],
+          "default": "_blank"
+        }
       ]
     }
   ],
-  "presets": [
-    { "name": "Cora Footer ", "category": "Global" }
-  ]
+  "presets": [{ "name": "Cora Footer ", "category": "Global" }]
 }
 {% endschema %}
 
+{% comment %}
+  <footer>
+    <div class="footer__copyright">
+      &copy;
+      {{ 'now' | date: '%Y' }}
+      {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+    </div>
 
-
-{% comment %} <footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
-
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
+    <div class="footer__links">
+      {% for link in section.settings.menu.links %}
+        {{ link.title | link_to: link.url }}
       {% endfor %}
-    {% endif %}
-  </div>
-</footer>
+    </div>
 
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+    <div class="footer__payment">
+      {% if section.settings.show_payment_icons %}
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag }}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </footer>
 
-{% schema %}
-{
-  "name": "t:general.footer",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
+  {% stylesheet %}
+    footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
     }
-  ]
-}
-{% endschema %} {% endcomment %}
+    footer a {
+      text-decoration: none;
+      color: var(--color-foreground);
+    }
+    footer .footer__links,
+    footer .footer__payment {
+      display: flex;
+      gap: 1rem;
+    }
+  {% endstylesheet %}
+
+  {% schema %}
+  {
+    "name": "t:general.footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "t:labels.menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "t:labels.show_payment_icons",
+        "default": true
+      }
+    ]
+  }
+  {% endschema %}
+{% endcomment %}

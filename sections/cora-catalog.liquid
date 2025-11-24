@@ -1,0 +1,177 @@
+{{ 'cora-catalog.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="cora-catalog-{{ section.id }}"
+  class="cora-catalog"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Catalog' }}"
+>
+  <div class="cora-catalog__inner">
+    {% if section.settings.title != blank %}
+      <header class="cora-catalog__header">
+        <h1 class="cora-catalog__title">{{ section.settings.title }}</h1>
+        {% if section.settings.subtitle != blank %}
+          <p class="cora-catalog__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    {%- comment -%}
+      Mode switch: 'all_collections' or 'single_collection'
+      - all_collections: show grid of all collections (linked to canonical /collections/{handle})
+      - single_collection: show product grid for the chosen collection
+    {%- endcomment -%}
+
+    {% if section.settings.display_mode == 'single_collection' %}
+      {%- comment -%} render one collection's products {%- endcomment -%}
+
+      {% assign collection_choice = section.settings.collection %}
+      {%- comment -%}
+        section.settings.collection might be:
+         - a collection object (when using collection picker)
+         - a handle string (rare). We'll defendively handle both.
+      {%- endcomment -%}
+
+      {% if collection_choice == blank %}
+        <div class="cora-catalog__empty">No collection selected. Please pick a collection in the section settings.</div>
+      {% else %}
+        {% comment %} try to get a collection object {% endcomment %}
+        {% assign coll = '' %}
+        {% if collection_choice.handle != blank %}
+          {% assign coll = collection_choice %}
+        {% else %}
+          {% assign coll = collections[collection_choice] %}
+        {% endif %}
+
+        {% if coll == blank %}
+          <div class="cora-catalog__empty">Could not find collection. Check the selected collection in settings.</div>
+        {% else %}
+          <div class="cora-collection-view">
+            <h2 class="cora-collection-view__title">{{ coll.title }}</h2>
+            {% if coll.description != blank %}
+              <p class="cora-collection-view__desc">{{ coll.description }}</p>
+            {% endif %}
+
+            <div class="cora-products-grid">
+              {% for product in coll.products %}
+                <article class="cora-product-card">
+                  <a
+                    class="cora-product-card__link"
+                    href="{{ routes.products_url | append: '/' | append: product.handle }}"
+                  >
+                    {% if product.featured_image %}
+                      <img
+                        src="{{ product.featured_image | img_url: '600x' }}"
+                        alt="{{ product.title }}"
+                        width="600"
+                        height="600"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <img
+                        src="{{ 'fallback.png' | asset_url }}"
+                        alt="{{ product.title }}"
+                        width="600"
+                        height="600"
+                        loading="lazy"
+                      >
+                    {% endif %}
+
+                    <div class="cora-product-card__body">
+                      <h3 class="cora-product-card__title">{{ product.title }}</h3>
+                      {% if product.compare_at_price > product.price %}
+                        <div class="cora-product-card__price">
+                          <span class="cora-price--compare">{{ product.compare_at_price | money }}</span>
+                          <span class="cora-price--sale">{{ product.price | money }}</span>
+                        </div>
+                      {% else %}
+                        <div class="cora-product-card__price">{{ product.price | money }}</div>
+                      {% endif %}
+                    </div>
+                  </a>
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+
+    {% else %}
+      {%- comment -%} all collections grid {%- endcomment -%}
+
+      <div class="cora-collections-grid">
+        {% for coll in collections %}
+          {%- unless coll.handle == 'frontpage' or coll.handle == blank -%}
+            <article class="cora-collection-card">
+              <a
+                class="cora-collection-card__link"
+                href="{{ routes.collections_url | append: '/' | append: coll.handle }}"
+              >
+                {% if coll.image %}
+                  <img
+                    src="{{ coll.image | img_url: '600x' }}"
+                    alt="{{ coll.title }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'fallback.png' | asset_url }}"
+                    alt="{{ coll.title }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                  >
+                {% endif %}
+                <div class="cora-collection-card__meta">
+                  <h3 class="cora-collection-card__title">{{ coll.title }}</h3>
+                  {% if coll.description != blank %}
+                    <p class="cora-collection-card__excerpt">{{ coll.description | strip_html | truncate: 120 }}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </article>
+          {%- endunless -%}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cora — Catalog",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Catalog" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Catalog" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "subtitle" },
+
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Display mode",
+      "options": [
+        { "value": "all_collections", "label": "All collections (default)" },
+        { "value": "single_collection", "label": "Single collection (show products)" }
+      ],
+      "default": "all_collections"
+    },
+
+    { "type": "collection", "id": "collection", "label": "Collection (when 'Single collection' mode is selected)" },
+
+    { "type": "range", "id": "grid_columns", "label": "Grid columns (desktop)", "min": 2, "max": 6, "default": 4 },
+    { "type": "range", "id": "mobile_columns", "label": "Mobile columns", "min": 1, "max": 3, "step": 1, "default": 2 },
+
+    { "type": "checkbox", "id": "show_prices", "label": "Show prices", "default": true },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show collection excerpt (all collections mode)",
+      "default": true
+    }
+  ],
+  "blocks": [],
+  "presets": [{ "name": "Cora — Catalog", "category": "Pages" }]
+}
+{% endschema %}
