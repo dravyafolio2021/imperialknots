@@ -1,4 +1,4 @@
-{{ 'cora-catalog.css' | asset_url | stylesheet_tag }}
+{{ 'catalog-collection-grid.css' | asset_url | stylesheet_tag }}
 
 <section
   id="cora-catalog-{{ section.id }}"
@@ -126,9 +126,7 @@
                 {% endif %}
                 <div class="cora-collection-card__meta">
                   <h3 class="cora-collection-card__title">{{ coll.title }}</h3>
-                  {% if coll.description != blank %}
-                    <p class="cora-collection-card__excerpt">{{ coll.description | strip_html | truncate: 120 }}</p>
-                  {% endif %}
+            
                 </div>
               </a>
             </article>
@@ -141,9 +139,9 @@
 
 {% schema %}
 {
-  "name": "Cora — Catalog",
+  "name": " Catalog Collection Grid",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Catalog" },
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Catalogg" },
     { "type": "text", "id": "title", "label": "Title", "default": "Catalog" },
     { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "subtitle" },
 
@@ -172,6 +170,6 @@
     }
   ],
   "blocks": [],
-  "presets": [{ "name": "Cora — Catalog", "category": "Catalog Page" }]
+  "presets": [{ "name": "Catalog Collection Grid", "category": "Catalog Page" }]
 }
 {% endschema %}

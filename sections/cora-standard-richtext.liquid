@@ -1,0 +1,85 @@
+{{ 'cora-standard-richtext.css' | asset_url | stylesheet_tag }}
+
+<section id="cora-standard-richtext-{{ section.id }}" class="cora-standard-richtext">
+  <div class="cora-standard-richtext__inner">
+    {% if page and page.title != blank %}
+      <h1 class="cora-standard-richtext__title">{{ page.title }}</h1>
+    {% elsif section.settings.title != blank %}
+      <h1 class="cora-standard-richtext__title">{{ section.settings.title }}</h1>
+    {% endif %}
+
+    {% if section.settings.show_updated %}
+      <p class="cora-standard-richtext__updated">
+        Last Updated:
+        {% if page and page.updated_at %}
+          {{ page.updated_at | date: '%B %d, %Y' }}
+        {% else %}
+          {{ 'now' | date: '%B %d, %Y' }}
+        {% endif %}
+      </p>
+    {% endif %}
+
+    {% comment %}
+      Prefer the page content when we're on a page object.
+      Fall back to the section WYSIWYG (useful for template-level content).
+    {% endcomment %}
+
+    {% if page and page.content != blank %}
+      <div class="cora-standard-richtext__content rte">
+        {{ page.content }}
+      </div>
+    {% elsif section.settings.content != blank %}
+      <div class="cora-standard-richtext__content rte">
+        {{ section.settings.content }}
+      </div>
+    {% else %}
+      <div class="cora-standard-richtext__content rte">
+        <p>Your content goes here — edit the Page in Shopify Admin.</p>
+      </div>
+    {% endif %}
+
+    {% if section.settings.info_box != blank %}
+      <div class="cora-standard-richtext__infobox rte">
+        {{ section.settings.info_box }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Standard Rich Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page Title",
+      "default": "Your Page Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_updated",
+      "label": "Show Last Updated Date",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Main Content",
+      "default": "<p>Enter your page content here...</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "info_box",
+      "label": "Bottom Info Box",
+      "default": "<p>Bottom Info Box</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Standard Rich Text",
+      "category": "Standard Page"
+    }
+  ]
+}
+{% endschema %}

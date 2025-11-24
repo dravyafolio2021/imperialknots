@@ -1,0 +1,201 @@
+/* ---------------------------------------------
+   Cora — Standard Page
+   For: Privacy Policy, Terms, Returns, About, etc.
+   Clean, premium, Imperial Knots style
+----------------------------------------------*/
+
+.cora-standard-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container width options */
+.cora-standard-page__inner.wide {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.cora-standard-page__inner.narrow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.cora-standard-page__inner.full {
+  max-width: 100%;
+  padding: 0 24px;
+}
+
+/* ---------------------------------------------
+   Banner
+----------------------------------------------*/
+
+.cora-standard-page__banner {
+  width: 100%;
+  padding: 80px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cora-standard-page__banner-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cora-standard-page__banner-tagline {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+.cora-standard-page__banner-title {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 8px 0 16px;
+}
+
+.cora-standard-page__banner-subheading {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------
+   Header inside content
+----------------------------------------------*/
+
+.cora-standard-page__header {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.cora-standard-page__title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cora-standard-page__subheading {
+  font-size: 16px;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+.cora-standard-page__last-updated {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------
+   Content & Richtext
+----------------------------------------------*/
+
+.cora-standard-page__content-wrapper {
+  width: 100%;
+}
+
+.cora-standard-page__content,
+.cora-standard-page__block--richtext {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.cora-standard-page__content p,
+.cora-standard-page__block--richtext p {
+  margin-bottom: 18px;
+}
+
+.cora-standard-page__content ul,
+.cora-standard-page__block--richtext ul {
+  list-style: disc;
+  margin-left: 22px;
+  margin-bottom: 20px;
+}
+
+.cora-standard-page__content li,
+.cora-standard-page__block--richtext li {
+  margin-bottom: 6px;
+}
+
+.cora-standard-page__content h2,
+.cora-standard-page__block--richtext h2 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.cora-standard-page__content h3,
+.cora-standard-page__block--richtext h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------
+   Info Box (Bottom)
+----------------------------------------------*/
+
+.cora-standard-page__info-box {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 22px 26px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 48px;
+  color: #444;
+}
+
+/* ---------------------------------------------
+   Responsive (Mobile)
+----------------------------------------------*/
+
+@media (max-width: 900px) {
+  .cora-standard-page__banner {
+    padding: 60px 20px;
+  }
+
+  .cora-standard-page__banner-title {
+    font-size: 28px;
+  }
+
+  .cora-standard-page__banner-subheading {
+    font-size: 15px;
+  }
+
+  .cora-standard-page__title {
+    font-size: 26px;
+  }
+
+  .cora-standard-page__content,
+  .cora-standard-page__block--richtext {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cora-standard-page__banner {
+    padding: 46px 16px;
+  }
+
+  .cora-standard-page__banner-title {
+    font-size: 24px;
+  }
+
+  .cora-standard-page__banner-subheading {
+    font-size: 14px;
+  }
+}

@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "cora-catalog",
+      "type": "catalog-collection-grid",
       "settings": {}
     }
   },
