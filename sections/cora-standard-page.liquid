@@ -167,12 +167,12 @@
               {% endif %}
             </div>
 
-            {% if next_block == '' or next_block.type != 'icon' %}
+            {% comment %} {% if next_block == '' or next_block.type != 'icon' %}
               </div>
               {# /.cora-icon-row__inner #}
               </div>
               {# /.cora-block--icon-row #}
-            {% endif %}
+            {% endif %} {% endcomment %}
 
           {%- when 'faq_item' -%}
             <div class="cora-block cora-block--faq">
