@@ -1,83 +1,299 @@
 {% comment %}
-  This section is used in the list-collections template to render a list of
-  collections.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
+  Custom Collections Grid
+  - Responsive, card-style layout with many theme settings for customization
+  - Placeholder/fallback image set to uploaded asset path below. Replace with asset_url for production.
 {% endcomment %}
 
-<h1>{{ 'collections.title' | t }}</h1>
+{{ 'collections-grid-custom.css' | asset_url | stylesheet_tag }}
+
+<h1 class="collections-grid__title">{{ 'collections.title' | t }}</h1>
 
 <div
-  class="collections {{ section.settings.grid_item_width }}"
-  style="--grid-gap: {{ section.settings.grid_gap }}px"
+  class="collections-grid {{ section.settings.grid_variant }} {{ section.settings.card_alignment }}"
+  style="
+    --grid-gap: {{ section.settings.grid_gap }}px;
+    --card-radius: {{ section.settings.card_radius }}px;
+    --card-shadow: {{ section.settings.card_shadow }};
+    --card-aspect: {{ section.settings.card_aspect }}%;
+    --card-max-width: {{ section.settings.card_max_width }}px;
+    --title-color: {{ section.settings.title_color }};
+    --text-color: {{ section.settings.text_color }};
+  "
+  data-columns-desktop="{{ section.settings.columns_desktop }}"
+  data-columns-tablet="{{ section.settings.columns_tablet }}"
+  data-columns-mobile="{{ section.settings.columns_mobile }}"
 >
   {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
-      {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
+    <a class="collections-grid__card" href="{{ collection.url }}">
+      <div class="collections-grid__media">
+        {% if collection.featured_image %}
+          {% render 'image',
+            class: 'collections-grid__img',
+            image: collection.featured_image,
+            sizes: '(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw',
+            width: 1200,
+            height: 1200,
+            crop: section.settings.image_crop
+          %}
+        {% else %}
+          <!-- fallback image from uploaded file (replace with asset_url in production) -->
+          <img
+            class="collections-grid__img"
+            src="/mnt/data/ba42729a-3bb7-4aee-8590-700d9985ed78.png"
+            alt="{{ collection.title }}"
+            loading="lazy"
+          >
+        {% endif %}
+
+        {% if section.settings.show_badge
+          and collection.metafields
+          and collection.metafields.custom
+          and collection.metafields.custom.featured == 'true'
         %}
-      {% endif %}
+          <span class="collections-grid__badge">Featured</span>
+        {% elsif section.settings.show_badge and collection.handle contains 'featured' %}
+          <span class="collections-grid__badge">Featured</span>
+        {% endif %}
+      </div>
 
-      <div class="collection-card__content">
-        <p>{{ collection.title }}</p>
+      <div class="collections-grid__content">
+        <h3 class="collections-grid__name">{{ collection.title }}</h3>
 
-        {% if collection.description %}
-          <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
+        {% if section.settings.show_description and collection.description %}
+          <p class="collections-grid__desc">
+            {{ collection.description | strip_html | truncatewords: section.settings.description_words }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.show_count %}
+          <p class="collections-grid__count">
+            {{ collection.products_count }}
+            {{ 'products' | t }}
+          </p>
         {% endif %}
       </div>
     </a>
   {% endfor %}
 </div>
 
-{% stylesheet %}
-  .collections {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
-    gap: var(--grid-gap);
-  }
-  .collections--compact {
-    --collection-card-size: 160px;
-  }
-  .collections--full {
-    --collection-card-size: 280px;
-  }
-  .collection-card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.collections_grid",
+  "name": "Custom Collections Grid",
   "settings": [
     {
       "type": "select",
-      "id": "grid_item_width",
-      "label": "t:labels.grid_item_width",
+      "id": "grid_variant",
+      "label": "Grid Variant",
       "options": [
-        { "value": "collections--compact", "label": "t:options.size.small" },
-        { "value": "collections--full", "label": "t:options.size.large" }
+        { "value": "collections-grid--cards", "label": "Cards" },
+        { "value": "collections-grid--rounded", "label": "Rounded (bigger radius)" },
+        { "value": "collections-grid--minimal", "label": "Minimal" }
       ],
-      "default": "collections--full"
+      "default": "collections-grid--cards"
+    },
+    {
+      "type": "select",
+      "id": "card_alignment",
+      "label": "Card alignment",
+      "options": [
+        { "value": "", "label": "Default (flow)" },
+        { "value": "center-cards", "label": "Center cards" }
+      ],
+      "default": ""
     },
     {
       "type": "range",
       "id": "grid_gap",
-      "label": "t:labels.grid_gap",
+      "label": "Grid gap (px)",
       "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 10
+      "max": 64,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "number",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+
+      "default": 3
+    },
+    {
+      "type": "number",
+      "id": "columns_tablet",
+      "label": "Tablet columns",
+
+      "default": 2
+    },
+    {
+      "type": "number",
+      "id": "columns_mobile",
+      "label": "Mobile columns",
+
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_aspect",
+      "label": "Card aspect ratio (height / width %) — 100 = square, 150 = tall",
+      "min": 80,
+      "max": 180,
+      "step": 1,
+      "default": 125
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius (px)",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "card_shadow",
+      "label": "Card shadow (CSS box-shadow)",
+      "default": "0 8px 24px rgba(11,20,23,0.06)"
+    },
+    {
+      "type": "number",
+      "id": "description_words",
+      "label": "Description word limit",
+
+      "default": 15
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description under title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show featured badge when collection is featured",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_crop",
+      "label": "Image crop",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "number",
+      "id": "card_max_width",
+      "label": "Card max width (px) to center grid",
+
+      "default": 380
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#444444"
     }
   ],
-  "presets": [{ "name": "t:general.collections_grid" }]
+  "presets": [
+    {
+      "name": "Custom Collections Grid"
+    }
+  ]
 }
 {% endschema %}
+
+{% comment %}
+  <h1>{{ 'collections.title' | t }}</h1>
+
+  <div
+    class="collections {{ section.settings.grid_item_width }}"
+    style="--grid-gap: {{ section.settings.grid_gap }}px"
+  >
+    {% for collection in collections %}
+      <a class="collection-card" href="{{ collection.url }}">
+        {% if collection.featured_image %}
+          {% render 'image',
+            class: 'collection-card__image',
+            image: collection.featured_image,
+            width: 600,
+            height: 600,
+            crop: 'center'
+          %}
+        {% endif %}
+
+        <div class="collection-card__content">
+          <p>{{ collection.title }}</p>
+
+          {% if collection.description %}
+            <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% stylesheet %}
+    .collections {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
+      gap: var(--grid-gap);
+    }
+    .collections--compact {
+      --collection-card-size: 160px;
+    }
+    .collections--full {
+      --collection-card-size: 280px;
+    }
+    .collection-card {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  {% endstylesheet %}
+
+  {% schema %}
+  {
+    "name": "t:general.collections_grid",
+    "settings": [
+      {
+        "type": "select",
+        "id": "grid_item_width",
+        "label": "t:labels.grid_item_width",
+        "options": [
+          { "value": "collections--compact", "label": "t:options.size.small" },
+          { "value": "collections--full", "label": "t:options.size.large" }
+        ],
+        "default": "collections--full"
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "t:labels.grid_gap",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "unit": "px",
+        "default": 10
+      }
+    ],
+    "presets": [{ "name": "t:general.collections_grid" }]
+  }
+  {% endschema %}
+{% endcomment %}

@@ -1,0 +1,151 @@
+:root {
+}
+.collections-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+/* Responsive columns via CSS variables & data-attributes (JS-free fallback) */
+.collections-grid[data-columns-desktop="1"] {
+  grid-template-columns: repeat(1, 1fr);
+}
+.collections-grid[data-columns-desktop="2"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+.collections-grid[data-columns-desktop="3"] {
+  grid-template-columns: repeat(3, 1fr);
+}
+.collections-grid[data-columns-desktop="4"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+.collections-grid[data-columns-desktop="5"] {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .collections-grid[data-columns-tablet="1"] {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .collections-grid[data-columns-tablet="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .collections-grid[data-columns-tablet="3"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  .collections-grid[data-columns-mobile="1"] {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .collections-grid[data-columns-mobile="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.collections-grid__title {
+  margin-bottom: 18px;
+  color: var(--title-color);
+  font-size: 28px;
+}
+
+.collections-grid__card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  overflow: visible;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.collections-grid__card:hover {
+  transform: translateY(-6px);
+}
+
+.collections-grid__media {
+  position: relative;
+  width: 100%;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  /* aspect ratio via padding-top for consistent heights */
+}
+
+/* Aspect ratio: uses padding-top fallback; --card-aspect is height/width * 100, e.g. 125% for tall card */
+.collections-grid__media::before {
+  content: "";
+  display: block;
+  padding-top: var(--card-aspect);
+}
+.collections-grid__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.collections-grid__badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 3;
+  font-weight: 600;
+}
+
+.collections-grid__content {
+  padding: 14px 4px 0;
+  color: var(--text-color);
+}
+
+.collections-grid__name {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--title-color);
+}
+
+.collections-grid__desc {
+  margin: 0 0 10px;
+  color: var(--text-color);
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.collections-grid__count {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Variants */
+.collections-grid--cards .collections-grid__media {
+  border-radius: var(--card-radius);
+}
+.collections-grid--rounded .collections-grid__media {
+  border-radius: calc(var(--card-radius) * 1.6);
+}
+.collections-grid--minimal .collections-grid__media {
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Card max-width to create centered grid feel when using fewer columns */
+.collections-grid {
+  justify-content: center;
+}
+.collections-grid > * {
+  max-width: var(--card-max-width);
+}
