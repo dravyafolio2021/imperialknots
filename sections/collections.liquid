@@ -1,185 +1,147 @@
 {% comment %}
-  Custom Collections Grid
-  - Responsive, card-style layout with many theme settings for customization
-  - Placeholder/fallback image set to uploaded asset path below. Replace with asset_url for production.
+  Custom Collections Grid (clean + container + modular)
+  - All UI CSS lives in assets/collections-grid-custom.css
+  - Only Section-specific background/padding/gap overrides are in the <style> block
 {% endcomment %}
 
 {{ 'collections-grid-custom.css' | asset_url | stylesheet_tag }}
 
-<h1 class="collections-grid__title">{{ 'collections.title' | t }}</h1>
+{%- style -%}
+  /* Section Background & Padding */
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color_desktop | default: '#ffffff' }};
+    {% if section.settings.bg_image_desktop %}
+      background-image: url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
+      background-size: cover;
+      background-position: center;
+    {% endif %}
+    padding-top: {{ section.settings.padding_top_desktop | default: 60 }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop | default: 60 }}px;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    
+  }
 
-<div
-  class="collections-grid {{ section.settings.grid_variant }} {{ section.settings.card_alignment }}"
-  style="
-    --grid-gap: {{ section.settings.grid_gap }}px;
-    --card-radius: {{ section.settings.card_radius }}px;
-    --card-shadow: {{ section.settings.card_shadow }};
-    --card-aspect: {{ section.settings.card_aspect }}%;
-    --card-max-width: {{ section.settings.card_max_width }}px;
-    --title-color: {{ section.settings.title_color }};
-    --text-color: {{ section.settings.text_color }};
-  "
-  data-columns-desktop="{{ section.settings.columns_desktop }}"
-  data-columns-tablet="{{ section.settings.columns_tablet }}"
-  data-columns-mobile="{{ section.settings.columns_mobile }}"
->
-  {% for collection in collections %}
-    <a class="collections-grid__card" href="{{ collection.url }}">
-      <div class="collections-grid__media">
-        {% if collection.featured_image %}
-          {% render 'image',
-            class: 'collections-grid__img',
-            image: collection.featured_image,
-            sizes: '(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw',
-            width: 1200,
-            height: 1200,
-            crop: section.settings.image_crop
-          %}
-        {% else %}
-          <!-- fallback image from uploaded file (replace with asset_url in production) -->
-          <img
-            class="collections-grid__img"
-            src="/mnt/data/ba42729a-3bb7-4aee-8590-700d9985ed78.png"
-            alt="{{ collection.title }}"
-            loading="lazy"
-          >
-        {% endif %}
+  /* Grid gap override */
+  #shopify-section-{{ section.id }} .collections-grid {
+    --grid-gap: {{ section.settings.grid_gap_desktop | default: 20 }}px;
+    --card-aspect: {{ section.settings.card_aspect | default: 125 }}%;
+    --card-radius: {{ section.settings.card_radius | default: 12 }}px;
+    --card-shadow: {{ section.settings.card_shadow | default: "0 8px 22px rgba(11,20,23,0.06)" }};
+  }
 
-        {% if section.settings.show_badge
-          and collection.metafields
-          and collection.metafields.custom
-          and collection.metafields.custom.featured == 'true'
-        %}
-          <span class="collections-grid__badge">Featured</span>
-        {% elsif section.settings.show_badge and collection.handle contains 'featured' %}
-          <span class="collections-grid__badge">Featured</span>
-        {% endif %}
-      </div>
+  /* Tablet overrides */
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_tablet | default: 40 }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 40 }}px;
+      margin-left: 0;
+      margin-right: 0;
+      {% if section.settings.bg_image_tablet %}
+        background-image: url({{ section.settings.bg_image_tablet | img_url: '1200x' }});
+      {% endif %}
+    }
+    #shopify-section-{{ section.id }} .collections-grid {
+      --grid-gap: {{ section.settings.grid_gap_tablet | default: 16 }}px;
+    }
+  }
 
-      <div class="collections-grid__content">
-        <h3 class="collections-grid__name">{{ collection.title }}</h3>
+  /* Mobile overrides */
+  @media (max-width: 600px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile | default: 24 }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 24 }}px;
+      {% if section.settings.bg_image_mobile %}
+        background-image: url({{ section.settings.bg_image_mobile | img_url: '800x' }});
+      {% endif %}
+    }
+    #shopify-section-{{ section.id }} .collections-grid {
+      --grid-gap: {{ section.settings.grid_gap_mobile | default: 12 }}px;
+    }
+  }
+{%- endstyle -%}
 
-        {% if section.settings.show_description and collection.description %}
-          <p class="collections-grid__desc">
-            {{ collection.description | strip_html | truncatewords: section.settings.description_words }}
-          </p>
-        {% endif %}
+<section id="shopify-section-{{ section.id }}" class="collections-grid__section">
+  <div class="collections-grid__container">
+    <div
+      class="collections-grid"
+      data-columns-desktop="{{ section.settings.columns_desktop }}"
+      data-columns-tablet="{{ section.settings.columns_tablet }}"
+      data-columns-mobile="{{ section.settings.columns_mobile }}"
+    >
+      {% for collection in collections %}
+        <a class="collections-grid__card" href="{{ collection.url }}">
+          <div class="collections-grid__media">
+            {% if collection.featured_image %}
+              {% render 'image',
+                class: 'collections-grid__img',
+                image: collection.featured_image,
+                width: 1200,
+                height: 1200,
+                crop: section.settings.image_crop
+              %}
+            {% else %}
+              <!-- Fallback image -->
+              <img
+                class="collections-grid__img"
+                src="/mnt/data/47923d28-a8b4-4cbd-bf6c-3671aa8f51e9.png"
+                alt="{{ collection.title }}"
+                loading="lazy" width="" height=""
+              >
+            {% endif %}
+          </div>
 
-        {% if section.settings.show_count %}
-          <p class="collections-grid__count">
-            {{ collection.products_count }}
-            {{ 'products' | t }}
-          </p>
-        {% endif %}
-      </div>
-    </a>
-  {% endfor %}
-</div>
+          <div class="collections-grid__content">
+            <h3 class="collections-grid__title">{{ collection.title }}</h3>
+
+            {% if section.settings.show_description and collection.description %}
+              <p class="collections-grid__desc">
+                {{ collection.description | strip_html | truncatewords: section.settings.description_words }}
+              </p>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "Custom Collections Grid",
+  "name": "Collections Grid ",
   "settings": [
-    {
-      "type": "select",
-      "id": "grid_variant",
-      "label": "Grid Variant",
-      "options": [
-        { "value": "collections-grid--cards", "label": "Cards" },
-        { "value": "collections-grid--rounded", "label": "Rounded (bigger radius)" },
-        { "value": "collections-grid--minimal", "label": "Minimal" }
-      ],
-      "default": "collections-grid--cards"
-    },
-    {
-      "type": "select",
-      "id": "card_alignment",
-      "label": "Card alignment",
-      "options": [
-        { "value": "", "label": "Default (flow)" },
-        { "value": "center-cards", "label": "Center cards" }
-      ],
-      "default": ""
-    },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "number", "id": "description_words", "label": "Description words",   "default": 15 },
+
+    { "type": "number", "id": "columns_desktop", "label": "Desktop columns",   "default": 3 },
+    { "type": "number", "id": "columns_tablet", "label": "Tablet columns", "default": 2 },
+    { "type": "number", "id": "columns_mobile", "label": "Mobile columns", "default": 1 },
+
     {
       "type": "range",
-      "id": "grid_gap",
-      "label": "Grid gap (px)",
-      "min": 0,
-      "max": 64,
+      "id": "grid_gap_desktop",
+      "label": "Desktop gap",
+      "min": 6,
+      "max": 36,
       "step": 2,
       "default": 20
     },
-    {
-      "type": "number",
-      "id": "columns_desktop",
-      "label": "Desktop columns",
+    { "type": "range", "id": "grid_gap_tablet", "label": "Tablet gap", "min": 6, "max": 28, "step": 2, "default": 16 },
+    { "type": "range", "id": "grid_gap_mobile", "label": "Mobile gap", "min": 6, "max": 20, "step": 2, "default": 12 },
 
-      "default": 3
-    },
-    {
-      "type": "number",
-      "id": "columns_tablet",
-      "label": "Tablet columns",
-
-      "default": 2
-    },
-    {
-      "type": "number",
-      "id": "columns_mobile",
-      "label": "Mobile columns",
-
-      "default": 1
-    },
     {
       "type": "range",
       "id": "card_aspect",
-      "label": "Card aspect ratio (height / width %) — 100 = square, 150 = tall",
-      "min": 80,
-      "max": 180,
+      "label": "Card aspect ratio %",
+      "min": 100,
+      "max": 200,
       "step": 1,
       "default": 125
     },
-    {
-      "type": "range",
-      "id": "card_radius",
-      "label": "Card border radius (px)",
-      "min": 0,
-      "max": 48,
-      "step": 1,
-      "default": 12
-    },
-    {
-      "type": "text",
-      "id": "card_shadow",
-      "label": "Card shadow (CSS box-shadow)",
-      "default": "0 8px 24px rgba(11,20,23,0.06)"
-    },
-    {
-      "type": "number",
-      "id": "description_words",
-      "label": "Description word limit",
+    { "type": "range", "id": "card_radius", "label": "Card radius (px)", "min": 0, "max": 48, "default": 14 },
+    { "type": "text", "id": "card_shadow", "label": "Card Shadow CSS", "default": "0 8px 22px rgba(11,20,23,0.06)" },
 
-      "default": 15
-    },
-    {
-      "type": "checkbox",
-      "id": "show_description",
-      "label": "Show description under title",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_count",
-      "label": "Show product count",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_badge",
-      "label": "Show featured badge when collection is featured",
-      "default": true
-    },
     {
       "type": "select",
       "id": "image_crop",
@@ -191,109 +153,56 @@
       ],
       "default": "center"
     },
+
+    { "type": "color", "id": "bg_color_desktop", "label": "BG Color Desktop", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image_desktop", "label": "BG Image Desktop" },
     {
       "type": "number",
-      "id": "card_max_width",
-      "label": "Card max width (px) to center grid",
+      "id": "padding_top_desktop",
+      "label": "Padding top desktop",
+     
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom desktop",
+      
+      "default": 60
+    },
 
-      "default": 380
+    { "type": "image_picker", "id": "bg_image_tablet", "label": "BG Image Tablet" },
+    {
+      "type": "number",
+      "id": "padding_top_tablet",
+      "label": "Padding top tablet",
+      
+      "default": 40
     },
     {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title color",
-      "default": "#111111"
+      "type": "number",
+      "id": "padding_bottom_tablet",
+      "label": "Padding bottom tablet",
+    
+      "default": 40
+    },
+
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "BG Image Mobile" },
+    {
+      "type": "number",
+      "id": "padding_top_mobile",
+      "label": "Padding top mobile",
+  
+      "default": 24
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#444444"
+      "type": "number",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom mobile",
+      
+      "default": 24
     }
   ],
-  "presets": [
-    {
-      "name": "Custom Collections Grid"
-    }
-  ]
+  "presets": [{ "name": "Collections Grid (Container)" }]
 }
 {% endschema %}
-
-{% comment %}
-  <h1>{{ 'collections.title' | t }}</h1>
-
-  <div
-    class="collections {{ section.settings.grid_item_width }}"
-    style="--grid-gap: {{ section.settings.grid_gap }}px"
-  >
-    {% for collection in collections %}
-      <a class="collection-card" href="{{ collection.url }}">
-        {% if collection.featured_image %}
-          {% render 'image',
-            class: 'collection-card__image',
-            image: collection.featured_image,
-            width: 600,
-            height: 600,
-            crop: 'center'
-          %}
-        {% endif %}
-
-        <div class="collection-card__content">
-          <p>{{ collection.title }}</p>
-
-          {% if collection.description %}
-            <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
-          {% endif %}
-        </div>
-      </a>
-    {% endfor %}
-  </div>
-
-  {% stylesheet %}
-    .collections {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
-      gap: var(--grid-gap);
-    }
-    .collections--compact {
-      --collection-card-size: 160px;
-    }
-    .collections--full {
-      --collection-card-size: 280px;
-    }
-    .collection-card {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-  {% endstylesheet %}
-
-  {% schema %}
-  {
-    "name": "t:general.collections_grid",
-    "settings": [
-      {
-        "type": "select",
-        "id": "grid_item_width",
-        "label": "t:labels.grid_item_width",
-        "options": [
-          { "value": "collections--compact", "label": "t:options.size.small" },
-          { "value": "collections--full", "label": "t:options.size.large" }
-        ],
-        "default": "collections--full"
-      },
-      {
-        "type": "range",
-        "id": "grid_gap",
-        "label": "t:labels.grid_gap",
-        "min": 0,
-        "max": 50,
-        "step": 5,
-        "unit": "px",
-        "default": 10
-      }
-    ],
-    "presets": [{ "name": "t:general.collections_grid" }]
-  }
-  {% endschema %}
-{% endcomment %}
