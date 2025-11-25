@@ -1,0 +1,137 @@
+/* assets/hero-collections.css
+   Hero section styling (keeps visual style clean & minimal)
+   Use BEM-like classes: hero-collections__*
+*/
+
+.hero-collections__section {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* inner wrapper to control width (kept fluid by per-section CSS) */
+.hero-collections__inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+}
+
+/* overlay sits over the background image */
+.hero-collections__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* content container (centers content inside a constrained container) */
+.hero-collections__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* content block with alignment modifiers */
+.hero-collections__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+/* alignment variations */
+.hero-collections__content--left {
+  align-items: flex-start;
+  text-align: left;
+}
+.hero-collections__content--center {
+  align-items: center;
+  text-align: center;
+}
+.hero-collections__content--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Prelabel (small tag above the heading) */
+.hero-collections__prelabel {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Heading */
+.hero-collections__heading {
+  margin: 0;
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: inherit;
+  text-wrap: balance;
+  word-break: break-word;
+}
+
+/* Subtext */
+.hero-collections__subtext {
+  margin: 0;
+  opacity: 0.92;
+  max-width: 900px;
+  color: inherit;
+}
+
+/* CTA */
+.hero-collections__actions {
+  margin-top: 12px;
+}
+.hero-collections__btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .hero-collections__container {
+    padding: 0 16px;
+  }
+  .hero-collections__prelabel {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  .hero-collections__subtext {
+    font-size: 14px;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-collections__container {
+    padding: 0 12px;
+  }
+  .hero-collections__heading {
+    font-weight: 800;
+  }
+  .hero-collections__subtext {
+    font-size: 13px;
+    max-width: 360px;
+  }
+}

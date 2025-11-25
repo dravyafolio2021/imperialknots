@@ -38,6 +38,7 @@
       padding-bottom: {{ section.settings.padding_bottom_tablet | default: 40 }}px;
       margin-left: 0;
       margin-right: 0;
+      max-width:1200px;
       {% if section.settings.bg_image_tablet %}
         background-image: url({{ section.settings.bg_image_tablet | img_url: '1200x' }});
       {% endif %}

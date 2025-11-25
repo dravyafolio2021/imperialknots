@@ -1,0 +1,259 @@
+{% comment %}
+  sections/hero-collections.liquid
+  - Hero / Masthead for Collections page
+  - Keeps markup & logic here; all non-dynamic styles in assets/hero-collections.css
+  - Per-section dynamic variables (bg image, overlay, padding) injected in the <style> block
+{% endcomment %}
+
+{{ 'cora-collections-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  /* Section-level background (single source) */
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color_desktop | default: '#ffffff' }};
+    background-image: url({% if section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '2000x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %});
+    background-size: cover;
+    background-position: {{ section.settings.bg_position_desktop | default: 'center' }};
+    background-repeat: no-repeat;
+
+    /* padding controls */
+    padding-top: {{ section.settings.padding_top_desktop | default: 80 }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop | default: 80 }}px;
+
+    /* Limit hero height to avoid very tall sections */
+    max-height: 400px;
+    overflow: hidden;
+    width: 100%;
+   
+  }
+
+  /* Text color & heading size variables */
+  #shopify-section-{{ section.id }} .hero-collections__heading,
+  #shopify-section-{{ section.id }} .hero-collections__subtext {
+    color: {{ section.settings.text_color | default: '#111111' }};
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      background-image: url({% if section.settings.bg_image_tablet %}{{ section.settings.bg_image_tablet | img_url: '1200x' }}{% else %}{% if section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '1200x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %}{% endif %});
+      background-position: {{ section.settings.bg_position_tablet | default: 'center' }};
+      padding-top: {{ section.settings.padding_top_tablet | default: 60 }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 60 }}px;
+      max-height: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    #shopify-section-{{ section.id }} {
+      background-image: url({% if section.settings.bg_image_mobile %}{{ section.settings.bg_image_mobile | img_url: '800x' }}{% else %}{% if section.settings.bg_image_tablet %}{{ section.settings.bg_image_tablet | img_url: '800x' }}{% elsif section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '800x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %}{% endif %});
+      background-position: {{ section.settings.bg_position_mobile | default: 'center' }};
+      padding-top: {{ section.settings.padding_top_mobile | default: 40 }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 40 }}px;
+      max-height: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #shopify-section-{{ section.id }} .hero-collections__heading {
+      font-size: {{ section.settings.mobile_heading_size | default: 28 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="shopify-section-{{ section.id }}"
+  class="hero-collections__section"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Collections hero' }}"
+>
+  <div class="hero-collections__container">
+    <div class="hero-collections__content hero-collections__content--{{ section.settings.align }}">
+      {% if section.settings.prelabelforheading != blank %}
+        <div class="hero-collections__prelabel">{{ section.settings.prelabelforheading }}</div>
+      {% endif %}
+
+      {% if section.settings.show_title %}
+        <h1 class="hero-collections__heading" style="font-size: {{ section.settings.heading_size | default: 44 }}px;">
+          {{ section.settings.heading_text | default: 'Our Collections' }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.show_subtext and section.settings.subtext != blank %}
+        <p class="hero-collections__subtext" style="font-size: {{ section.settings.subtext_size | default: 16 }}px;">
+          {{ section.settings.subtext }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.show_cta and section.settings.cta_text != blank %}
+        <div class="hero-collections__actions">
+          <a
+            href="{{ section.settings.cta_link | default: '#' }}"
+            class="hero-collections__btn"
+            aria-label="{{ section.settings.cta_text }}"
+          >
+            {{- section.settings.cta_text -}}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections Hero Banner",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Collections hero" },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "text",
+      "id": "prelabelforheading",
+      "label": "Prelabel (small tag)",
+      "default": "Handcrafted Excellence"
+    },
+    { "type": "checkbox", "id": "show_title", "label": "Show heading", "default": true },
+    { "type": "text", "id": "heading_text", "label": "Heading text", "default": "Our Collections" },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (px)",
+      "min": 24,
+      "max": 80,
+      "step": 1,
+      "default": 44
+    },
+
+    { "type": "checkbox", "id": "show_subtext", "label": "Show subtext", "default": true },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Handmade rugs crafted to perfection for every home. Explore our curated collections showcasing India's finest artisanship."
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Subtext size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA", "default": false },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Shop Collections" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "default": "/" },
+
+    { "type": "color", "id": "bg_color_desktop", "label": "Background color (desktop)", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_image_desktop", "label": "Background image (desktop)" },
+    {
+      "type": "select",
+      "id": "bg_position_desktop",
+      "label": "Background position (desktop)",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "image_picker", "id": "bg_image_tablet", "label": "Background image (tablet)" },
+    {
+      "type": "select",
+      "id": "bg_position_tablet",
+      "label": "Background position (tablet)",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image (mobile)" },
+    {
+      "type": "select",
+      "id": "bg_position_mobile",
+      "label": "Background position (mobile)",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop px)",
+     
+      "default": 80
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom (desktop px)",
+    
+      "default": 80
+    },
+
+    {
+      "type": "number",
+      "id": "padding_top_tablet",
+      "label": "Padding top (tablet px)",
+   
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_tablet",
+      "label": "Padding bottom (tablet px)",
+       
+      "default": 60
+    },
+
+    {
+      "type": "number",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile px)",
+     
+      "default": 40
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile px)",
+      
+      "default": 40
+    },
+
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size (px)",
+      "min": 18,
+      "max": 48,
+      "default": 28
+    }
+  ],
+  "presets": [{ "name": "Collections Hero Banner", "category": "Collections" }]
+}
+{% endschema %}
