@@ -1,0 +1,41 @@
+{% comment %}
+  -----------------------------------------------------------------------------
+  SECTION: STANDARD PAGE TEMPLATE
+  Usage: Applied to About, Legal, FAQ pages for consistent layout.
+  -----------------------------------------------------------------------------
+{% endcomment %}
+
+{{ 'component-standard-page.css' | asset_url | stylesheet_tag }}
+
+<div class="std-page-container">
+  
+  {%- if section.settings.show_title -%}
+    <div class="std-page-header">
+      <h1 class="std-page-title">{{ page.title }}</h1>
+    </div>
+  {%- endif -%}
+
+  <div class="std-page-content">
+    {{ page.content }}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Standard Page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show Page Title",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Standard Page"
+    }
+  ]
+}
+{% endschema %}

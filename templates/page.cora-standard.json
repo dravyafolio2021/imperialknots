@@ -1,12 +1,12 @@
 {
   "sections": {
     "main": {
-      "type": "cora-standard-page",
+      "type": "main-standard-page",
       "settings": {
       }
     }
   },
   "order": [
     "main"
-  ],
- }
+  ]
+}
