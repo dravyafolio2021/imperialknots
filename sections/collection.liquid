@@ -1,47 +1,176 @@
-{% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
+{{ 'component-collection-grid.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
-
-<h1>{{ collection.title }}</h1>
-
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
+<div class="collection-container">
+  {%- comment -%} SIDEBAR FILTERS {%- endcomment -%}
+  <aside class="collection-sidebar">
+    <div class="filter-wrapper">
+      <div class="filter-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
+        <span style="font-weight:700;">Filters</span>
+        <a href="{{ collection.url }}" style="font-size:12px; text-decoration:underline; color:#666;">Clear All</a>
       </div>
-    {% endfor %}
 
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
+      <form class="filter-form">
+        {%- for filter in collection.filters -%}
+          <div class="filter-group">
+            <div class="filter-title">{{ filter.label }}</div>
+            <ul class="filter-list">
+              {%- case filter.type -%}
+                {%- when 'list' -%}
+                  {%- for value in filter.values -%}
+                    <li class="filter-item">
+                      <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          {% if value.active %}
+                            checked
+                          {% endif %}
+                          {% if value.count == 0 and value.active == false %}
+                            disabled
+                          {% endif %}
+                        >
+                        {{ value.label }}
+                        <span style="color:#999; font-size:12px;">({{ value.count }})</span>
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                {%- when 'price_range' -%}
+                  <div class="price-range-group">
+                    <div style="display:flex; gap:10px; align-items:center;">
+                      <span>{{ cart.currency.symbol }}</span>
+                      <input
+                        name="{{ filter.min_value.param_name }}"
+                        id="Filter-{{ filter.label | escape }}-GTE"
+                        {% if filter.min_value.value -%}
+                          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                        {%- endif %}
+                        type="number"
+                        placeholder="0"
+                        min="0"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        style="width: 100%; padding: 8px; border:1px solid #ddd;"
+                      >
+                      <span>-</span>
+                      <input
+                        name="{{ filter.max_value.param_name }}"
+                        id="Filter-{{ filter.label | escape }}-LTE"
+                        {% if filter.max_value.value -%}
+                          value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                        {%- endif %}
+                        type="number"
+                        placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        min="0"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        style="width: 100%; padding: 8px; border:1px solid #ddd;"
+                      >
+                    </div>
+                    <button
+                      type="submit"
+                      style="margin-top:10px; width:100%; padding:8px; background:#000; color:#fff; border:none; cursor:pointer;"
+                    >
+                      Apply
+                    </button>
+                  </div>
+              {%- endcase -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </form>
+    </div>
+  </aside>
+
+  {%- comment -%} MAIN PRODUCT GRID {%- endcomment -%}
+  <div class="collection-main">
+    <div class="collection-header">
+      {% comment %} <h1 style="font-size: 24px; font-weight:700; margin:0;">{{ collection.title }}</h1> {% endcomment %}
+
+      <div style="display:flex; gap:20px; align-items:center;">
+        <span class="product-count">{{ collection.products_count }} Products</span>
+
+        <select
+          id="sort-by"
+          onchange="location = this.value;"
+          style="padding:8px; border:1px solid #ddd; border-radius:4px;"
+        >
+          {% for option in collection.sort_options %}
+            <option
+              value="?sort_by={{ option.value }}"
+              {% if option.value == collection.sort_by %}
+                selected
+              {% endif %}
+            >
+              {{ option.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    {% paginate collection.products by 20 %}
+      <div class="product-grid">
+        {% for product in collection.products %}
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <a href="{{ product.url }}">
+                {% if product.compare_at_price > product.price %}
+                  <span class="product-badge">Sale</span>
+                {% endif %}
+
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+                    alt="{{ product.title | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+              </a>
+            </div>
+
+            <div class="product-info">
+              <h3>
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              <div class="product-price">
+                <span>{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <div style="margin-top: 40px; display: flex; justify-content: center; gap: 10px;">
+          {{ paginate | default_pagination: next: 'Next >', previous: '< Prev' }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
 </div>
 
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
+<script>
+  document.querySelectorAll('.filter-form input').forEach((input) => {
+    input.addEventListener('change', function () {
+      // Basic URL update logic for filters (Native Shopify)
+      const form = document.querySelector('.filter-form');
+      const formData = new FormData(form);
+      const searchParams = new URLSearchParams(formData).toString();
+      window.location.search = searchParams;
+    });
+  });
+</script>
 
 {% schema %}
 {
-  "name": "t:general.collection",
+  "name": "Collection Grid",
   "settings": []
 }
 {% endschema %}
