@@ -1,259 +1,198 @@
 {% comment %}
-  sections/hero-collections.liquid
-  - Hero / Masthead for Collections page
-  - Keeps markup & logic here; all non-dynamic styles in assets/hero-collections.css
-  - Per-section dynamic variables (bg image, overlay, padding) injected in the <style> block
+  -----------------------------------------------------------------------------
+  SECTION: DYNAMIC COLLECTION BANNER
+  -----------------------------------------------------------------------------
 {% endcomment %}
 
-{{ 'cora-collections-banner.css' | asset_url | stylesheet_tag }}
+{{ 'collection-banner.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  /* Section-level background (single source) */
-  #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color_desktop | default: '#ffffff' }};
-    background-image: url({% if section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '2000x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %});
-    background-size: cover;
-    background-position: {{ section.settings.bg_position_desktop | default: 'center' }};
-    background-repeat: no-repeat;
-
-    /* padding controls */
-    padding-top: {{ section.settings.padding_top_desktop | default: 80 }}px;
-    padding-bottom: {{ section.settings.padding_bottom_desktop | default: 80 }}px;
-
-    /* Limit hero height to avoid very tall sections */
-    max-height: 400px;
-    overflow: hidden;
-    width: 100%;
-   
+  /* Dynamic Spacing */
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
-  /* Text color & heading size variables */
-  #shopify-section-{{ section.id }} .hero-collections__heading,
-  #shopify-section-{{ section.id }} .hero-collections__subtext {
-    color: {{ section.settings.text_color | default: '#111111' }};
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    #shopify-section-{{ section.id }} {
-      background-image: url({% if section.settings.bg_image_tablet %}{{ section.settings.bg_image_tablet | img_url: '1200x' }}{% else %}{% if section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '1200x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %}{% endif %});
-      background-position: {{ section.settings.bg_position_tablet | default: 'center' }};
-      padding-top: {{ section.settings.padding_top_tablet | default: 60 }}px;
-      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 60 }}px;
-      max-height: 100%;
-      margin-left: 0;
-      margin-right: 0;
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
     }
   }
 
-  /* Mobile */
-  @media (max-width: 600px) {
-    #shopify-section-{{ section.id }} {
-      background-image: url({% if section.settings.bg_image_mobile %}{{ section.settings.bg_image_mobile | img_url: '800x' }}{% else %}{% if section.settings.bg_image_tablet %}{{ section.settings.bg_image_tablet | img_url: '800x' }}{% elsif section.settings.bg_image_desktop %}{{ section.settings.bg_image_desktop | img_url: '800x' }}{% else %}/mnt/data/f8f5fd30-6299-4853-bca7-df0bd900cf4f.png{% endif %}{% endif %});
-      background-position: {{ section.settings.bg_position_mobile | default: 'center' }};
-      padding-top: {{ section.settings.padding_top_mobile | default: 40 }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 40 }}px;
-      max-height: 100%;
-      margin-left: 0;
-      margin-right: 0;
-    }
+  /* Dynamic Colors & Overlay */
+  #cb-root-{{ section.id }} .cb-container {
+    background-color: {{ section.settings.bg_color }};
+  }
 
-    #shopify-section-{{ section.id }} .hero-collections__heading {
-      font-size: {{ section.settings.mobile_heading_size | default: 28 }}px;
+  #cb-root-{{ section.id }} .cb-overlay {
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  #cb-root-{{ section.id }} .cb-content {
+    color: {{ section.settings.text_color }};
+  }
+
+  /* Dynamic Typography */
+  #cb-root-{{ section.id }} .cb-heading {
+    font-size: {{ section.settings.heading_size }}px;
+  }
+
+  #cb-root-{{ section.id }} .cb-subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+  }
+
+  /* Mobile Font Scaling */
+  @media screen and (max-width: 768px) {
+    #cb-root-{{ section.id }} .cb-heading {
+      font-size: {{ section.settings.heading_size | times: 0.7 | round: 0 }}px;
+    }
+    #cb-root-{{ section.id }} .cb-subheading {
+      font-size: {{ section.settings.subheading_size | times: 0.9 | round: 0 }}px;
     }
   }
 {%- endstyle -%}
 
-<section
-  id="shopify-section-{{ section.id }}"
-  class="hero-collections__section"
-  role="region"
-  aria-label="{{ section.settings.aria_label | default: 'Collections hero' }}"
->
-  <div class="hero-collections__container">
-    <div class="hero-collections__content hero-collections__content--{{ section.settings.align }}">
-      {% if section.settings.prelabelforheading != blank %}
-        <div class="hero-collections__prelabel">{{ section.settings.prelabelforheading }}</div>
-      {% endif %}
-
-      {% if section.settings.show_title %}
-        <h1 class="hero-collections__heading" style="font-size: {{ section.settings.heading_size | default: 44 }}px;">
-          {{ section.settings.heading_text | default: 'Our Collections' }}
-        </h1>
-      {% endif %}
-
-      {% if section.settings.show_subtext and section.settings.subtext != blank %}
-        <p class="hero-collections__subtext" style="font-size: {{ section.settings.subtext_size | default: 16 }}px;">
-          {{ section.settings.subtext }}
-        </p>
-      {% endif %}
-
-      {% if section.settings.show_cta and section.settings.cta_text != blank %}
-        <div class="hero-collections__actions">
-          <a
-            href="{{ section.settings.cta_link | default: '#' }}"
-            class="hero-collections__btn"
-            aria-label="{{ section.settings.cta_text }}"
+<section id="cb-root-{{ section.id }}" class="collection-banner-section" aria-label="Collection Banner">
+  <div class="cb-container section-{{ section.id }}-padding">
+    <div class="cb-bg">
+      {%- if section.settings.image_desktop != blank -%}
+        <picture>
+          {%- if section.settings.image_mobile != blank -%}
+            <source media="(max-width: 767px)" srcset="{{ section.settings.image_mobile | img_url: '800x' }}">
+          {%- endif -%}
+          <img
+            src="{{ section.settings.image_desktop | img_url: '2000x' }}"
+            alt="{{ collection.title | escape }}"
+            loading="eager"
+            width="2000"
+            height="800"
           >
-            {{- section.settings.cta_text -}}
-          </a>
-        </div>
-      {% endif %}
+        </picture>
+      {%- elsif collection.image != blank -%}
+        <img
+          src="{{ collection.image | img_url: '2000x' }}"
+          alt="{{ collection.title | escape }}"
+          loading="eager"
+          width="2000"
+          height="800"
+        >
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <div class="cb-overlay"></div>
+
+    <div class="cb-content">
+      <h1 class="cb-heading">
+        {%- if section.settings.heading != blank -%}
+          {{ section.settings.heading }}
+        {%- else -%}
+          {{ collection.title }}
+        {%- endif -%}
+      </h1>
+
+      <div class="cb-subheading">
+        {%- if section.settings.subheading != blank -%}
+          {{ section.settings.subheading }}
+        {%- else -%}
+          {{ collection.description }}
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Collections Hero Banner",
+  "name": "Collection Banner",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Collections hero" },
-    {
-      "type": "select",
-      "id": "align",
-      "label": "Content alignment",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
-    },
-
+    { "type": "header", "content": "Content" },
     {
       "type": "text",
-      "id": "prelabelforheading",
-      "label": "Prelabel (small tag)",
-      "default": "Handcrafted Excellence"
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to use Collection Title."
     },
-    { "type": "checkbox", "id": "show_title", "label": "Show heading", "default": true },
-    { "type": "text", "id": "heading_text", "label": "Heading text", "default": "Our Collections" },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Description",
+      "info": "Leave blank to use Collection Description."
+    },
+
+    { "type": "header", "content": "Images" },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Image",
+      "info": "If blank, uses Collection Featured Image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)"
+    },
+
+    { "type": "header", "content": "Colors & Overlay" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f3f3f3" },
+    { "type": "color", "id": "overlay_color", "label": "Overlay Color", "default": "#ffffff" },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 85
+    },
+
+    { "type": "header", "content": "Sizing" },
     {
       "type": "range",
       "id": "heading_size",
-      "label": "Heading size (px)",
-      "min": 24,
+      "min": 20,
       "max": 80,
-      "step": 1,
-      "default": 44
-    },
-
-    { "type": "checkbox", "id": "show_subtext", "label": "Show subtext", "default": true },
-    {
-      "type": "textarea",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "Handmade rugs crafted to perfection for every home. Explore our curated collections showcasing India's finest artisanship."
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 42
     },
     {
       "type": "range",
-      "id": "subtext_size",
-      "label": "Subtext size (px)",
+      "id": "subheading_size",
       "min": 12,
-      "max": 20,
+      "max": 30,
       "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size",
       "default": 16
     },
-
-    { "type": "checkbox", "id": "show_cta", "label": "Show CTA", "default": false },
-    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Shop Collections" },
-    { "type": "url", "id": "cta_link", "label": "CTA link", "default": "/" },
-
-    { "type": "color", "id": "bg_color_desktop", "label": "Background color (desktop)", "default": "#ffffff" },
-    { "type": "image_picker", "id": "bg_image_desktop", "label": "Background image (desktop)" },
-    {
-      "type": "select",
-      "id": "bg_position_desktop",
-      "label": "Background position (desktop)",
-      "options": [
-        { "value": "center", "label": "Center" },
-        { "value": "top", "label": "Top" },
-        { "value": "bottom", "label": "Bottom" }
-      ],
-      "default": "center"
-    },
-
-    { "type": "image_picker", "id": "bg_image_tablet", "label": "Background image (tablet)" },
-    {
-      "type": "select",
-      "id": "bg_position_tablet",
-      "label": "Background position (tablet)",
-      "options": [
-        { "value": "center", "label": "Center" },
-        { "value": "top", "label": "Top" },
-        { "value": "bottom", "label": "Bottom" }
-      ],
-      "default": "center"
-    },
-
-    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image (mobile)" },
-    {
-      "type": "select",
-      "id": "bg_position_mobile",
-      "label": "Background position (mobile)",
-      "options": [
-        { "value": "center", "label": "Center" },
-        { "value": "top", "label": "Top" },
-        { "value": "bottom", "label": "Bottom" }
-      ],
-      "default": "center"
-    },
-
-    {
-      "type": "number",
-      "id": "padding_top_desktop",
-      "label": "Padding top (desktop px)",
-     
-      "default": 80
-    },
-    {
-      "type": "number",
-      "id": "padding_bottom_desktop",
-      "label": "Padding bottom (desktop px)",
-    
-      "default": 80
-    },
-
-    {
-      "type": "number",
-      "id": "padding_top_tablet",
-      "label": "Padding top (tablet px)",
-   
-      "default": 60
-    },
-    {
-      "type": "number",
-      "id": "padding_bottom_tablet",
-      "label": "Padding bottom (tablet px)",
-       
-      "default": 60
-    },
-
-    {
-      "type": "number",
-      "id": "padding_top_mobile",
-      "label": "Padding top (mobile px)",
-     
-      "default": 40
-    },
-    {
-      "type": "number",
-      "id": "padding_bottom_mobile",
-      "label": "Padding bottom (mobile px)",
-      
-      "default": 40
-    },
-
-    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
     {
       "type": "range",
-      "id": "mobile_heading_size",
-      "label": "Mobile heading size (px)",
-      "min": 18,
-      "max": 48,
-      "default": 28
+      "id": "padding_top",
+      "min": 40,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 100
     }
   ],
-  "presets": [{ "name": "Collections Hero Banner", "category": "Collections" }]
+  "presets": [{ "name": "Collection Banner" }]
 }
 {% endschema %}
