@@ -1,182 +1,205 @@
 {% comment %}
-  sections/sitemap.liquid
-  - Human-readable sitemap for QA / quick-checking
-  - Shows: Collections (optionally products), Blogs & Articles, Custom Links
-  - Client-side search (sitemap.js) filters results instantly
-  - CSS lives in assets/sitemap.css
+  SECTION: HTML SITEMAP
+  Purpose: Displays a human-readable list of all store content.
 {% endcomment %}
 
-{{ 'sitemap.css' | asset_url | stylesheet_tag }}
-
-{%- style -%}
-  /* Per-section container width & gap vars */
-  #shopify-section-{{ section.id }} .sitemap__container {
-    max-width: {{ section.settings.container_width | default: 1200 }}px;
+<style>
+  .sitemap-wrapper {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 36px 20px;
+    padding: 60px 20px;
+    font-family: var(--font-body-family, sans-serif);
   }
-{%- endstyle -%}
 
-<section id="shopify-section-{{ section.id }}" class="sitemap-section" aria-label="Sitemap">
-  <div class="sitemap__container">
-    <div class="sitemap__top">
-      <h1 class="sitemap__title">{{ section.settings.title | default: 'Sitemap' }}</h1>
-      {% if section.settings.show_search %}
-        <div class="sitemap__search">
-          <input
-            id="sitemap-search"
-            class="sitemap__search-input"
-            type="search"
-            placeholder="Search pages, products, articles..."
-            aria-label="Search sitemap"
-          >
-          <small class="sitemap__search-hint">Type to filter results instantly (Ctrl+F to focus)</small>
-        </div>
-      {% endif %}
-    </div>
+  .sitemap-header {
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 30px;
+  }
 
-    <div class="sitemap__grid">
-      <!-- Left column: Collections -->
-      <div class="sitemap__col sitemap__col--collections" aria-labelledby="sitemap-collections">
-        <div class="sitemap__col-head">
-          <h2 id="sitemap-collections">Collections</h2>
-          {% if section.settings.include_products %}
-            <button class="sitemap__toggle-products" id="sitemap-toggle-products" aria-pressed="false">
-              Show products
-            </button>
-          {% endif %}
-        </div>
+  .sitemap-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
 
-        <ul class="sitemap__list sitemap__list--collections" id="sitemap-collections-list">
-          {% comment %}
-            Iterate through all visible collections.
-            If include_products is enabled we output up to products_per_collection for each collection.
-            Note: listing ALL products for very large stores can be heavy — we limit per collection.
-          {% endcomment %}
-          {% for collection in collections %}
-            <li class="sitemap__item sitemap__collection" data-sitemap-index="{{ collection.handle }}">
-              <a class="sitemap__link sitemap__link--collection" href="{{ collection.url }}">{{ collection.title }}</a>
-              <span class="sitemap__meta">({{ collection.products_count }} products)</span>
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
 
-              {% if section.settings.include_products and collection.products_count > 0 %}
-                <button
-                  class="sitemap__expand-products"
-                  aria-expanded="false"
-                  data-collection-handle="{{ collection.handle }}"
-                >
-                  Show
-                </button>
-                <ul
-                  class="sitemap__sublist sitemap__sublist--products"
-                  data-collection="{{ collection.handle }}"
-                  hidden
-                >
-                  {% assign limit = section.settings.products_per_collection | default: 6 %}
-                  {% for product in collection.products limit: limit %}
-                    <li class="sitemap__subitem">
-                      <a href="{{ product.url }}" class="sitemap__sublink">{{ product.title }}</a>
-                      <span class="sitemap__small">{{ product.price | money }}</span>
-                    </li>
-                  {% endfor %}
-                  {% if collection.products_count > limit %}
-                    <li class="sitemap__subitem sitemap__see-all">
-                      <a href="{{ collection.url }}">See all products in {{ collection.title }}</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+  /* Columns */
+  .sitemap-col h2 {
+    font-size: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-      <!-- Middle column: Blogs & Articles -->
-      <div class="sitemap__col sitemap__col--blogs" aria-labelledby="sitemap-blogs">
-        <h2 id="sitemap-blogs">Blogs & Articles</h2>
-        <ul class="sitemap__list sitemap__list--blogs">
-          {% assign articles_limit_each = section.settings.articles_per_blog | default: 5 %}
-          {% for blog in blogs %}
-            <li class="sitemap__item sitemap__blog" data-sitemap-index="blog-{{ blog.handle }}">
-              <a class="sitemap__link sitemap__link--blog" href="{{ blog.url }}">{{ blog.title }}</a>
-              <ul class="sitemap__sublist sitemap__sublist--articles">
-                {% for article in blog.articles limit: articles_limit_each %}
-                  <li class="sitemap__subitem">
-                    <a href="{{ article.url }}" class="sitemap__sublink">{{ article.title }}</a>
-                    <span class="sitemap__small">{{ article.published_at | date: '%b %d, %Y' }}</span>
-                  </li>
-                {% endfor %}
-                {% if blog.articles_count > articles_limit_each %}
-                  <li class="sitemap__subitem sitemap__see-all">
-                    <a href="{{ blog.url }}">See all articles in {{ blog.title }}</a>
-                  </li>
-                {% endif %}
-              </ul>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+  /* Lists */
+  .sitemap-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-      <!-- Right column: Custom Links & Navigation -->
-      <div class="sitemap__col sitemap__col--custom" aria-labelledby="sitemap-custom">
-        <h2 id="sitemap-custom">Custom Links & Navigation</h2>
+  .sitemap-list li {
+    margin-bottom: 12px;
+  }
 
-        <!-- Custom links added in section blocks (link picker) -->
-        {% if section.blocks.size > 0 %}
-          <ul class="sitemap__list sitemap__list--custom">
-            {% for block in section.blocks %}
-              <li class="sitemap__item sitemap__custom-item">
-                {% if block.settings.link %}
-                  <a class="sitemap__link" href="{{ block.settings.link }}">
-                    {{- block.settings.title | default: block.settings.link.title -}}
-                  </a>
-                {% else %}
-                  <span class="sitemap__link">{{ block.settings.title }}</span>
-                {% endif %}
-                {% if block.settings.note %}
-                  <div class="sitemap__small">{{ block.settings.note }}</div>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <div class="sitemap__muted">
-            No custom links added. Use the theme editor to add important pages here (e.g., Contact, FAQ, Shipping,
-            Returns).
-          </div>
-        {% endif %}
+  .sitemap-list a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
 
-        <!-- Menus: render linklists that are commonly used (header/footer) -->
-        <div class="sitemap__navs">
-          {% comment %}
-            We show a few known linklists if they exist: 'main-menu', 'footer', 'secondary-menu' — change handles as needed.
-          {% endcomment %}
-          {% assign known_menus = 'main-menu,footer,secondary-menu' | split: ',' %}
-          {% for menu_handle in known_menus %}
-            {% assign menu = linklists[menu_handle] %}
-            {% if menu and menu.links_count > 0 %}
-              <div class="sitemap__menu">
-                <h3 class="sitemap__menu-title">{{ menu.title }}</h3>
-                <ul>
-                  {% for link in menu.links %}
-                    <li>
-                      <a href="{{ link.url }}">{{ link.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
+  .sitemap-list a:hover {
+    color: #666;
+    text-decoration: underline;
+  }
 
-    <div class="sitemap__footer">
-      <p class="sitemap__muted">
-        Generated sitemap for quick checks. Use the search or the expand buttons to reveal products & articles. For full
-        XML sitemaps (for crawlers), use Shopify's built-in `/sitemap.xml`.
-      </p>
-    </div>
+  /* Nested Lists (Products/Articles) */
+  .sitemap-sublist {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border-left: 1px solid #ddd;
+  }
+
+  .sitemap-sublist li {
+    margin-bottom: 6px;
+  }
+
+  .sitemap-sublist a {
+    font-size: 13px;
+    color: #666;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 768px) {
+    .sitemap-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="sitemap-wrapper">
+  
+  <div class="sitemap-header">
+    <h1>{{ page.title }}</h1>
+    <p>An overview of the available content on our site.</p>
   </div>
-</section>
 
-{{ 'sitemap.js' | asset_url | script_tag }}
+  <div class="sitemap-grid">
+
+    <div class="sitemap-col">
+      <h2>Collections & Products</h2>
+      <ul class="sitemap-list">
+        {%- for collection in collections -%}
+          {%- comment -%} Skip Frontpage collection {%- endcomment -%}
+          {%- if collection.handle == 'frontpage' -%}{%- continue -%}{%- endif -%}
+          
+          <li>
+            <a href="{{ collection.url }}"><strong>{{ collection.title }}</strong></a>
+            
+            {%- if section.settings.show_products -%}
+              <ul class="sitemap-sublist">
+                {%- for product in collection.products limit: 10 -%}
+                  <li><a href="{{ product.url }}">{{ product.title }}</a></li>
+                {%- endfor -%}
+                {%- if collection.all_products_count > 10 -%}
+                  <li><a href="{{ collection.url }}" style="font-style:italic;">View all {{ collection.all_products_count }} products...</a></li>
+                {%- endif -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h2>Journal & News</h2>
+      <ul class="sitemap-list">
+        {%- for blog in blogs -%}
+          <li>
+            <a href="{{ blog.url }}"><strong>{{ blog.title }}</strong></a>
+            
+            {%- if section.settings.show_articles -%}
+              <ul class="sitemap-sublist">
+                {%- for article in blog.articles limit: 10 -%}
+                  <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h2>Pages & Info</h2>
+      {%- if section.settings.pages_menu != blank -%}
+        <ul class="sitemap-list">
+          {%- for link in linklists[section.settings.pages_menu].links -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              
+              {%- if link.links.size > 0 -%}
+                <ul class="sitemap-sublist">
+                  {%- for child_link in link.links -%}
+                    <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <p style="color:red; font-size:12px;">
+          * Please select a Menu in the theme editor to display Pages here.
+        </p>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "HTML Sitemap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Pages Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "pages_menu",
+      "label": "Select 'All Pages' Menu",
+      "info": "Create a menu in Navigation containing all your static pages (About, Contact, Legal, etc)."
+    },
+    {
+      "type": "header",
+      "content": "Detail Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show Products under Collections",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_articles",
+      "label": "Show Articles under Blogs",
+      "default": true
+    }
+  ],
+  "presets": [{ "name": "HTML Sitemap" }]
+}
+{% endschema %}
