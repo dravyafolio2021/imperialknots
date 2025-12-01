@@ -1,0 +1,77 @@
+/* ASSET: cora-trust-badges.css */
+
+.ctb-section {
+  background-color: #f4f4f2; /* The specific beige from your design */
+  padding: 60px 20px;
+  width: 100%;
+}
+
+.ctb-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px; /* Generous spacing between items */
+  flex-wrap: wrap;
+}
+
+.ctb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 150px;
+}
+
+/* The Circle Icon Container */
+.ctb-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.08); /* Very subtle border/bg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.ctb-item:hover .ctb-icon-wrapper {
+  transform: translateY(-5px);
+  border-color: #000;
+}
+
+.ctb-icon-wrapper svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5px;
+  color: #1a1a1a;
+}
+
+/* Text Styling */
+.ctb-text {
+  font-family: 'Inter', sans-serif; /* Using your body font */
+  font-size: 13px;
+  color: #555;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .ctb-section {
+    padding: 40px 20px;
+  }
+  .ctb-container {
+    gap: 30px;
+    justify-content: space-between;
+  }
+  .ctb-item {
+    min-width: 40%; /* 2 per row on mobile */
+  }
+  .ctb-text {
+    font-size: 12px;
+  }
+}

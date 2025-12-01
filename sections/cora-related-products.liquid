@@ -1,0 +1,96 @@
+{% comment %}
+  SECTION: CORA RELATED PRODUCTS
+  Logic: Uses Shopify Product Recommendations API
+{% endcomment %}
+
+{{ 'cora-related-products.css' | asset_url | stylesheet_tag }}
+
+<div class="crp-section product-recommendations" 
+     data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related">
+  
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="crp-container">
+      
+      <div class="crp-header">
+        <h2 class="crp-heading">{{ section.settings.heading }}</h2>
+        {%- if product.collections.first -%}
+          <a href="{{ product.collections.first.url }}" class="crp-view-all">View All</a>
+        {%- endif -%}
+      </div>
+
+      <div class="crp-grid">
+        {%- for product in recommendations.products -%}
+          <a href="{{ product.url }}" class="crp-card">
+            
+            <div class="crp-image-wrap">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="crp-badge">Sale</span>
+              {%- elsif product.tags contains 'Bestseller' -%}
+                <span class="crp-badge">Bestseller</span>
+              {%- endif -%}
+              
+              <img src="{{ product.featured_image | img_url: '600x' }}" width="" height="" alt="{{ product.title }}" loading="lazy">
+            </div>
+
+            <div class="crp-details">
+              <h3 class="crp-title">{{ product.title }}</h3>
+              <div class="crp-price-row">
+                <span class="crp-price">{{ product.price | money }}</span>
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="crp-compare">{{ product.compare_at_price | money }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+
+          </a>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  // This script fetches the recommendations when the page loads
+  const handleIntersection = (entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+    observer.unobserve(productRecommendationsSection);
+
+    const url = productRecommendationsSection.dataset.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  };
+
+  const productRecommendationsSection = document.querySelector('.product-recommendations');
+  const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+
+  observer.observe(productRecommendationsSection);
+</script>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You May Also Like"
+    }
+  ],
+  "presets": [{ "name": "Related Products", "category": "Products" }]
+}
+{% endschema %}

@@ -1,0 +1,73 @@
+{% comment %}
+  SECTION: CORA TRUST BADGES
+  Design: Minimal icon row with circular backgrounds.
+{% endcomment %}
+
+{{ 'cora-trust-badges.css' | asset_url | stylesheet_tag }}
+
+<section class="ctb-section" aria-label="Trust Badges">
+  <div class="ctb-container">
+    
+    {%- for block in section.blocks -%}
+      <div class="ctb-item" {{ block.shopify_attributes }}>
+        <div class="ctb-icon-wrapper">
+          {%- case block.settings.icon -%}
+            {%- when 'shipping' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            {%- when 'shield' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            {%- when 'return' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 2v6h6M21.5 22v-6h-6"/><path d="M22 11.5A10 10 0 0 0 3.2 7.2M2 12.5a10 10 0 0 0 18.8 4.2"/></svg>
+            {%- when 'star' -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          {%- endcase -%}
+        </div>
+        <div class="ctb-text">{{ block.settings.text }}</div>
+      </div>
+    {%- endfor -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping Truck" },
+            { "value": "shield", "label": "Authenticity Shield" },
+            { "value": "return", "label": "Return Arrows" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "shipping", "text": "Free Shipping" } },
+        { "type": "badge", "settings": { "icon": "shield", "text": "Authenticity Guaranteed" } },
+        { "type": "badge", "settings": { "icon": "return", "text": "30-Day Returns" } }
+      ], "category": "Products"
+    }
+  ]
+}
+{% endschema %}
