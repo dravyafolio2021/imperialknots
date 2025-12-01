@@ -1,0 +1,159 @@
+/* ASSET: cora-about-page.css */
+
+.cap-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.cap-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- 1. HERO BLOCK --- */
+.cap-hero {
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f4f4f2;
+  margin-bottom: 80px;
+}
+
+.cap-hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.cap-hero-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.cap-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+}
+
+.cap-hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.cap-hero-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+
+.cap-hero-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* --- 2. IMAGE WITH TEXT (Story) --- */
+.cap-iwt {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 100px;
+}
+
+.cap-iwt.reverse {
+  flex-direction: row-reverse;
+}
+
+.cap-iwt-image {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f4f4;
+  height: 500px;
+}
+
+.cap-iwt-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.cap-iwt-image:hover img { transform: scale(1.03); }
+
+.cap-iwt-content {
+  flex: 1;
+}
+
+.cap-iwt-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.cap-iwt-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.cap-iwt-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* --- 3. STATS ROW --- */
+.cap-stats {
+  background-color: #f9f9f9;
+  padding: 60px 0;
+  margin-bottom: 100px;
+}
+
+.cap-stats-grid {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.cap-stat-number {
+  font-family: 'Assistant', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+
+.cap-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Mobile */
+@media screen and (max-width: 900px) {
+  .cap-hero { height: 400px; }
+  .cap-hero-title { font-size: 36px; }
+  
+  .cap-iwt { flex-direction: column !important; gap: 40px; margin-bottom: 60px; }
+  .cap-iwt-image { width: 100%; height: 350px; }
+  
+  .cap-stats-grid { flex-direction: column; gap: 40px; }
+}
