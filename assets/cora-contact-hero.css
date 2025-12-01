@@ -1,0 +1,45 @@
+/* ASSET: cora-contact-hero.css */
+
+.cch-section {
+  background-color: #ebe9e1; /* The exact beige from your screenshot */
+  padding: 100px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.cch-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cch-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+  line-height: 1.15;
+}
+
+.cch-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: #4a4a4a;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .cch-section {
+    padding: 70px 20px;
+  }
+  .cch-title {
+    font-size: 32px; /* Smaller on mobile to prevent overflow */
+    margin-bottom: 16px;
+  }
+  .cch-desc {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,47 @@
+{% comment %}
+  SECTION: CORA CONTACT HERO
+  Design: Simple centered beige header
+{% endcomment %}
+
+{{ 'cora-contact-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="cch-section">
+  <div class="cch-container">
+    <h1 class="cch-title">{{ section.settings.heading }}</h1>
+    
+    {%- if section.settings.text != blank -%}
+      <div class="cch-desc">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let's Connect with Imperial Knots"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subtext",
+      "default": "We'd love to hear from you — whether you're a homeowner, designer, or retailer."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ebe9e1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Hero", "category": "Contact Us"
+    }
+  ]
+}
+{% endschema %}
