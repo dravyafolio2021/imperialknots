@@ -1,0 +1,33 @@
+{% comment %}
+  SECTION: INFLUENCER HERO
+{% endcomment %}
+
+{{ 'cora-influencer-page.css' | asset_url | stylesheet_tag }}
+
+<section class="cip-hero">
+  <div class="cip-container">
+    <h1 class="cip-hero-title">{{ section.settings.heading }}</h1>
+    <div class="cip-hero-desc">{{ section.settings.text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Influencer Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Influencer Application"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Thank you for your interest in collaborating with us! We receive many requests each day..."
+    }
+  ],
+  "presets": [{ "name": "Influencer Hero", "category": "Influencer" }]
+}
+{% endschema %}

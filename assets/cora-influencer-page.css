@@ -1,0 +1,171 @@
+/* ASSET: cora-influencer-page.css */
+
+.cip-section {
+  width: 100%;
+  background-color: #fff;
+}
+
+.cip-container {
+  max-width: 800px; /* Tighter width for form readability */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- 1. HERO HEADER --- */
+.cip-hero {
+  text-align: center;
+  padding: 80px 20px 40px 20px;
+}
+
+.cip-hero-title {
+  font-family: "Assistant", sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.cip-hero-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- 2. FORM STYLES --- */
+.cip-form-wrapper {
+  padding-bottom: 100px;
+}
+
+.cip-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 Columns */
+  gap: 20px;
+}
+
+.cip-form-group {
+  margin-bottom: 20px;
+}
+
+.cip-form-group.full-width {
+  grid-column: span 2;
+}
+
+.cip-label {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.cip-input,
+.cip-select,
+.cip-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.cip-input:focus,
+.cip-select:focus,
+.cip-textarea:focus {
+  border-color: #1a1a1a;
+}
+
+.cip-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Range Slider Styling (for Follower Count) */
+.cip-range-wrapper {
+  padding: 10px 0;
+}
+.cip-range-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Checkbox */
+.cip-checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.cip-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #1a1a1a;
+  margin-top: 3px;
+}
+
+.cip-checkbox-label {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Submit Button */
+.cip-btn {
+  width: 100%;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 16px;
+  border: none;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.cip-btn:hover {
+  opacity: 0.9;
+}
+
+.cip-footer-note {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.cip-footer-note a {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .cip-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .cip-form-group.full-width {
+    grid-column: span 1;
+  }
+  .cip-hero-title {
+    font-size: 32px;
+  }
+}
