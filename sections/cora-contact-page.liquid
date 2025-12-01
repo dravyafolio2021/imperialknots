@@ -1,0 +1,149 @@
+{% comment %}
+  SECTION: CORA CONTACT PAGE
+  Filename: sections/cora-contact-page.liquid
+{% endcomment %}
+
+{{ 'cora-contact-page.css' | asset_url | stylesheet_tag }}
+
+<div class="ccp-section">
+  
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      
+      {%- comment -%} BLOCK: HERO HEADER {%- endcomment -%}
+      {%- when 'hero' -%}
+        <div class="ccp-hero" {{ block.shopify_attributes }}>
+          <div class="ccp-container">
+            <h1 class="ccp-hero-title">{{ block.settings.heading }}</h1>
+            <div class="ccp-hero-desc">{{ block.settings.text }}</div>
+          </div>
+        </div>
+
+      {%- comment -%} BLOCK: INFO GRID {%- endcomment -%}
+      {%- when 'info_grid' -%}
+        <div class="ccp-container" {{ block.shopify_attributes }}>
+          <div class="ccp-info-grid">
+            <div class="ccp-info-card">
+              <div class="ccp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <h3 class="ccp-card-title">{{ block.settings.title_1 }}</h3>
+              <div class="ccp-card-text">{{ block.settings.text_1 }}</div>
+            </div>
+            <div class="ccp-info-card">
+              <div class="ccp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <h3 class="ccp-card-title">{{ block.settings.title_2 }}</h3>
+              <div class="ccp-card-text">{{ block.settings.text_2 }}</div>
+            </div>
+            <div class="ccp-info-card">
+              <div class="ccp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <h3 class="ccp-card-title">{{ block.settings.title_3 }}</h3>
+              <div class="ccp-card-text">{{ block.settings.text_3 }}</div>
+            </div>
+          </div>
+        </div>
+
+      {%- comment -%} BLOCK: CONTACT FORM {%- endcomment -%}
+      {%- when 'contact_form' -%}
+        <div class="ccp-container" {{ block.shopify_attributes }}>
+          <div class="ccp-form-wrapper">
+            <div class="ccp-form-header">
+              <h2 class="ccp-form-title">{{ block.settings.heading }}</h2>
+              <p>{{ block.settings.text }}</p>
+            </div>
+
+            {% form 'contact' %}
+              {%- if form.posted_successfully? -%}
+                <div class="form-status form-status-list" tabindex="-1" autofocus>
+                  <p>Thanks for contacting us. We'll get back to you shortly.</p>
+                </div>
+              {%- elsif form.errors -%}
+                <div class="form-status">
+                  <div class="form-status-list">
+                    Please correct the errors marked below.
+                  </div>
+                </div>
+              {%- endif -%}
+
+              <div class="ccp-form-group ccp-form-row">
+                <input class="ccp-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Name">
+                <input class="ccp-input" autocomplete="email" type="email" id="ContactForm-email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" spellcheck="false" autocapitalize="off" placeholder="Email" required>
+              </div>
+
+              <div class="ccp-form-group">
+                <input class="ccp-input" type="tel" id="ContactForm-phone" name="contact[phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="Phone Number">
+              </div>
+
+              <div class="ccp-form-group">
+                <textarea rows="10" id="ContactForm-body" class="ccp-textarea" name="contact[body]" placeholder="How can we help?">
+                  {{- form.body -}}
+                </textarea>
+              </div>
+
+              <button type="submit" class="ccp-btn">
+                {{ block.settings.btn_text }}
+              </button>
+            {% endform %}
+          </div>
+        </div>
+
+    {%- endcase -%}
+  {%- endfor -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page Builder",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "hero",
+      "name": "Header / Hero",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Get in Touch" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "We'd love to hear from you. Here's how you can reach us..." }
+      ]
+    },
+    {
+      "type": "info_grid",
+      "name": "Info Cards (3 Col)",
+      "settings": [
+        { "type": "header", "content": "Card 1 (Email)" },
+        { "type": "text", "id": "title_1", "label": "Title", "default": "Email" },
+        { "type": "richtext", "id": "text_1", "label": "Text", "default": "<p>hello@imperialknots.com</p>" },
+        { "type": "header", "content": "Card 2 (Phone)" },
+        { "type": "text", "id": "title_2", "label": "Title", "default": "Phone" },
+        { "type": "richtext", "id": "text_2", "label": "Text", "default": "<p>+91 98765 43210<br>Mon-Fri, 9am-6pm</p>" },
+        { "type": "header", "content": "Card 3 (Office)" },
+        { "type": "text", "id": "title_3", "label": "Title", "default": "Office" },
+        { "type": "richtext", "id": "text_3", "label": "Text", "default": "<p>Jaipur, Rajasthan<br>India</p>" }
+      ]
+    },
+    {
+      "type": "contact_form",
+      "name": "Contact Form",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Form Heading", "default": "Send us a Message" },
+        { "type": "text", "id": "text", "label": "Form Subtext", "default": "We usually respond within 24 hours." },
+        { "type": "text", "id": "btn_text", "label": "Button Label", "default": "SEND MESSAGE" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Page Builder",
+      "category": "Contact Us",
+      "blocks": [
+        { "type": "hero" },
+        { "type": "info_grid" },
+        { "type": "contact_form" }
+      ]
+    }
+  ]
+}
+{% endschema %}

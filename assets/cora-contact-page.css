@@ -1,0 +1,212 @@
+/* ASSET: cora-contact-page.css */
+
+.ccp-section {
+  width: 100%;
+  background-color: #fff;
+}
+
+.ccp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- 1. HERO HEADER --- */
+.ccp-hero {
+  background-color: #f4f4f2; /* Matching your Beige theme */
+  padding: 80px 20px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.ccp-hero-title {
+  font-family: "Assistant", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+
+.ccp-hero-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- 2. INFO GRID (Cards) --- */
+.ccp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.ccp-info-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  background: #fff;
+}
+
+.ccp-info-card:hover {
+  transform: translateY(-5px);
+  border-color: #d1d1d1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.ccp-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px auto;
+  background-color: #f9f8f4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c1a676; /* Gold/Beige Accent */
+}
+
+.ccp-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ccp-card-title {
+  font-family: "Assistant", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+
+.ccp-card-text {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.ccp-card-text a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- 3. CONTACT FORM --- */
+.ccp-form-wrapper {
+  max-width: 700px;
+  margin: 0 auto 100px auto;
+  padding: 40px;
+  background-color: #fcfcfc;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+.ccp-form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ccp-form-title {
+  font-family: "Assistant", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Form Fields */
+.ccp-form-group {
+  margin-bottom: 20px;
+}
+
+.ccp-form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.ccp-input,
+.ccp-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.ccp-input:focus,
+.ccp-textarea:focus {
+  border-color: #1a1a1a;
+}
+
+.ccp-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.ccp-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: opacity 0.2s;
+}
+
+.ccp-btn:hover {
+  opacity: 0.9;
+}
+
+/* Success/Error Messages */
+.form-status {
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+.form-status-list {
+  list-style: none;
+  padding: 0;
+  color: red;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .ccp-hero {
+    padding: 60px 20px;
+  }
+  .ccp-hero-title {
+    font-size: 36px;
+  }
+
+  .ccp-info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ccp-form-wrapper {
+    padding: 20px;
+    border: none;
+    background: transparent;
+  }
+  .ccp-form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,114 @@
+{% comment %}
+  SECTION: CORA ETHICS GRID
+  Update: Custom Icon Upload (Image or SVG)
+{% endcomment %}
+
+{{ 'cora-ethics-grid.css' | asset_url | stylesheet_tag }}
+
+<section class="ceg-section" aria-label="Sustainability and Ethics">
+  <div class="ceg-container">
+    
+    <div class="ceg-header">
+      <h2 class="ceg-title">{{ section.settings.heading }}</h2>
+      <div class="ceg-desc">{{ section.settings.text }}</div>
+    </div>
+
+    <div class="ceg-grid">
+      {%- for block in section.blocks -%}
+        <div class="ceg-card" {{ block.shopify_attributes }}>
+          
+          <div class="ceg-icon-wrapper">
+            {%- if block.settings.custom_svg != blank -%}
+              {{ block.settings.custom_svg }}
+            
+            {%- elsif block.settings.custom_image != blank -%}
+              <img src="{{ block.settings.custom_image | img_url: '100x' }}" 
+                   alt="{{ block.settings.title }}" 
+                   loading="lazy"
+                   width="24" height="24">
+            
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {%- endif -%}
+          </div>
+
+          <h3 class="ceg-card-title">{{ block.settings.title }}</h3>
+          <div class="ceg-card-text">{{ block.settings.text }}</div>
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ethics Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sustainability & Ethics"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subheading",
+      "default": "We're committed to creating beautiful rugs while protecting our planet."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Icon Settings"
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Paste SVG Code",
+          "info": "Paste raw <svg>...</svg> code here. Overrides image."
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Or Upload Image",
+          "info": "Upload a PNG/JPG/SVG icon. Recommended size 100x100px."
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Short description of this feature."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ethics Grid", "category": "About Us",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Recycled Materials", "text": "Using recycled yarn." } },
+        { "type": "feature", "settings": { "title": "Eco Dyeing", "text": "Low impact processes." } },
+        { "type": "feature", "settings": { "title": "Fair Trade", "text": "Ethical wages." } },
+        { "type": "feature", "settings": { "title": "Carbon Neutral", "text": "Offset emissions." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

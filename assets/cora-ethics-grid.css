@@ -1,0 +1,121 @@
+/* ASSET: cora-ethics-grid.css */
+
+.ceg-section {
+  padding: 80px 20px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.ceg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.ceg-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+}
+
+.ceg-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.ceg-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Grid */
+.ceg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Card */
+.ceg-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ceg-card:hover {
+  transform: translateY(-5px);
+  border-color: #d1d1d1;
+}
+
+/* Update the .ceg-icon-wrapper rule */
+.ceg-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f9f8f4;
+  color: #c1a676;
+  overflow: hidden; /* Ensures square images don't poke out */
+}
+
+/* Add support for Images inside the icon circle */
+.ceg-icon-wrapper img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Ensure pasted SVGs resize correctly */
+.ceg-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5;
+  fill: none; /* Default for line icons */
+}
+/* Text */
+.ceg-card-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+}
+
+.ceg-card-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 200px; /* Ensures text wraps nicely */
+}
+
+/* Mobile: 2 Columns as shown in screenshot */
+@media screen and (max-width: 900px) {
+  .ceg-section { padding: 60px 20px; }
+  .ceg-title { font-size: 30px; }
+  
+  .ceg-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .ceg-card {
+    padding: 25px 15px;
+  }
+}

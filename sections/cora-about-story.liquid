@@ -1,0 +1,170 @@
+{% comment %}
+  SECTION: CORA ABOUT STORY
+  Category: About Us
+  Design: Text + Stats (Left) | Image (Right)
+{% endcomment %}
+
+{{ 'cora-about-story.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .cas-section {
+    background-color: {{ section.settings.bg_color }};
+  }
+  #shopify-section-{{ section.id }} .cas-heading {
+    color: {{ section.settings.text_color }};
+  }
+  #shopify-section-{{ section.id }} .cas-text {
+    color: {{ section.settings.body_color }};
+  }
+  #shopify-section-{{ section.id }} .cas-stat-number {
+    color: {{ section.settings.accent_color }};
+  }
+{%- endstyle -%}
+
+<div class="cas-section">
+  <div class="cas-container">
+    
+    <div class="cas-content">
+      <h2 class="cas-heading">{{ section.settings.heading }}</h2>
+      <div class="cas-text">
+        {{ section.settings.content }}
+      </div>
+
+      <div class="cas-stats">
+        {%- if section.settings.stat_1_num != blank -%}
+          <div class="cas-stat-item">
+            <span class="cas-stat-number">{{ section.settings.stat_1_num }}</span>
+            <span class="cas-stat-label">{{ section.settings.stat_1_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.stat_2_num != blank -%}
+          <div class="cas-stat-item">
+            <span class="cas-stat-number">{{ section.settings.stat_2_num }}</span>
+            <span class="cas-stat-label">{{ section.settings.stat_2_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.stat_3_num != blank -%}
+          <div class="cas-stat-item">
+            <span class="cas-stat-number">{{ section.settings.stat_3_num }}</span>
+            <span class="cas-stat-label">{{ section.settings.stat_3_label }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="cas-image-wrapper">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | img_url: '1000x' }}" 
+             alt="{{ section.settings.heading | escape }}" 
+             loading="lazy" 
+             class="cas-image">
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'cas-image' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story (Stats)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Story"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Story Text",
+      "default": "<p>Imperial Knots was founded in 2010...</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_num",
+      "label": "Stat 1 Number",
+      "default": "200+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Artisans"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_num",
+      "label": "Stat 2 Number",
+      "default": "45+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Countries"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_num",
+      "label": "Stat 3 Number",
+      "default": "10k+"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Rugs Created"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Stat Number Color",
+      "default": "#c1a676"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story ",
+      "category": "About Us"
+    }
+  ]
+}
+{% endschema %}

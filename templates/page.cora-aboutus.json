@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "cora-about-page"
+      "type": "cora-about-page" 
     }
   },
   "order": ["main"]

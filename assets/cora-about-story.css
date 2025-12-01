@@ -1,0 +1,119 @@
+/* ASSET: cora-about-story.css */
+
+.cas-section {
+  padding: 80px 20px;
+  background-color: #e6e6e6; /* Fallback color */
+  overflow: hidden;
+}
+
+.cas-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+/* CONTENT COLUMN */
+.cas-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.cas-heading {
+  font-family: 'Assistant', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+}
+
+.cas-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.cas-text p {
+  margin-bottom: 16px;
+}
+
+/* STATS ROW */
+.cas-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.cas-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cas-stat-number {
+  font-family: 'Assistant', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #c1a676; /* The Gold/Beige color from design */
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.cas-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+}
+
+/* IMAGE COLUMN */
+.cas-image-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.cas-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* Square-ish portrait */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Soft shadow effect */
+  display: block;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 900px) {
+  .cas-section {
+    padding: 60px 20px;
+  }
+  
+  .cas-container {
+    flex-direction: column-reverse; /* Puts image on top */
+    gap: 40px;
+    text-align: center;
+  }
+
+  .cas-content {
+    max-width: 100%;
+  }
+
+  .cas-heading {
+    font-size: 32px;
+  }
+
+  .cas-stats {
+    justify-content: center; /* Center stats on mobile */
+    gap: 30px;
+  }
+  
+  .cas-image-wrapper {
+    width: 100%;
+    max-width: 500px; /* Constraint image width on mobile */
+  }
+}

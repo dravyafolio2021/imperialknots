@@ -1,159 +1,132 @@
-/* ASSET: cora-about-page.css */
+/* ASSET: cora-about-hero.css */
 
-.cap-section {
-  width: 100%;
-  overflow: hidden;
-}
-
-.cap-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* --- 1. HERO BLOCK --- */
-.cap-hero {
+.cah-section {
   position: relative;
-  height: 500px;
+  width: 100%;
+  height: 600px; /* Adjust height as needed */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #f4f4f2;
-  margin-bottom: 80px;
+  overflow: hidden;
+  background-color: #f4f4f4;
 }
 
-.cap-hero-bg {
+/* Background Image */
+.cah-bg {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
 }
 
-.cap-hero-bg img {
-  width: 100%; height: 100%; object-fit: cover;
+.cah-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
-.cap-hero-overlay {
+/* Overlay Gradient (Matches your design's bottom fade) */
+.cah-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.3);
-}
-
-.cap-hero-content {
-  position: relative;
   z-index: 2;
-  color: #fff;
-  max-width: 700px;
-  padding: 0 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
 }
 
-.cap-hero-title {
+/* Content */
+.cah-content {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  padding: 0 20px;
+  max-width: 800px;
+  margin-top: 100px; /* Pushes text slightly down like image */
+}
+
+.cah-title {
   font-family: 'Assistant', sans-serif;
   font-size: 56px;
-  font-weight: 700;
+  font-weight: 400; /* Lighter weight like the image */
   margin: 0 0 16px 0;
   line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-.cap-hero-text {
+.cah-subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
-  line-height: 1.6;
   opacity: 0.95;
-}
-
-/* --- 2. IMAGE WITH TEXT (Story) --- */
-.cap-iwt {
-  display: flex;
-  align-items: center;
-  gap: 80px;
-  margin-bottom: 100px;
-}
-
-.cap-iwt.reverse {
-  flex-direction: row-reverse;
-}
-
-.cap-iwt-image {
-  flex: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f4f4f4;
-  height: 500px;
-}
-
-.cap-iwt-image img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.cap-iwt-image:hover img { transform: scale(1.03); }
-
-.cap-iwt-content {
-  flex: 1;
-}
-
-.cap-iwt-kicker {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #888;
-  margin-bottom: 12px;
-}
-
-.cap-iwt-title {
-  font-family: 'Assistant', sans-serif;
-  font-size: 36px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 20px 0;
-}
-
-.cap-iwt-desc {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  color: #555;
-  line-height: 1.7;
-}
-
-/* --- 3. STATS ROW --- */
-.cap-stats {
-  background-color: #f9f9f9;
-  padding: 60px 0;
-  margin-bottom: 100px;
-}
-
-.cap-stats-grid {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-.cap-stat-number {
-  font-family: 'Assistant', sans-serif;
-  font-size: 42px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 5px;
-}
-
-.cap-stat-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 /* Mobile */
-@media screen and (max-width: 900px) {
-  .cap-hero { height: 400px; }
-  .cap-hero-title { font-size: 36px; }
+/* --- MOBILE OPTIMIZATION --- */
+@media screen and (max-width: 768px) {
   
-  .cap-iwt { flex-direction: column !important; gap: 40px; margin-bottom: 60px; }
-  .cap-iwt-image { width: 100%; height: 350px; }
+  /* 1. HERO: Fix Layout & Font Size */
+  .cap-hero {
+    height: 500px; /* Reduced height for mobile screens */
+    align-items: center; /* Center content vertically */
+  }
+
+  .cap-hero-content {
+    margin-top: 0; /* Remove top offset to center it properly */
+    padding: 0 20px; /* Ensure padding on sides */
+    width: 100%;
+  }
+
+  .cap-hero-title {
+    font-size: 36px; /* Reduced from 64px to fit screen */
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .cap-hero-text {
+    font-size: 15px;
+    padding: 0 10px;
+    line-height: 1.5;
+  }
+
+  /* 2. IMAGE + TEXT: Stack them vertically */
+  .cap-iwt {
+    flex-direction: column !important; /* Force stack */
+    gap: 30px;
+    margin-bottom: 60px;
+  }
   
-  .cap-stats-grid { flex-direction: column; gap: 40px; }
+  /* Reset "Reverse" layout on mobile so Image is always first */
+  .cap-iwt.reverse {
+    flex-direction: column !important; 
+  }
+
+  .cap-iwt-image {
+    width: 100%;
+    height: 300px; /* Fixed height for consistency */
+  }
+  
+  .cap-iwt-content {
+    padding: 0 10px;
+    text-align: left; /* Optional: Keep centered or align left */
+  }
+
+  .cap-iwt-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  /* 3. STATS: Stack vertically */
+  .cap-stats {
+    padding: 50px 0;
+  }
+  
+  .cap-stats-grid {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .cap-stat-number {
+    font-size: 48px;
+  }
 }
