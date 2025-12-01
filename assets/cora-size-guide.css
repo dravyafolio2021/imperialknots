@@ -1,0 +1,154 @@
+/* ASSET: cora-size-guide.css */
+
+.csg-section {
+  padding: 80px 20px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.csg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- HEADER --- */
+.csg-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.csg-kicker {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.csg-title {
+  font-family: "Assistant", sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+
+.csg-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* --- GRID --- */
+.csg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 Columns Desktop */
+  gap: 40px;
+}
+
+/* --- ROOM CARD --- */
+.csg-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.csg-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 65%; /* Landscape Aspect Ratio */
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  margin-bottom: 20px;
+}
+
+.csg-image-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.csg-card:hover .csg-image-wrap img {
+  transform: scale(1.03);
+}
+
+/* Room Label Badge (Top Left) */
+.csg-room-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Size Bar (Floating Bottom) */
+.csg-size-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 2;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.csg-size-pill {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  padding: 4px 10px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* Text Below */
+.csg-card-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .csg-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .csg-image-wrap {
+    padding-top: 75%;
+  } /* Taller on mobile */
+  .csg-title {
+    font-size: 32px;
+  }
+
+  .csg-size-bar {
+    padding: 10px;
+    gap: 8px;
+    justify-content: center;
+  }
+}

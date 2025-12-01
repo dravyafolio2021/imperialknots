@@ -1,0 +1,115 @@
+{% comment %}
+  SECTION: CORA SIZE GUIDE
+  Purpose: Room-by-room rug size guide with visual cards.
+{% endcomment %}
+
+{{ 'cora-size-guide.css' | asset_url | stylesheet_tag }}
+
+<section class="csg-section">
+  <div class="csg-container">
+    
+    <div class="csg-header">
+      <span class="csg-kicker">{{ section.settings.kicker }}</span>
+      <h2 class="csg-title">{{ section.settings.heading }}</h2>
+      <div class="csg-desc">{{ section.settings.text }}</div>
+    </div>
+
+    <div class="csg-grid">
+      {%- for block in section.blocks -%}
+        <div class="csg-card" {{ block.shopify_attributes }}>
+          
+          <div class="csg-image-wrap">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | img_url: '1000x' }}" width="" height="" loading="lazy" alt="{{ block.settings.room_name }}">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag }}
+            {%- endif -%}
+            
+            <div class="csg-room-badge">{{ block.settings.room_name }}</div>
+
+            <div class="csg-size-bar">
+              {%- if block.settings.size_1 != blank -%}<span class="csg-size-pill">{{ block.settings.size_1 }}</span>{%- endif -%}
+              {%- if block.settings.size_2 != blank -%}<span class="csg-size-pill">{{ block.settings.size_2 }}</span>{%- endif -%}
+              {%- if block.settings.size_3 != blank -%}<span class="csg-size-pill">{{ block.settings.size_3 }}</span>{%- endif -%}
+            </div>
+          </div>
+
+          <div class="csg-card-desc">
+            {{ block.settings.description }}
+          </div>
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Size Guide Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Small Label",
+      "default": "Find the Perfect Rug Size"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Room-by-Room Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Explore how different rug sizes work in various room settings."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "room",
+      "name": "Room Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Room Image"
+        },
+        {
+          "type": "text",
+          "id": "room_name",
+          "label": "Room Name",
+          "default": "Living Room"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Tip / Description",
+          "default": "Position the rug so front furniture legs rest on it, creating a cohesive seating area."
+        },
+        {
+          "type": "header",
+          "content": "Recommended Sizes"
+        },
+        { "type": "text", "id": "size_1", "label": "Size 1", "default": "5' x 8'" },
+        { "type": "text", "id": "size_2", "label": "Size 2", "default": "8' x 10'" },
+        { "type": "text", "id": "size_3", "label": "Size 3", "default": "9' x 12'" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Guide Grid", "category": "Rug Size Guide",
+      "blocks": [
+        { "type": "room", "settings": { "room_name": "Living Room" } },
+        { "type": "room", "settings": { "room_name": "Dining Room" } },
+        { "type": "room", "settings": { "room_name": "Bedroom" } },
+        { "type": "room", "settings": { "room_name": "Entryway" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
