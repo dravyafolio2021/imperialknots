@@ -1,15 +1,14 @@
 {
-  "sections": {
-    "hero": {
-      "type": "cora-influencer-hero",
-      "settings": {
-        "heading": "Influencer Application",
-        "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to everyone."
-      }
-    }
-  },
-  "order": [
-    "hero",
-    "form"
-  ]
+    "sections": {
+        "hero": {
+            "type": "cora-influencer-hero",
+            "settings": {
+                "heading": "Influencer Application",
+                "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to everyone."
+            }
+        }
+    },
+    "order": [
+        "hero",
+    ]
 }
