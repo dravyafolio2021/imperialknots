@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "cora-blog-grid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
