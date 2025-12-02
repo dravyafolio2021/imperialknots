@@ -1,68 +1,88 @@
 {% comment %}
-  This section is used in the article template to render the article page, which
-  displays the full content of the blog post and can optionally include a
-  comments section for customers (not shown in this example).
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/article
+  SECTION: CORA ARTICLE TEMPLATE
+  Filename: sections/cora-article-template.liquid
+  Purpose: Clean, readable blog post layout with hero image.
 {% endcomment %}
 
-{% if article.image %}
-  {{ article.image | image_url: width: 1000 | image_tag }}
-{% endif %}
+{{ 'cora-article-template.css' | asset_url | stylesheet_tag }}
 
-<h1>{{ article.title }}</h1>
+<article class="cat-section" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  <div class="cat-hero">
+    <div class="cat-hero-bg">
+      {%- if article.image -%}
+        <img src="{{ article.image | img_url: '2000x' }}" width="" height="" alt="{{ article.title }}" loading="eager">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    
+    <div class="cat-hero-overlay"></div>
 
-{% assign date = article.published_at | time_tag: format: 'date' %}
-<p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-
-{{ article.content }}
-
-{% if blog.comments_enabled? %}
-  <h2>{{ 'blog.article_comments' | t }}</h2>
-
-  <div id="comments">
-    {% paginate article.comments by 10 %}
-      {% for comment in article.comments %}
-        <div>
-          <p>{{ comment.author }}</p>
-          <p>
-            {{- comment.created_at | time_tag: format: 'date' -}}
-          </p>
-          <p>{{ comment.content }}</p>
-        </div>
-      {% endfor %}
-
-      {{ paginate | default_pagination: anchor: 'comments' }}
-    {% endpaginate %}
+    <div class="cat-hero-content">
+      <h1 class="cat-title" itemprop="headline">{{ article.title }}</h1>
+      {%- if article.excerpt.size > 0 -%}
+        <div class="cat-excerpt">{{ article.excerpt }}</div>
+      {%- endif -%}
+    </div>
   </div>
 
-  {% form 'new_comment', article %}
-    <h2>{{ 'blog.comment_form_title' | t }}</h2>
-
-    {{ form.errors | default_errors }}
-
-    <div>
-      <label for="author">{{ 'blog.comment_form_name' | t }}</label>
-      <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
+  <div class="cat-container">
+    
+    <div class="cat-meta">
+      <span>Last Updated: <time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: "%B %d, %Y" }}</time></span>
+      {%- if section.settings.show_author -%}
+        <span>&nbsp;&bull;&nbsp; Written by {{ article.author }}</span>
+      {%- endif -%}
     </div>
 
-    <div>
-      <label for="email">{{ 'blog.comment_form_email' | t }}</label>
-      <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
+    <div class="cat-content rte" itemprop="articleBody">
+      {{ article.content }}
     </div>
 
-    <div>
-      <label for="body">{{ 'blog.comment_form_body' | t }}</label>
-      <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
+    <div class="cat-footer">
+      <a href="{{ blog.url }}" class="cat-back-link">← Back to {{ blog.title }}</a>
     </div>
 
-    <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
-  {% endform %}
-{% endif %}
+    </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "articleBody": {{ article.content | strip_html | json }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ request.origin | append: page.url | json }}
+  },
+  "headline": {{ article.title | json }},
+  "image": [
+    {{ article.image | image_url: width: 1200 | prepend: "https:" | json }}
+  ],
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}
+  }
+}
+</script>
 
 {% schema %}
 {
-  "name": "t:general.article",
-  "settings": []
+  "name": "Article Template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show Author Name",
+      "default": true
+    }
+  ]
 }
 {% endschema %}
