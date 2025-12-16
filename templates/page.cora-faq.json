@@ -1,4 +1,11 @@
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "main": {
+      "type": "cora-faq-accordion",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
 }
