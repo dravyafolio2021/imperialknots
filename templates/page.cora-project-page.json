@@ -1,0 +1,10 @@
+{
+    "sections": {
+        "main": {
+            "type": "cora-project-page"
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

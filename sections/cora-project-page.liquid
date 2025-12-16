@@ -1,0 +1,105 @@
+{% comment %}
+  SECTION: CUSTOM RUG REQUEST FORM
+  Filename: sections/cora-custom-rug.liquid
+{% endcomment %}
+
+{{ 'cora-custom-rug.css' | asset_url | stylesheet_tag }}
+
+<div class="ccr-hero">
+  <h1 class="ccr-hero-title">{{ section.settings.heading }}</h1>
+  <div class="ccr-hero-desc">{{ section.settings.text }}</div>
+</div>
+
+<div class="ccr-section">
+  <div class="ccr-container">
+    <div class="ccr-form-card">
+      {% form 'contact' %}
+        {%- if form.posted_successfully? -%}
+          <p class="form-status-success" style="color:green; text-align:center; margin-bottom:30px;">
+            Thank you! Your custom request has been sent. We will be in touch shortly.
+          </p>
+        {%- elsif form.errors -%}
+          <p class="form-status-error" style="color:red; text-align:center; margin-bottom:30px;">
+            Please correct the errors and try again.
+          </p>
+        {%- endif -%}
+
+        <div class="ccr-form-section">
+          <h2 class="ccr-section-title">Basic Information</h2>
+          <p class="ccr-section-desc">Let's start with your contact details.</p>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Full Name *</label>
+            <input type="text" name="contact[name]" class="ccr-input" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Email Address *</label>
+            <input type="email" name="contact[email]" class="ccr-input" placeholder="your.email@example.com" required>
+          </div>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Contact Number (Optional)</label>
+            <input type="tel" name="contact[phone]" class="ccr-input" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="ccr-form-section">
+          <h2 class="ccr-section-title">Rug Details</h2>
+          <p class="ccr-section-desc">Tell us about your vision.</p>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Approximate Size</label>
+            <input type="text" name="contact[size]" class="ccr-input" placeholder="e.g. 8x10, 9x12">
+          </div>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Preferred Shape</label>
+            <select name="contact[shape]" class="ccr-select">
+              <option value="Rectangle">Rectangle</option>
+              <option value="Round">Round</option>
+              <option value="Runner">Runner</option>
+              <option value="Square">Square</option>
+              <option value="Irregular">Irregular / Custom</option>
+            </select>
+          </div>
+
+          <div class="ccr-group">
+            <label class="ccr-label">Color Palette / Description</label>
+            <textarea
+              name="contact[body]"
+              class="ccr-textarea"
+              placeholder="Describe the colors, patterns, or style you are looking for..."
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="ccr-btn-row">
+          <button type="submit" class="ccr-btn">Submit Request <span>&rarr;</span></button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Rugs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Custom Rug Request"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Create your perfect rug. Tell us about your vision and our artisans will bring it to life."
+    }
+  ],
+  "presets": [{ "name": "Custom Rugs", "category": "Custom Rugs" }]
+}
+{% endschema %}
