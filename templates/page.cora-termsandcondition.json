@@ -26,6 +26,17 @@
     },
     "main": {
       "type": "cora-rich-text",
+      "blocks": {
+        "text_j6rmQ6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_j6rmQ6"
+      ],
       "settings": {
         "width": "cora-width-narrow",
         "text_alignment": "left",
