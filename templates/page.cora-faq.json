@@ -56,8 +56,8 @@
       ],
       "name": "Cora FAQ Accordion",
       "settings": {
-        "heading": "Frequently Asked Questions",
-        "desc": "Find answers to common questions about our products and services.",
+        "heading": "",
+        "desc": "",
         "padding_top": 60,
         "padding_bottom": 60,
         "bg_color": "#ffffff",
