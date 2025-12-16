@@ -9,12 +9,59 @@
  */
 {
   "sections": {
-    "main": {
+    "cora_collections_list_D7WfMX": {
       "type": "cora-collections-list",
-      "settings": {}
+      "blocks": {
+        "collection_wyBLkq": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_EXJQLk": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_aydPBe": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_PfnPLc": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_wyBLkq",
+        "collection_EXJQLk",
+        "collection_aydPBe",
+        "collection_PfnPLc"
+      ],
+      "settings": {
+        "heading": "Our Collections",
+        "desc": "Explore our handcrafted series.",
+        "text_align": "center",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "cora-ratio-portrait",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
-    "main"
+    "cora_collections_list_D7WfMX"
   ]
 }
