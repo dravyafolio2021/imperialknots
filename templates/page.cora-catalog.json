@@ -1,8 +1,17 @@
+// {
+//   "sections": {
+//     "main": {
+//       "type": "catalog-collection-grid",
+//       "settings": {}
+//     }
+//   },
+//   "order": ["main"]
+// }
+
 {
   "sections": {
     "main": {
-      "type": "catalog-collection-grid",
-      "settings": {}
+      "type": "cora-collections-list"
     }
   },
   "order": ["main"]

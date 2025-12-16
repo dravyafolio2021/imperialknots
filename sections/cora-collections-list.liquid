@@ -1,0 +1,82 @@
+{{ 'cora-catalog.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Cora Collections Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description",
+      "default": "Explore our handcrafted series."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Optional)",
+          "info": "Overrides the default collection image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Collections Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="cora-catalog-section">
+  <div class="cora-catalog-container">
+    
+    <div class="cora-catalog-header">
+      {% if section.settings.heading != blank %}
+        <h1 class="cora-catalog-title">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.desc != blank %}
+        <p class="cora-catalog-desc">{{ section.settings.desc }}</p>
+      {% endif %}
+    </div>
+
+    <div class="cora-grid-layout">
+      {% for block in section.blocks %}
+        {% assign coll = collections[block.settings.collection] %}
+        {% if coll %}
+          <a href="{{ coll.url }}" class="cora-card" {{ block.shopify_attributes }}>
+            <div class="cora-card-media">
+              {% assign img = block.settings.image | default: coll.image | default: coll.products.first.featured_image %}
+              {% if img %}
+                <img src="{{ img | img_url: '800x' }}" alt="{{ coll.title }}" class="cora-card-img" loading="lazy">
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag: 'cora-card-img' }}
+              {% endif %}
+            </div>
+            <div class="cora-card-info">
+              <h3 class="cora-card-title">{{ coll.title }}</h3>
+              <div class="cora-card-meta">{{ coll.products_count }} Products</div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

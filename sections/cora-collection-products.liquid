@@ -1,0 +1,65 @@
+
+{{ 'cora-catalog.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Cora Product Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12,
+      "label": "Products per page"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="cora-catalog-section">
+  <div class="cora-catalog-container">
+    
+    <div class="cora-catalog-header">
+      <h1 class="cora-catalog-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="cora-catalog-desc">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+
+    {% paginate collection.products by section.settings.products_per_page %}
+      <div class="cora-grid-layout">
+        {% for product in collection.products %}
+          <a href="{{ product.url }}" class="cora-card">
+            <div class="cora-card-media">
+              {% if product.featured_image %}
+                <img width="" height="" src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="cora-card-img" loading="lazy">
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'cora-card-img' }}
+              {% endif %}
+            </div>
+            <div class="cora-card-info">
+              <h3 class="cora-card-title">{{ product.title }}</h3>
+              <div class="cora-card-meta">
+                {% if product.compare_at_price > product.price %}
+                  <span style="text-decoration: line-through; margin-right:5px;">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+                {{ product.price | money }}
+              </div>
+            </div>
+          </a>
+        {% else %}
+          <p style="text-align:center; width:100%; grid-column: 1 / -1;">No products found in this collection.</p>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <div style="text-align: center; margin-top: 50px;">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+
+  </div>
+</div>
