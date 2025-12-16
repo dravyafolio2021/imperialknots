@@ -15,7 +15,7 @@
         "slide_ribDea": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -33,7 +33,7 @@
         "slide_Gx4CtH": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -201,7 +201,6 @@
         "card_eerzQJ": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/1000306936.png",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
@@ -210,7 +209,6 @@
         "card_hPbGRF": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/1000306936.png",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
@@ -219,7 +217,6 @@
         "card_wbtK6d": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/1000306936.png",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
@@ -228,7 +225,6 @@
         "card_EtATwx": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/1000306936.png",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
