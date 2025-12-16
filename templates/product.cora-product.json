@@ -12,9 +12,17 @@
     "main": {
       "type": "cora-main-product",
       "settings": {}
+    },
+    "cora_related_products_cc3cHE": {
+      "type": "cora-related-products",
+      "name": "Related Products",
+      "settings": {
+        "heading": "You May Also Like"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "cora_related_products_cc3cHE"
   ]
 }
