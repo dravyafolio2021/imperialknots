@@ -1,11 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
+    "cora_catalog_banner_EDDTc4": {
+      "type": "cora-catalog-banner",
+      "name": "Catalog Banner",
+      "settings": {
+        "heading": "{{ page.title }}",
+        "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
+        "text_color": "#000000",
+        "text_align": "center",
+        "bg_color": "#F0EBE4",
+        "pt_desktop": 60,
+        "pb_desktop": 60,
+        "pt_mobile": 40,
+        "pb_mobile": 40
+      }
+    },
+    "cora_rich_text_9tm4xQ": {
       "type": "cora-rich-text",
-      "settings": {}
+      "blocks": {
+        "text_hy7P9f": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Imperial Knots, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or purchase our products.<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_hy7P9f"
+      ],
+      "settings": {
+        "width": "cora-width-narrow",
+        "text_alignment": "left",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
-    "main"
+    "cora_catalog_banner_EDDTc4",
+    "cora_rich_text_9tm4xQ"
   ]
 }

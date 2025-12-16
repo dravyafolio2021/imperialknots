@@ -1,19 +1,67 @@
-// {
-//   "sections": {
-//     "main": {
-//       "type": "catalog-collection-grid",
-//       "settings": {}
-//     }
-//   },
-//   "order": ["main"]
-// }
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "cora-collections-list"
+    "cora_collections_list_D7WfMX": {
+      "type": "cora-collections-list",
+      "blocks": {
+        "collection_wyBLkq": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_EXJQLk": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_aydPBe": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        },
+        "collection_PfnPLc": {
+          "type": "collection",
+          "settings": {
+            "collection": "broadloom-carpets-india",
+            "collection_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_wyBLkq",
+        "collection_EXJQLk",
+        "collection_aydPBe",
+        "collection_PfnPLc"
+      ],
+      "settings": {
+        "heading": "Our Collections",
+        "desc": "Explore our handcrafted series.",
+        "text_align": "center",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "cora-ratio-portrait",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
-    "main"
+    "cora_collections_list_D7WfMX"
   ]
 }

@@ -1,14 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "hero": {
-            "type": "cora-influencer-hero",
-            "settings": {
-                "heading": "Influencer Application",
-                "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to everyone."
-            }
-        }
+  "sections": {
+    "hero": {
+      "type": "cora-influencer-hero",
+      "settings": {
+        "heading": "{{ page.title }}",
+        "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to you. By filling out the form below, you will be added to our database and will be notified if you are selected for a collaboration. You do not need to submit a form multiple times, we will keep your information on file. Influencers must have a shipping address within the 48 contiguous United States."
+      }
     },
-    "order": [
-        "hero",
-    ]
+    "1765899789632cbd28": {
+      "type": "apps",
+      "blocks": {
+        "forms_inline_NgjNAt": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "772460",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_NgjNAt"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "1765899789632cbd28"
+  ]
 }

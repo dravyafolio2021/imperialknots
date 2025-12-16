@@ -1,8 +1,135 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "cora-about-page" 
+    "cora_about_page_GNeGhL": {
+      "type": "cora-about-page",
+      "settings": {
+        "image_desktop": "shopify://shop_images/ImageWithFallback_91036001-0b48-4aec-82ac-e06dd9880de2.png",
+        "image_mobile": "shopify://shop_images/ImageWithFallback-1_32644480-c89b-45bf-b701-5a6daf5b5d02.png",
+        "overlay_opacity": 30,
+        "heading": "Our Journey in Every Thread",
+        "subheading": "Crafted in India. Cherished Worldwide."
+      }
+    },
+    "cora_about_story_Ly8xm7": {
+      "type": "cora-about-story",
+      "name": "Our Story ",
+      "settings": {
+        "heading": "Our Story",
+        "content": "<p>Imperial Knots was founded in 2010 in the heart of Jaipur, India's rug-making capital, with a vision to preserve traditional hand-knotting techniques while bringing contemporary designs to global markets.</p><p>Our founder, inspired by generations of master weavers in their family, saw an opportunity to bridge the gap between authentic Indian craftsmanship and modern luxury interiors. What started as a small workshop with five artisans has grown into a thriving design house employing over 200 skilled craftspeople.</p>",
+        "image": "shopify://shop_images/ILS-59_2.jpg",
+        "stat_1_num": "200+",
+        "stat_1_label": "Artisans",
+        "stat_2_num": "45+",
+        "stat_2_label": "Countries",
+        "stat_3_num": "10k+",
+        "stat_3_label": "Rugs Created",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "body_color": "#555555",
+        "accent_color": "#c1a676"
+      }
+    },
+    "cora_craftsmanship_7a7RJA": {
+      "type": "cora-craftsmanship",
+      "blocks": {
+        "process_step_r63Jxx": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/AboutV2-1.png",
+            "title": "Yarn Dyeing",
+            "caption": "Natural and synthetic dyes carefully selected."
+          }
+        },
+        "process_step_drzynN": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/AboutV2-2.png",
+            "title": "Hand-Knotting",
+            "caption": "Each knot tied by skilled artisans."
+          }
+        },
+        "process_step_C79LYE": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/AboutV2.png",
+            "title": "Quality Checks",
+            "caption": "Rigorous inspection ensures luxury standards."
+          }
+        }
+      },
+      "block_order": [
+        "process_step_r63Jxx",
+        "process_step_drzynN",
+        "process_step_C79LYE"
+      ],
+      "name": "Craftsmanship Grid",
+      "settings": {
+        "heading": "Craftsmanship & Production",
+        "text": "Each rug passes through multiple stages of meticulous craftsmanship."
+      }
+    },
+    "cora_ethics_grid_fGwEiE": {
+      "type": "cora-ethics-grid",
+      "blocks": {
+        "feature_VxzTtz": {
+          "type": "feature",
+          "settings": {
+            "custom_svg": "",
+            "title": "Recycled Materials",
+            "text": "Using recycled yarn."
+          }
+        },
+        "feature_ANULBn": {
+          "type": "feature",
+          "settings": {
+            "custom_svg": "",
+            "title": "Eco Dyeing",
+            "text": "Low impact processes."
+          }
+        },
+        "feature_cWiNVn": {
+          "type": "feature",
+          "settings": {
+            "custom_svg": "",
+            "title": "Fair Trade",
+            "text": "Ethical wages."
+          }
+        },
+        "feature_WEz7DW": {
+          "type": "feature",
+          "settings": {
+            "custom_svg": "",
+            "title": "Carbon Neutral",
+            "text": "Offset emissions."
+          }
+        }
+      },
+      "block_order": [
+        "feature_VxzTtz",
+        "feature_ANULBn",
+        "feature_cWiNVn",
+        "feature_WEz7DW"
+      ],
+      "name": "Ethics Grid",
+      "settings": {
+        "heading": "Sustainability & Ethics",
+        "text": "We're committed to creating beautiful rugs while protecting our planet."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "cora_about_page_GNeGhL",
+    "cora_about_story_Ly8xm7",
+    "cora_craftsmanship_7a7RJA",
+    "cora_ethics_grid_fGwEiE"
+  ]
 }

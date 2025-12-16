@@ -1,11 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "cora_catalog_banner_98hLd4": {
+      "type": "cora-catalog-banner",
+      "name": "Catalog Banner",
+      "settings": {
+        "heading": "{{ page.title }}",
+        "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
+        "text_color": "#000000",
+        "text_align": "center",
+        "bg_color": "#f0ebe4",
+        "pt_desktop": 60,
+        "pb_desktop": 60,
+        "pt_mobile": 40,
+        "pb_mobile": 40
+      }
+    },
     "main": {
       "type": "cora-rich-text",
-      "settings": {}
+      "blocks": {
+        "text_j6rmQ6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_j6rmQ6"
+      ],
+      "settings": {
+        "width": "cora-width-narrow",
+        "text_alignment": "left",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
+    "cora_catalog_banner_98hLd4",
     "main"
   ]
 }
