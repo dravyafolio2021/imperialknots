@@ -27,20 +27,11 @@
       {% for block in section.blocks %}
         {% assign coll = collections[block.settings.collection] %}
 
-        {% comment %} Allow blocking rendering even if empty for preview purposes {% endcomment %}
-        <a href="{{ coll.url | default: '#' }}" class="cora-card" {{ block.shopify_attributes }}>
+        <a href="{{ coll.url | default: '#' }}?view=cora-grid" class="cora-card" {{ block.shopify_attributes }}>
           <div class="cora-card-media {{ section.settings.image_ratio }}">
             {% assign img = block.settings.image | default: coll.image | default: coll.products.first.featured_image %}
-
             {% if img %}
-              <img
-                src="{{ img | img_url: '800x' }}"
-                alt="{{ coll.title | default: 'Collection' }}"
-                class="cora-card-img"
-                loading="lazy"
-                width="800"
-                height="{{ 800 | divided_by: img.aspect_ratio | round }}"
-              >
+              <img height="" width="" src="{{ img | img_url: '800x' }}" alt="{{ coll.title }}" class="cora-card-img" loading="lazy">
             {% else %}
               {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'cora-card-img' }}
             {% endif %}
@@ -68,22 +59,8 @@
 {
   "name": "Cora Collections Grid",
   "settings": [
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Our Collections"
-    },
-    {
-      "type": "textarea",
-      "id": "desc",
-      "label": "Description",
-      "default": "Explore our handcrafted series."
-    },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Collections" },
+    { "type": "textarea", "id": "desc", "label": "Description", "default": "Explore our handcrafted series." },
     {
       "type": "select",
       "id": "text_align",
@@ -93,10 +70,6 @@
         { "value": "center", "label": "Center" }
       ],
       "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Grid Layout"
     },
     {
       "type": "range",
@@ -123,51 +96,21 @@
       "label": "Image Shape",
       "options": [
         { "value": "cora-ratio-portrait", "label": "Portrait (Tall)" },
-        { "value": "cora-ratio-square", "label": "Square" },
-        { "value": "cora-ratio-landscape", "label": "Landscape (Wide)" },
-        { "value": "cora-ratio-circle", "label": "Circle" }
+        { "value": "cora-ratio-square", "label": "Square" }
       ],
       "default": "cora-ratio-portrait"
     },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Padding Top",
-      "default": 60
-    },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 5, "default": 60, "label": "Padding Top" },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
       "max": 100,
       "step": 5,
-      "unit": "px",
-      "label": "Padding Bottom",
-      "default": 60
+      "default": 60,
+      "label": "Padding Bottom"
     }
   ],
   "blocks": [
@@ -175,31 +118,12 @@
       "type": "collection",
       "name": "Collection",
       "settings": [
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Select Collection"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Custom Image (Optional)",
-          "info": "Overrides the default collection image"
-        },
-        {
-          "type": "text",
-          "id": "collection_title",
-          "label": "Custom Title (Optional)",
-          "info": "Overrides default title if collection is empty"
-        }
+        { "type": "collection", "id": "collection", "label": "Select Collection" },
+        { "type": "image_picker", "id": "image", "label": "Custom Image" },
+        { "type": "text", "id": "collection_title", "label": "Custom Title" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Cora Collections Grid",
-      "blocks": [{ "type": "collection" }, { "type": "collection" }, { "type": "collection" }]
-    }
-  ]
+  "presets": [{ "name": "Cora Collections Grid" }]
 }
 {% endschema %}

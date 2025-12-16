@@ -1,0 +1,210 @@
+/* --- Container --- */
+.cora-product-section {
+  width: 100%;
+  padding: 60px 20px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.cora-product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Gallery takes slightly more space */
+  gap: 60px;
+  align-items: start;
+}
+
+/* --- Gallery (Left) --- */
+.cora-gallery-wrapper {
+  position: relative;
+}
+
+.cora-main-image-container {
+  width: 100%;
+  aspect-ratio: 4/5; /* Luxury portrait ratio */
+  background-color: #f4f4f4;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cora-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.cora-thumb-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.cora-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  border: 1px solid transparent;
+}
+
+.cora-thumb:hover, .cora-thumb.active {
+  opacity: 1;
+  border-color: #000;
+}
+
+/* --- Info (Right) --- */
+.cora-product-info {
+  position: sticky;
+  top: 40px;
+}
+
+/* Meta: SKU & Category */
+.cora-product-meta {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.cora-product-title {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.cora-emi-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* Button */
+.cora-btn-request {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: opacity 0.3s;
+}
+
+.cora-btn-request:hover {
+  opacity: 0.8;
+}
+
+/* --- Accordions --- */
+.cora-accordion {
+  border-top: 1px solid #e5e5e5;
+}
+
+.cora-accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cora-accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  color: #1a1a1a;
+}
+
+.cora-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  opacity: 0;
+}
+
+.cora-accordion-body {
+  padding-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.cora-accordion-item.active .cora-accordion-content {
+  opacity: 1;
+}
+
+.cora-plus-icon::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.cora-accordion-item.active .cora-plus-icon::after {
+  content: '-';
+}
+
+/* --- Trust Badges (Bottom) --- */
+.cora-trust-row {
+  grid-column: 1 / -1; /* Spans full width */
+  display: flex;
+  justify-content: space-around;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.cora-trust-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.cora-trust-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.cora-trust-text {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .cora-product-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .cora-product-title {
+    font-size: 28px;
+  }
+
+  .cora-trust-row {
+    flex-direction: column;
+    gap: 30px;
+  }
+}

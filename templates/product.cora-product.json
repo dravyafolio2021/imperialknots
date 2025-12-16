@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "main": {
+      "type": "cora-main-product"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

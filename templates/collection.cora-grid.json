@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "cora-collection-products",
+      "settings": {
+        "products_per_page": 24,
+        "text_align": "center",
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "image_ratio": "cora-ratio-portrait",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

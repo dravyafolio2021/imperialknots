@@ -1,0 +1,179 @@
+{{ 'cora-main-product.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+    /* --- 7. MOBILE RESPONSIVENESS --- */
+  @media screen and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .cmp-container {
+      flex-direction: column !important;
+      gap: 30px !important;
+    }
+
+    #shopify-section-{{ section.id }} .cmp-info {
+      width: 100% !important;
+      flex: auto !important;
+      position: static !important;
+    }
+
+    .cmp-gallery {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+{% endstyle %}
+
+<section class="cmp-section" id="MainProduct-{{ section.id }}">
+  <div class="cmp-container">
+    <div class="cmp-gallery">
+      <div class="cmp-main-image">
+        {%- if product.featured_image -%}
+          <img
+            id="MainImg-{{ section.id }}"
+            width=""
+            height=""
+            src="{{ product.featured_image | img_url: '1200x' }}"
+            alt="{{ product.title }}"
+            loading="eager"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {%- endif -%}
+        <div class="cmp-image-counter">1 / {{ product.images.size }}</div>
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="cmp-thumbnails">
+          {%- for media in product.images -%}
+            <div
+              class="cmp-thumb {% if forloop.first %}active{% endif %}"
+              onclick="changeImage('{{ media | img_url: '1200x' }}', this)"
+            >
+              <img src="{{ media | img_url: '200x' }}" width="" height="" alt="{{ media.alt }}">
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="cmp-info">
+      <div class="cmp-meta">
+        {%- if product.collections.first -%}
+          <span class="cmp-category">{{ product.collections.first.title }}</span>
+        {%- endif -%}
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        <span class="cmp-sku"
+          >SKU: <span id="Sku-{{ section.id }}">{{ current_variant.sku | default: 'N/A' }}</span></span
+        >
+      </div>
+
+      <h1 class="cmp-title">{{ product.title }}</h1>
+      <div class="cmp-emi">Easy EMI options available at Checkout</div>
+
+      <div class="cmp-accordions">
+        <div class="cmp-accordion-item">
+          <div class="cmp-accordion-header" onclick="toggleAccordion(this)">
+            Description
+            <span class="cmp-accordion-icon">+</span>
+          </div>
+          <div class="cmp-accordion-content">
+            <div class="cmp-accordion-inner">{{ product.description }}</div>
+          </div>
+        </div>
+
+        {%- for block in section.blocks -%}
+          <div class="cmp-accordion-item">
+            <div class="cmp-accordion-header" onclick="toggleAccordion(this)">
+              {{ block.settings.heading }}
+              <span class="cmp-accordion-icon">+</span>
+            </div>
+            <div class="cmp-accordion-content">
+              <div class="cmp-accordion-inner">{{ block.settings.content }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product.variants | json }}
+</script>
+
+<script>
+  function changeImage(src, thumb) {
+    document.getElementById('MainImg-{{ section.id }}').src = src;
+    document.querySelectorAll('.cmp-thumb').forEach((t) => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+
+  function toggleAccordion(header) {
+    var content = header.nextElementSibling;
+    var item = header.parentElement;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      item.removeAttribute('open');
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      item.setAttribute('open', '');
+    }
+  }
+
+  (function () {
+    var variants = JSON.parse(document.getElementById('ProductJson-{{ section.id }}').innerHTML);
+    var container = document.querySelector('#shopify-section-{{ section.id }}');
+    var inputs = container.querySelectorAll('.cmp-option-input');
+
+    inputs.forEach(function (input) {
+      input.addEventListener('change', function () {
+        var selectedOptions = [];
+        container.querySelectorAll('.cmp-option-input:checked').forEach(function (radio) {
+          selectedOptions.push(radio.value);
+        });
+
+        var matchedVariant = variants.find(function (variant) {
+          return variant.options.every(function (val, index) {
+            return val === selectedOptions[index];
+          });
+        });
+
+        if (matchedVariant) {
+          document.getElementById('MasterSelect-{{ section.id }}').value = matchedVariant.id;
+
+          // Use innerHTML for Money so Bucks can read the <span>
+          var price = (matchedVariant.price / 100).toFixed(2);
+          var symbol = '{{ cart.currency.symbol }}';
+          document.getElementById('Price-{{ section.id }}').innerHTML =
+            '<span class="money">' + symbol + price + '</span>';
+
+          var btn = document.getElementById('AddToCart-{{ section.id }}');
+          if (matchedVariant.available) {
+            btn.disabled = false;
+            btn.querySelector('span').innerText = 'Add to Cart';
+          } else {
+            btn.disabled = true;
+            btn.querySelector('span').innerText = 'Sold Out';
+          }
+
+          window.history.replaceState(null, null, '?variant=' + matchedVariant.id);
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Info Tab",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Material & Care" },
+        { "type": "richtext", "id": "content", "label": "Content" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Main Product", "category": "Products" }]
+}
+{% endschema %}
