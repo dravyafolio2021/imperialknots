@@ -1,12 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "main-standard-page",
+    "cora_standard_richtext_z4KDA7": {
+      "type": "cora-standard-richtext",
+      "name": "Standard Rich Text",
       "settings": {
+        "title": "",
+        "show_updated": true,
+        "content": "<p>Enter your page content here...</p>",
+        "info_box": "<p>Bottom Info Box</p>"
       }
     }
   },
   "order": [
-    "main"
+    "cora_standard_richtext_z4KDA7"
   ]
 }
