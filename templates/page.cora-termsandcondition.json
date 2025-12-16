@@ -1,4 +1,11 @@
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "main": {
+      "type": "cora-rich-text",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

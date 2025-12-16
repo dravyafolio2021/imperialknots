@@ -15,25 +15,8 @@
     },
     "cora_standard_page_VwVrRt": {
       "type": "cora-standard-page",
-      "blocks": {
-        // "heading_7kmnrB": {
-        //   "type": "heading",
-        //   "settings": {
-        //     "title": "Page title",
-        //     "intro": "intro"
-        //   }
-        // },
-        // "rich_text_J7HxqE": {
-        //   "type": "rich_text",
-        //   "settings": {
-        //     "text": "<p>At Imperial Knots, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or purchase our products.<br/><br/></p>"
-        //   }
-        // }
-      },
-      "block_order": [
-        // "heading_7kmnrB",
-        // "rich_text_J7HxqE"
-      ],
+      "blocks": {},
+      "block_order": [],
       "name": "Cora — Standard Page",
       "settings": {
         "aria_label": "Page content",
