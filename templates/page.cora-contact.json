@@ -1,1 +1,10 @@
-{ "sections": { "main": { "type": "cora-contact-page" } }, "order": ["main"] }
+{
+    "sections": {
+        "main": {
+            "type": "cora-contact-page"
+        }
+    },
+    "order": [
+        "main"
+    ]
+}
