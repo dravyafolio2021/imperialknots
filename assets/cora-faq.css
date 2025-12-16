@@ -1,167 +1,135 @@
-/* --- Core Container --- */
-.cora-faq {
+/* --- Section Container --- */
+.cora-faq-section {
   width: 100%;
-  box-sizing: border-box;
+  position: relative;
+  background-color: #ffffff;
 }
 
-.cora-faq__inner {
-  max-width: 800px; /* Optimal reading width for FAQs */
+.cora-faq-container {
+  max-width: 800px; /* Narrower width for better readability */
   margin: 0 auto;
   padding: 0 20px;
-  width: 100%;
 }
 
-/* --- Header Section --- */
-.cora-faq__header {
+/* --- Header Area --- */
+.cora-faq-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
-.cora-faq__title {
+.cora-faq-title {
   font-size: 32px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-  line-height: 1.2;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: inherit;
+  font-family: inherit;
 }
 
-.cora-faq__description {
+.cora-faq-desc {
   font-size: 16px;
-  color: #555555;
+  opacity: 0.7;
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* --- FAQ List & Item --- */
-.cora-faq__list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Space between questions */
+/* --- Accordion Item --- */
+.cora-faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.cora-faq__item {
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  background-color: #ffffff;
-  overflow: hidden;
-  transition: border-color 0.2s ease;
+.cora-faq-item:first-child {
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
-.cora-faq__item:hover {
-  border-color: #bbbbbb;
-}
-
-/* --- Trigger Button (Question) --- */
-.cora-faq__trigger {
+/* --- Trigger (Question) --- */
+.cora-faq-trigger {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
+  padding: 20px 0;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-  color: #1a1a1a;
-  transition: background-color 0.2s ease;
+  color: inherit;
+  transition: opacity 0.2s;
 }
 
-.cora-faq__trigger:hover {
-  background-color: #f9f9f9;
+.cora-faq-trigger:hover {
+  opacity: 0.8;
 }
 
-.cora-faq__trigger:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: -2px;
-  background-color: #f5f5f5;
-}
-
-/* Typography for Question */
-.cora-faq__question {
+.cora-faq-question {
   font-size: 18px;
   font-weight: 500;
-  line-height: 1.4;
-  padding-right: 16px; /* Space before icon */
+  padding-right: 20px;
 }
 
-/* Toggle Icon (+ / -) */
-.cora-faq__toggle-icon {
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 1;
-  color: #777;
-  flex-shrink: 0; /* Prevents squishing */
+/* --- Icon --- */
+.cora-faq-icon {
   width: 24px;
-  text-align: center;
+  height: 24px;
+  position: relative;
+  flex-shrink: 0;
 }
 
-/* Open State Styling for Trigger */
-.cora-faq__trigger[aria-expanded="true"] {
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #f0f0f0;
+.cora-faq-icon::before,
+.cora-faq-icon::after {
+  content: '';
+  position: absolute;
+  background-color: currentColor;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
 }
 
-.cora-faq__trigger[aria-expanded="true"] .cora-faq__toggle-icon {
-  color: #000;
-  font-weight: 500;
+/* Horizontal line (always visible) */
+.cora-faq-icon::before {
+  width: 14px;
+  height: 2px;
 }
 
-/* --- Answer Panel --- */
-.cora-faq__panel {
-  /* display is handled by JS, here we just style inner content */
-  background-color: #ffffff;
+/* Vertical line (rotates to flat when open) */
+.cora-faq-icon::after {
+  width: 2px;
+  height: 14px;
 }
 
-.cora-faq__answer {
-  padding: 20px 24px 24px 24px;
+/* Open State Icon */
+.cora-faq-trigger[aria-expanded="true"] .cora-faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg); /* Flattens to minus */
+}
+
+/* --- Content (Answer) --- */
+.cora-faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  opacity: 0;
+}
+
+.cora-faq-answer {
+  padding-bottom: 25px;
   font-size: 16px;
-  line-height: 1.7;
-  color: #444444;
+  line-height: 1.6;
+  opacity: 0.8;
 }
 
-/* Styling content inside the answer (links, lists, etc.) */
-.cora-faq__answer p {
-  margin-bottom: 1em;
+/* Open State Content */
+.cora-faq-item.active .cora-faq-content {
+  opacity: 1;
 }
 
-.cora-faq__answer p:last-child {
-  margin-bottom: 0;
-}
-
-.cora-faq__answer a {
-  color: #1a1a1a;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.cora-faq__answer ul, 
-.cora-faq__answer ol {
-  padding-left: 20px;
-  margin-bottom: 1em;
-}
-
-/* --- Mobile Responsiveness --- */
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .cora-faq__inner {
-    padding: 0 16px;
-  }
-  
-  .cora-faq__title {
+  .cora-faq-title {
     font-size: 26px;
   }
-  
-  .cora-faq__trigger {
-    padding: 16px 20px;
-  }
-  
-  .cora-faq__question {
+  .cora-faq-question {
     font-size: 16px;
-  }
-  
-  .cora-faq__answer {
-    padding: 16px 20px 20px 20px;
-    font-size: 15px;
   }
 }
