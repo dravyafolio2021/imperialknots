@@ -1,9 +1,77 @@
 {{ 'cora-catalog.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  #cora-section-{{ section.id }} {
+    --cora-bg: {{ section.settings.bg_color }};
+    --cora-text: {{ section.settings.text_color }};
+    --cora-pt: {{ section.settings.padding_top }}px;
+    --cora-pb: {{ section.settings.padding_bottom }}px;
+    --cora-align: {{ section.settings.text_align }};
+    --grid-desktop: {{ section.settings.columns_desktop }};
+    --grid-mobile: {{ section.settings.columns_mobile }};
+  }
+{%- endstyle -%}
+
+<div id="cora-section-{{ section.id }}" class="cora-catalog-section">
+  <div class="cora-catalog-container">
+    <div class="cora-catalog-header">
+      {% if section.settings.heading != blank %}
+        <h1 class="cora-catalog-title">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.desc != blank %}
+        <p class="cora-catalog-desc">{{ section.settings.desc }}</p>
+      {% endif %}
+    </div>
+
+    <div class="cora-grid-layout">
+      {% for block in section.blocks %}
+        {% assign coll = collections[block.settings.collection] %}
+
+        {% comment %} Allow blocking rendering even if empty for preview purposes {% endcomment %}
+        <a href="{{ coll.url | default: '#' }}" class="cora-card" {{ block.shopify_attributes }}>
+          <div class="cora-card-media {{ section.settings.image_ratio }}">
+            {% assign img = block.settings.image | default: coll.image | default: coll.products.first.featured_image %}
+
+            {% if img %}
+              <img
+                src="{{ img | img_url: '800x' }}"
+                alt="{{ coll.title | default: 'Collection' }}"
+                class="cora-card-img"
+                loading="lazy"
+                width="800"
+                height="{{ 800 | divided_by: img.aspect_ratio | round }}"
+              >
+            {% else %}
+              {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'cora-card-img' }}
+            {% endif %}
+          </div>
+
+          <div class="cora-card-info">
+            <h3 class="cora-card-title">
+              {{ coll.title | default: block.settings.collection_title | default: 'Collection Name' }}
+            </h3>
+            <div class="cora-card-meta">
+              {% if coll != blank %}
+                {{ coll.products_count }} Products
+              {% else %}
+                0 Products
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
 {
   "name": "Cora Collections Grid",
   "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -15,6 +83,91 @@
       "id": "desc",
       "label": "Description",
       "default": "Explore our handcrafted series."
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on Desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image Shape",
+      "options": [
+        { "value": "cora-ratio-portrait", "label": "Portrait (Tall)" },
+        { "value": "cora-ratio-square", "label": "Square" },
+        { "value": "cora-ratio-landscape", "label": "Landscape (Wide)" },
+        { "value": "cora-ratio-circle", "label": "Circle" }
+      ],
+      "default": "cora-ratio-portrait"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
     }
   ],
   "blocks": [
@@ -32,51 +185,21 @@
           "id": "image",
           "label": "Custom Image (Optional)",
           "info": "Overrides the default collection image"
+        },
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Custom Title (Optional)",
+          "info": "Overrides default title if collection is empty"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Cora Collections Grid"
+      "name": "Cora Collections Grid",
+      "blocks": [{ "type": "collection" }, { "type": "collection" }, { "type": "collection" }]
     }
   ]
 }
 {% endschema %}
-
-<div class="cora-catalog-section">
-  <div class="cora-catalog-container">
-    
-    <div class="cora-catalog-header">
-      {% if section.settings.heading != blank %}
-        <h1 class="cora-catalog-title">{{ section.settings.heading }}</h1>
-      {% endif %}
-      {% if section.settings.desc != blank %}
-        <p class="cora-catalog-desc">{{ section.settings.desc }}</p>
-      {% endif %}
-    </div>
-
-    <div class="cora-grid-layout">
-      {% for block in section.blocks %}
-        {% assign coll = collections[block.settings.collection] %}
-        {% if coll %}
-          <a href="{{ coll.url }}" class="cora-card" {{ block.shopify_attributes }}>
-            <div class="cora-card-media">
-              {% assign img = block.settings.image | default: coll.image | default: coll.products.first.featured_image %}
-              {% if img %}
-                <img src="{{ img | img_url: '800x' }}" alt="{{ coll.title }}" class="cora-card-img" loading="lazy">
-              {% else %}
-                {{ 'collection-1' | placeholder_svg_tag: 'cora-card-img' }}
-              {% endif %}
-            </div>
-            <div class="cora-card-info">
-              <h3 class="cora-card-title">{{ coll.title }}</h3>
-              <div class="cora-card-meta">{{ coll.products_count }} Products</div>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-  </div>
-</div>

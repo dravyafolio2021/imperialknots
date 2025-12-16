@@ -4,5 +4,7 @@
       "type": "cora-collection-products"
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
