@@ -1,0 +1,143 @@
+{{ 'cora-story-hero.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Cora Story Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)",
+      "info": "If blank, desktop image will be used."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30,
+      "info": "Darkens image to make text readable"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Text",
+      "default": "Every rug tells a story — handwoven by skilled Indian artisans and shipped with care across the world."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Discover Our Story"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop Height",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile Height",
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Story Hero","category": "Contact Page"
+    }
+  ]
+}
+{% endschema %}
+
+{%- style -%}
+  /* Desktop Styles */
+  #cora-hero-{{ section.id }} {
+    background-image: url({{ section.settings.image_desktop | img_url: '2000x' }});
+    min-height: {{ section.settings.height_desktop }}px;
+  }
+
+  /* Mobile Styles (Switch image if provided) */
+  @media (max-width: 768px) {
+    #cora-hero-{{ section.id }} {
+      {% if section.settings.image_mobile != blank %}
+        background-image: url({{ section.settings.image_mobile | img_url: '1200x' }});
+      {% endif %}
+      min-height: {{ section.settings.height_mobile }}px;
+    }
+  }
+
+  /* Text Color Override */
+  #cora-hero-{{ section.id }} .cora-hero-text,
+  #cora-hero-{{ section.id }} .cora-hero-btn {
+    color: {{ section.settings.text_color }};
+  }
+  #cora-hero-{{ section.id }} .cora-hero-btn {
+    border-color: {{ section.settings.text_color | color_modify: 'alpha', 0.5 }};
+  }
+  #cora-hero-{{ section.id }} .cora-hero-btn:hover {
+    background-color: {{ section.settings.text_color }};
+    /* Inverse color calculation for hover text is hard in CSS alone, 
+       so we default to black or you can add a setting */
+    color: #000000; 
+  }
+{%- endstyle -%}
+
+<div id="cora-hero-{{ section.id }}" class="cora-hero-section">
+  
+  <div class="cora-hero-overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="cora-hero-content">
+    {% if section.settings.heading != blank %}
+      <h2 class="cora-hero-text">{{ section.settings.heading | newline_to_br }}</h2>
+    {% endif %}
+
+    {% if section.settings.btn_label != blank and section.settings.btn_link != blank %}
+      <a href="{{ section.settings.btn_link }}" class="cora-hero-btn">
+        {{ section.settings.btn_label }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    {% endif %}
+  </div>
+
+</div>

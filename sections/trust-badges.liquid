@@ -1,0 +1,148 @@
+{{ 'trust-badges.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Cora Trust Badges",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fcfcfc"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "html",
+          "id": "svg_icon",
+          "label": "SVG Icon Code",
+          "info": "Paste SVG code here. Overrides image."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_icon",
+          "label": "Image Icon (Optional)",
+          "info": "Use this if you don't have SVG code."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Worldwide Shipping"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "We deliver handcrafted rugs to customers across the globe with care"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Trust Badges",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Worldwide Shipping",
+            "text": "We deliver handcrafted rugs to customers across the globe with care",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><line x1='2' y1='12' x2='22' y2='12'></line><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'></path></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Handmade in India",
+            "text": "Every piece is woven by skilled artisans using traditional techniques",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='6' r='3'></circle><circle cx='6' cy='18' r='3'></circle><line x1='20' y1='4' x2='8.12' y2='15.88'></line><line x1='14.47' y1='14.48' x2='20' y2='20'></line><line x1='8.12' y1='8.12' x2='12' y2='12'></line></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Dedicated Support",
+            "text": "Our team is here to assist you throughout your journey with us",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 18v-6a9 9 0 0 1 18 0v6'></path><path d='M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'></path></svg>"
+          }
+        }
+      ],
+      "category": "Contact Page"
+    }
+  ]
+}
+{% endschema %}
+
+<div
+  class="tb-section"
+  style="
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="tb-container">
+    <div class="tb-grid">
+      {% for block in section.blocks %}
+        <div class="tb-item" {{ block.shopify_attributes }}>
+          <div
+            class="tb-icon-wrapper"
+            style="border-color: {{ section.settings.text_color | color_modify: 'alpha', 0.15 }};"
+          >
+            {% if block.settings.svg_icon != blank %}
+              <div class="tb-svg-container">
+                {{ block.settings.svg_icon }}
+              </div>
+            {% elsif block.settings.image_icon != blank %}
+              <img
+                height=""
+                width=""
+                src="{{ block.settings.image_icon | img_url: '100x' }}"
+                alt="{{ block.settings.title }}"
+                class="tb-img-icon"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+
+          <div class="tb-content">
+            <h3 class="tb-title">{{ block.settings.title }}</h3>
+            <div class="tb-text">{{ block.settings.text }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

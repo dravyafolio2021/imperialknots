@@ -1,0 +1,106 @@
+/* --- Section Container --- */
+.cora-hero-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Default min-height, overrideable via Liquid */
+  min-height: 500px; 
+}
+
+/* --- Overlay --- */
+.cora-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1;
+}
+
+/* --- Content Wrapper --- */
+.cora-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 40px 20px;
+  color: #ffffff;
+}
+
+/* --- Typography --- */
+.cora-hero-text {
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 400;
+  margin-bottom: 40px;
+  /* Design uses a Serif-style font for this text */
+  font-family: var(--font-heading-family), "Times New Roman", serif; 
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* --- Button --- */
+.cora-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 30px;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50px; /* Pill shape */
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background-color: rgba(0,0,0,0.2); /* Slight tint for readability */
+  backdrop-filter: blur(4px);
+}
+
+.cora-hero-btn svg {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  width: 14px;
+  height: 14px;
+}
+
+.cora-hero-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.cora-hero-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Mobile */
+@media (max-width: 768px) {
+  .cora-hero-section {
+    min-height: 600px; /* Taller on mobile to match design */
+    background-position: center top;
+  }
+
+  .cora-hero-text {
+    font-size: 24px; /* Smaller text for mobile */
+    line-height: 1.5;
+    padding: 0 15px;
+  }
+
+  .cora-hero-content {
+    width: 100%;
+    /* Position content towards bottom or center depending on preference */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+}

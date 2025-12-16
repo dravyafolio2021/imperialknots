@@ -1,0 +1,220 @@
+{{ 'cora-contact-grid.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Cora Contact Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F9F8F6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description",
+      "default": "Choose your preferred way to connect with our team"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_card",
+      "name": "Contact Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Icon"
+        },
+        {
+          "type": "html",
+          "id": "svg_icon",
+          "label": "SVG Icon Code"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_icon",
+          "label": "Image Icon (Fallback)"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (Small)",
+          "default": "Head Office"
+        },
+        {
+          "type": "textarea",
+          "id": "value",
+          "label": "Main Text",
+          "default": "Gurgaon, Haryana, India"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Visit our showroom"
+        },
+        {
+          "type": "header",
+          "content": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "View on Map"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Contact Grid", "category": "Contact Page",
+      "blocks": [
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "Head Office",
+            "value": "Gurgaon, Haryana, India",
+            "subtext": "Visit our showroom",
+            "link_text": "View on Map",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path><circle cx='12' cy='10' r='3'></circle></svg>"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "Email",
+            "value": "care@imperialknots.com",
+            "subtext": "Send us an email",
+            "link_text": "Send Email",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path><polyline points='22,6 12,13 2,6'></polyline></svg>"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "Phone",
+            "value": "+91 XXXXXXXXXX",
+            "subtext": "Call us directly",
+            "link_text": "Call Now",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'></path></svg>"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "WhatsApp",
+            "value": "Chat with us instantly",
+            "subtext": "Quick responses",
+            "link_text": "Start Chat",
+            "svg_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'></path></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="cora-contact-section" style="
+  background-color: {{ section.settings.bg_color }}; 
+  color: {{ section.settings.text_color }};
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+">
+  <div class="cora-contact-container">
+    
+    <div class="cora-contact-header">
+      {% if section.settings.heading != blank %}
+        <h2 class="cora-contact-title">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.desc != blank %}
+        <p class="cora-contact-desc">{{ section.settings.desc }}</p>
+      {% endif %}
+    </div>
+
+    <div class="cora-contact-grid">
+      {% for block in section.blocks %}
+        <div class="cora-card" {{ block.shopify_attributes }}>
+          
+          <div class="cora-card-icon-wrapper" style="background-color: {{ section.settings.text_color | color_modify: 'alpha', 0.05 }}">
+            {% if block.settings.svg_icon != blank %}
+              <div class="cora-card-svg" style="color: {{ section.settings.text_color }}">
+                {{ block.settings.svg_icon }}
+              </div>
+            {% elsif block.settings.image_icon != blank %}
+              <img src="{{ block.settings.image_icon | img_url: '100x' }}" alt="{{ block.settings.label }}" class="cora-card-img" loading="lazy">
+            {% endif %}
+          </div>
+
+          <div class="cora-card-label">{{ block.settings.label }}</div>
+          <div class="cora-card-value">{{ block.settings.value | newline_to_br }}</div>
+          <div class="cora-card-subtext">{{ block.settings.subtext }}</div>
+          
+          {% if block.settings.link_text != blank %}
+            <a href="{{ block.settings.link_url }}" class="cora-card-link">
+              {{ block.settings.link_text }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

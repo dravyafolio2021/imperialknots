@@ -1,0 +1,90 @@
+/* Base Layout */
+.tb-section {
+  width: 100%;
+  /* Padding is handled inline via Liquid settings, or you can set defaults here */
+}
+
+.tb-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tb-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.tb-item {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Icons */
+.tb-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* SVG Handling */
+.tb-svg-container svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  /* Stroke color is inherited from the parent div's inline style */
+  stroke: currentColor;
+}
+
+.tb-img-icon {
+  width: 32px;
+  height: auto;
+}
+
+/* Typography */
+.tb-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.5px;
+  color: inherit;
+  font-family: inherit;
+}
+
+.tb-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: inherit;
+  opacity: 0.8;
+  max-width: 300px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+/* Mobile Responsive */
+@media only screen and (max-width: 768px) {
+  .tb-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .tb-item {
+    width: 100%;
+    max-width: 400px;
+  }
+}
