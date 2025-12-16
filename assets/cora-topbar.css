@@ -1,58 +1,87 @@
+/* --- Cora Topbar Marquee --- */
 .cora-topbar-marquee {
   position: relative;
+  z-index: 50;
   overflow: hidden;
+  line-height: 1.2;
+  
+  /* FORCE FULL WIDTH (The Breakout Hack) */
+  width: 100vw; 
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
   box-sizing: border-box;
 }
+
 .cora-topbar-marquee__inner {
-  position: relative;
-  z-index: 2;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  user-select: none;
 }
+
+/* --- Marquee Container --- */
 .cora-marquee {
-  display: block;
-  outline: 0;
+  flex: 0 0 auto;
+  min-width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
 }
+
 .cora-marquee__track {
   display: flex;
-  white-space: nowrap;
+  flex-direction: row;
   align-items: center;
-  will-change: transform;
-  animation-name: cora-marquee-slide;
+  /* Animation applied here */
+  animation-name: cora-marquee-scroll;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+/* --- Items --- */
 .cora-marquee__item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.cora-marquee__text {
+  display: inline-block;
+  font-family: inherit;
+}
+
+/* Icon Support */
+.cora-marquee__icon {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  margin-right: 10px;
 }
+
 .cora-marquee__icon img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  display: block;
+  width: auto;
+  max-height: 1.2em;
 }
-.cora-marquee__track:hover,
-.cora-marquee:focus .cora-marquee__track {
-  animation-play-state: paused;
+
+/* --- Animation Keyframes --- */
+@keyframes cora-marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .cora-marquee__track {
-    animation: none !important;
-    transform: none !important;
-  }
+
+/* --- Utilities --- */
+.cora-topbar--hide-mobile {
+  display: block;
 }
-@keyframes cora-marquee-slide {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-@media (max-width: 900px) {
+
+@media (max-width: 768px) {
   .cora-topbar--hide-mobile {
-    display: none !important;
+    display: none;
   }
 }

@@ -1,190 +1,187 @@
 {{ 'cora-topbar.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  #shopify-section-{{  section.id }}{
-     background-color: {{ section.settings.bg_color_desktop | default: '#101828' }};
+  #shopify-section-{{ section.id }} {
+    --bg-desktop: {{ section.settings.bg_color_desktop }};
+    --bg-mobile: {{ section.settings.bg_color_mobile }};
+    --text-color: {{ section.settings.text_color }};
+    --padding-top: {{ section.settings.padding_top_desktop }}px;
+    --padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+  }
+
+  #cora-topbar-{{ section.id }} {
+    background-color: var(--bg-desktop);
+    color: var(--text-color);
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  /* Specific Typography */
+  #cora-topbar-{{ section.id }} .cora-marquee__text {
+    font-size: {{ section.settings.font_size_desktop }}px;
+    font-weight: {{ section.settings.font_weight }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    {% if section.settings.uppercase %}text-transform: uppercase;{% endif %}
+  }
+
+  /* Marquee Speed & Gap controls */
+  #cora-topbar-{{ section.id }} .cora-marquee__track {
+    animation-duration: {{ section.settings.speed }}s;
+    {% if section.settings.direction == 'right' %} animation-direction: reverse; {% endif %}
+  }
+
+  #cora-topbar-{{ section.id }} .cora-marquee__item {
+    padding-right: {{ section.settings.gap }}px; /* Adds gap between repeats */
+  }
+
+  /* Background Image Support */
+  {% if section.settings.bg_image_desktop %}
+    #cora-topbar-{{ section.id }} {
+      background-image: url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
+      background-size: cover;
+      background-position: center;
+    }
+  {% endif %}
+
+  /* Mobile Overrides */
+  @media (max-width: 768px) {
+    #cora-topbar-{{ section.id }} {
+      background-color: var(--bg-mobile);
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      {% if section.settings.bg_image_mobile %}
+        background-image: url({{ section.settings.bg_image_mobile | img_url: '800x' }});
+      {% endif %}
+    }
+
+    #cora-topbar-{{ section.id }} .cora-marquee__text {
+      font-size: {{ section.settings.font_size_mobile }}px;
+    }
+  }
+
+  /* Accessibility: Stop motion if requested */
+  @media (prefers-reduced-motion: reduce) {
+    #cora-topbar-{{ section.id }} .cora-marquee__track {
+      animation: none !important;
+      transform: none !important;
+      justify-content: center; /* Center text if animation stops */
+      width: 100%;
+    }
   }
 {%- endstyle -%}
 
-
-<style>
-    #cora-topbar-marquee-{{ section.id }}{
-      box-sizing:border-box;
-      position:relative;
-      overflow:hidden;
-      color: {{ section.settings.text_color }};
-      padding-top: {{ section.settings.padding_top_desktop }}px;
-      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-      background-color: {{ section.settings.bg_color_desktop }};
-      width:100vw;
-      margin-left:calc(50% - 50vw);
-      margin-right:calc(50% - 50vw); 
-    }
-  #shopify-section-{{ section.id }}{
-     background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
-     background-color: {{ section.settings.bg_color_desktop }};
-     background-size:cover;
-     overflow:hidden;
-     background-position:center;
-  }
-
-    {% if section.settings.bg_image_desktop %}
-    #cora-topbar-marquee-{{ section.id }}{
-      background-image:url({{ section.settings.bg_image_desktop | img_url: '2000x' }});
-      background-size:cover;
-      background-position:center;
-    }
-    {% endif %}
-
-    #cora-topbar-marquee-{{ section.id }} .cora-topbar-marquee__inner{
-      position:relative;
-      z-index:2;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding-left:12px;
-      padding-right:12px;
-    }
-
-    #cora-topbar-marquee-{{ section.id }} .cora-marquee__track{
-      animation-duration: {{ section.settings.speed }}s;
-      {% if section.settings.direction == 'right' %}
-        animation-direction: reverse;
-      {% endif %}
-    }
-
-    #cora-topbar-marquee-{{ section.id }} .cora-marquee__item{
-      margin-right: {{ section.settings.gap }}px;
-    }
-
-    #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
-      font-size: {{ section.settings.font_size_desktop }}px;
-      font-weight: {{ section.settings.font_weight }};
-      letter-spacing: {{ section.settings.letter_spacing }}px;
-      {% if section.settings.uppercase %} text-transform:uppercase; {% endif %}
-      color: {{ section.settings.text_color }};
-    }
-
-    @media (max-width:900px){
-      #cora-topbar-marquee-{{ section.id }}{
-        padding-top: {{ section.settings.padding_top_mobile }}px;
-        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-        background-color: {{ section.settings.bg_color_mobile }};
-        width:100%;
-        margin-left:0;
-        margin-right:0;
-      }
-
-      {% if section.settings.bg_image_mobile %}
-      #cora-topbar-marquee-{{ section.id }}{
-        background-image:url({{ section.settings.bg_image_mobile | img_url: '800x' }});
-        background-size:cover;
-        background-position:center;
-      }
-      {% endif %}
-
-      #cora-topbar-marquee-{{ section.id }} .cora-marquee__text{
-        font-size: {{ section.settings.font_size_mobile }}px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      #cora-topbar-marquee-{{ section.id }} .cora-marquee__track{
-        animation:none !important;
-        transform:none !important;
-      }
-    }
-</style>
-
 <section
-  id="cora-topbar-marquee-{{ section.id }}"
+  id="cora-topbar-{{ section.id }}"
   class="cora-topbar-marquee {% if section.settings.hide_on_mobile %}cora-topbar--hide-mobile{% endif %}"
   role="region"
-  aria-label="{{ section.settings.aria_label | default: 'Announcement' }}"
+  aria-label="{{ section.settings.aria_label }}"
 >
   <div class="cora-topbar-marquee__inner">
-    <div class="cora-marquee" tabindex="0" aria-live="polite" role="status">
-      <div class="cora-marquee__track">
-        {% capture item_html %}
-          {% if section.settings.show_icon and section.settings.icon_image %}
-            <span class="cora-marquee__icon">
-              <img src="{{ section.settings.icon_image | img_url: '48x' }}"
-                   width="{{ section.settings.icon_image.width }}"
-                   height="{{ section.settings.icon_image.height }}"
-                   alt="">
-            </span>
-          {% endif %}
-          <span class="cora-marquee__text">
-            {% if section.settings.uppercase %}
-              {{ section.settings.text | upcase }}
-            {% else %}
-              {{ section.settings.text }}
+    <div class="cora-marquee">
+      {% for i in (1..4) %}
+        <div class="cora-marquee__track" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+          <div class="cora-marquee__item">
+            {% if section.settings.link_url %}
+              <a
+                href="{{ section.settings.link_url }}"
+                style="text-decoration:none; color:inherit; display:flex; align-items:center;"
+              >
             {% endif %}
-          </span>
-        {% endcapture %}
 
-        <div class="cora-marquee__item">{{ item_html }}</div>
-        <div class="cora-marquee__item">{{ item_html }}</div>
-        <div class="cora-marquee__item">{{ item_html }}</div>
-      </div>
+            {% if section.settings.show_icon and section.settings.icon_image %}
+              <span class="cora-marquee__icon">
+                <img
+                  src="{{ section.settings.icon_image | img_url: '60x' }}"
+                  alt=""
+                  width="{{ section.settings.icon_image.width }}"
+                  height="{{ section.settings.icon_image.height }}"
+                  loading="lazy"
+                >
+              </span>
+            {% endif %}
+
+            <span class="cora-marquee__text">
+              {{ section.settings.text }}
+            </span>
+
+            {% if section.settings.link_url %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Cora Topbar  ",
+  "name": "Cora Topbar",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Announcement" },
+    { "type": "header", "content": "Content" },
     {
       "type": "text",
       "id": "text",
-      "label": "Marquee text",
+      "label": "Announcement Text",
       "default": "Free Shipping on All Orders | 30-Day Returns | Sustainably Crafted"
     },
-    { "type": "url", "id": "link_url", "label": "Optional link" },
+    { "type": "url", "id": "link_url", "label": "Link (Optional)" },
+    { "type": "text", "id": "aria_label", "label": "Accessibility Label", "default": "Announcement Bar" },
 
+    { "type": "header", "content": "Design" },
+    { "type": "color", "id": "bg_color_desktop", "label": "Background (Desktop)", "default": "#0B1220" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#ffffff" },
     {
       "type": "range",
       "id": "font_size_desktop",
-      "label": "Font size desktop",
       "min": 10,
-      "max": 36,
+      "max": 24,
       "step": 1,
+      "label": "Font Size",
       "default": 14
-    },
-    {
-      "type": "range",
-      "id": "font_size_mobile",
-      "label": "Font size mobile",
-      "min": 10,
-      "max": 28,
-      "step": 1,
-      "default": 13
     },
     {
       "type": "select",
       "id": "font_weight",
-      "label": "Font weight",
+      "label": "Font Weight",
       "options": [
-        { "value": "400", "label": "400" },
-        { "value": "500", "label": "500" },
-        { "value": "600", "label": "600" },
-        { "value": "700", "label": "700" }
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Bold" }
       ],
-      "default": "500"
+      "default": "400"
     },
+    { "type": "checkbox", "id": "uppercase", "label": "Uppercase Text", "default": false },
     {
       "type": "range",
       "id": "letter_spacing",
-      "label": "Letter spacing",
       "min": 0,
-      "max": 6,
+      "max": 5,
       "step": 0.5,
-      "default": 0
+      "label": "Letter Spacing",
+      "default": 0.5
     },
-    { "type": "checkbox", "id": "uppercase", "label": "Uppercase", "default": false },
 
+    { "type": "header", "content": "Animation" },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll Speed (Seconds)",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 25,
+      "info": "Higher number = Slower"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between repeats (px)",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "default": 80
+    },
     {
       "type": "select",
       "id": "direction",
@@ -195,57 +192,64 @@
       ],
       "default": "left"
     },
-    { "type": "range", "id": "speed", "label": "Speed", "min": 4, "max": 40, "step": 1, "default": 12 },
-    { "type": "range", "id": "gap", "label": "Gap", "min": 12, "max": 200, "step": 4, "default": 48 },
 
-    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
-    { "type": "color", "id": "bg_color_desktop", "label": "Background desktop", "default": "#0B1220" },
-    { "type": "color", "id": "bg_color_mobile", "label": "Background mobile", "default": "#0B1220" },
-    { "type": "image_picker", "id": "bg_image_desktop", "label": "Desktop background image" },
-    { "type": "image_picker", "id": "bg_image_mobile", "label": "Mobile background image" },
-
-    { "type": "checkbox", "id": "show_icon", "label": "Show icon", "default": false },
-    { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
-
+    { "type": "header", "content": "Mobile Settings" },
+    { "type": "color", "id": "bg_color_mobile", "label": "Background (Mobile)", "default": "#0B1220" },
     {
       "type": "range",
-      "id": "padding_top_desktop",
-      "label": "Padding top desktop",
-      "min": 0,
-      "max": 60,
+      "id": "font_size_mobile",
+      "min": 10,
+      "max": 20,
       "step": 1,
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_desktop",
-      "label": "Padding bottom desktop",
-      "min": 0,
-      "max": 60,
-      "step": 1,
-      "default": 8
+      "label": "Font Size (Mobile)",
+      "default": 13
     },
     {
       "type": "range",
       "id": "padding_top_mobile",
-      "label": "Padding top mobile",
       "min": 0,
       "max": 40,
       "step": 1,
-      "default": 8
+      "label": "Padding Top",
+      "default": 10
     },
     {
       "type": "range",
       "id": "padding_bottom_mobile",
-      "label": "Padding bottom mobile",
       "min": 0,
       "max": 40,
       "step": 1,
-      "default": 8
+      "label": "Padding Bottom",
+      "default": 10
+    },
+    { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on Mobile", "default": false },
+
+    { "type": "header", "content": "Desktop Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "label": "Padding Top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "label": "Padding Bottom",
+      "default": 12
     },
 
-    { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false }
+    { "type": "header", "content": "Advanced" },
+    { "type": "image_picker", "id": "bg_image_desktop", "label": "Background Image" },
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Mobile Background Image" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show Icon", "default": false },
+    { "type": "image_picker", "id": "icon_image", "label": "Icon" }
   ],
-  "presets": [{ "name": "Cora — Topbar Marquee ", "category": "Global" }]
+  "presets": [{ "name": "Cora Topbar" }]
 }
 {% endschema %}
