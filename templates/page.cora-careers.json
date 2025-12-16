@@ -1,9 +1,4 @@
 {
-  "sections": {
-    "main": {
-      "type": "careers",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
+    "sections": {},
+    "order": []
 }
