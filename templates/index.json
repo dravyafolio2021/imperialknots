@@ -262,7 +262,7 @@
         "card_PbWBY8": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -272,10 +272,10 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_eTK4Ty": {
+        "card_eggEKi": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -285,10 +285,10 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_Ufykqt": {
+        "card_TBd9xz": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -298,10 +298,10 @@
             "overlay_opacity": 0.5
           }
         },
-        "card_WPGC8w": {
+        "card_EBcBM7": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback-1.png",
+            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -315,9 +315,9 @@
       "block_order": [
         "heading_TzhgTe",
         "card_PbWBY8",
-        "card_eTK4Ty",
-        "card_Ufykqt",
-        "card_WPGC8w"
+        "card_eggEKi",
+        "card_TBd9xz",
+        "card_EBcBM7"
       ],
       "name": "Style Grid",
       "settings": {
