@@ -201,30 +201,34 @@
         "card_eerzQJ": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ILS-59_2.jpg",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
           }
         },
-        "card_hPbGRF": {
+        "card_XzWMVc": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ILS-59_2.jpg",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
           }
         },
-        "card_wbtK6d": {
+        "card_pe9cji": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ILS-59_2.jpg",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
           }
         },
-        "card_EtATwx": {
+        "card_BwdKBH": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ILS-59_2.jpg",
             "image_alt": "Moroccan Berber Red",
             "title": "Moroccan Berber Red",
             "link": ""
@@ -234,9 +238,9 @@
       "block_order": [
         "heading_VJ8MYT",
         "card_eerzQJ",
-        "card_hPbGRF",
-        "card_wbtK6d",
-        "card_EtATwx"
+        "card_XzWMVc",
+        "card_pe9cji",
+        "card_BwdKBH"
       ],
       "name": "Collection Grid",
       "settings": {
