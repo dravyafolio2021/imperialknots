@@ -1,25 +1,39 @@
+/* --- Cora Slider CSS --- */
 .cora-slider {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   color: #fff;
 }
+
 .cora-slider__viewport {
   width: 100%;
   overflow: hidden;
   position: relative;
 }
+
 .cora-slider__track {
   display: flex;
-  transition: transform 0.45s ease;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
+  height: 100%;
 }
+
 .cora-slider__slide {
   min-width: 100%;
   position: relative;
   box-sizing: border-box;
   display: block;
+  overflow: hidden;
 }
+
+/* --- Image Handling --- */
+.cora-slider__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .cora-slider__image img {
   display: block;
   width: 100%;
@@ -27,6 +41,7 @@
   object-fit: cover;
 }
 
+/* --- Overlay --- */
 .cora-slider__overlay {
   position: absolute;
   inset: 0;
@@ -34,146 +49,236 @@
   pointer-events: none;
 }
 
+/* --- Content Layout --- */
 .cora-slider__content {
   position: absolute;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
-  padding: 24px;
+  padding: 40px;
   box-sizing: border-box;
   color: inherit;
   max-width: 60%;
+  width: 100%;
 }
+
+/* Alignment */
 .cora-slider__content[style*="--cora-content-align: left"] {
   left: 6%;
-  transform: translateY(-50%);
   text-align: left;
+  align-items: flex-start;
 }
 .cora-slider__content[style*="--cora-content-align: center"] {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  align-items: center;
 }
 .cora-slider__content[style*="--cora-content-align: right"] {
   right: 6%;
-  transform: translateY(-50%);
   text-align: right;
+  align-items: flex-end;
 }
 
+/* --- Typography --- */
 .cora-slider__kicker {
   font-size: 14px;
-  opacity: 0.85;
-  font-family: "Inter", sans-serif;
-  margin-bottom: 8px; 
-}
-
-.cora-slider__nav-link,
-.cora-slider__mobile-link {
-  font-family: "Inter", sans-serif;
-}
-.cora-slider__heading {
-  font-size: 48px;
-  line-height: 1.02;
-  margin: 0 0 12px 0;
-    font-family: "Assistant", sans-serif;
-  font-weight: 600;
-}
-.cora-slider__text {
-  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   opacity: 0.9;
   font-family: "Inter", sans-serif;
-  margin-bottom: 16px; 
+  margin-bottom: 12px; 
 }
+
+.cora-slider__heading {
+  font-size: 56px;
+  line-height: 1.1;
+  margin: 0 0 20px 0;
+  font-family: "Assistant", sans-serif;
+  font-weight: 600;
+}
+
+.cora-slider__text {
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.9;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 30px; 
+  max-width: 800px;
+}
+
+/* --- Buttons (FIXED LAYOUT) --- */
+.cora-slider__buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap; /* Forces buttons to stay in one row */
+  align-items: center;
+  width: 100%; 
+}
+
+/* Align button container based on text alignment */
+.cora-slider__content[style*="--cora-content-align: center"] .cora-slider__buttons { justify-content: center; }
+.cora-slider__content[style*="--cora-content-align: right"] .cora-slider__buttons { justify-content: flex-end; }
 
 .cora-btn {
   font-family: "Inter", sans-serif;
-  display: inline-block; 
-  padding: 12px 18px;
-  border-radius: 10px;
-  text-decoration: none;
-  margin-right: 10px;
-}
-.cora-btn--primary {
-  background: #fff;
-  color: #111;
-}
-.cora-btn--ghost {
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.cora-slider__arrows {
-  position: absolute;
-  z-index: 3;
-  inset: auto 12px auto 12px;
-  display: flex;
-  justify-content: space-between;
-  width: calc(100% - 24px);
-  pointer-events: none;
-}
-.cora-slider__arrow {
-  pointer-events: all;
-  background: rgba(0, 0, 0, 0.45);
-  color: #fff;
-  border: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap; /* Prevents text from breaking into two lines */
+  transition: all 0.2s ease;
 }
 
+.cora-btn--primary {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+.cora-btn--primary:hover {
+  background: #f0f0f0;
+  color: #000000;
+}
+
+.cora-btn--ghost {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.cora-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+}
+
+/* --- Arrows --- */
+.cora-slider__arrows {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0; 
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.cora-slider__arrow {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 20px;
+}
+.cora-slider__arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- Dots --- */
 .cora-slider__dots {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 12px;
+  bottom: 24px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
   z-index: 4;
 }
+
 .cora-slider__dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.3);
   border: 0;
   cursor: pointer;
-}
-.cora-slider__dot.is-active {
-  background: #fff;
+  transition: all 0.2s;
 }
 
-/* responsive */
+.cora-slider__dot.is-active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+/* --------------------------------------------------------- */
+/* --- RESPONSIVE MOBILE FIXES --- */
+/* --------------------------------------------------------- */
 @media (max-width: 900px) {
+  
+  .cora-slider__slide {
+    height: 75vh;
+    min-height: 500px;
+  }
+
+  .cora-slider__image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+
+  .cora-slider__image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
   .cora-slider__content {
-    max-width: 86%;
-    padding: 16px;
+    max-width: 90%;
+    padding: 2px;
+    left: 5% !important; 
+    right: 5% !important;
+    top: auto;
+    bottom: 10%; /* Text stays at bottom */
+    transform: none;
+    text-align: left !important; /* Force left align usually looks best on mobile */
+    align-items: flex-start !important;
   }
+
   .cora-slider__heading {
-    font-size: 36px;
+    font-size: 32px;
+    margin-bottom: 10px;
   }
+  
   .cora-slider__kicker {
-    font-size: 13px;
+    font-size: 12px;
+    margin-bottom: 6px;
   }
+  
   .cora-slider__text {
     font-size: 14px;
+    display: none; /* Hide body text to save space */
   }
+
   .cora-slider__arrows {
     display: none;
   }
-}
 
-/* ensure clones don't break layout */
-.cora-slider__slide--clone {
-  opacity: 1;
-}
+  /* BUTTON FIX FOR MOBILE */
+  .cora-slider__buttons {
+    width: 100%;
+    justify-content: flex-start !important; /* Start from left */
+    gap: 8px; /* Reduce gap */
+  }
 
-/* accessibility */
-.cora-slider__slide:focus {
-  outline: 3px solid rgba(255, 255, 255, 0.12);
-  outline-offset: -3px;
+  .cora-btn {
+    flex: 1; /* Make buttons share equal width */
+    padding: 12px 10px; /* Reduce padding to fit */
+    font-size: 13px; /* Slightly smaller text */
+    min-width: 0; /* Allow shrinking if needed */
+  }
 }

@@ -15,11 +15,12 @@
   text-align: center;
   margin-bottom: 20px;
 }
-.cora-product-grid__title {
+
+.cora-product-section-grid__title {
   font-family: "Assistant", sans-serif;
-  font-size: 26px;
-  margin: 0 0 6px 0;
-  color: #0b1220;
+  font-size: 28px;
+  margin: 0 0 8px 0;
+  color: #111;
 }
 .cora-style-grid__title {
   font-family: "Assistant", sans-serif;
