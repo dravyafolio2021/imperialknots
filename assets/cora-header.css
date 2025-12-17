@@ -1,168 +1,276 @@
+/* --- Cora Header (Responsive Flexbox) --- */
 .cora-header {
   width: 100%;
-  box-sizing: border-box;
   position: relative;
   z-index: 60;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
 }
+
 .cora-header__inner {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 ;
+  height: 80px; /* Fixed height for stability */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 0 20px;
+  position: relative; /* Essential for mobile logo centering */
 }
 
-/* columns */
-.cora-header__left,
-.cora-header__center,
-.cora-header__right {
+/* --- 1. Brand / Logo --- */
+.cora-header__left {
+  flex: 1; /* Takes available space on desktop */
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-.cora-header__left {
-  flex: 1;
-  align-items: center;
-}
-.cora-header__center {
-  flex: 0 0 auto;
-  justify-content: center;
-}
-.cora-header__right {
-  flex: 1;
-  justify-content: flex-end;
 }
 
-/* brand */
-.cora-header__brand img {
-  height: 40px;
+.cora-header__brand-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.cora-header__brand-text {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.cora-header__logo-img {
+  max-height: 40px;
   width: auto;
   display: block;
 }
-.cora-header__brand-text {
-  font-family: serif;
-  font-size: 20px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  text-decoration: none;
-  color: inherit;
+
+/* --- 2. Navigation (Center) --- */
+.cora-header__center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
 }
 
-/* primary nav */
 .cora-header__nav {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
 }
-.cora-header__nav-link {
-  text-decoration: none;
-  color: inherit;
-  font-size: 14px;
-  padding: 6px 4px;
-  display: inline-block;
-}
-.cora-header__nav-link[aria-haspopup="true"]::after {
-  content: " ▾";
-  margin-left: 6px;
-  font-size: 12px;
+
+/* Hide Nav on Tablet/Mobile to prevent breaking */
+@media (max-width: 1024px) {
+  .cora-header__center {
+    display: none;
+  }
 }
 
-/* icons */
+.cora-nav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80px; /* Match header height for hover target */
+}
+
+.cora-nav__link {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cora-nav__link:hover {
+  opacity: 0.7;
+}
+
+/* Dropdown */
+.cora-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  padding: 10px 0;
+  z-index: 70;
+}
+
+.cora-nav__item:hover .cora-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.cora-dropdown__link {
+  display: block;
+  padding: 10px 20px;
+  color: #444;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cora-dropdown__link:hover {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+/* --- 3. Icons (Right) --- */
+.cora-header__right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
 .cora-header__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
+  color: #1a1a1a;
   text-decoration: none;
-  color: inherit;
-}
-.cora-header__cart-count {
   position: relative;
 }
-.cora-header__cart-count span {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: #111;
-  color: #fff;
-  border-radius: 10px;
-  padding: 2px 6px;
-  font-size: 12px;
+
+.cora-header__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5px;
 }
 
-/* hamburger (mobile) */
-.cora-header__hamburger {
-  display: none;
-  background: transparent;
-  border: 0;
-  width: 44px;
-  height: 44px;
+.cora-cart-count {
+  position: absolute;
+  bottom: -2px;
+  right: -5px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
-/* mobile nav toggle checkbox (hidden) */
-input.cora-nav-toggle {
-  display: none;
+/* --- MOBILE LAYOUT (Hamburger | Logo Center | Icons) --- */
+.cora-header__mobile-trigger {
+  display: none; /* Hidden on Desktop */
 }
 
-/* mobile nav panel (hidden by default, shown when checkbox checked) */
-.cora-header__mobile-nav {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  background: inherit;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
-  z-index: 60;
-}
-input.cora-nav-toggle:checked ~ .cora-header__mobile-nav {
-  display: block;
-}
-
-/* mobile list */
-.cora-header__mobile-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.cora-header__mobile-item {
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-}
-.cora-header__mobile-link {
-  color: inherit;
-  text-decoration: none;
-  display: block;
-}
-
-/* responsive behavior */
-@media (max-width: 900px) {
-  .cora-header__inner {
-    padding: 0 14px;
-  }
-  .cora-header__nav {
-    display: none;
-  }
-  .cora-header__hamburger {
+@media (max-width: 1024px) {
+  /* 1. Show Hamburger */
+  .cora-header__mobile-trigger {
     display: flex;
+    align-items: center;
+    flex: 1; /* Takes left space */
   }
-  .cora-header__center {
+  
+  .cora-header__hamburger {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  /* 2. Absolute Center the Logo */
+  .cora-header__left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     justify-content: center;
+    flex: 0; /* Stop it from growing */
+    width: auto;
   }
+
+  /* 3. Right Icons stay flex-end */
+  .cora-header__right {
+    flex: 1;
+  }
+
 }
 
-/* accessibility focus */
-a:focus,
-button:focus {
-  outline: 2px solid rgba(0, 0, 0, 0.12);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* --- Mobile Drawer (Slide-out Menu) --- */
+.cora-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Hidden by default */
+  width: 85%;
+  max-width: 350px;
+  height: 100vh;
+  background: #fff;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 0;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cora-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+
+/* Checkbox Logic to Open Menu */
+#cora-nav-toggle:checked ~ .cora-mobile-drawer {
+  transform: translateX(100%); /* Slide In */
+  left: 0; /* Reset left to ensure it's visible */
+}
+#cora-nav-toggle:checked ~ .cora-mobile-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Drawer Styling */
+.cora-drawer__header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.cora-drawer__close {
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.cora-drawer__nav {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.cora-drawer__link {
+  display: block;
+  font-size: 16px;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid #f9f9f9;
 }
