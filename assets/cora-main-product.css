@@ -307,3 +307,12 @@
   transform: rotate(45deg);
 }
 
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+
+/* --- 1. LAYOUT STRUCTURE --- */
+.cmp-section {
+  background-color: #fff;
+  padding: 40px 0;
+}
+}

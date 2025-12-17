@@ -154,6 +154,7 @@
 /* Badges */
 .product-badge {
   position: absolute;
+  color: #000000;
   top: 10px;
   left: 10px;
   background: white;
@@ -203,4 +204,125 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Modern Pagination UI --- */
+.cora-pagination {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* --- Previous Button (Minimal) --- */
+.cora-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.cora-pagination__prev:hover {
+  opacity: 0.7;
+}
+
+/* --- Next Button (Pill Style) --- */
+.cora-pagination__next {
+  background-color: #ffffff; /* Light gray pill background */
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: background-color 0.2s;
+}
+
+.cora-pagination__next:hover {
+  background-color: #ffffff;
+}
+
+/* --- Page Numbers List --- */
+.cora-pagination__list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cora-pagination__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px; /* Soft square corners */
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.cora-pagination__number:hover:not(.is-active) {
+  background-color: #f9f9f9;
+}
+
+/* --- Active Page (The White Box) --- */
+.cora-pagination__number.is-active {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft drop shadow */
+  font-weight: 600;
+  cursor: default;
+}
+
+/* --- Dots (...) --- */
+.cora-pagination__dots {
+  color: #999;
+  padding: 0 5px;
+  letter-spacing: 2px;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  .cora-pagination {
+    gap: 10px;
+    justify-content: space-between;
+  }
+  
+  .cora-pagination__number {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+  
+  .cora-pagination__next {
+    padding: 8px 14px;
+  }
+  
+  /* Hide text labels on very small screens if needed, keep icons */
+  .cora-pagination__btn {
+    font-size: 13px;
+  }
 }

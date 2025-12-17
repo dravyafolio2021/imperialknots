@@ -163,6 +163,15 @@
   .cora-footer__top {
     padding-bottom: 18px;
   }
+  .cora-footer__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
   .cora-footer__columns {
     display: block;
   }
@@ -177,7 +186,6 @@
     gap: 10px;
   }
   .cora-footer__bottom {
-    
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
