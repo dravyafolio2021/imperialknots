@@ -17,7 +17,7 @@
         "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
         "text_color": "#000000",
         "text_align": "center",
-        "bg_color": "#F0EBE4",
+        "bg_color": "#f0ebe4",
         "pt_desktop": 60,
         "pb_desktop": 60,
         "pt_mobile": 40,
@@ -33,9 +33,9 @@
             "form_id": "792151",
             "text_color": "#202020",
             "button_background_color": "#202020",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
             "text_alignment": "center",
             "form_alignment": "center",
             "padding_top": 0,
@@ -48,6 +48,7 @@
       "block_order": [
         "forms_inline_UDgy8h"
       ],
+      "custom_css": [],
       "settings": {}
     },
     "trust_badges_zy7jRj": {
@@ -147,7 +148,7 @@
       ],
       "name": "Cora Contact Grid",
       "settings": {
-        "bg_color": "#F9F8F6",
+        "bg_color": "#f9f8f6",
         "text_color": "#1a1a1a",
         "heading": "Get in Touch",
         "desc": "Choose your preferred way to connect with our team",
