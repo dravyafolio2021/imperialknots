@@ -11,7 +11,41 @@
   "sections": {
     "main": {
       "type": "collection",
-      "settings": {}
+      "blocks": {
+        "filter_group_KyHfaj": {
+          "type": "filter_group",
+          "settings": {
+            "filter_name": "Delivery Time:",
+            "default_open": true
+          }
+        },
+        "filter_group_Qrww8g": {
+          "type": "filter_group",
+          "settings": {
+            "filter_name": "Color",
+            "default_open": true
+          }
+        },
+        "price_range_H7Aeez": {
+          "type": "price_range",
+          "settings": {
+            "default_open": true
+          }
+        }
+      },
+      "block_order": [
+        "filter_group_KyHfaj",
+        "filter_group_Qrww8g",
+        "price_range_H7Aeez"
+      ],
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "show_remaining": true,
+        "bg_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
