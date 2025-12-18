@@ -1,0 +1,68 @@
+{%- comment -%}
+  Renders a single filter group (List or Price)
+  Props:
+    - filter: The filter object
+    - block: The block settings (optional)
+    - default_open: boolean (optional)
+{%- endcomment -%}
+
+{%- assign is_open = default_open -%}
+{%- if block -%}{%- assign is_open = block.settings.default_open -%}{%- endif -%}
+
+<div class="filter-group">
+  <details {% if is_open %}open{% endif %}>
+    <summary class="filter-title">
+      {{ filter.label }}
+      <span class="icon-chevron"></span>
+    </summary>
+    
+    <div class="filter-content">
+      {%- case filter.type -%}
+        
+        {%- when 'list' -%}
+          <ul class="filter-list">
+            {%- for value in filter.values -%}
+              <li class="filter-item">
+                <label class="filter-label {% if value.count == 0 and value.active == false %}disabled{% endif %}">
+                  <input type="checkbox"
+                    name="{{ value.param_name }}"
+                    value="{{ value.value }}"
+                    {% if value.active %}checked{% endif %}
+                    {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                  >
+                  <span class="checkmark"></span>
+                  {{ value.label }}
+                  <span class="count">({{ value.count }})</span>
+                </label>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+        {%- when 'price_range' -%}
+          <div class="price-range-group">
+            <div class="price-inputs">
+              <div class="field">
+                <span class="currency">{{ cart.currency.symbol }}</span>
+                <input name="{{ filter.min_value.param_name }}"
+                  type="number" placeholder="0" min="0"
+                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                >
+              </div>
+              <span class="separator">-</span>
+              <div class="field">
+                <span class="currency">{{ cart.currency.symbol }}</span>
+                <input name="{{ filter.max_value.param_name }}"
+                  type="number" placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  min="0" max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                >
+              </div>
+            </div>
+            <button type="submit" class="price-apply-btn">Apply</button>
+          </div>
+
+      {%- endcase -%}
+    </div>
+  </details>
+</div>
