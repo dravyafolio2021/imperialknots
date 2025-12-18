@@ -1,10 +1,113 @@
-{% comment %}
-  This section is used in the cart template to render /cart page with an
-  overview of the items in customer's cart.
+{{ 'cora-cart.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
-{% endcomment %}
+<div class="cora-cart-section">
+  <div class="cora-cart-container">
 
+    <div class="cora-cart-header">
+      <h1 class="cora-cart-title">{{ 'cart.title' | t }}</h1>
+      <span class="cora-cart-count">{{ cart.item_count }} Items</span>
+    </div>
+
+    <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+      
+      {% if cart.item_count > 0 %}
+        <div class="cora-cart-grid">
+          
+          <div class="cora-cart-items-wrapper">
+            <table class="cora-cart-items">
+              <tbody>
+                {% for item in cart.items %}
+                  <tr class="cora-cart-row">
+                    
+                    <td class="cora-cart-col" style="width: 120px;">
+                      {% if item.image %}
+                        <a href="{{ item.url }}">
+                          <img src="{{ item.image | img_url: '400x' }}" alt="{{ item.title | escape }}" class="cora-item-image">
+                        </a>
+                      {% endif %}
+                    </td>
+
+                    <td class="cora-cart-col cora-item-details">
+                      <h3 class="cora-item-title">
+                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      </h3>
+                      
+                      {% unless item.product.has_only_default_variant %}
+                        <div class="cora-item-variant">{{ item.variant.title }}</div>
+                      {% endunless %}
+
+                      <div class="cora-item-price">
+                        {{ item.final_line_price | money }}
+                      </div>
+
+                      <div style="display:flex; align-items:center; gap: 20px;">
+                        
+                        <div class="cora-qty-wrapper">
+                          <button type="button" class="cora-qty-btn" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.form.submit()">-</button>
+                          <input 
+                            type="number" 
+                            name="updates[]" 
+                            value="{{ item.quantity }}" 
+                            min="0" 
+                            class="cora-qty-input"
+                            aria-label="Quantity"
+                          >
+                          <button type="button" class="cora-qty-btn" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.form.submit()">+</button>
+                        </div>
+
+                        <a href="{{ item.url_to_remove }}" class="cora-item-remove">
+                          {{ 'cart.remove' | t }}
+                        </a>
+
+                      </div>
+                    </td>
+
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cora-cart-summary">
+            <h2 class="cora-summary-title">Order Summary</h2>
+            
+            <div class="cora-summary-row">
+              <span>Subtotal</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            
+            <div class="cora-summary-note">
+              Shipping, taxes, and discounts will be calculated at checkout.
+            </div>
+
+            <button type="submit" name="checkout" class="cora-checkout-btn">
+              {{ 'cart.checkout' | t }}
+            </button>
+          </div>
+
+        </div>
+
+      {% else %}
+        <div class="cora-cart-empty">
+          <h2 class="cora-cart-title" style="font-size: 32px; margin-bottom: 20px;">Your cart is empty</h2>
+          <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any luxury rugs yet.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="cora-btn">Start Shopping</a>
+        </div>
+      {% endif %}
+
+    </form>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}
+
+{% comment %} {{ 'cora-cart.css' | asset_url | stylesheet_tag }}
 <h1>{{ 'cart.title' | t }}</h1>
 
 <form action="{{ routes.cart_url }}" method="post">
@@ -34,4 +137,4 @@
   "name": "t:general.cart",
   "settings": []
 }
-{% endschema %}
+{% endschema %} {% endcomment %}
