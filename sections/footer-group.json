@@ -11,6 +11,51 @@
   "type": "footer",
   "name": "t:general.footer",
   "sections": {
+    "cora_mobile_bar_CjRGRt": {
+      "type": "cora-mobile-bar",
+      "blocks": {
+        "menu_trigger_bByAGD": {
+          "type": "menu_trigger",
+          "settings": {
+            "label": "Menu",
+            "custom_svg": ""
+          }
+        },
+        "link_d4FgdF": {
+          "type": "link",
+          "settings": {
+            "label": "Categories",
+            "url": "",
+            "custom_svg": ""
+          }
+        },
+        "whatsapp_4tWhqJ": {
+          "type": "whatsapp",
+          "settings": {
+            "label": "WhatsApp",
+            "phone_number": "",
+            "message": "Hi, I need help with...",
+            "custom_svg": ""
+          }
+        },
+        "phone_Y6zwzW": {
+          "type": "phone",
+          "settings": {
+            "label": "Call",
+            "phone_number": "",
+            "custom_svg": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_trigger_bByAGD",
+        "link_d4FgdF",
+        "whatsapp_4tWhqJ",
+        "phone_Y6zwzW"
+      ],
+      "name": "Mobile Sticky Bar",
+      "settings": {}
+    },
     "footer_7fh9kJ": {
       "type": "footer",
       "blocks": {
@@ -79,6 +124,7 @@
     }
   },
   "order": [
+    "cora_mobile_bar_CjRGRt",
     "footer_7fh9kJ"
   ]
 }
