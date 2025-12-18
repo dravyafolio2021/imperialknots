@@ -55,8 +55,9 @@
         "price_range_H7Aeez"
       ],
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 24,
         "columns_desktop": 3,
+        "columns_mobile": 2,
         "show_remaining": true,
         "bg_color": "#ffffff",
         "padding_top": 60,
