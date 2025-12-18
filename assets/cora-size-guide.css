@@ -146,6 +146,11 @@
     font-size: 32px;
   }
 
+.csg-section {
+  padding: 80px 0;
+  background-color: #fff;
+  width: 100%;
+}
   .csg-size-bar {
     padding: 10px;
     gap: 8px;
