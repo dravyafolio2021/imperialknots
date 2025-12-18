@@ -112,7 +112,7 @@
 
 /* Mobile */
 @media screen and (max-width: 900px) {
-  .cc-section { padding: 60px 20px; }
+  .cc-section { padding: 60px 0; }
   .cc-title { font-size: 30px; }
   .cc-grid { flex-direction: column; gap: 40px; }
   .cc-card { height: 350px; }
