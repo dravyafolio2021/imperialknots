@@ -531,6 +531,61 @@
         "padding_bottom": 32,
         "accordion": true
       }
+    },
+    "cora_faq_section_R8KehB": {
+      "type": "cora-faq-section",
+      "blocks": {
+        "category_7zyLDY": {
+          "type": "category",
+          "settings": {
+            "title": "General"
+          }
+        },
+        "question_fCikft": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "question_r4g7ge": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_bbLAK6": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question_kyFbDk": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_7zyLDY",
+        "question_fCikft",
+        "question_r4g7ge",
+        "category_bbLAK6",
+        "question_kyFbDk"
+      ],
+      "name": "Advanced FAQ Widget",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "text": "Common questions about our products and shipping.",
+        "enable_accordion": true,
+        "bg_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -540,6 +595,7 @@
     "cora_style_grid_K3RUBY",
     "cora_product_grid_aPwt7d",
     "cora_features_jfEBK8",
-    "cora_faq_KAratB"
+    "cora_faq_KAratB",
+    "cora_faq_section_R8KehB"
   ]
 }
