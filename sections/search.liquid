@@ -9,7 +9,7 @@
 
 {{ 'cora-search.css' | asset_url | stylesheet_tag }}
 
-<div class="cora-search-section">
+<section class="cora-search-section">
   <div class="cora-search-container">
 
     <header class="cora-search-header">
@@ -17,7 +17,7 @@
         {% if search.performed %}
           {{ search.results_count }} Results for "{{ search.terms }}"
         {% else %}
-          Search our store
+          {{ 'search.title' | t }}
         {% endif %}
       </h1>
 
@@ -27,21 +27,17 @@
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
-          placeholder="Search for rugs, styles, or colors..."
-          autocomplete="off"
+          placeholder="{{ 'search.placeholder' | t }}"
         >
-        <button type="submit" class="cora-search-submit" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
+        <button type="submit" class="cora-search-submit" aria-label="{{ 'search.submit' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
       </form>
     </header>
 
     {% if search.performed %}
       {% if search.results_count == 0 %}
-        <div style="text-align: center; margin-top: 40px; color: #64748b;">
+        <div style="text-align:center; color: #666; margin-top: 40px;">
           <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
         </div>
       {% else %}
@@ -49,69 +45,57 @@
         <div class="cora-search-results">
           {% paginate search.results by 24 %}
             
-            {% for item in search.results %}
-              <a href="{{ item.url }}" class="cora-search-card">
-                
-                <div class="cora-card-image-wrapper">
-                  {% if item.object_type != 'product' %}
-                    <span class="cora-card-badge">{{ item.object_type }}</span>
-                  {% elsif item.compare_at_price > item.price %}
-                    <span class="cora-card-badge">Sale</span>
-                  {% endif %}
-
-                  {% assign featured_image = item.featured_image | default: item.image %}
-                  {% if featured_image %}
-                    <img 
-                      class="cora-card-image" 
-                      src="{{ featured_image | img_url: '600x600', crop: 'center' }}" 
-                      alt="{{ item.title | escape }}" 
-                      loading="lazy"
-                    >
-                  {% else %}
-                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#cbd5e1; background:#f8fafc;">
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                        <polyline points="21 15 16 10 5 21"></polyline>
-                      </svg>
-                    </div>
-                  {% endif %}
-                </div>
-
-                <div class="cora-card-content">
-                  <h3 class="cora-card-title">{{ item.title }}</h3>
+            {% for result in search.results %}
+              <div class="cora-search-item">
+                <a href="{{ result.url }}" class="cora-search-card">
                   
-                  {% if item.object_type == 'product' %}
-                    <div class="cora-card-price">
-                      {% if item.compare_at_price > item.price %}
-                        <span class="compare-price">{{ item.compare_at_price | money }}</span>
-                        <span class="sale-price">{{ item.price | money }}</span>
-                      {% else %}
-                        {{ item.price | money }}
-                      {% endif %}
-                    </div>
-                  {% else %}
-                    <div class="cora-card-price" style="font-size: 12px; opacity: 0.7;">
-                      {{ item.content | strip_html | truncate: 50 }}
-                    </div>
-                  {% endif %}
-                </div>
+                  <div class="cora-card-image-wrapper">
+                    {% if result.object_type != 'product' %}
+                      <div style="position:absolute; top:10px; left:10px; z-index:2;">
+                        <span class="cora-card-type">{{ result.object_type }}</span>
+                      </div>
+                    {% endif %}
 
-              </a>
+                    {% assign featured_image = result.featured_image | default: result.image %}
+                    {% if featured_image %}
+                      <img 
+                        class="cora-card-image"  height=""  width=""
+                        src="{{ featured_image | img_url: '600x' }}" 
+                        alt="{{ result.title | escape }}" 
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#ccc;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="cora-card-info">
+                    <h3 class="cora-card-title">{{ result.title }}</h3>
+                    {% if result.object_type == 'product' %}
+                      <p class="cora-card-price">
+                        {% if result.compare_at_price > result.price %}
+                          <span style="text-decoration:line-through; margin-right:5px; opacity:0.6;">{{ result.compare_at_price | money }}</span>
+                          <span style="color:#d32f2f;">{{ result.price | money }}</span>
+                        {% else %}
+                          {{ result.price | money }}
+                        {% endif %}
+                      </p>
+                    {% endif %}
+                    
+                    {% if result.object_type == 'article' %}
+                       <p class="cora-card-price" style="font-size:12px;">{{ result.published_at | date: "%B %d, %Y" }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
             {% endfor %}
 
             {% if paginate.pages > 1 %}
-              <nav class="cora-pagination" role="navigation" aria-label="Pagination">
+              <div class="cora-pagination">
                 {% if paginate.previous %}
-                  <a href="{{ paginate.previous.url }}" class="cora-pagination__btn">
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-                    <span>Prev</span>
-                  </a>
-                {% else %}
-                  <span class="cora-pagination__btn cora-pagination__btn--disabled">
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-                    <span>Prev</span>
-                  </span>
+                  <a href="{{ paginate.previous.url }}" class="cora-pagination__btn">← Prev</a>
                 {% endif %}
 
                 {% for part in paginate.parts %}
@@ -121,23 +105,15 @@
                     {% if part.title == paginate.current_page %}
                       <span class="cora-pagination__item active">{{ part.title }}</span>
                     {% else %}
-                      <span class="cora-pagination__item cora-pagination__item--dots">...</span>
+                      <span class="cora-pagination__item">...</span>
                     {% endif %}
                   {% endif %}
                 {% endfor %}
 
                 {% if paginate.next %}
-                  <a href="{{ paginate.next.url }}" class="cora-pagination__btn">
-                    <span>Next</span>
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-                  </a>
-                {% else %}
-                  <span class="cora-pagination__btn cora-pagination__btn--disabled">
-                    <span>Next</span>
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-                  </span>
+                  <a href="{{ paginate.next.url }}" class="cora-pagination__btn">Next →</a>
                 {% endif %}
-              </nav>
+              </div>
             {% endif %}
 
           {% endpaginate %}
@@ -147,11 +123,11 @@
     {% endif %}
 
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Search Results",
+  "name": "Search Page",
   "settings": []
 }
 {% endschema %}
