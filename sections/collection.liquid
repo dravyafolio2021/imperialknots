@@ -124,7 +124,41 @@
     </div>
 
     {% paginate collection.products by section.settings.products_per_page %}
-      <div class="product-grid" style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);">
+      <div class="product-grid">
+  {% for product in collection.products %}
+    <div class="product-card">
+      <div class="product-image-wrapper">
+        <a href="{{ product.url }}">
+          {% if product.compare_at_price > product.price -%}
+            <span class="product-badge">Sale</span>
+          {%- endif %}
+          
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+              alt="{{ product.title }}"
+              loading="lazy"
+            >
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {% endif %}
+        </a>
+      </div>
+      <div class="product-info">
+        <h3>
+          <a href="{{ product.url }}">{{ product.title }}</a>
+        </h3>
+        <div class="product-price">
+          <span>{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="price-compare">{{ product.compare_at_price | money }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+      {% comment %} <div class="product-grid" style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);">
         {% for product in collection.products %}
           <div class="product-card">
             <div class="product-image-wrapper">
@@ -156,7 +190,7 @@
             </div>
           </div>
         {% endfor %}
-      </div>
+      </div> {% endcomment %}
 
       {% if paginate.pages > 1 %}
         <div class="cora-pagination">
