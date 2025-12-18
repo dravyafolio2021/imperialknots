@@ -1,0 +1,116 @@
+/* --- Cora Luxury 404 Page --- */
+.cora-error-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Takes up most of the screen */
+  background-color: #ffffff;
+  color: #1a1a1a;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cora-error-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Big 404 Number */
+.cora-error-code {
+  font-family: "Times New Roman", Times, serif; /* Luxury Serif */
+  font-size: 180px;
+  line-height: 1;
+  font-weight: 400;
+  margin: 0;
+  color: #f0f0f0; /* Very subtle, almost watermark-like */
+  user-select: none;
+}
+
+/* Heading ("Page Not Found") */
+.cora-error-title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin: -40px 0 20px 0; /* Pull it up over the big number */
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.5px;
+}
+
+.cora-error-text {
+  font-family: inherit;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Action Buttons */
+.cora-error-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cora-btn {
+  display: inline-block;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 16px 40px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  border: 1px solid #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+.cora-btn:hover {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+/* Search Bar (Optional UX improvement) */
+.cora-error-search {
+  margin-top: 40px;
+  position: relative;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cora-error-search input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.cora-error-search input:focus {
+  border-bottom-color: #1a1a1a;
+}
+.cora-error-search svg {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cora-error-code {
+    font-size: 120px;
+  }
+  .cora-error-title {
+    font-size: 28px;
+    margin-top: -20px;
+  }
+}
