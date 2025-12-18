@@ -1,4 +1,6 @@
-/* --- 1. Base Header Layout --- */
+/* =========================================
+   1. BASE HEADER LAYOUT
+   ========================================= */
 .cora-header {
   width: 100%;
   position: relative;
@@ -17,10 +19,10 @@
   justify-content: space-between;
 }
 
-/* --- 2. Logo (Left) --- */
+/* --- Logo (Left) --- */
 .cora-header__left {
   flex: 0 0 auto;
-  z-index: 52; /* Ensure clickable over centered elements */
+  z-index: 52;
 }
 
 .cora-header__brand-link {
@@ -41,11 +43,11 @@
 
 .cora-header__logo-img {
   display: block;
-  max-height: 45px; /* constrain height */
+  max-height: 45px;
   width: auto;
 }
 
-/* --- 3. Desktop Navigation (Center) --- */
+/* --- Desktop Navigation (Center) --- */
 .cora-header__center {
   flex: 1 1 auto;
   display: flex;
@@ -83,14 +85,14 @@
   opacity: 0.7;
 }
 
-/* Chevron Icon */
+/* Chevron Icon (Desktop) */
 .cora-chevron {
   width: 10px;
   height: 10px;
   opacity: 0.6;
 }
 
-/* Dropdown Menu (Desktop) */
+/* Desktop Dropdown Menu */
 .cora-nav__dropdown {
   position: absolute;
   top: 100%;
@@ -126,7 +128,7 @@
   background-color: #f5f5f5;
 }
 
-/* --- 4. Icons (Right) --- */
+/* --- Icons (Right) --- */
 .cora-header__right {
   flex: 0 0 auto;
   display: flex;
@@ -165,7 +167,7 @@
   font-weight: bold;
 }
 
-/* --- 5. Mobile Hamburger Trigger --- */
+/* --- Mobile Hamburger Trigger --- */
 .cora-header__mobile-trigger {
   display: none; /* Hidden on Desktop */
 }
@@ -177,13 +179,12 @@
 }
 
 /* =========================================
-   RESPONSIVE LOGIC (Tablet & Mobile)
-   Break at 1024px (standard tablet landscape)
+   2. RESPONSIVE LOGIC (Tablet & Mobile)
+   Break at 1024px
    ========================================= */
 
 @media (max-width: 1024px) {
-  
-  /* 1. Layout Shift: Hamburger | Logo (Center) | Icons */
+  /* Layout Shift: Hamburger | Logo (Center) | Icons */
   .cora-header__inner {
     justify-content: space-between;
   }
@@ -191,7 +192,7 @@
   /* Show Hamburger */
   .cora-header__mobile-trigger {
     display: block;
-    flex: 1; /* Takes left space */
+    flex: 1;
   }
 
   /* Hide Desktop Nav */
@@ -199,8 +200,7 @@
     display: none; 
   }
 
-  /* Logo Centering Trick */
-  /* We make the logo absolute center so it ignores the width of hamburger vs icons */
+  /* Absolute Center Logo */
   .cora-header__left {
     position: absolute;
     left: 50%;
@@ -213,12 +213,12 @@
 
   /* Right Icons */
   .cora-header__right {
-    flex: 1; /* Takes right space to balance left */
+    flex: 1;
   }
 }
 
 /* =========================================
-   MOBILE DRAWER (Slide-Out Menu)
+   3. MOBILE DRAWER (Slide-Out Menu)
    ========================================= */
 
 .cora-mobile-drawer {
@@ -229,14 +229,15 @@
   height: 100vh;
   background: #ffffff;
   z-index: 100;
-  transform: translateX(-100%); /* Hidden by default */
+  transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  /* Flex column for sticky footer */
   display: flex;
   flex-direction: column;
 }
 
-/* Overlay (Dark background) */
+/* Overlay */
 .cora-mobile-overlay {
   position: fixed;
   top: 0;
@@ -250,22 +251,19 @@
   transition: opacity 0.3s;
 }
 
-/* --- Open State Logic (Checkbox Hack) --- */
+/* Open Logic */
 #cora-nav-toggle:checked ~ .cora-mobile-drawer {
-  transform: translateX(0); /* Slide In */
+  transform: translateX(0);
 }
-
 #cora-nav-toggle:checked ~ .cora-mobile-overlay {
   opacity: 1;
   visibility: visible;
 }
-
-/* Prevent body scroll when menu open (optional JS usually needed, but this helps visual) */
 #cora-nav-toggle:checked ~ body {
   overflow: hidden;
 }
 
-/* --- Drawer Content --- */
+/* Drawer Header */
 .cora-drawer__header {
   padding: 20px;
   border-bottom: 1px solid #f0f0f0;
@@ -280,18 +278,103 @@
   line-height: 1;
 }
 
+/* --- Navigation Area --- */
 .cora-drawer__nav {
-  padding: 20px;
+  padding: 0;
   overflow-y: auto;
-  flex: 1;
+  flex: 1; /* Pushes footer down */
 }
 
-.cora-drawer__link {
-  display: block;
-  padding: 15px 0;
-  border-bottom: 1px solid #f9f9f9;
+/* Base Link & Summary */
+.cora-drawer__link,
+.cora-drawer__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f5f5f5;
   text-decoration: none;
   color: #1a1a1a;
   font-size: 16px;
   font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+  list-style: none;
+}
+
+.cora-drawer__link:hover,
+.cora-drawer__summary:hover {
+  background-color: #fafafa;
+}
+
+/* Hide default marker */
+.cora-drawer__summary::-webkit-details-marker {
+  display: none;
+}
+
+/* --- Accordion Logic --- */
+.cora-drawer__accordion[open] .cora-drawer__summary {
+  border-bottom-color: transparent;
+  padding-bottom: 10px;
+}
+
+.cora-drawer__submenu {
+  background-color: #fafafa;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.cora-drawer__sublink {
+  padding: 12px 24px 12px 40px; /* Indented */
+  font-size: 15px;
+  color: #555;
+  border-bottom: none;
+  background: transparent;
+}
+.cora-drawer__sublink:hover {
+  color: #000;
+}
+
+/* Icon Rotation */
+.cora-drawer__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.cora-drawer__accordion[open] .cora-drawer__icon {
+  transform: rotate(45deg); /* Turns + into x */
+}
+
+/* --- Sticky Bottom CTA --- */
+.cora-drawer__footer {
+  padding: 20px;
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  margin-top: auto; /* Ensures it sticks to bottom of flex container */
+  flex-shrink: 0;
+}
+
+.cora-drawer__cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.cora-drawer__cta:hover {
+  opacity: 0.9;
 }
