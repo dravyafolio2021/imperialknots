@@ -1,6 +1,6 @@
 /* --- Cora Header (Responsive Flexbox) --- */
 .cora-header {
-  width: 100%;
+  width: 100%; 
   position: relative;
   z-index: 60;
   background-color: #ffffff;
