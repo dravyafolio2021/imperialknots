@@ -1,72 +1,132 @@
+/* cora-catalog-banner.css - responsive, fluid typography + mobile bg handling */
+
+/* Base */
 .cora-catalog-banner {
-  position: relative;
   width: 100%;
-  background-color: var(--bg-color);
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding-top: var(--pt-desktop);
-  padding-bottom: var(--pb-desktop);
-  overflow: hidden;
-  isolation: isolate; /* Creates a new stacking context */
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible;
+  --cora-banner-max: 1200px;
+  --cora-heading-color: #000;
+  --cora-sub-color: rgba(0, 0, 0, 0.85);
 }
 
-/* Overlay sits between background and text */
-.cora-banner-overlay {
+/* background uses CSS vars set by liquid inline style */
+.cora-catalog-banner {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* content wrapper */
+.cora-catalog-banner__inner {
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: var(--cora-banner-max);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* default center, overridden by alignment classes */
+}
+
+/* alignment helpers */
+.cora-catalog-banner__inner.align-left {
+  align-items: flex-start;
+  text-align: left;
+}
+.cora-catalog-banner__inner.align-right {
+  align-items: flex-end;
+  text-align: right;
+}
+.cora-catalog-banner__inner.align-center {
+  align-items: center;
+  text-align: center;
+}
+
+/* fluid heading using clamp */
+.cora-catalog-banner__heading {
+  font-family: "Assistant", sans-serif;
+  margin: 0 0 12px 0;
+  color: var(--cora-heading-color);
+  font-weight: 700;
+  line-height: 1.02;
+  /* fluid size: min 28, preferred 6.5vw, max 64 */
+  font-size: clamp(28px, 6.5vw, 64px);
+  letter-spacing: -0.01em;
+}
+
+/* subheading */
+.cora-catalog-banner__subheading {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  max-width: 920px;
+  color: var(--cora-sub-color);
+  line-height: 1.6;
+  font-size: clamp(14px, 1.45vw, 20px);
+  opacity: 0.95;
+}
+
+/* spacing utilities (desktop fallback) */
+.cora-catalog-banner {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* mobile layout: reduce padding, adjust max width */
+@media (max-width: 900px) {
+  .cora-catalog-banner {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  .cora-catalog-banner__inner {
+    padding-left: 18px;
+    padding-right: 18px;
+    max-width: calc(100% - 36px);
+  }
+  .cora-catalog-banner__subheading {
+    max-width: 88%;
+  }
+}
+
+/* small phones */
+@media (max-width: 420px) {
+  .cora-catalog-banner {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+  .cora-catalog-banner__heading {
+    font-size: clamp(22px, 8.5vw, 40px);
+  }
+  .cora-catalog-banner__subheading {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Accessibility focus outline for interactive children if any */
+.cora-catalog-banner a:focus {
+  outline: 3px solid rgba(0, 120, 230, 0.14);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* fallback handling: if background-image var isn't set in inline style, use theme fallback */
+.cora-catalog-banner[data-bg="none"] {
+  background-image: url('{{ "fallback.png" | asset_url }}');
+}
+
+/* If merchant uses overlay via CSS var, the overlay can be simulated with a pseudo element */
+.cora-catalog-banner::after {
+  content: "";
+  pointer-events: none;
   position: absolute;
   inset: 0;
-  background-color: var(--overlay-color);
-  opacity: var(--overlay-opacity);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.cora-catalog-banner__inner {
-  position: relative;
-  z-index: 2; /* Sits above overlay */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Typography */
-.cora-catalog-banner__heading {
-  margin: 0 0 16px 0;
-  color: var(--text-color);
-  font-family: inherit; /* Inherits theme font */
-  font-size: 42px;
-  line-height: 1.2;
-}
-
-.cora-catalog-banner__subheading {
-  margin: 0;
-  color: var(--text-color);
-  font-size: 18px;
-  opacity: 0.9;
-  max-width: 800px;
-  line-height: 1.6;
-}
-
-/* Alignment Helpers */
-.cora-catalog-banner__inner.align-center { text-align: center; margin-left: auto; margin-right: auto; }
-.cora-catalog-banner__inner.align-center .cora-catalog-banner__subheading { margin-left: auto; margin-right: auto; }
-
-.cora-catalog-banner__inner.align-left { text-align: left; }
-.cora-catalog-banner__inner.align-right { text-align: right; margin-left: auto; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .cora-catalog-banner {
-    padding-top: var(--pt-mobile);
-    padding-bottom: var(--pb-mobile);
-  }
-  
-  .cora-catalog-banner__heading {
-    font-size: 32px;
-  }
-  
-  .cora-catalog-banner__subheading {
-    font-size: 16px;
-  }
+  background: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* default none — set via inline --cora-overlay if needed */
+  mix-blend-mode: normal;
 }
