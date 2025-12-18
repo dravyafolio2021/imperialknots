@@ -9,67 +9,125 @@
 
 {{ 'cora-search.css' | asset_url | stylesheet_tag }}
 
+<section class="cora-search-section">
+  <div class="cora-search-container">
 
-<h1>{{ 'search.title' | t }}</h1>
+    <header class="cora-search-header">
+      <h1 class="cora-search-title">
+        {% if search.performed %}
+          {{ search.results_count }} Results for "{{ search.terms }}"
+        {% else %}
+          {{ 'search.title' | t }}
+        {% endif %}
+      </h1>
 
-<form action="{{ routes.search_url }}" method="get" role="search">
-  <input
-    type="search"
-    size="50"
-    name="q"
-    value="{{ search.terms | escape }}"
-    placeholder="{{ 'search.placeholder' | t }}"
-  >
-  <button type="submit">{{ 'search.submit' | t }}</button>
-</form>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="cora-search-form">
+        <input
+          class="cora-search-input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'search.placeholder' | t }}"
+        >
+        <button type="submit" class="cora-search-submit" aria-label="{{ 'search.submit' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </form>
+    </header>
 
-{% if search.performed %}
-  {% if search.results_count == 0 %}
-    <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
-  {% else %}
-    <p>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <div style="text-align:center; color: #666; margin-top: 40px;">
+          <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+        </div>
+      {% else %}
+        
+        <div class="cora-search-results">
+          {% paginate search.results by 24 %}
+            
+            {% for result in search.results %}
+              <div class="cora-search-item">
+                <a href="{{ result.url }}" class="cora-search-card">
+                  
+                  <div class="cora-card-image-wrapper">
+                    {% if result.object_type != 'product' %}
+                      <div style="position:absolute; top:10px; left:10px; z-index:2;">
+                        <span class="cora-card-type">{{ result.object_type }}</span>
+                      </div>
+                    {% endif %}
 
-    <div class="search-results">
-      {% paginate search.results by 20 %}
-        {% # Search result items may be an article, a page, or a product. %}
-        {% for result in search.results %}
-          <div class="search-result">
-            {% assign featured_image = result.featured_image | default: result.image %}
-            {% if featured_image %}
-              {% render 'image', class: 'search-result__image', image: featured_image, url: result.url, width: 400 %}
-            {% endif %}
-            <div class="search-result__content">
-              <p>
-                {{ result.title | link_to: result.url }}
-                {% if result.price %}
-                  {{ result.price | money_with_currency }}
+                    {% assign featured_image = result.featured_image | default: result.image %}
+                    {% if featured_image %}
+                      <img 
+                        class="cora-card-image" 
+                        src="{{ featured_image | img_url: '600x' }}" 
+                        alt="{{ result.title | escape }}" 
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#ccc;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="cora-card-info">
+                    <h3 class="cora-card-title">{{ result.title }}</h3>
+                    {% if result.object_type == 'product' %}
+                      <p class="cora-card-price">
+                        {% if result.compare_at_price > result.price %}
+                          <span style="text-decoration:line-through; margin-right:5px; opacity:0.6;">{{ result.compare_at_price | money }}</span>
+                          <span style="color:#d32f2f;">{{ result.price | money }}</span>
+                        {% else %}
+                          {{ result.price | money }}
+                        {% endif %}
+                      </p>
+                    {% endif %}
+                    
+                    {% if result.object_type == 'article' %}
+                       <p class="cora-card-price" style="font-size:12px;">{{ result.published_at | date: "%B %d, %Y" }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+
+            {% if paginate.pages > 1 %}
+              <div class="cora-pagination">
+                {% if paginate.previous %}
+                  <a href="{{ paginate.previous.url }}" class="cora-pagination__btn">← Prev</a>
                 {% endif %}
-              </p>
-            </div>
-          </div>
-        {% endfor %}
 
-        {{ paginate | default_pagination }}
-      {% endpaginate %}
-    </div>
-  {% endif %}
-{% endif %}
+                {% for part in paginate.parts %}
+                  {% if part.is_link %}
+                    <a href="{{ part.url }}" class="cora-pagination__item">{{ part.title }}</a>
+                  {% else %}
+                    {% if part.title == paginate.current_page %}
+                      <span class="cora-pagination__item active">{{ part.title }}</span>
+                    {% else %}
+                      <span class="cora-pagination__item">...</span>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
 
-{% stylesheet %}
-  .search-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-  .search-results .prev,
-  .search-results .page,
-  .search-results .next {
-    grid-column: 1 / -1;
-  }
-{% endstylesheet %}
+                {% if paginate.next %}
+                  <a href="{{ paginate.next.url }}" class="cora-pagination__btn">Next →</a>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          {% endpaginate %}
+        </div>
+
+      {% endif %}
+    {% endif %}
+
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "t:general.search",
+  "name": "Search Page",
   "settings": []
 }
 {% endschema %}
