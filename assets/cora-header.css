@@ -208,6 +208,19 @@
   }
 }
 
+
+@media (max-width: 680px){
+
+.cora-header__brand-text {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: inherit;
+}
+
+}
 /* =========================================
    MOBILE DRAWER (Slide-Out Menu)
    ========================================= */
