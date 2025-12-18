@@ -220,3 +220,112 @@
 
 
 
+/* --- Shadcn-style Pagination --- */
+
+.cora-pagination {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Standard gap between elements */
+  width: 100%;
+  font-family: inherit;
+}
+
+/* --- Buttons (Prev / Next) --- */
+.cora-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #0f172a; /* Slate 900 */
+  background-color: transparent;
+  border: 0;
+  border-radius: 6px; /* Modern radius */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.cora-pagination__btn:hover:not(.cora-pagination__btn--disabled) {
+  background-color: #f1f5f9; /* Slate 100 Hover */
+}
+
+.cora-pagination__btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Page Numbers List --- */
+.cora-pagination__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Single Page Item */
+.cora-pagination__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 40px; /* Ensures squares */
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+  text-decoration: none;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid transparent; /* Prevents layout shift on active */
+  transition: all 0.2s ease;
+}
+
+/* Hover State for Numbers */
+.cora-pagination__item:not(.cora-pagination__item--active):not(.cora-pagination__item--dots):hover {
+  background-color: #f1f5f9;
+}
+
+/* Active State (Black Outline variant) */
+.cora-pagination__item--active {
+  background-color: #ffffff;
+  border-color: #e2e8f0; /* Slate 200 */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: default;
+  font-weight: 600;
+}
+
+/* Dots (...) */
+.cora-pagination__item--dots {
+  color: #94a3b8; /* Slate 400 */
+  cursor: default;
+  background: none;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  .cora-pagination {
+    gap: 4px;
+  }
+  
+  /* Hide the word "Previous/Next" on very small screens, keep icons */
+  .cora-pagination__btn span {
+    display: none;
+  }
+  
+  .cora-pagination__btn {
+    padding: 0 10px; /* Reduced padding for icon-only */
+  }
+
+  .cora-pagination__item {
+    height: 36px;
+    min-width: 36px;
+    font-size: 13px;
+  }
+}
