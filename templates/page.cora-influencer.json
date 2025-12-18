@@ -31,9 +31,9 @@
             "text_alignment": "center",
             "form_alignment": "center",
             "padding_top": 40,
-            "padding_bottom": 24,
-            "padding_right": 40,
-            "padding_left": 24
+            "padding_bottom": 40,
+            "padding_right": 0,
+            "padding_left": 0
           }
         }
       },
