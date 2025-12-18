@@ -7,6 +7,18 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
+     #shopify-section-{{ section.id }} .product-grid {
+      /* Override for Desktop */
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 30px;
+    }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} .product-grid {
+      /* Override for Desktop */
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+      gap: 30px;
+    }
+  }
 {%- endstyle -%}
 
 <div class="collection-container" id="shopify-section-{{ section.id }}">
@@ -177,6 +189,15 @@
       "step": 1,
       "default": 3,
       "label": "Desktop Columns"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Mobile Columns"
     },
     {
       "type": "checkbox",
