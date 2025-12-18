@@ -19,8 +19,16 @@
     padding-bottom: {{ section.settings.padding_bottom_desktop | default: 60 }}px;
     width: 100%;
     display: flex;
-    justify-content:center;
-    
+    justify-content: center;
+  }
+
+  /* --- NEW: Container Constraint --- */
+  #shopify-section-{{ section.id }} .collections-grid__container {
+    width: 100%;
+    max-width: 1400px; /* Adjust this value (e.g. 1200px) to match your site's container width */
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
   }
 
   /* Grid gap override */
@@ -36,9 +44,7 @@
     #shopify-section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_tablet | default: 40 }}px;
       padding-bottom: {{ section.settings.padding_bottom_tablet | default: 40 }}px;
-      margin-left: 0;
-      margin-right: 0;
-      max-width:1200px;
+      /* Removed max-width from section ID so background stays full width */
       {% if section.settings.bg_image_tablet %}
         background-image: url({{ section.settings.bg_image_tablet | img_url: '1200x' }});
       {% endif %}
@@ -59,6 +65,11 @@
     }
     #shopify-section-{{ section.id }} .collections-grid {
       --grid-gap: {{ section.settings.grid_gap_mobile | default: 12 }}px;
+    }
+    /* Smaller side padding for mobile container */
+    #shopify-section-{{ section.id }} .collections-grid__container {
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
 {%- endstyle -%}
@@ -83,12 +94,13 @@
                 crop: section.settings.image_crop
               %}
             {% else %}
-              <!-- Fallback image -->
               <img
                 class="collections-grid__img"
                 src="/mnt/data/47923d28-a8b4-4cbd-bf6c-3671aa8f51e9.png"
                 alt="{{ collection.title }}"
-                loading="lazy" width="" height=""
+                loading="lazy"
+                width=""
+                height=""
               >
             {% endif %}
           </div>
@@ -113,9 +125,9 @@
   "name": "Collections Grid ",
   "settings": [
     { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
-    { "type": "number", "id": "description_words", "label": "Description words",   "default": 15 },
+    { "type": "number", "id": "description_words", "label": "Description words", "default": 15 },
 
-    { "type": "number", "id": "columns_desktop", "label": "Desktop columns",   "default": 3 },
+    { "type": "number", "id": "columns_desktop", "label": "Desktop columns", "default": 3 },
     { "type": "number", "id": "columns_tablet", "label": "Tablet columns", "default": 2 },
     { "type": "number", "id": "columns_mobile", "label": "Mobile columns", "default": 1 },
 
@@ -161,14 +173,14 @@
       "type": "number",
       "id": "padding_top_desktop",
       "label": "Padding top desktop",
-     
+
       "default": 60
     },
     {
       "type": "number",
       "id": "padding_bottom_desktop",
       "label": "Padding bottom desktop",
-      
+
       "default": 60
     },
 
@@ -177,14 +189,14 @@
       "type": "number",
       "id": "padding_top_tablet",
       "label": "Padding top tablet",
-      
+
       "default": 40
     },
     {
       "type": "number",
       "id": "padding_bottom_tablet",
       "label": "Padding bottom tablet",
-    
+
       "default": 40
     },
 
@@ -193,14 +205,14 @@
       "type": "number",
       "id": "padding_top_mobile",
       "label": "Padding top mobile",
-  
+
       "default": 24
     },
     {
       "type": "number",
       "id": "padding_bottom_mobile",
       "label": "Padding bottom mobile",
-      
+
       "default": 24
     }
   ],
