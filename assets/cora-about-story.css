@@ -90,7 +90,7 @@
 /* MOBILE RESPONSIVENESS */
 @media screen and (max-width: 900px) {
   .cas-section {
-    padding: 60px 20px;
+    padding: 60px 0;
   }
   
   .cas-container {
