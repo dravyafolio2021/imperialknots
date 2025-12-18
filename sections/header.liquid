@@ -9,17 +9,24 @@
   <label for="cora-nav-toggle" class="cora-mobile-overlay"></label>
 
   <div class="cora-header__inner">
-    
     <div class="cora-header__mobile-trigger">
       <label for="cora-nav-toggle" class="cora-header__hamburger">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
       </label>
     </div>
 
     <div class="cora-header__left">
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
         {% if section.settings.logo_image %}
-          <img src="{{ section.settings.logo_image | img_url: '400x' }}" alt="{{ shop.name }}" class="cora-header__logo-img" width="{{ section.settings.logo_width }}" height="auto">
+          <img
+            src="{{ section.settings.logo_image | img_url: '400x' }}"
+            alt="{{ shop.name }}"
+            class="cora-header__logo-img"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+          >
         {% else %}
           <span class="cora-header__brand-text">{{ shop.name }}</span>
         {% endif %}
@@ -32,7 +39,11 @@
           <div class="cora-nav__item">
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
-              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
+              {% if link.links != blank %}
+                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor">
+                  <path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              {% endif %}
             </a>
             {% if link.links != blank %}
               <div class="cora-nav__dropdown">
@@ -47,14 +58,18 @@
     </div>
 
     <div class="cora-header__right">
-      
       <a href="{{ routes.search_url }}" class="cora-header__icon" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </a>
-      
       <a href="{{ routes.cart_url }}" class="cora-header__icon" aria-label="Cart" style="margin-right: 5px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-        {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        {% if cart.item_count > 0 -%}
+          <span class="cora-cart-count">{{ cart.item_count }}</span>
+        {%- endif %}
       </a>
 
       {% if shop.customer_accounts_enabled %}
@@ -62,7 +77,8 @@
           {% if customer %}
             <a href="{{ routes.account_url }}" class="cora-user-pill">
               <span class="cora-avatar">
-                {{ customer.first_name | first }}{{ customer.last_name | first }}
+                {{- customer.first_name | first -}}
+                {{- customer.last_name | first -}}
               </span>
               <span style="font-size:13px;">{{ customer.first_name }}</span>
             </a>
@@ -72,7 +88,6 @@
           {% endif %}
         </div>
       {% endif %}
-
     </div>
   </div>
 
@@ -88,7 +103,11 @@
           <details class="cora-drawer__accordion">
             <summary class="cora-drawer__summary">
               {{ link.title }}
-              <span class="cora-drawer__icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+              <span class="cora-drawer__icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor">
+                  <path d="M6 1V11M1 6H11" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
             </summary>
             <div class="cora-drawer__submenu">
               {% for child_link in link.links %}
@@ -101,25 +120,31 @@
         {% endif %}
       {% endfor %}
     </nav>
-    
+
     <div class="cora-drawer__footer">
-      {% if shop.customer_accounts_enabled and customer %}
-        <a href="{{ routes.account_url }}" class="cora-drawer__cta" style="background:#f1f5f9; color:#0f172a; border:1px solid #e2e8f0;">
-          My Account
-        </a>
-      {% else %}
-        {% if section.settings.mobile_cta_text != blank %}
-          <a href="{{ section.settings.mobile_cta_link }}" class="cora-drawer__cta">
-            {{ section.settings.mobile_cta_text }}
-          </a>
-          <div style="margin-top:15px; display:flex; justify-content:center; gap:20px; font-size:14px;">
-            <a href="{{ routes.account_login_url }}" style="text-decoration:none; color:#666;">Log in</a>
-            <a href="{{ routes.account_register_url }}" style="text-decoration:none; color:#1a1a1a; font-weight:600;">Sign up</a>
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="{{ routes.account_url }}" class="cora-drawer__cta"> My Account </a>
+        {% else %}
+          <div style="display: flex; gap: 12px;">
+            <a
+              href="{{ routes.account_login_url }}"
+              class="cora-btn-shadcn cora-btn-ghost"
+              style="flex: 1; border: 1px solid #e2e8f0; justify-content: center;"
+            >
+              Log in
+            </a>
+            <a
+              href="{{ routes.account_register_url }}"
+              class="cora-btn-shadcn cora-btn-primary"
+              style="flex: 1; justify-content: center;"
+            >
+              Sign up
+            </a>
           </div>
         {% endif %}
       {% endif %}
     </div>
-
   </div>
 </header>
 
@@ -128,18 +153,22 @@
   "name": "Cora Header (Responsive)",
   "settings": [
     { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
-    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 150, "label": "Logo Width (px)" },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 150,
+      "label": "Logo Width (px)"
+    },
     { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
     { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
-    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" },
-    { "type": "header", "content": "Mobile Drawer Settings" },
-    { "type": "text", "id": "mobile_cta_text", "label": "Bottom CTA Text", "default": "Shop New Arrivals" },
-    { "type": "url", "id": "mobile_cta_link", "label": "Bottom CTA Link" }
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
   ],
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
 {% endschema %}
-
 
 {% comment %}
   {{ 'cora-header.css' | asset_url | stylesheet_tag }}
