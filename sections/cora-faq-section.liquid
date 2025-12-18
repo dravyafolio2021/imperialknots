@@ -1,0 +1,159 @@
+{{ 'cora-faq-widget.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #cora-faq-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #cora-faq-{{ section.id }} .cora-faq-title {
+    color: {{ section.settings.heading_color }};
+  }
+{%- endstyle -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'question' -%}
+        {
+          "@type": "Question",
+          "name": "{{ block.settings.title | escape }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ block.settings.answer | strip_html | escape }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+<section id="cora-faq-{{ section.id }}" class="cora-faq-section" data-accordion="{{ section.settings.enable_accordion }}">
+  <div class="cora-faq-container">
+    
+    {% if section.settings.heading != blank %}
+      <div class="cora-faq-header">
+        <h2 class="cora-faq-title">{{ section.settings.heading }}</h2>
+        {% if section.settings.text != blank %}
+          <div class="cora-faq-desc">{{ section.settings.text }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="cora-faq-list">
+      {% for block in section.blocks %}
+        
+        {% case block.type %}
+          
+          {% when 'category' %}
+            <div class="cora-faq-category" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </div>
+
+          {% when 'question' %}
+            <div class="cora-faq-item" {{ block.shopify_attributes }}>
+              <button class="cora-faq-trigger" aria-expanded="false">
+                <span class="cora-faq-question">{{ block.settings.title }}</span>
+                <span class="cora-faq-icon"></span>
+              </button>
+              
+              <div class="cora-faq-content">
+                <div class="cora-faq-answer">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const section = document.getElementById("cora-faq-{{ section.id }}");
+    const isAccordion = section.getAttribute('data-accordion') === 'true';
+    const triggers = section.querySelectorAll('.cora-faq-trigger');
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+        // 1. If Accordion Mode is ON, close all others first
+        if (isAccordion && !isOpen) {
+          triggers.forEach(otherBtn => {
+            if (otherBtn !== this) {
+              otherBtn.setAttribute('aria-expanded', 'false');
+              otherBtn.nextElementSibling.style.maxHeight = null;
+            }
+          });
+        }
+
+        // 2. Toggle Current
+        this.setAttribute('aria-expanded', !isOpen);
+        
+        if (!isOpen) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Advanced FAQ Widget",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "textarea", "id": "text", "label": "Description", "default": "Common questions about our products and shipping." },
+    
+    { "type": "header", "content": "Settings" },
+    { "type": "checkbox", "id": "enable_accordion", "label": "One open at a time", "default": true },
+    
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#1a1a1a" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "default": 80, "label": "Padding Top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "default": 80, "label": "Padding Bottom" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Section Header",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Section Title", "default": "Shipping & Returns" }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Q&A",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Question", "default": "What is your return policy?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>We accept returns within 30 days of purchase.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced FAQ Widget",
+      "blocks": [
+        { "type": "category", "settings": { "title": "General" } },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "category", "settings": { "title": "Shipping" } },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}
