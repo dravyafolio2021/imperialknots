@@ -447,7 +447,105 @@ details[open] .filter-title .icon-chevron::after {
   text-transform: uppercase;
   border-radius: 4px;
 }
+/* =========================================
+   CUSTOM SORT DROPDOWN (Shadcn Style)
+   ========================================= */
 
+.cora-sort-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 20; /* Ensure it floats above products */
+}
+
+/* The Trigger Button */
+.cora-sort-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  list-style: none; /* Hides default triangle */
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.cora-sort-trigger:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Hide standard marker in Webkit */
+.cora-sort-trigger::-webkit-details-marker {
+  display: none;
+}
+
+/* The Dropdown Menu */
+.cora-sort-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0; /* Aligns to right edge */
+  width: 220px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* Animation */
+  opacity: 0;
+  transform: translateY(-5px);
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+/* Open State */
+details[open] .cora-sort-menu {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+/* Menu Items */
+.cora-sort-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #334155;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+
+.cora-sort-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.cora-sort-item.selected {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Backdrop to close when clicking outside (optional trick) */
+details[open] .cora-sort-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
+  background: transparent;
+  cursor: default;
+}
 
 
 
