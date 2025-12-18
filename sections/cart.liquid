@@ -1,104 +1,109 @@
 {{ 'cora-cart.css' | asset_url | stylesheet_tag }}
 
-<div class="cora-cart-section">
+<section class="cora-cart-section">
   <div class="cora-cart-container">
 
-    <div class="cora-cart-header">
+    <header class="cora-cart-header">
       <h1 class="cora-cart-title">{{ 'cart.title' | t }}</h1>
-      <span class="cora-cart-count">{{ cart.item_count }} Items</span>
-    </div>
+      <div class="cora-cart-subtitle">
+        {{ cart.item_count }} items in your bag
+      </div>
+    </header>
 
     <form action="{{ routes.cart_url }}" method="post" id="cart-form">
       
       {% if cart.item_count > 0 %}
         <div class="cora-cart-grid">
           
-          <div class="cora-cart-items-wrapper">
-            <table class="cora-cart-items">
-              <tbody>
-                {% for item in cart.items %}
-                  <tr class="cora-cart-row">
+          <div class="cora-cart-items">
+            {% for item in cart.items %}
+              <div class="cora-cart-item">
+                
+                <a href="{{ item.url }}">
+                  {% if item.image %}
+                    <img src="{{ item.image | img_url: '400x' }}" alt="{{ item.title | escape }}" class="cora-item-image">
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'cora-item-image' }}
+                  {% endif %}
+                </a>
+
+                <div class="cora-item-details">
+                  <div>
+                    <a href="{{ item.url }}" class="cora-item-title">{{ item.product.title }}</a>
+                    {% unless item.product.has_only_default_variant %}
+                      <div class="cora-item-variant">{{ item.variant.title }}</div>
+                    {% endunless %}
+                  </div>
+
+                  <div>
+                    <div class="cora-qty-pill">
+                      <button type="button" class="cora-qty-btn" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.form.submit()">−</button>
+                      <input 
+                        type="number" 
+                        name="updates[]" 
+                        value="{{ item.quantity }}" 
+                        min="0" 
+                        class="cora-qty-input"
+                        aria-label="Quantity"
+                      >
+                      <button type="button" class="cora-qty-btn" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.form.submit()">+</button>
+                    </div>
                     
-                    <td class="cora-cart-col" style="width: 120px;">
-                      {% if item.image %}
-                        <a href="{{ item.url }}">
-                          <img src="{{ item.image | img_url: '400x' }}" alt="{{ item.title | escape }}" class="cora-item-image">
-                        </a>
-                      {% endif %}
-                    </td>
+                    <br>
+                    <a href="{{ item.url_to_remove }}" class="cora-item-remove">Remove</a>
+                  </div>
+                </div>
 
-                    <td class="cora-cart-col cora-item-details">
-                      <h3 class="cora-item-title">
-                        <a href="{{ item.url }}">{{ item.product.title }}</a>
-                      </h3>
-                      
-                      {% unless item.product.has_only_default_variant %}
-                        <div class="cora-item-variant">{{ item.variant.title }}</div>
-                      {% endunless %}
+                <div class="cora-item-price-col">
+                  {{ item.final_line_price | money }}
+                </div>
 
-                      <div class="cora-item-price">
-                        {{ item.final_line_price | money }}
-                      </div>
-
-                      <div style="display:flex; align-items:center; gap: 20px;">
-                        
-                        <div class="cora-qty-wrapper">
-                          <button type="button" class="cora-qty-btn" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.form.submit()">-</button>
-                          <input 
-                            type="number" 
-                            name="updates[]" 
-                            value="{{ item.quantity }}" 
-                            min="0" 
-                            class="cora-qty-input"
-                            aria-label="Quantity"
-                          >
-                          <button type="button" class="cora-qty-btn" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.form.submit()">+</button>
-                        </div>
-
-                        <a href="{{ item.url_to_remove }}" class="cora-item-remove">
-                          {{ 'cart.remove' | t }}
-                        </a>
-
-                      </div>
-                    </td>
-
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+              </div>
+            {% endfor %}
           </div>
 
-          <div class="cora-cart-summary">
-            <h2 class="cora-summary-title">Order Summary</h2>
+          <aside class="cora-cart-summary">
+            <h2 class="cora-summary-title">Summary</h2>
             
             <div class="cora-summary-row">
               <span>Subtotal</span>
               <span>{{ cart.total_price | money }}</span>
             </div>
             
-            <div class="cora-summary-note">
-              Shipping, taxes, and discounts will be calculated at checkout.
+            <div class="cora-summary-row">
+              <span>Shipping</span>
+              <span style="color:#888;">Calculated at checkout</span>
+            </div>
+
+            <div class="cora-summary-row total">
+              <span>Total</span>
+              <span>{{ cart.total_price | money }}</span>
             </div>
 
             <button type="submit" name="checkout" class="cora-checkout-btn">
-              {{ 'cart.checkout' | t }}
+              Proceed to Checkout
             </button>
-          </div>
+            
+            <div style="text-align:center; margin-top:20px; font-size:12px; color:#999;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Secure Checkout
+            </div>
+          </aside>
 
         </div>
 
       {% else %}
+        
         <div class="cora-cart-empty">
-          <h2 class="cora-cart-title" style="font-size: 32px; margin-bottom: 20px;">Your cart is empty</h2>
-          <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any luxury rugs yet.</p>
-          <a href="{{ routes.all_products_collection_url }}" class="cora-btn">Start Shopping</a>
+          <h2 class="cora-cart-title" style="font-size:32px;">Your bag is empty</h2>
+          <p style="color:#666; margin-bottom:30px;">Browse our collection to find your perfect rug.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="cora-empty-btn">Continue Shopping</a>
         </div>
+
       {% endif %}
-
     </form>
-
   </div>
-</div>
+</section>
 
 {% schema %}
 {
