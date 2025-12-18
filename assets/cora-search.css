@@ -1,9 +1,10 @@
-/* --- Cora Modern Search UI --- */
+/* --- Cora Search Page (Modern Minimal) --- */
+
 .cora-search-section {
   padding: 80px 20px;
   background-color: #ffffff;
+  min-height: 80vh;
   color: #1a1a1a;
-  min-height: 60vh;
 }
 
 .cora-search-container {
@@ -11,19 +12,19 @@
   margin: 0 auto;
 }
 
-/* --- 1. Search Header (The Input) --- */
+/* --- 1. Search Header --- */
 .cora-search-header {
   text-align: center;
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto 60px auto;
 }
 
 .cora-search-title {
   font-family: "Times New Roman", Times, serif; /* Luxury Serif */
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 400;
-  margin-bottom: 30px;
-  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
 }
 
 .cora-search-form {
@@ -33,68 +34,71 @@
 
 .cora-search-input {
   width: 100%;
-  border: 1px solid #e5e5e5;
-  padding: 18px 50px 18px 20px;
-  font-size: 18px;
-  font-family: inherit;
-  color: #1a1a1a;
-  background: #f9f9f9;
-  border-radius: 8px; /* Modern Soft Radius */
+  padding: 14px 45px 14px 16px;
+  font-size: 16px;
+  border: 1px solid #e2e8f0; /* Subtle border */
+  border-radius: 6px;       /* Modern radius */
   outline: none;
-  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #0f172a;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 .cora-search-input:focus {
-  background: #ffffff;
   border-color: #1a1a1a;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 0 0 1px #1a1a1a;
 }
 
 .cora-search-submit {
   position: absolute;
-  right: 15px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  color: #1a1a1a;
-  padding: 5px;
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  color: #64748b;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.cora-search-submit:hover { opacity: 1; }
-.cora-search-submit svg { width: 22px; height: 22px; }
+
+.cora-search-submit:hover {
+  color: #1a1a1a;
+}
 
 /* --- 2. Results Grid --- */
 .cora-search-results {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 Columns Desktop */
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  margin-bottom: 60px;
 }
 
 /* --- 3. Result Card --- */
 .cora-search-card {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
-  display: block;
-  position: relative;
+  group: hover;
 }
 
 .cora-card-image-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 125%; /* 4:5 Portrait Ratio */
+  aspect-ratio: 4/5; /* Luxury portrait ratio */
   background-color: #f4f4f4;
+  border-radius: 8px;
   overflow: hidden;
-  border-radius: 6px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .cora-card-image {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
@@ -103,42 +107,60 @@
   transform: scale(1.05);
 }
 
-/* Result Info */
-.cora-card-info { text-align: left; }
+.cora-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.cora-card-content {
+  text-align: left;
+}
 
 .cora-card-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   line-height: 1.4;
+  color: #1a1a1a;
 }
 
 .cora-card-price {
   font-size: 14px;
-  color: #666;
-  margin: 0;
+  color: #64748b; /* Muted grey for price */
 }
 
-.cora-card-type {
-  display: inline-block;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: #f0f0f0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
+.cora-card-price .sale-price {
+  color: #ef4444; /* Red for sale */
+  margin-left: 6px;
+}
+
+.cora-card-price .compare-price {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* --- 4. Pagination (Shadcn Style) --- */
 .cora-pagination {
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  font-family: inherit;
 }
-.cora-pagination__btn, .cora-pagination__item {
+
+.cora-pagination__btn, 
+.cora-pagination__item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -149,23 +171,50 @@
   font-weight: 500;
   color: #0f172a;
   text-decoration: none;
+  background-color: transparent;
+  border: 1px solid transparent;
   border-radius: 6px;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
-.cora-pagination__btn:hover, .cora-pagination__item:hover:not(.active) {
+
+.cora-pagination__btn:hover, 
+.cora-pagination__item:hover:not(.active) {
   background-color: #f1f5f9;
 }
+
 .cora-pagination__item.active {
-  background-color: #fff;
-  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-color: #e2e8f0;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  font-weight: 600;
+  cursor: default;
+}
+
+.cora-pagination__btn--disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-  .cora-search-results { grid-template-columns: repeat(3, 1fr); }
+  .cora-search-results {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
 @media (max-width: 768px) {
-  .cora-search-results { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-  .cora-search-title { font-size: 32px; }
+  .cora-search-section {
+    padding: 40px 16px;
+  }
+  .cora-search-results {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .cora-search-title {
+    font-size: 28px;
+  }
+  /* On mobile, show smaller pagination */
+  .cora-pagination__btn span { display: none; }
+  .cora-pagination__btn svg { display: block; }
 }
