@@ -185,6 +185,7 @@
   .cora-header__inner {
     justify-content: space-between;
     padding: 0;
+      padding: 0 ;
   }
   .cora-header__mobile-trigger {
     display: block;
