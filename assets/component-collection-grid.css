@@ -463,6 +463,11 @@ details[open] .filter-title .icon-chevron::after {
 @media (max-width: 900px) {
   .collection-container {
     flex-direction: column;
+     display: flex;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 ;
   }
   .collection-sidebar {
     width: 100%;
