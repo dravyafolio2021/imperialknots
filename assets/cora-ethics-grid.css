@@ -107,7 +107,7 @@
 
 /* Mobile: 2 Columns as shown in screenshot */
 @media screen and (max-width: 900px) {
-  .ceg-section { padding: 60px 20px; }
+  .ceg-section { padding: 60px 0; }
   .ceg-title { font-size: 30px; }
   
   .ceg-grid {
