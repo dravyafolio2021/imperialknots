@@ -9,14 +9,14 @@
   }
      #shopify-section-{{ section.id }} .product-grid {
       /* Override for Desktop */
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+      gap: 12px;
     }
   @media (min-width: 768px) {
     #shopify-section-{{ section.id }} .product-grid {
       /* Override for Desktop */
-      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 12px;
     }
   }
 {%- endstyle -%}
