@@ -125,40 +125,6 @@
 
     {% paginate collection.products by section.settings.products_per_page %}
       <div class="product-grid">
-  {% for product in collection.products %}
-    <div class="product-card">
-      <div class="product-image-wrapper">
-        <a href="{{ product.url }}">
-          {% if product.compare_at_price > product.price -%}
-            <span class="product-badge">Sale</span>
-          {%- endif %}
-          
-          {% if product.featured_image %}
-            <img
-              src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
-              alt="{{ product.title }}"
-              loading="lazy"
-            >
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag }}
-          {% endif %}
-        </a>
-      </div>
-      <div class="product-info">
-        <h3>
-          <a href="{{ product.url }}">{{ product.title }}</a>
-        </h3>
-        <div class="product-price">
-          <span>{{ product.price | money }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="price-compare">{{ product.compare_at_price | money }}</span>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-</div>
-       <div class="product-grid" style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);">
         {% for product in collection.products %}
           <div class="product-card">
             <div class="product-image-wrapper">
@@ -166,6 +132,7 @@
                 {% if product.compare_at_price > product.price -%}
                   <span class="product-badge">Sale</span>
                 {%- endif %}
+
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
@@ -190,61 +157,67 @@
             </div>
           </div>
         {% endfor %}
-      </div>  
-
+      </div>
+   
       {% if paginate.pages > 1 %}
-  <nav class="cora-pagination" role="navigation" aria-label="Pagination">
-    
-    <div class="cora-pagination__left">
-      {% if paginate.previous %}
-        <a href="{{ paginate.previous.url }}" class="cora-pagination__btn cora-pagination__prev">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-          <span>Previous</span>
-        </a>
-      {% else %}
-        <span class="cora-pagination__btn cora-pagination__btn--disabled">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-          <span>Previous</span>
-        </span>
+        <nav class="cora-pagination" role="navigation" aria-label="Pagination">
+          <div class="cora-pagination__left">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="cora-pagination__btn cora-pagination__prev">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+                <span>Previous</span>
+              </a>
+            {% else %}
+              <span class="cora-pagination__btn cora-pagination__btn--disabled">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+                <span>Previous</span>
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="cora-pagination__list">
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}" class="cora-pagination__item">
+                  {{ part.title }}
+                </a>
+              {% else %}
+                {% if part.title == paginate.current_page %}
+                  <span class="cora-pagination__item cora-pagination__item--active">
+                    {{ part.title }}
+                  </span>
+                {% else %}
+                  <span class="cora-pagination__item cora-pagination__item--dots">
+                    {{ part.title }}
+                  </span>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="cora-pagination__right">
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="cora-pagination__btn cora-pagination__next">
+                <span>Next</span>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+              </a>
+            {% else %}
+              <span class="cora-pagination__btn cora-pagination__btn--disabled">
+                <span>Next</span>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+              </span>
+            {% endif %}
+          </div>
+        </nav>
       {% endif %}
-    </div>
-
-    <div class="cora-pagination__list">
-      {% for part in paginate.parts %}
-        {% if part.is_link %}
-          <a href="{{ part.url }}" class="cora-pagination__item">
-            {{ part.title }}
-          </a>
-        {% else %}
-          {% if part.title == paginate.current_page %}
-            <span class="cora-pagination__item cora-pagination__item--active">
-              {{ part.title }}
-            </span>
-          {% else %}
-            <span class="cora-pagination__item cora-pagination__item--dots">
-              {{ part.title }}
-            </span>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <div class="cora-pagination__right">
-      {% if paginate.next %}
-        <a href="{{ paginate.next.url }}" class="cora-pagination__btn cora-pagination__next">
-          <span>Next</span>
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-        </a>
-      {% else %}
-        <span class="cora-pagination__btn cora-pagination__btn--disabled">
-          <span>Next</span>
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-        </span>
-      {% endif %}
-    </div>
-
-  </nav>
-{% endif %}
     {% endpaginate %}
   </div>
 </div>
