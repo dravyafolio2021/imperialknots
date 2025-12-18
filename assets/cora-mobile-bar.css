@@ -1,0 +1,98 @@
+/* --- Cora Mobile App Bar --- */
+
+.cora-mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 999; /* Highest priority */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 15px 0; /* Extra bottom padding for iOS Home bar */
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08); /* Soft upward shadow */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top: 1px solid rgba(0,0,0,0.02);
+  transition: transform 0.3s ease;
+}
+
+/* Hide on Desktop (larger than 1024px) */
+@media (min-width: 1025px) {
+  .cora-mobile-bar {
+    display: none;
+  }
+}
+
+/* --- Bar Items --- */
+.cora-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #64748b; /* Slate 500 (Inactive) */
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  gap: 6px;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cora-bar-item:hover,
+.cora-bar-item.active {
+  color: #0f172a; /* Slate 900 (Active) */
+}
+
+/* Icon Sizing */
+.cora-bar-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cora-bar-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.8px; /* Slightly thicker for mobile legibility */
+}
+
+/* Label Text */
+.cora-bar-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+/* --- WhatsApp Specific Color --- */
+.cora-bar-item.whatsapp-item {
+  color: #25D366;
+}
+.cora-bar-item.whatsapp-item:hover {
+  color: #128C7E;
+}
+
+/* --- Cart Badge (Optional) --- */
+.cora-bar-badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+}
