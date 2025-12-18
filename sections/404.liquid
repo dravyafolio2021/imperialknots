@@ -5,7 +5,57 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
 
-<h1>{{ '404.title' | t }}</h1>
+
+ 
+{{ 'cora-error.css' | asset_url | stylesheet_tag }}
+
+<section class="cora-error-section">
+  <div class="cora-error-container">
+    
+    <h1 class="cora-error-code">404</h1>
+
+    <h2 class="cora-error-title">{{ section.settings.heading | default: 'Page Not Found' }}</h2>
+    
+    <p class="cora-error-text">
+      {{ '404.not_found' | t }}<br>
+      The page you are looking for might have been moved or doesn't exist.
+    </p>
+
+    <div class="cora-error-actions">
+      <a href="{{ routes.all_products_collection_url }}" class="cora-btn">
+        {{ '404.back_to_shopping' | t }}
+      </a>
+    </div>
+
+    <div class="cora-error-search">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input 
+          type="text" 
+          name="q" 
+          placeholder="Search our store..."
+          autocomplete="off"
+        >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Page Not Found"
+    }
+  ]
+}
+{% endschema %}
+{% comment %} <h1>{{ '404.title' | t }}</h1>
 
 <p>
   {{ '404.not_found' | t }}
@@ -20,4 +70,4 @@
   "name": "t:general.404",
   "settings": []
 }
-{% endschema %}
+{% endschema %} {% endcomment %}
