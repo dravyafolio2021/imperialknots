@@ -7,8 +7,8 @@
   
   /* FORCE FULL WIDTH (The Breakout Hack) */
   width: 100vw; 
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: 0;
+  margin-right: 0;
   left: 50%;
   right: 50%;
   transform: translateX(-50%);
