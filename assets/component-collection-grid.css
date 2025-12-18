@@ -114,7 +114,7 @@
 
 @media screen and (min-width: 768px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 }
@@ -457,7 +457,7 @@ details[open] .filter-title .icon-chevron::after {
 
 .product-grid {
   display: grid;
-  gap: 30px; /* Use grid for columns */
+  gap: 12px; /* Use grid for columns */
 }
 
 @media (max-width: 900px) {
