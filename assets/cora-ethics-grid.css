@@ -109,7 +109,13 @@
 @media screen and (max-width: 900px) {
   .ceg-section { padding: 60px 0; }
   .ceg-title { font-size: 30px; }
-  
+  .ceg-card-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+}
   .ceg-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
