@@ -1,4 +1,4 @@
-/* --- Cora Luxury Cart Page --- */
+/* --- Cora Modern Luxury Cart --- */
 .cora-cart-section {
   padding: 80px 20px;
   background-color: #ffffff;
@@ -7,167 +7,164 @@
 }
 
 .cora-cart-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 /* --- Header --- */
 .cora-cart-header {
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 20px;
+  margin-bottom: 60px;
+  text-align: center; /* Centered Luxury Header */
+  position: relative;
 }
 
 .cora-cart-title {
   font-family: "Times New Roman", Times, serif;
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 10px 0;
   letter-spacing: -0.5px;
 }
 
-.cora-cart-count {
-  font-family: inherit;
-  font-size: 16px;
+.cora-cart-subtitle {
+  font-size: 14px;
   color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* --- Layout Grid --- */
+/* --- Main Layout --- */
 .cora-cart-grid {
   display: grid;
-  grid-template-columns: 1fr 400px; /* Items | Summary */
-  gap: 60px;
+  grid-template-columns: 1.5fr 1fr; /* Wider items, narrower summary */
+  gap: 80px;
+  align-items: start;
 }
 
-/* --- Empty State --- */
-.cora-cart-empty {
-  text-align: center;
-  padding: 100px 0;
-}
-.cora-btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  padding: 15px 30px;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 1px;
-  margin-top: 20px;
-}
-
-/* --- Cart Items Table --- */
+/* --- Cart Items List --- */
 .cora-cart-items {
   width: 100%;
-  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.cora-cart-row {
+.cora-cart-item {
+  display: grid;
+  grid-template-columns: 120px 1fr auto; /* Image | Details | Price */
+  gap: 30px;
+  padding: 30px 0;
   border-bottom: 1px solid #f0f0f0;
 }
-.cora-cart-row:last-child {
-  border-bottom: none;
-}
 
-.cora-cart-col {
-  padding: 30px 0;
-  vertical-align: top;
+.cora-cart-item:first-child {
+  border-top: 1px solid #f0f0f0;
 }
 
 /* Product Image */
 .cora-item-image {
-  width: 120px;
-  aspect-ratio: 4/5;
+  width: 100%;
+  aspect-ratio: 3/4;
   object-fit: cover;
-  background: #f4f4f4;
-  display: block;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
-/* Product Info */
+/* Product Details */
 .cora-item-details {
-  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cora-item-title {
+  font-family: inherit;
   font-size: 18px;
   font-weight: 500;
   margin: 0 0 5px 0;
-}
-.cora-item-title a {
-  text-decoration: none;
   color: #1a1a1a;
+  text-decoration: none;
 }
 
 .cora-item-variant {
   font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.cora-item-price {
-  font-size: 15px;
+  color: #888;
   margin-bottom: 15px;
 }
 
-.cora-item-remove {
-  font-size: 12px;
-  text-decoration: underline;
-  color: #666;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-.cora-item-remove:hover { color: #000; }
-
-/* Quantity Selector */
-.cora-qty-wrapper {
+/* Minimal Quantity Selector */
+.cora-qty-pill {
   display: inline-flex;
-  border: 1px solid #e5e5e5;
-  height: 40px;
   align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px; /* Pill shape */
+  padding: 5px;
+  width: fit-content;
+  height: 36px;
 }
 
 .cora-qty-btn {
-  width: 40px;
-  height: 100%;
   background: none;
   border: none;
+  width: 30px;
+  height: 100%;
   cursor: pointer;
   font-size: 16px;
   color: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.2s;
 }
-.cora-qty-btn:hover { background: #f9f9f9; }
+.cora-qty-btn:hover { opacity: 0.6; }
 
 .cora-qty-input {
-  width: 50px;
-  height: 100%;
+  width: 40px;
   border: none;
+  background: transparent;
   text-align: center;
   font-size: 14px;
+  font-weight: 500;
   appearance: none;
   margin: 0;
+  outline: none;
 }
 
-/* --- Cart Summary (Sticky) --- */
+/* Remove Link */
+.cora-item-remove {
+  font-size: 12px;
+  text-decoration: none;
+  color: #999;
+  margin-top: 15px;
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+.cora-item-remove:hover {
+  color: #d32f2f;
+  border-bottom-color: #d32f2f;
+}
+
+/* Price Column */
+.cora-item-price-col {
+  text-align: right;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* --- Summary (Sticky & Modern) --- */
 .cora-cart-summary {
-  background: #f9f9f9;
-  padding: 40px;
   position: sticky;
   top: 40px;
-  height: fit-content;
+  padding: 40px;
+  border: 1px solid #e2e8f0; /* Subtle border instead of bg */
+  border-radius: 12px;
 }
 
 .cora-summary-title {
   font-family: "Times New Roman", Times, serif;
-  font-size: 24px;
-  margin: 0 0 25px 0;
+  font-size: 28px;
+  margin: 0 0 30px 0;
 }
 
 .cora-summary-row {
@@ -175,53 +172,72 @@
   justify-content: space-between;
   margin-bottom: 15px;
   font-size: 15px;
+  color: #555;
 }
 
 .cora-summary-row.total {
-  border-top: 1px solid #e5e5e5;
+  margin-top: 25px;
   padding-top: 20px;
-  margin-top: 20px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.cora-summary-note {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 25px;
-  line-height: 1.5;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 20px;
+  color: #1a1a1a;
+  font-weight: 500;
 }
 
 .cora-checkout-btn {
   display: block;
   width: 100%;
-  background-color: #000;
-  color: #fff;
+  background-color: #1a1a1a;
+  color: #ffffff;
   border: none;
   padding: 18px;
   text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
 }
-.cora-checkout-btn:hover { opacity: 0.8; }
+.cora-checkout-btn:hover {
+  background-color: #333;
+}
+
+/* --- Empty State --- */
+.cora-cart-empty {
+  text-align: center;
+  padding: 100px 0;
+}
+.cora-empty-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 40px;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
   .cora-cart-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .cora-cart-header {
-    flex-direction: column;
-    gap: 10px;
-    border: none;
-  }
-  .cora-item-image {
-    width: 90px;
+    gap: 50px;
   }
   .cora-cart-summary {
     position: static;
+    border: none;
+    background: #f9f9f9; /* Add bg back on mobile to separate */
   }
+}
+
+@media (max-width: 600px) {
+  .cora-cart-item {
+    grid-template-columns: 90px 1fr;
+    grid-template-areas: "img details" "img price";
+  }
+  .cora-item-image { grid-area: img; }
+  .cora-item-details { grid-area: details; }
+  .cora-item-price-col { grid-area: price; text-align: left; margin-top: 10px; }
 }
