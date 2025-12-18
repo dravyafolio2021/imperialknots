@@ -464,74 +464,6 @@
         "layout": "grid"
       }
     },
-    "cora_faq_KAratB": {
-      "type": "cora-faq",
-      "blocks": {
-        "heading_4cqCbw": {
-          "type": "heading",
-          "settings": {
-            "heading": "Frequently Asked Questions",
-            "description": "Have a question? We have answers. Browse common questions below."
-          }
-        },
-        "faq_wNBUC3": {
-          "type": "faq",
-          "settings": {
-            "question": "Question goes here",
-            "answer": "Answer goes here",
-            "open": true
-          }
-        },
-        "faq_8BGYMx": {
-          "type": "faq",
-          "settings": {
-            "question": "Question goes here",
-            "answer": "Answer goes here",
-            "open": false
-          }
-        },
-        "faq_3CmA8h": {
-          "type": "faq",
-          "settings": {
-            "question": "Question goes here",
-            "answer": "Answer goes here",
-            "open": false
-          }
-        },
-        "faq_cXYMgK": {
-          "type": "faq",
-          "settings": {
-            "question": "Question goes here",
-            "answer": "Answer goes here",
-            "open": false
-          }
-        },
-        "faq_arjexG": {
-          "type": "faq",
-          "settings": {
-            "question": "Question goes here",
-            "answer": "Answer goes here",
-            "open": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_4cqCbw",
-        "faq_wNBUC3",
-        "faq_8BGYMx",
-        "faq_3CmA8h",
-        "faq_cXYMgK",
-        "faq_arjexG"
-      ],
-      "name": "Cora FAQ",
-      "settings": {
-        "aria_label": "FAQ",
-        "bg_color": "#ffffff",
-        "padding_top": 32,
-        "padding_bottom": 32,
-        "accordion": true
-      }
-    },
     "cora_faq_section_R8KehB": {
       "type": "cora-faq-section",
       "blocks": {
@@ -595,7 +527,6 @@
     "cora_style_grid_K3RUBY",
     "cora_product_grid_aPwt7d",
     "cora_features_jfEBK8",
-    "cora_faq_KAratB",
     "cora_faq_section_R8KehB"
   ]
 }
