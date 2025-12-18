@@ -59,7 +59,7 @@
                     {% assign featured_image = result.featured_image | default: result.image %}
                     {% if featured_image %}
                       <img 
-                        class="cora-card-image" 
+                        class="cora-card-image"  height=""  width=""
                         src="{{ featured_image | img_url: '600x' }}" 
                         alt="{{ result.title | escape }}" 
                         loading="lazy"
