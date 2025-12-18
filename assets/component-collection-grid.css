@@ -328,13 +328,14 @@
 }
 
 
-/* --- Sidebar Layout --- */
+  
 .collection-container {
-  display: flex;
-  gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 40px 20px;
+  display: flex;
+  gap: 40px;
+  font-family: "Inter", sans-serif; /* Default to Inter */
 }
 
 .collection-sidebar {
@@ -552,7 +553,15 @@ details[open] .filter-title .icon-chevron::after {
   .cora-pagination__btn span {
     display: none;
   }
-  
+  .collection-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 0px;
+  display: flex;
+  gap: 40px;
+  font-family: "Inter", sans-serif; /* Default to Inter */
+}
+
   .cora-pagination__btn {
     padding: 0 10px; /* Reduced padding for icon-only */
   }
