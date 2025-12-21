@@ -68,9 +68,37 @@
           </div>
         {% endif %}
       {% endfor %}
+<div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
+        {% for block in section.blocks %}
+          {% if block.type == 'link_column' %}
+            <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
+              
+              <button class="cora-footer__col-header" aria-expanded="false" onclick="this.parentElement.classList.toggle('is-open')">
+                {% if block.settings.title != blank %}
+                  <h4 class="cora-footer__col-title">{{ block.settings.title }}</h4>
+                {% endif %}
+                <span class="cora-footer__col-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </button>
 
+              {% if block.settings.menu %}
+                <ul class="cora-footer__links">
+                  {% assign list_handle = block.settings.menu %}
+                  {% for link in linklists[list_handle].links %}
+                    <li class="cora-footer__link-item">
+                      <a class="cora-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
       {%- comment -%} LINK COLUMNS (merchant can add multiple) {%- endcomment -%}
-      <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
+      {% comment %} <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
         {% for block in section.blocks %}
           {% if block.type == 'link_column' %}
             <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
@@ -91,7 +119,7 @@
             </div>
           {% endif %}
         {% endfor %}
-      </div>
+      </div> {% endcomment %}
     </div>
     <!-- /.cora-footer__top -->
 
@@ -111,16 +139,7 @@
         {% if section.settings.trust_text != blank %}
           <div class="cora-footer__trust">{{ section.settings.trust_text }}</div>
         {% endif %}
-
-        {% comment %}
-          {% if section.settings.show_payment_icons %}
-            <div class="cora-footer__payments" aria-hidden="true">
-              {% for type in shop.enabled_payment_types %}
-                <span class="cora-footer__payment-icon">{% raw %}{{% endraw %} type | payment_type_svg_tag {% raw %}}{% endraw %}</span>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endcomment %}
+ 
       </div>
     </div>
   </div>
