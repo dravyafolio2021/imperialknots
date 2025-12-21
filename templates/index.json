@@ -72,6 +72,7 @@
         "category_cRxzta": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/TIM-2287_1.jpg",
             "image_alt": "Imperial Knots",
             "title": "Category",
             "link": ""
