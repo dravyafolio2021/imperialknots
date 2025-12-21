@@ -44,28 +44,35 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('cora-category-slider-{{ section.id }}');
+    if (!section) return;
+
     const slider = section.querySelector('.cora-category-slider__track');
     const prevBtn = section.querySelector('.cora-slider-arrow--prev');
     const nextBtn = section.querySelector('.cora-slider-arrow--next');
+    
     let isDown = false;
     let startX;
     let scrollLeft;
     let isDragging = false;
 
-    // --- 1. Arrow Click Logic ---
-    prevBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: -250, behavior: 'smooth' });
-    });
+    // 1. Arrow Navigation
+    if(prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        slider.scrollBy({ left: -250, behavior: 'smooth' });
+      });
+    }
 
-    nextBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: 250, behavior: 'smooth' });
-    });
+    if(nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        slider.scrollBy({ left: 250, behavior: 'smooth' });
+      });
+    }
 
-    // --- 2. Mouse Drag to Scroll Logic ---
+    // 2. Drag to Scroll Logic
     slider.addEventListener('mousedown', (e) => {
       isDown = true;
-      isDragging = false; // Reset drag flag
-      slider.classList.add('cora-is-dragging'); // Changes cursor style
+      isDragging = false;
+      slider.classList.add('cora-is-dragging');
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     });
@@ -84,17 +91,16 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 1.5; // Scroll-fast multiplier
+      const walk = (x - startX) * 1.5; // Scroll speed multiplier
       
-      // If moved more than 5 pixels, consider it a drag operation
+      // Check if actually dragging
       if (Math.abs(walk) > 5) {
         isDragging = true;
       }
-      
       slider.scrollLeft = scrollLeft - walk;
     });
 
-    // --- 3. Prevent Link Click if Dragging ---
+    // 3. Prevent clicking links while dragging
     const links = slider.querySelectorAll('a');
     links.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -123,7 +129,7 @@
       "name": "Category",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Circle image" },
-        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Imperial Knots" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Category Image" },
         { "type": "text", "id": "title", "label": "Category title", "default": "Category" },
         { "type": "url", "id": "link", "label": "Link (to collection / page)" }
       ]

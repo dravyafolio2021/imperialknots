@@ -5,15 +5,15 @@
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
-  position: relative; /* Context for arrows */
+  position: relative;
 }
 
-/* Inner wrap */
+/* Inner wrap - Centered on desktop */
 .cora-category-slider__wrap {
   max-width: 1400px;
   margin: 0 auto;
-  position: relative; /* Ensures arrows sit relative to max-width */
-  padding: 0 40px; /* Space for arrows */
+  position: relative;
+  padding: 0 40px; /* Space for arrows on desktop */
 }
 
 /* Horizontal track */
@@ -21,26 +21,24 @@
   display: flex;
   gap: 28px;
   overflow-x: auto;
-  /* Snap is mandatory for touch, but we override it via JS during drag for smoothness */
-  scroll-snap-type: x mandatory; 
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   align-items: flex-start;
-  padding: 10px 4px; /* Slight padding to prevent shadow clipping */
-  cursor: grab; /* Indicates drag capability */
+  padding: 10px 4px;
+  cursor: grab; /* Cursor indicator */
   
   /* Hide Scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
-
 .cora-category-slider__track::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
-/* Active Drag State (Added by JS) */
+/* Active Drag State */
 .cora-category-slider__track.cora-is-dragging {
   cursor: grabbing;
-  scroll-snap-type: none; /* Disable snap while dragging for fluid movement */
+  scroll-snap-type: none; /* Disable snap for smooth drag */
   scroll-behavior: auto !important;
 }
 
@@ -66,7 +64,7 @@
   text-decoration: none;
   color: inherit;
   gap: 12px;
-  user-select: none; /* Prevents text highlighting while dragging */
+  user-select: none;
 }
 
 /* Circular media */
@@ -99,14 +97,14 @@
   background: linear-gradient(180deg, #f6f6f6, #eaeef0);
 }
 
-/* Title */
+/* Title - UPDATED FONT */
 .cora-category-slider__title {
-  font-family: inherit;
-  font-size: 14px;
+  font-family: 'Assistant', sans-serif; /* Requested Font */
+  font-size: 15px;
   line-height: 1.2;
   text-align: center;
   color: #1a1a1a;
-  margin-top: 6px;
+  margin-top: 8px;
   font-weight: 500;
 }
 
@@ -130,58 +128,47 @@
   transition: all 0.2s ease;
   outline: none;
 }
-
 .cora-slider-arrow:hover {
   background: #f8f8f8;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border-color: #000;
 }
+.cora-slider-arrow--prev { left: 0; }
+.cora-slider-arrow--next { right: 0; }
+.cora-slider-arrow svg { width: 20px; height: 20px; }
 
-.cora-slider-arrow--prev {
-  left: 0;
-}
 
-.cora-slider-arrow--next {
-  right: 0;
-}
-
-.cora-slider-arrow svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* Responsive */
+/* --- Mobile Responsive (Edge to Edge) --- */
 @media (max-width: 900px) {
+  
+  /* 1. Remove wrapper side padding so track hits the edge */
   .cora-category-slider__wrap {
-    padding: 0 10px; /* Less side padding on mobile */
+    padding: 0; 
+    max-width: 100%;
   }
   
-  /* Hide arrows on mobile/tablet as touch is better */
+  /* 2. Add padding to the TRACK instead */
+  .cora-category-slider__track {
+    padding: 10px 20px; /* 20px start/end offset, but full width scroll */
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* 3. Hide arrows on mobile (touch is native) */
   .cora-slider-arrow {
     display: none;
   }
-  
-  .cora-category-slider__track {
-    padding-left: 20px; /* Start padding */
-    padding-right: 20px;
-  }
 
+  /* Sizes */
   .cora-category-slider__media {
-    width: 84px;
-    height: 84px;
+    width: 88px;
+    height: 88px;
   }
-  
   .cora-category-slider__title {
     font-size: 13px;
   }
 }
 
 @media (min-width: 1600px) {
-  .cora-category-slider__track {
-    gap: 36px;
-  }
-  .cora-category-slider__media {
-    width: 128px;
-    height: 128px;
-  }
+  .cora-category-slider__track { gap: 36px; }
+  .cora-category-slider__media { width: 128px; height: 128px; }
 }
