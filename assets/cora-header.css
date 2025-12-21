@@ -1,8 +1,10 @@
-/* --- 1. Base Header Layout --- */
+/* =========================================
+   1. BASE HEADER LAYOUT
+   ========================================= */
 .cora-header {
   width: 100%;
   position: relative;
-  z-index: 50; 
+  z-index: 50;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -11,13 +13,16 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
-  height: 80px; /* Standard height */
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* Justify between pushes Menu (Left) and Icons (Right) apart */
+  justify-content: space-between; 
 }
 
-/* --- 2. Logo (Left) --- */
+/* =========================================
+   2. LOGO (Centered on Desktop)
+   ========================================= */
 .cora-header__left {
   flex: 0 0 auto;
   z-index: 52;
@@ -45,11 +50,15 @@
   width: auto;
 }
 
-/* --- 3. Desktop Navigation (Center) --- */
+/* =========================================
+   3. NAVIGATION (Left on Desktop)
+   ========================================= */
 .cora-header__center {
-  flex: 1 1 auto;
+  /* Takes up left space */
+  flex: 1; 
   display: flex;
-  justify-content: center;
+  /* Forces content to the start (Left) */
+  justify-content: flex-start; 
   height: 100%;
 }
 
@@ -83,19 +92,17 @@
   opacity: 0.7;
 }
 
-/* Chevron Icon */
 .cora-chevron {
   width: 10px;
   height: 10px;
   opacity: 0.6;
 }
 
-/* Dropdown Menu (Desktop) */
+/* Dropdown Menu */
 .cora-nav__dropdown {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  left: 0; /* Align dropdown to left edge of link */
   background: #ffffff;
   border: 1px solid #e5e5e5;
   min-width: 200px;
@@ -110,7 +117,6 @@
 .cora-nav__item:hover .cora-nav__dropdown {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
 }
 
 .cora-dropdown__link {
@@ -126,13 +132,16 @@
   background-color: #f5f5f5;
 }
 
-/* --- 4. Icons (Right) --- */
+/* =========================================
+   4. ICONS & AUTH (Right)
+   ========================================= */
 .cora-header__right {
-  flex: 0 0 auto;
+  /* Takes up right space */
+  flex: 1; 
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* Pushes content to Right */
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .cora-header__icon {
@@ -165,231 +174,16 @@
   font-weight: bold;
 }
 
-/* --- 5. Mobile Hamburger Trigger --- */
-.cora-header__mobile-trigger {
-  display: none;
-}
-
-.cora-header__hamburger {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-/* =========================================
-   RESPONSIVE LOGIC (Tablet & Mobile)
-   Break at 1024px
-   ========================================= */
-
-@media (max-width: 1024px) {
-  .cora-header__inner {
-    justify-content: space-between;
-    padding: 0;
-      padding: 0 ;
-  }
-  .cora-header__mobile-trigger {
-    display: block;
-    flex: 1;
-  }
-  .cora-header__center {
-    display: none; 
-  }
-  /* Absolute Center Logo */
-  .cora-header__left {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    display: flex;
-    justify-content: center;
-  }
-  .cora-header__right {
-    flex: 1;
-  }
-}
-
-
-@media (max-width: 680px){
-
-.cora-header__brand-text {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  color: inherit;
-}
-
-}
-/* =========================================
-   MOBILE DRAWER (Slide-Out Menu)
-   ========================================= */
-
-.cora-mobile-drawer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 320px;
-  height: 100vh;
-  background: #ffffff;
-  z-index: 100;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column; /* Essential for Sticky Footer */
-}
-
-/* Overlay */
-.cora-mobile-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 90;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s;
-}
-
-#cora-nav-toggle:checked ~ .cora-mobile-drawer {
-  transform: translateX(0);
-}
-
-#cora-nav-toggle:checked ~ .cora-mobile-overlay {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Drawer Header */
-.cora-drawer__header {
-  padding: 20px;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.cora-drawer__close {
-  font-size: 28px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-/* --- Navigation List (Scrollable) --- */
-.cora-drawer__nav {
-  padding: 0;
-  overflow-y: auto;
-  flex: 1; /* Pushes footer down */
-}
-
-.cora-drawer__link,
-.cora-drawer__summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 24px;
-  border-bottom: 1px solid #f5f5f5;
-  text-decoration: none;
-  color: #1a1a1a;
-  font-size: 16px;
-  font-weight: 500;
-  background: #fff;
-  cursor: pointer;
-  list-style: none;
-  transition: background 0.2s;
-}
-
-.cora-drawer__link:hover,
-.cora-drawer__summary:hover {
-  background-color: #fafafa;
-}
-
-.cora-drawer__summary::-webkit-details-marker {
-  display: none;
-}
-
-/* --- Accordion Submenu --- */
-.cora-drawer__accordion[open] .cora-drawer__summary {
-  border-bottom-color: transparent;
-  padding-bottom: 10px;
-}
-
-.cora-drawer__submenu {
-  background-color: #fafafa;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f5f5f5;
-}
-
-.cora-drawer__sublink {
-  padding: 12px 24px 12px 40px; /* Indented */
-  font-size: 15px;
-  color: #555;
-  border-bottom: none;
-  background: transparent;
-}
-
-/* Icon Animation */
-.cora-drawer__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.cora-drawer__accordion[open] .cora-drawer__icon {
-  transform: rotate(45deg); /* Turns + to x */
-}
-
-/* --- Sticky Bottom Footer --- */
-.cora-drawer__footer {
-  padding: 20px;
-  background: #ffffff;
-  border-top: 1px solid #e5e5e5;
-  margin-top: auto;
-  flex-shrink: 0;
-}
-
-.cora-drawer__cta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: opacity 0.2s;
-}
-
-.cora-drawer__cta:hover {
-  opacity: 0.9;
-}
-/* ... keep previous CSS ... */
-
-/* =========================================
-   SHADCN AUTH STYLES (New)
-   ========================================= */
-
+/* Auth Styles */
 .cora-auth-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-left: 15px; /* Spacing from Search/Cart icons */
+  gap: 10px;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #f0f0f0;
 }
 
-/* Base Button Style (Shadcn h-9) */
 .cora-btn-shadcn {
   display: inline-flex;
   align-items: center;
@@ -398,7 +192,7 @@
   padding: 0 16px;
   font-size: 14px;
   font-weight: 500;
-  border-radius: 6px; /* rounded-md */
+  border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -406,45 +200,27 @@
   cursor: pointer;
 }
 
-/* Variant: Ghost (Log In) */
-.cora-btn-ghost {
-  color: #0f172a; /* Slate 900 */
-  background: transparent;
-}
-.cora-btn-ghost:hover {
-  background-color: #f1f5f9; /* Slate 100 */
-}
+.cora-btn-ghost { color: #0f172a; background: transparent; }
+.cora-btn-ghost:hover { background-color: #f1f5f9; }
 
-/* Variant: Primary (Sign Up) */
-.cora-btn-primary {
-  background-color: #0f172a; /* Slate 900 */
-  color: #ffffff;
-}
-.cora-btn-primary:hover {
-  background-color: #334155; /* Slate 700 */
-}
+.cora-btn-primary { background-color: #0f172a; color: #ffffff; }
+.cora-btn-primary:hover { background-color: #334155; }
 
-/* Variant: User Profile Pill (Logged In) */
 .cora-user-pill {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 4px 12px 4px 4px;
   border: 1px solid #e2e8f0;
-  border-radius: 50px; /* Full rounded */
+  border-radius: 50px;
   text-decoration: none;
   color: #0f172a;
   font-size: 14px;
   font-weight: 500;
-  transition: background 0.2s;
   background-color: #ffffff;
 }
-.cora-user-pill:hover {
-  background-color: #f8fafc;
-  border-color: #cbd5e1;
-}
+.cora-user-pill:hover { background-color: #f8fafc; border-color: #cbd5e1; }
 
-/* Avatar Circle */
 .cora-avatar {
   width: 28px;
   height: 28px;
@@ -459,9 +235,103 @@
   text-transform: uppercase;
 }
 
-/* Mobile Adjustments: Hide auth buttons on small screens if they crowd header */
-@media (max-width: 1024px) {
-  .cora-auth-wrapper {
-    display: none; /* We show auth in Drawer instead */
+/* =========================================
+   5. DESKTOP SPECIFIC LAYOUT (Min 1025px)
+   ========================================= */
+@media (min-width: 1025px) {
+  /* ABSOLUTE CENTER THE LOGO */
+  .cora-header__left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    display: flex;
+    justify-content: center;
+    z-index: 60; /* Higher than menu */
   }
 }
+
+/* =========================================
+   6. MOBILE HAMBURGER
+   ========================================= */
+.cora-header__mobile-trigger { display: none; }
+.cora-header__hamburger { cursor: pointer; display: flex; align-items: center; }
+
+/* =========================================
+   7. RESPONSIVE LOGIC (Tablet & Mobile)
+   ========================================= */
+@media (max-width: 1024px) {
+  .cora-header__inner { justify-content: space-between; }
+  .cora-header__mobile-trigger { display: block; flex: 1; }
+  
+  /* Hide Desktop Nav & Auth */
+  .cora-header__center, .cora-auth-wrapper { display: none; }
+  
+  /* Mobile Logo Center */
+  .cora-header__left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cora-header__right { flex: 1; }
+}
+
+/* =========================================
+   8. MOBILE DRAWER
+   ========================================= */
+.cora-mobile-drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 320px; height: 100vh;
+  background: #ffffff;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  display: flex; flex-direction: column;
+}
+
+.cora-mobile-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 90;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s;
+}
+
+#cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
+#cora-nav-toggle:checked ~ .cora-mobile-overlay { opacity: 1; visibility: visible; }
+#cora-nav-toggle:checked ~ body { overflow: hidden; }
+
+.cora-drawer__header { padding: 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.cora-drawer__close { font-size: 28px; cursor: pointer; line-height: 1; }
+
+.cora-drawer__nav { padding: 0; overflow-y: auto; flex: 1; }
+.cora-drawer__link, .cora-drawer__summary {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px; border-bottom: 1px solid #f5f5f5;
+  text-decoration: none; color: #1a1a1a; font-size: 16px; font-weight: 500;
+  background: #fff; cursor: pointer; list-style: none; transition: background 0.2s;
+}
+.cora-drawer__link:hover, .cora-drawer__summary:hover { background-color: #fafafa; }
+.cora-drawer__summary::-webkit-details-marker { display: none; }
+
+.cora-drawer__accordion[open] .cora-drawer__summary { border-bottom-color: transparent; padding-bottom: 10px; }
+.cora-drawer__submenu { background-color: #fafafa; padding-bottom: 10px; border-bottom: 1px solid #f5f5f5; }
+.cora-drawer__sublink { padding: 12px 24px 12px 40px; font-size: 15px; color: #555; border-bottom: none; background: transparent; }
+
+.cora-drawer__icon { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; transition: transform 0.3s ease; }
+.cora-drawer__accordion[open] .cora-drawer__icon { transform: rotate(45deg); }
+
+.cora-drawer__footer { padding: 20px; background: #ffffff; border-top: 1px solid #e5e5e5; margin-top: auto; flex-shrink: 0; }
+.cora-drawer__cta {
+  display: flex; justify-content: center; align-items: center; width: 100%;
+  padding: 16px; background-color: #1a1a1a; color: #ffffff;
+  text-decoration: none; text-transform: uppercase; font-size: 14px;
+  letter-spacing: 1px; font-weight: 600; border-radius: 4px; transition: opacity 0.2s;
+}
+.cora-drawer__cta:hover { opacity: 0.9; }
