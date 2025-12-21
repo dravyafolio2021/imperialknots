@@ -10,7 +10,6 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -31,9 +30,8 @@
   max-width: 320px;
 }
 .cora-footer__logo-link img {
-  max-width: 220px;
-  height: auto;
   display: block;
+  height: auto;
 }
 .cora-footer__brand-desc {
   font-family: Inter, sans-serif;
@@ -72,6 +70,19 @@
   min-width: 160px;
   flex: 0 0 200px;
 }
+
+/* Column Header (Accordion Trigger on Mobile) */
+.cora-footer__col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: default; /* Default cursor on desktop */
+}
+
 .cora-footer__col-title {
   font-family: Assistant, sans-serif;
   font-size: 14px;
@@ -80,7 +91,26 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 600;
+  text-align: left;
 }
+
+/* Accordion Icon (Hidden on Desktop) */
+.cora-footer__col-icon {
+  display: none; 
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.cora-footer__col-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: #1a1a1a;
+  stroke-width: 2px;
+}
+
+/* Links List */
 .cora-footer__links {
   list-style: none;
   padding: 0;
@@ -88,12 +118,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* Transition for height animation */
+  overflow: hidden; 
 }
+
 .cora-footer__link {
   font-family: Inter, sans-serif;
   font-size: 15px;
   color: rgba(10, 20, 30, 0.75);
   text-decoration: none;
+  display: block;
 }
 
 /* Divider */
@@ -128,68 +162,69 @@
   color: rgba(10, 20, 30, 0.7);
   font-size: 14px;
 }
-.cora-footer__payments img {
-  display: inline-block;
-  margin-left: 6px;
-  opacity: 0.95;
+.cora-footer__payments {
+  display: flex;
+  gap: 8px;
 }
-
-/* Payment svg wrapper */
-.cora-footer__payment-icon svg {
-  height: 28px;
+.cora-footer__payments svg {
+  height: 24px;
   width: auto;
-  vertical-align: middle;
 }
 
-/* Responsive */
+/* --- Responsive & Mobile Accordion Logic --- */
+
 @media (max-width: 1100px) {
-  .cora-footer__top {
-    gap: 20px;
-  }
-  .cora-footer__brand {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  .cora-footer__columns {
-    gap: 18px;
-  }
-  .cora-footer__col {
-    flex: 0 0 45%;
-    min-width: auto;
-  }
+  .cora-footer__top { gap: 20px; }
+  .cora-footer__brand { flex: 0 0 100%; max-width: 100%; }
+  .cora-footer__columns { gap: 18px; }
+  .cora-footer__col { flex: 0 0 45%; min-width: auto; }
 }
 
 @media (max-width: 600px) {
-  .cora-footer__top {
-    padding-bottom: 18px;
-  }
-  .cora-footer__inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-  .cora-footer__columns {
-    display: block;
-  }
+  .cora-footer__inner { padding-left: 0; padding-right: 0; }
+  .cora-footer__columns { display: block; width: 100%; }
+  
+  /* Mobile Column Item */
   .cora-footer__col {
-    margin-bottom: 18px;
+    margin-bottom: 0; /* Stack them */
     width: 100%;
+    border-bottom: 1px solid #f0f0f0;
   }
-  .cora-footer__brand-desc {
-    font-size: 14px;
+
+  /* Make Header Clickable */
+  .cora-footer__col-header {
+    cursor: pointer;
+    padding: 15px 0;
   }
-  .cora-footer__socials {
-    gap: 10px;
+  .cora-footer__col-title {
+    margin-bottom: 0; /* Remove bottom margin so it centers vertically */
   }
-  .cora-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+
+  /* Show Icon */
+  .cora-footer__col-icon {
+    display: flex;
   }
+
+  /* Hide Links by default */
+  .cora-footer__links {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease;
+  }
+
+  /* OPEN STATE */
+  .cora-footer__col.is-open .cora-footer__links {
+    max-height: 500px; /* Arbitrary large height */
+    opacity: 1;
+    padding-bottom: 20px; /* Space at bottom */
+  }
+  
+  /* Rotate Icon */
+  .cora-footer__col.is-open .cora-footer__col-icon {
+    transform: rotate(180deg);
+  }
+
+  .cora-footer__bottom { flex-direction: column; align-items: flex-start; gap: 15px; }
 }
 
 /* Accessibility */
