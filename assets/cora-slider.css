@@ -221,7 +221,7 @@
 @media (max-width: 900px) {
   
   .cora-slider__slide {
-    height: 75vh;
+    height: 60vh;
     min-height: 500px;
   }
 
