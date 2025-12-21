@@ -19,7 +19,7 @@
 }
 
 .cora-faq-title {
-  font-family: "Times New Roman", Times, serif; /* Luxury Serif */
+  font-family: "Times New Roman", Times, serif;
   font-size: 36px;
   font-weight: 400;
   margin: 0 0 16px 0;
@@ -39,21 +39,62 @@
   flex-direction: column;
 }
 
-/* --- Section Break (Category Header) --- */
+/* --- Section Break (Collapsible Category) --- */
 .cora-faq-category {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 40px 0 20px 0;
   padding-bottom: 10px;
+  border: none;
   border-bottom: 2px solid #1a1a1a;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.cora-faq-category-text {
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #1a1a1a;
+}
+
+/* Category Icon (Small Chevron) */
+.cora-category-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.cora-category-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: #1a1a1a;
+  stroke-width: 2px;
+}
+
+/* Rotate icon when closed (Optional preference: default open) */
+.cora-faq-category[aria-expanded="false"] .cora-category-icon {
+  transform: rotate(-90deg);
 }
 
 /* --- FAQ Item (Accordion) --- */
 .cora-faq-item {
   border-bottom: 1px solid #e5e5e5;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Hidden state for items when category is collapsed */
+.cora-faq-item.cora-hidden {
+  display: none;
 }
 
 .cora-faq-item:first-of-type {
@@ -142,7 +183,6 @@
   padding-right: 20px;
 }
 
-/* Rich Text Styling inside Answer */
 .cora-faq-answer p { margin-bottom: 15px; }
 .cora-faq-answer p:last-child { margin-bottom: 0; }
 .cora-faq-answer a { color: #1a1a1a; text-decoration: underline; }

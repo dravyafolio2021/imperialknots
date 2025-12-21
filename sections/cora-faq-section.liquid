@@ -50,9 +50,12 @@
         {% case block.type %}
           
           {% when 'category' %}
-            <div class="cora-faq-category" {{ block.shopify_attributes }}>
-              {{ block.settings.title }}
-            </div>
+            <button class="cora-faq-category" aria-expanded="true" {{ block.shopify_attributes }}>
+              <span class="cora-faq-category-text">{{ block.settings.title }}</span>
+              <span class="cora-category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
 
           {% when 'question' %}
             <div class="cora-faq-item" {{ block.shopify_attributes }}>
@@ -78,6 +81,8 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const section = document.getElementById("cora-faq-{{ section.id }}");
+    
+    // --- 1. Question Accordion Logic ---
     const isAccordion = section.getAttribute('data-accordion') === 'true';
     const triggers = section.querySelectorAll('.cora-faq-trigger');
 
@@ -86,8 +91,8 @@
         const content = this.nextElementSibling;
         const isOpen = this.getAttribute('aria-expanded') === 'true';
 
-        // 1. If Accordion Mode is ON, close all others first
         if (isAccordion && !isOpen) {
+          // Find siblings only within the same category group (if needed) or globally
           triggers.forEach(otherBtn => {
             if (otherBtn !== this) {
               otherBtn.setAttribute('aria-expanded', 'false');
@@ -96,13 +101,35 @@
           });
         }
 
-        // 2. Toggle Current
         this.setAttribute('aria-expanded', !isOpen);
         
         if (!isOpen) {
           content.style.maxHeight = content.scrollHeight + "px";
         } else {
           content.style.maxHeight = null;
+        }
+      });
+    });
+
+    // --- 2. Category Collapse Logic ---
+    const categories = section.querySelectorAll('.cora-faq-category');
+
+    categories.forEach(cat => {
+      cat.addEventListener('click', function() {
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isOpen);
+
+        // Find all siblings until the next category
+        let nextSibling = this.nextElementSibling;
+        while (nextSibling && nextSibling.classList.contains('cora-faq-item')) {
+          if (!isOpen) {
+            // Opening: Remove hidden class
+            nextSibling.classList.remove('cora-hidden');
+          } else {
+            // Closing: Add hidden class
+            nextSibling.classList.add('cora-hidden');
+          }
+          nextSibling = nextSibling.nextElementSibling;
         }
       });
     });
@@ -118,7 +145,7 @@
     { "type": "textarea", "id": "text", "label": "Description", "default": "Common questions about our products and shipping." },
     
     { "type": "header", "content": "Settings" },
-    { "type": "checkbox", "id": "enable_accordion", "label": "One open at a time", "default": true },
+    { "type": "checkbox", "id": "enable_accordion", "label": "One open at a time (Questions)", "default": true },
     
     { "type": "header", "content": "Style" },
     { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
