@@ -256,7 +256,7 @@
    6. MOBILE HAMBURGER
    ========================================= */
 .cora-header__mobile-trigger { display: none; }
-.cora-header__hamburger { cursor: pointer; display: flex; align-items: center; }
+.cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
 
 /* =========================================
    7. RESPONSIVE LOGIC (Tablet & Mobile)
