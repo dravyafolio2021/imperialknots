@@ -148,7 +148,7 @@
   
   /* 2. Add padding to the TRACK instead */
   .cora-category-slider__track {
-    padding: 10px 20px; /* 20px start/end offset, but full width scroll */
+    padding: 10px 0; /* 20px start/end offset, but full width scroll */
     gap: 20px;
     scroll-snap-type: x mandatory;
   }
