@@ -1,39 +1,64 @@
-/* cora-category-slider.css - horizontal, accessible, lightweight */
+/* cora-category-slider.css */
 
-/* outer section */
+/* Outer section */
 .cora-category-slider {
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
+  position: relative; /* Context for arrows */
 }
 
-/* inner wrap keeps center alignment */
+/* Inner wrap */
 .cora-category-slider__wrap {
   max-width: 1400px;
   margin: 0 auto;
-   
+  position: relative; /* Ensures arrows sit relative to max-width */
+  padding: 0 40px; /* Space for arrows */
 }
 
-/* horizontal track: scroll-snap for smooth keyboard + touch support */
+/* Horizontal track */
 .cora-category-slider__track {
   display: flex;
   gap: 28px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  /* Snap is mandatory for touch, but we override it via JS during drag for smoothness */
+  scroll-snap-type: x mandatory; 
   -webkit-overflow-scrolling: touch;
-  align-items: center;
-  padding: 6px 4px;
+  align-items: flex-start;
+  padding: 10px 4px; /* Slight padding to prevent shadow clipping */
+  cursor: grab; /* Indicates drag capability */
+  
+  /* Hide Scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
-/* each item */
+.cora-category-slider__track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Active Drag State (Added by JS) */
+.cora-category-slider__track.cora-is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none; /* Disable snap while dragging for fluid movement */
+  scroll-behavior: auto !important;
+}
+
+/* Each item */
 .cora-category-slider__item {
   scroll-snap-align: center;
   flex: 0 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-/* link and layout */
+/* Prevent image dragging ghost */
+.cora-category-slider__item img {
+  pointer-events: none; 
+}
+
+/* Link */
 .cora-category-slider__link {
   display: flex;
   flex-direction: column;
@@ -41,19 +66,25 @@
   text-decoration: none;
   color: inherit;
   gap: 12px;
+  user-select: none; /* Prevents text highlighting while dragging */
 }
 
-/* circular media container */
+/* Circular media */
 .cora-category-slider__media {
   width: 112px;
   height: 112px;
-  border-radius: 9999px;
+  border-radius: 50%;
   overflow: hidden;
-  display: inline-block;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06),
-    inset 0 0 0 4px rgba(20, 30, 40, 0.06);
-  border: 4px solid rgba(10, 20, 35, 0.08);
+  display: block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  border: 4px solid transparent;
   background: #fff;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.cora-category-slider__link:hover .cora-category-slider__media {
+  border-color: rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .cora-category-slider__media img {
@@ -63,55 +94,88 @@
   display: block;
 }
 
-/* placeholder circle (if no image) */
+/* Placeholder */
 .cora-category-slider__media--placeholder {
   background: linear-gradient(180deg, #f6f6f6, #eaeef0);
 }
 
-/* title */
+/* Title */
 .cora-category-slider__title {
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial;
+  font-family: inherit;
   font-size: 14px;
   line-height: 1.2;
   text-align: center;
-  color: rgba(10, 20, 30, 0.88);
+  color: #1a1a1a;
   margin-top: 6px;
+  font-weight: 500;
 }
 
-/* keyboard focus */
-.cora-category-slider__link:focus {
-  outline: 3px solid rgba(0, 120, 230, 0.12);
-  outline-offset: 6px;
-  border-radius: 8px;
+/* --- Navigation Arrows --- */
+.cora-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  color: #333;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
-/* hide scrollbar visually but keep functionality */
-.cora-category-slider__track {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0) transparent;
-}
-.cora-category-slider__track::-webkit-scrollbar {
-  height: 8px;
-}
-.cora-category-slider__track::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0);
-  border-radius: 8px;
+.cora-slider-arrow:hover {
+  background: #f8f8f8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #000;
 }
 
-/* responsive sizes */
+.cora-slider-arrow--prev {
+  left: 0;
+}
+
+.cora-slider-arrow--next {
+  right: 0;
+}
+
+.cora-slider-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
+  .cora-category-slider__wrap {
+    padding: 0 10px; /* Less side padding on mobile */
+  }
+  
+  /* Hide arrows on mobile/tablet as touch is better */
+  .cora-slider-arrow {
+    display: none;
+  }
+  
+  .cora-category-slider__track {
+    padding-left: 20px; /* Start padding */
+    padding-right: 20px;
+  }
+
   .cora-category-slider__media {
     width: 84px;
     height: 84px;
   }
+  
   .cora-category-slider__title {
     font-size: 13px;
   }
- 
 }
 
-/* support large screens: show more gap */
 @media (min-width: 1600px) {
   .cora-category-slider__track {
     gap: 36px;
@@ -120,12 +184,4 @@
     width: 128px;
     height: 128px;
   }
-}
-
-/* utility: center-first-and-last items visually */
-.cora-category-slider__track::before,
-.cora-category-slider__track::after {
-  display: inline-block;
-
-  flex: 0 0 auto;
 }
