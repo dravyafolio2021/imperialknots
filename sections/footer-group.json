@@ -90,6 +90,16 @@
         "social_V7f6HA": {
           "type": "social",
           "settings": {
+            "icon": "shopify://shop_images/Link.svg",
+            "label": "Social",
+            "url": "/",
+            "target": "_blank"
+          }
+        },
+        "social_HMBCEi": {
+          "type": "social",
+          "settings": {
+            "icon": "shopify://shop_images/Link-1.svg",
             "label": "Social",
             "url": "/",
             "target": "_blank"
@@ -109,6 +119,7 @@
         "link_column_cLifNk",
         "link_column_JTRC6G",
         "social_V7f6HA",
+        "social_HMBCEi",
         "brand_nE7kPJ"
       ],
       "name": "Cora Footer ",
