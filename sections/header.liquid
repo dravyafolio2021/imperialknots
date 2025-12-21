@@ -1,172 +1,171 @@
-{{ 'cora-footer.css' | asset_url | stylesheet_tag }}
+{{ 'cora-header.css' | asset_url | stylesheet_tag }}
 
-<section
-  id="cora-footer-{{ section.id }}"
-  class="cora-footer"
-  role="contentinfo"
-  aria-label="{{ section.settings.aria_label | default: 'Footer' }}"
-  style="
-    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
-    padding-top: {{ section.settings.padding_top | default: 40 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;
-    {% if section.settings.bg_image %} background-image: url({{ section.settings.bg_image | img_url: '2000x' }}); background-size: cover; background-position: center; {% endif %}
-  "
+<header
+  id="cora-header-{{ section.id }}"
+  class="cora-header"
+  style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};"
 >
-  <div class="cora-footer__inner">
-    <div class="cora-footer__top">
-      
-      <div class="cora-footer__brand" role="region" aria-label="Brand">
-        <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
-          {% if section.settings.logo %}
-            <img
-              src="{{ section.settings.logo | img_url: '400x' }}"
-              alt="{{ shop.name }}"
-              loading="lazy"
-              width="{{ section.settings.logo_width }}"
-              height="auto"
-              style="width: {{ section.settings.logo_width }}px; max-width: 100%;"
-            >
-          {% else %}
-            <span style="font-family:'Times New Roman', serif; font-size:24px; font-weight:bold; text-transform:uppercase;">{{ shop.name }}</span>
-          {% endif %}
-        </a>
+  <input type="checkbox" id="cora-nav-toggle" style="display:none;">
+  <label for="cora-nav-toggle" class="cora-mobile-overlay"></label>
 
-        {% if section.settings.brand_description != blank %}
-          <p class="cora-footer__brand-desc">{{ section.settings.brand_description }}</p>
-        {% endif %}
-
-        <div class="cora-footer__socials" aria-label="Follow us">
-          {% for block in section.blocks %}
-            {% if block.type == 'social' and block.settings.icon %}
-              <a
-                class="cora-footer__social-link"
-                href="{{ block.settings.url | default: '#' }}"
-                aria-label="{{ block.settings.label }}"
-                target="{{ block.settings.target }}"
-              >
-                <img
-                  src="{{ block.settings.icon | img_url: '64x64' }}"
-                  alt="{{ block.settings.label }}"
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                >
-              </a>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
-        {% for block in section.blocks %}
-          {% if block.type == 'link_column' %}
-            <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
-              
-              <button class="cora-footer__col-header" aria-expanded="false" onclick="this.parentElement.classList.toggle('is-open')">
-                {% if block.settings.title != blank %}
-                  <h4 class="cora-footer__col-title">{{ block.settings.title }}</h4>
-                {% endif %}
-                <span class="cora-footer__col-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </span>
-              </button>
-
-              {% if block.settings.menu %}
-                <ul class="cora-footer__links">
-                  {% assign list_handle = block.settings.menu %}
-                  {% for link in linklists[list_handle].links %}
-                    <li class="cora-footer__link-item">
-                      <a class="cora-footer__link" href="{{ link.url }}">{{ link.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+  <div class="cora-header__inner">
+    
+    <div class="cora-header__mobile-trigger">
+      <label for="cora-nav-toggle" class="cora-header__hamburger">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </label>
     </div>
 
-    <div class="cora-footer__divider" role="presentation" aria-hidden="true"></div>
+    <div class="cora-header__center">
+      <nav class="cora-header__nav">
+        {% for link in section.settings.menu.links %}
+          <div class="cora-nav__item">
+            <a href="{{ link.url }}" class="cora-nav__link">
+              {{ link.title }}
+              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
+            </a>
+            {% if link.links != blank %}
+              <div class="cora-nav__dropdown">
+                {% for child_link in link.links %}
+                  <a href="{{ child_link.url }}" class="cora-dropdown__link">{{ child_link.title }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </nav>
+    </div>
 
-    <div class="cora-footer__bottom">
-      <div class="cora-footer__copyright">
-        {% if section.settings.copyright_text != blank %}
-          {{ section.settings.copyright_text }}
-        {% else %}
-          &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
-        {% endif %}
-      </div>
-
-      <div class="cora-footer__right">
-        {% if section.settings.trust_text != blank %}
-          <div class="cora-footer__trust">{{ section.settings.trust_text }}</div>
-        {% endif %}
+    <div class="cora-header__left">
+      <a href="{{ routes.root_url }}" class="cora-header__brand-link">
         
-        {% if section.settings.show_payment_icons %}
-           <div class="cora-footer__payments" aria-hidden="true">
-              {% for type in shop.enabled_payment_types %}
-                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- if section.settings.logo_svg != blank -%}
+          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display:flex; align-items:center;">
+            {{ section.settings.logo_svg }}
+          </div>
+
+        {%- elsif section.settings.logo_image != blank -%}
+          <img 
+            src="{{ section.settings.logo_image | img_url: '600x' }}" 
+            alt="{{ shop.name }}" 
+            class="cora-header__logo-img" 
+            width="{{ section.settings.logo_width }}" 
+            height="auto"
+            style="width: {{ section.settings.logo_width }}px;"
+          >
+
+        {%- else -%}
+          <span class="cora-header__brand-text">{{ shop.name }}</span>
+        {%- endif -%}
+
+      </a>
+    </div>
+
+    <div class="cora-header__right">
+      <a href="{{ routes.search_url }}" class="cora-header__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="cora-header__icon" aria-label="Cart" style="margin-right: 5px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
+      </a>
+
+      {% if shop.customer_accounts_enabled %}
+        <div class="cora-auth-wrapper">
+          {% if customer %}
+            <a href="{{ routes.account_url }}" class="cora-user-pill">
+              <span class="cora-avatar">{{ customer.first_name | first }}{{ customer.last_name | first }}</span>
+              <span style="font-size:13px;">{{ customer.first_name }}</span>
+            </a>
+          {% else %}
+            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost">Log in</a>
+            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary">Sign up</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div class="cora-mobile-drawer">
+    <div class="cora-drawer__header">
+      <span style="font-weight:600; font-size:16px; text-transform:uppercase; letter-spacing:1px;">Menu</span>
+      <label for="cora-nav-toggle" class="cora-drawer__close">&times;</label>
+    </div>
+
+    <nav class="cora-drawer__nav">
+      {% for link in section.settings.menu.links %}
+        {% if link.links != blank %}
+          <details class="cora-drawer__accordion">
+            <summary class="cora-drawer__summary">
+              {{ link.title }}
+              <span class="cora-drawer__icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </summary>
+            <div class="cora-drawer__submenu">
+              {% for child_link in link.links %}
+                <a href="{{ child_link.url }}" class="cora-drawer__link cora-drawer__sublink">{{ child_link.title }}</a>
               {% endfor %}
-           </div>
+            </div>
+          </details>
+        {% else %}
+          <a href="{{ link.url }}" class="cora-drawer__link">{{ link.title }}</a>
         {% endif %}
-      </div>
+      {% endfor %}
+    </nav>
+    
+    <div class="cora-drawer__footer">
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="{{ routes.account_url }}" class="cora-drawer__cta">My Account</a>
+        {% else %}
+          <div style="display: flex; gap: 12px;">
+            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost" style="flex: 1; border: 1px solid #e2e8f0; justify-content: center;">Log in</a>
+            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary" style="flex: 1; justify-content: center;">Sign up</a>
+          </div>
+        {% endif %}
+      {% endif %}
     </div>
   </div>
-</section>
+</header>
 
 {% schema %}
 {
-  "name": "Cora Footer",
+  "name": "Cora Header (Responsive)",
   "settings": [
-    { "type": "header", "content": "Brand Settings" },
-    { "type": "image_picker", "id": "logo", "label": "Logo Image" },
-    { "type": "range", "id": "logo_width", "min": 50, "max": 300, "step": 5, "default": 180, "label": "Logo Width (px)" },
-    { "type": "textarea", "id": "brand_description", "label": "Brand Description" },
-
-    { "type": "header", "content": "Style & Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
-    { "type": "image_picker", "id": "bg_image", "label": "Background Image" },
-    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 100, "step": 1, "default": 60 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 100, "step": 1, "default": 60 },
-
-    { "type": "header", "content": "Bottom Bar" },
-    { "type": "text", "id": "copyright_text", "label": "Copyright Text" },
-    { "type": "text", "id": "trust_text", "label": "Trust Text (Right side)" },
-    { "type": "checkbox", "id": "show_payment_icons", "label": "Show Payment Icons", "default": true }
-  ],
-  "blocks": [
-    {
-      "type": "link_column",
-      "name": "Link Column",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Column Title", "default": "Links" },
-        { "type": "link_list", "id": "menu", "label": "Menu" }
-      ]
+    { 
+      "type": "header", 
+      "content": "Logo Settings" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "logo_image", 
+      "label": "Logo Image" 
+    },
+    { 
+      "type": "html", 
+      "id": "logo_svg", 
+      "label": "Custom SVG Logo", 
+      "info": "Paste your SVG code here. This overrides the image logo." 
     },
     {
-      "type": "social",
-      "name": "Social Icon",
-      "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Icon (SVG/PNG)" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Social" },
-        { "type": "url", "id": "url", "label": "Link URL" },
-        {
-          "type": "select",
-          "id": "target",
-          "label": "Open in",
-          "options": [
-            { "value": "_self", "label": "Same Window" },
-            { "value": "_blank", "label": "New Tab" }
-          ],
-          "default": "_blank"
-        }
-      ]
-    }
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 150,
+      "label": "Logo Width (px)"
+    },
+    { "type": "header", "content": "Navigation" },
+    { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
   ],
-  "presets": [{ "name": "Cora Footer", "category": "Global" }]
+  "presets": [{ "name": "Cora Header (Responsive)" }]
 }
 {% endschema %}
+
 
 {% comment %} 
 {{ 'cora-header.css' | asset_url | stylesheet_tag }}
