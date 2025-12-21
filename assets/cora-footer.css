@@ -10,7 +10,6 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  align-items: center;
   display: flex;
   flex-direction: column;
 }
@@ -31,9 +30,9 @@
   max-width: 320px;
 }
 .cora-footer__logo-link img {
-  max-width: 220px;
-  height: auto;
   display: block;
+  height: auto;
+  max-width: 100%;
 }
 .cora-footer__brand-desc {
   font-family: Inter, sans-serif;
@@ -72,6 +71,21 @@
   min-width: 160px;
   flex: 0 0 200px;
 }
+
+/* Column Header (Button Reset) */
+.cora-footer__col-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: default; /* Not clickable on desktop */
+  text-align: left;
+}
+
 .cora-footer__col-title {
   font-family: Assistant, sans-serif;
   font-size: 14px;
@@ -80,7 +94,21 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 600;
+  display: block;
 }
+
+/* Accordion Icon (Hidden on Desktop) */
+.cora-footer__col-icon {
+  display: none;
+  transition: transform 0.3s ease;
+}
+.cora-footer__col-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: #1a1a1a;
+}
+
+/* Links List */
 .cora-footer__links {
   list-style: none;
   padding: 0;
@@ -88,7 +116,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow: hidden; /* For animation */
 }
+
 .cora-footer__link {
   font-family: Inter, sans-serif;
   font-size: 15px;
@@ -141,7 +171,8 @@
   vertical-align: middle;
 }
 
-/* Responsive */
+/* --- Responsive Styles --- */
+
 @media (max-width: 1100px) {
   .cora-footer__top {
     gap: 20px;
@@ -160,25 +191,63 @@
 }
 
 @media (max-width: 600px) {
+  .cora-footer__inner {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .cora-footer__top {
     padding-bottom: 18px;
   }
-  .cora-footer__inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
+  
   .cora-footer__columns {
     display: block;
-  }
-  .cora-footer__col {
-    margin-bottom: 18px;
     width: 100%;
   }
+  
+  /* Mobile Column (Accordion Item) */
+  .cora-footer__col {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 0;
+  }
+
+  /* Make header clickable */
+  .cora-footer__col-header {
+    cursor: pointer;
+    padding: 15px 0;
+  }
+  
+  .cora-footer__col-title {
+    margin-bottom: 0; /* Align with icon */
+  }
+
+  /* Show Chevron Icon */
+  .cora-footer__col-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide links by default on mobile */
+  .cora-footer__links {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease;
+  }
+
+  /* --- Open State (triggered by JS .is-open class) --- */
+  .cora-footer__col.is-open .cora-footer__links {
+    max-height: 500px; /* Arbitrary large height */
+    opacity: 1;
+    padding-bottom: 20px;
+  }
+
+  /* Rotate Icon when open */
+  .cora-footer__col.is-open .cora-footer__col-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Bottom Area adjustments */
   .cora-footer__brand-desc {
     font-size: 14px;
   }
