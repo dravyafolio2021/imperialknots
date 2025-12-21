@@ -262,7 +262,7 @@
    7. RESPONSIVE LOGIC (Tablet & Mobile)
    ========================================= */
 @media (max-width: 1024px) {
-  .cora-header__inner { justify-content: space-between; }
+  .cora-header__inner { justify-content: space-between;   padding: 0 ; }
   .cora-header__mobile-trigger { display: block; flex: 1; }
   
   /* Hide Desktop Nav & Auth */
