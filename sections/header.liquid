@@ -56,7 +56,14 @@
           >
 
         {%- else -%}
-          <span class="cora-header__brand-text">{{ shop.name }}</span>
+          <img 
+            src="https://cdn.shopify.com/s/files/1/0694/0170/6565/files/Logo_430x.svg?v=1765908401#" 
+            alt="{{ shop.name }}" 
+            class="cora-header__logo-img" 
+            width="{{ section.settings.logo_width }}" 
+            height="auto"
+            style="width: {{ section.settings.logo_width }}px;"
+          >
         {%- endif -%}
 
       </a>
@@ -166,7 +173,6 @@
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
 {% endschema %}
-
 {% comment %} 
 {{ 'cora-header.css' | asset_url | stylesheet_tag }}
 
