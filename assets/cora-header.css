@@ -263,6 +263,15 @@
    ========================================= */
 @media (max-width: 1024px) {
   .cora-header__inner { justify-content: space-between;   padding: 0 ; }
+
+.cora-header__brand-text {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: inherit;
+}
   .cora-header__mobile-trigger { display: block; flex: 1; }
   
   /* Hide Desktop Nav & Auth */
