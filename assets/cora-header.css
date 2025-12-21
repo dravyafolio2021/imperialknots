@@ -2,7 +2,7 @@
 .cora-header {
   width: 100%;
   position: relative;
-  z-index: 50;
+  z-index: 50; 
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
 }
