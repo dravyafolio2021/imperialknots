@@ -40,7 +40,8 @@
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
         
         {%- if section.settings.logo_svg != blank -%}
-          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display:flex; align-items:center;">
+          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display: flex; align-items: center;">
+            <style>.cora-header__logo-svg svg { width: 100%; height: auto; }</style>
             {{ section.settings.logo_svg }}
           </div>
 
@@ -150,9 +151,9 @@
     {
       "type": "range",
       "id": "logo_width",
-      "min": 50,
-      "max": 250,
-      "step": 10,
+      "min": 100,
+      "max": 300,
+      "step": 2,
       "default": 150,
       "label": "Logo Width (px)"
     },
@@ -165,7 +166,6 @@
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
 {% endschema %}
-
 
 {% comment %} 
 {{ 'cora-header.css' | asset_url | stylesheet_tag }}
