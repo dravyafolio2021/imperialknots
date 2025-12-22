@@ -398,7 +398,6 @@
       "settings": {
         "aria_label": "Trending Now",
         "bg_color": "#ffffff",
-        "bg_image": "shopify://shop_images/Logo.svg",
         "padding_top": 32,
         "padding_bottom": 32
       }
