@@ -16,25 +16,6 @@
       </label>
     </div>
 
-    <div class="cora-header__center">
-      <nav class="cora-header__nav">
-        {% for link in section.settings.menu.links %}
-          <div class="cora-nav__item">
-            <a href="{{ link.url }}" class="cora-nav__link">
-              {{ link.title }}
-              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
-            </a>
-            {% if link.links != blank %}
-              <div class="cora-nav__dropdown">
-                {% for child_link in link.links %}
-                  <a href="{{ child_link.url }}" class="cora-dropdown__link">{{ child_link.title }}</a>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </nav>
-    </div>
 
     <div class="cora-header__left">
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
@@ -68,6 +49,28 @@
 
       </a>
     </div>
+    
+    <div class="cora-header__center">
+      <nav class="cora-header__nav">
+        {% for link in section.settings.menu.links %}
+          <div class="cora-nav__item">
+            <a href="{{ link.url }}" class="cora-nav__link">
+              {{ link.title }}
+              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
+            </a>
+            {% if link.links != blank %}
+              <div class="cora-nav__dropdown">
+                {% for child_link in link.links %}
+                  <a href="{{ child_link.url }}" class="cora-dropdown__link">{{ child_link.title }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </nav>
+    </div>
+
+    
 
     <div class="cora-header__right">
       <a href="{{ routes.search_url }}" class="cora-header__icon" aria-label="Search">
