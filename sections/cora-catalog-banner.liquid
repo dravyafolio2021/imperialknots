@@ -18,7 +18,7 @@
   "
 >
   <div class="cora-catalog-banner__inner {% if section.settings.text_align == 'left' %}align-left{% elsif section.settings.text_align == 'right' %}align-right{% else %}align-center{% endif %}">
-    <h1 class="cora-catalog-banner__heading" style="color: {{ section.settings.text_color | default: '#000' }}; background-color: {{ section.settings.bg_color | default: '#F0EBE4' }};">
+    <h1 class="cora-catalog-banner__heading" style="color: {{ section.settings.text_color | default: '#000' }}; ">
       {{ section.settings.heading | default: 'Product Catalog' }}
     </h1>
 
