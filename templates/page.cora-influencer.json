@@ -12,7 +12,7 @@
     "hero": {
       "type": "cora-influencer-hero",
       "custom_css": [
-        "{background-color: #F0EBE4;}"
+        ".cip-hero{background-color: #f0ebe4;}"
       ],
       "settings": {
         "heading": "{{ page.title }}",
