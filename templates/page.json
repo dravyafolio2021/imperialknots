@@ -11,6 +11,9 @@
   "sections": {
     "cora_catalog_banner_mrGVbb": {
       "type": "cora-catalog-banner",
+      "custom_css": [
+        "{background-color: #ffffff;}"
+      ],
       "name": "Catalog Banner",
       "settings": {
         "heading": "{{ page.title }}",
