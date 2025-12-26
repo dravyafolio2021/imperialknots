@@ -11,6 +11,9 @@
   "sections": {
     "hero": {
       "type": "cora-influencer-hero",
+      "custom_css": [
+        "{background-color: #F0EBE4;}"
+      ],
       "settings": {
         "heading": "{{ page.title }}",
         "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to you. By filling out the form below, you will be added to our database and will be notified if you are selected for a collaboration. You do not need to submit a form multiple times, we will keep your information on file. Influencers must have a shipping address within the 48 contiguous United States."
