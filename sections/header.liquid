@@ -1,4 +1,4 @@
-{{ 'cora-header.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'cora-header.css' | asset_url | stylesheet_tag }}
 
 <header
   id="cora-header-{{ section.id }}"
@@ -49,7 +49,7 @@
 
       </a>
     </div>
-    
+
     <div class="cora-header__center">
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
@@ -175,8 +175,8 @@
   ],
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
-{% endschema %}
-{% comment %} 
+{% endschema %} {% endcomment %}
+ 
 {{ 'cora-header.css' | asset_url | stylesheet_tag }}
 
 <header
@@ -304,4 +304,4 @@
   ],
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
-{% endschema %} {% endcomment %}
+{% endschema %}  
