@@ -17,7 +17,7 @@
         "subheading": "Be part of a creative ecosystem building the future of design & technology.",
         "text_color": "#000000",
         "text_align": "center",
-        "bg_color": "#f0ebe4",
+        "bg_color": "#ffffff",
         "pt_desktop": 60,
         "pb_desktop": 60,
         "pt_mobile": 40,
@@ -58,6 +58,7 @@
       "settings": {
         "heading": "",
         "desc": "",
+        "enable_accordion_mode": true,
         "padding_top": 60,
         "padding_bottom": 60,
         "bg_color": "#ffffff",
