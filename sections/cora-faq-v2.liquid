@@ -1,4 +1,4 @@
-{{ 'cora-faq-v2.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'cora-faq-v2.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   #cora-faq-v2-{{ section.id }} {
@@ -129,6 +129,171 @@
           "label": "Answer",
           "default": "<p>We accept returns within 30 days of purchase.</p>"
         }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ V2 (Scrollable)",
+      "blocks": [
+        { "type": "category", "settings": { "title": "General" } },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "category", "settings": { "title": "Shipping" } },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %} {% endcomment %}
+{{ 'cora-faq-v2.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #cora-faq-v2-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #cora-faq-v2-{{ section.id }} .cora-faq-v2__heading {
+    color: {{ section.settings.heading_color }};
+  }
+{%- endstyle -%}
+
+<section id="cora-faq-v2-{{ section.id }}" class="cora-faq-v2-section">
+  <div class="cora-faq-v2__container">
+    
+    {%- if section.settings.heading != blank -%}
+      <div class="cora-faq-v2__header">
+        <h2 class="cora-faq-v2__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <div class="cora-faq-v2__desc">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="cora-faq-v2__wrapper">
+      {%- assign in_group = false -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          {%- if in_group -%}
+            </div> </div> </div> {%- endif -%}
+          
+          {%- assign in_group = true -%}
+          
+          <div class="cora-faq-v2__category-group" {{ block.shopify_attributes }}>
+            
+            <button class="cora-faq-v2__category-header" aria-expanded="true" type="button">
+              <h3 class="cora-faq-v2__category-title">{{ block.settings.title }}</h3>
+              <span class="cora-faq-v2__cat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </button>
+            
+            <div class="cora-faq-v2__questions-wrapper" style="max-height: none;">
+              <div class="cora-faq-v2__questions-list">
+        
+        {%- elsif block.type == 'question' -%}
+          {%- if in_group -%}
+            <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
+              <button class="cora-faq-v2__question-trigger" aria-expanded="true" type="button">
+                <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
+                <span class="cora-faq-v2__icon"></span>
+              </button>
+              
+              <div class="cora-faq-v2__answer-wrapper" style="max-height: none;">
+                <div class="cora-faq-v2__answer">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if in_group -%}
+        </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const section = document.getElementById("cora-faq-v2-{{ section.id }}");
+    
+    // Helper function for accordion animation
+    const toggleAccordion = (trigger, content) => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', !isOpen);
+
+      if (isOpen) {
+        // Closing
+        content.style.maxHeight = content.scrollHeight + "px"; // Set explicit height
+        content.offsetHeight; // Force reflow
+        content.style.maxHeight = "0"; // Collapse
+      } else {
+        // Opening
+        content.style.maxHeight = content.scrollHeight + "px";
+        // Optional: Remove max-height after transition to allow content resizing
+        setTimeout(() => {
+           if(trigger.getAttribute('aria-expanded') === 'true') {
+             content.style.maxHeight = "none"; 
+           }
+        }, 350);
+      }
+    };
+
+    // 1. Question Toggles
+    const questionTriggers = section.querySelectorAll('.cora-faq-v2__question-trigger');
+    questionTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleAccordion(this, this.nextElementSibling);
+      });
+    });
+
+    // 2. Category Group Toggles
+    const categoryTriggers = section.querySelectorAll('.cora-faq-v2__category-header');
+    categoryTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleAccordion(this, this.nextElementSibling);
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ V2 (Scrollable)",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "textarea", "id": "text", "label": "Description", "default": "Common questions about our products and shipping." },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#1a1a1a" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "default": 80, "label": "Padding Top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "default": 80, "label": "Padding Bottom" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Header",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Category Title", "default": "General" }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question & Answer",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Question", "default": "What is your return policy?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>We accept returns within 30 days of purchase.</p>" }
       ]
     }
   ],
