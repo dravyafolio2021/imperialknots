@@ -25,35 +25,48 @@
 
     <div class="cora-faq-v2__wrapper">
       {%- assign category_open = false -%}
+      
       {%- for block in section.blocks -%}
-        {%- if block.type == 'category' -%}
-          {%- if category_open -%}
+        {%- case block.type -%}
+          
+          {%- when 'category' -%}
+            {%- comment -%} Close previous category if one is open {%- endcomment -%}
+            {%- if category_open -%}
+                </div>
+              </details>
+            {%- endif -%}
+            
+            {%- assign category_open = true -%}
+            
+            <details class="cora-faq-v2__category" {{ block.shopify_attributes }}>
+              <summary class="cora-faq-v2__category-trigger">
+                <h3 class="cora-faq-v2__category-title">{{ block.settings.title }}</h3>
+                <span class="cora-faq-v2__icon cora-faq-v2__icon--category">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </summary>
+              <div class="cora-faq-v2__category-content">
+
+          {%- when 'question' -%}
+            {%- comment -%} Only render questions if inside an open category {%- endcomment -%}
+            {%- if category_open -%}
+              <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
+                <button class="cora-faq-v2__question-trigger" aria-expanded="false" type="button">
+                  <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
+                  <span class="cora-faq-v2__icon cora-faq-v2__icon--question"></span>
+                </button>
+                <div class="cora-faq-v2__answer-wrapper">
+                  <div class="cora-faq-v2__answer">
+                    {{ block.settings.answer }}
+                  </div>
+                </div>
               </div>
-            </details>
-          {%- endif -%}
-          {%- assign category_open = true -%}
-          <details class="cora-faq-v2__category" {{ block.shopify_attributes }}>
-            <summary class="cora-faq-v2__category-trigger">
-              <h3 class="cora-faq-v2__category-title">{{ block.settings.title }}</h3>
-              <span class="cora-faq-v2__icon cora-faq-v2__icon--category">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </span>
-            </summary>
-            <div class="cora-faq-v2__category-content">
-        {%- elsif block.type == 'question' and category_open -%}
-          <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
-            <button class="cora-faq-v2__question-trigger" aria-expanded="false">
-              <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
-              <span class="cora-faq-v2__icon cora-faq-v2__icon--question"></span>
-            </button>
-            <div class="cora-faq-v2__answer-wrapper">
-              <div class="cora-faq-v2__answer">
-                {{ block.settings.answer }}
-              </div>
-            </div>
-          </div>
-        {%- endif -%}
+            {%- endif -%}
+
+        {%- endcase -%}
       {%- endfor -%}
+
+      {%- comment -%} Close the last category if one was open {%- endcomment -%}
       {%- if category_open -%}
           </div>
         </details>
@@ -67,24 +80,16 @@
   document.addEventListener("DOMContentLoaded", function() {
     const section = document.getElementById("cora-faq-v2-{{ section.id }}");
     
-    // 1. Category Toggling (Native <details> behavior is enhanced)
-    const categories = section.querySelectorAll('.cora-faq-v2__category');
-    categories.forEach(cat => {
-      cat.addEventListener('click', function(e) {
-        // Optional: Close other categories if you want an accordion effect for categories too
-        // categories.forEach(c => { if (c !== this && c.hasAttribute('open')) c.removeAttribute('open'); });
-      });
-    });
-
-    // 2. Question Accordion Logic
+    // Question Accordion Logic
     const questionTriggers = section.querySelectorAll('.cora-faq-v2__question-trigger');
     questionTriggers.forEach(trigger => {
-      trigger.addEventListener('click', function() {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent any default button behavior
         const content = this.nextElementSibling;
         const isOpen = this.getAttribute('aria-expanded') === 'true';
         const parentCategoryContent = this.closest('.cora-faq-v2__category-content');
 
-        // Close other questions within the same category
+        // Optional: Close other questions within the same category
         if (parentCategoryContent) {
             parentCategoryContent.querySelectorAll('.cora-faq-v2__question-trigger').forEach(otherBtn => {
                 if (otherBtn !== this && otherBtn.getAttribute('aria-expanded') === 'true') {
@@ -144,7 +149,6 @@
         { "type": "question" },
         { "type": "question" },
         { "type": "category", "settings": { "title": "Shipping" } },
-        { "type": "question" },
         { "type": "question" }
       ]
     }
