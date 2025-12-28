@@ -32,14 +32,15 @@
 /* Wrapper (Desktop Grid) */
 .cora-faq-v2__wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 Columns */
-  gap: 60px;
+  grid-template-columns: repeat(2, 1fr); /* 2 Columns on Desktop */
+  gap: 60px; /* Space between columns */
   align-items: start;
 }
 
 /* Category Group */
 .cora-faq-v2__category-group {
   width: 100%;
+  margin-bottom: 20px; /* Space between rows */
 }
 
 .cora-faq-v2__category-header {
@@ -71,7 +72,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Align top for multi-line text */
+  align-items: flex-start;
   padding: 24px 0 16px;
   background: none;
   border: none;
@@ -126,49 +127,38 @@
 }
 .cora-faq-v2__answer p { margin-bottom: 10px; }
 
-/* --- Mobile Responsive (Scrollable Cards) --- */
+/* --- Mobile Responsive (Vertical Stack) --- */
 @media (max-width: 900px) {
   .cora-faq-v2-section {
-    padding: 60px 0; /* Full width for scroll */
+    padding: 60px 20px; /* Standard padding */
   }
   
   .cora-faq-v2__header {
-    padding: 0 20px;
     margin-bottom: 40px;
   }
 
+  /* RESET WRAPPER TO VERTICAL STACK */
   .cora-faq-v2__wrapper {
-    display: flex; /* Horizontal Layout */
-    overflow-x: auto; /* Scrollable */
-    scroll-snap-type: x mandatory;
-    gap: 20px;
-    padding: 0 20px 40px; /* Bottom padding for shadow/space */
-    align-items: stretch;
-    -webkit-overflow-scrolling: touch;
-    
-    /* Hide scrollbar */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column; /* Vertical rows */
+    gap: 40px; /* Space between category groups */
+    overflow-x: visible; /* Disable scroll */
+    padding: 0;
   }
-  .cora-faq-v2__wrapper::-webkit-scrollbar { display: none; }
 
+  /* Reset Category Group Styles */
   .cora-faq-v2__category-group {
-    /* Mobile Card Style */
-    flex: 0 0 88vw; /* Card Width */
-    max-width: 400px;
-    scroll-snap-align: center;
-    
-    /* "No Outline" - Clean card look */
+    flex: none;
+    width: 100%;
+    max-width: 100%;
     border: none;
-    background: transparent; 
-    /* Optional: If you want white cards on grey bg, uncomment below */
-    /* background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); */
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
   }
 
-  .cora-faq-v2__category-header {
-    border-bottom: 1px solid #e5e5e5; /* Lighter separator on mobile */
-  }
-  
+  /* Visual adjustments */
   .cora-faq-v2__question {
     font-size: 16px;
   }
