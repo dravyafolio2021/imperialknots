@@ -32,7 +32,7 @@
 /* Wrapper (Desktop Grid) */
 .cora-faq-v2__wrapper {
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /* 2 Columns on Desktop */
+  grid-template-columns: repeat(2, 1fr); /* 2 Columns on Desktop */
   gap: 60px; /* Space between columns */
   align-items: start;
 }
@@ -40,13 +40,22 @@
 /* Category Group */
 .cora-faq-v2__category-group {
   width: 100%;
-  margin-bottom: 20px; /* Space between rows */
+  margin-bottom: 20px;
 }
 
+/* Category Header (Clickable Button) */
 .cora-faq-v2__category-header {
-  padding-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 20px 0;
+  border: none;
+  background: none;
   border-bottom: 2px solid #1a1a1a;
-  margin-bottom: 10px;
+  margin-bottom: 0; /* Margin handled by wrapper padding */
+  cursor: pointer;
+  text-align: left;
 }
 
 .cora-faq-v2__category-title {
@@ -57,10 +66,37 @@
   margin: 0;
 }
 
+/* Category Chevron Icon */
+.cora-faq-v2__cat-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.cora-faq-v2__cat-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: #1a1a1a;
+}
+
+/* Rotate icon when category is open */
+.cora-faq-v2__category-header[aria-expanded="true"] .cora-faq-v2__cat-icon {
+  transform: rotate(90deg);
+}
+
+/* Questions Wrapper (Collapsible) */
+.cora-faq-v2__questions-wrapper {
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
 /* Questions List */
 .cora-faq-v2__questions-list {
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
 }
 
 /* Question Item */
@@ -88,7 +124,7 @@
   line-height: 1.4;
 }
 
-/* Icon (+ / -) */
+/* Question Icon (+ / -) */
 .cora-faq-v2__icon {
   position: relative;
   width: 14px;
@@ -130,7 +166,7 @@
 /* --- Mobile Responsive (Vertical Stack) --- */
 @media (max-width: 900px) {
   .cora-faq-v2-section {
-    padding: 60px 20px; /* Standard padding */
+    padding: 60px 20px;
   }
   
   .cora-faq-v2__header {
@@ -140,20 +176,15 @@
   /* RESET WRAPPER TO VERTICAL STACK */
   .cora-faq-v2__wrapper {
     display: flex;
-    flex-direction: column; /* Vertical rows */
-    gap: 40px; /* Space between category groups */
-    overflow-x: visible; /* Disable scroll */
+    flex-direction: column;
+    gap: 40px;
     padding: 0;
   }
-
- 
- 
 
   /* Reset Category Group Styles */
   .cora-faq-v2__category-group {
     flex: none;
     width: 100%;
-    max-width: 100%;
     border: none;
     background: transparent;
     padding: 0;
@@ -161,7 +192,6 @@
     box-shadow: none;
   }
 
-  /* Visual adjustments */
   .cora-faq-v2__question {
     font-size: 16px;
   }
