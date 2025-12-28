@@ -9,12 +9,51 @@
  */
 {
   "sections": {
+    "cora_catalog_banner_YRWeUa": {
+      "type": "cora-catalog-banner",
+      "custom_css": [
+        "{background-color: #ffff;}"
+      ],
+      "name": "Catalog Banner",
+      "settings": {
+        "heading": "All Collections",
+        "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
+        "text_color": "#000000",
+        "text_align": "center",
+        "bg_color": "#F0EBE4",
+        "pt_desktop": 60,
+        "pb_desktop": 60,
+        "pt_mobile": 40,
+        "pb_mobile": 40
+      }
+    },
     "main": {
       "type": "collections",
-      "settings": {}
+      "settings": {
+        "show_description": true,
+        "description_words": 15,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "grid_gap_desktop": 20,
+        "grid_gap_tablet": 16,
+        "grid_gap_mobile": 12,
+        "card_aspect": 125,
+        "card_radius": 14,
+        "card_shadow": "0 8px 22px rgba(11,20,23,0.06)",
+        "image_crop": "center",
+        "bg_color_desktop": "#ffffff",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_tablet": 40,
+        "padding_bottom_tablet": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
     }
   },
   "order": [
+    "cora_catalog_banner_YRWeUa",
     "main"
   ]
 }
