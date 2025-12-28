@@ -29,6 +29,9 @@
     },
     "main": {
       "type": "collections",
+      "custom_css": [
+        "{overflow-x: hidden}"
+      ],
       "settings": {
         "show_description": true,
         "description_words": 15,
