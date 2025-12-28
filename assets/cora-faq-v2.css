@@ -32,7 +32,7 @@
 /* Wrapper (Desktop Grid) */
 .cora-faq-v2__wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 Columns on Desktop */
+  grid-template-columns: repeat(1, 1fr); /* 2 Columns on Desktop */
   gap: 60px; /* Space between columns */
   align-items: start;
 }
@@ -145,6 +145,9 @@
     overflow-x: visible; /* Disable scroll */
     padding: 0;
   }
+
+ 
+ 
 
   /* Reset Category Group Styles */
   .cora-faq-v2__category-group {
