@@ -557,6 +557,19 @@
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         },
+        "question_MyNQNM": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_7AFgjY": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
         "question_6TwP9m": {
           "type": "question",
           "settings": {
@@ -571,6 +584,8 @@
         "question_Kfh38c",
         "category_7K3jmc",
         "question_yfthfF",
+        "question_MyNQNM",
+        "category_7AFgjY",
         "question_6TwP9m"
       ],
       "name": "FAQ V2 (Collapsible)",
