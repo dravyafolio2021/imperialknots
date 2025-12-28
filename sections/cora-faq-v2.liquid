@@ -48,25 +48,26 @@
               <div class="cora-faq-v2__category-content">
 
           {%- when 'question' -%}
-            {%- comment -%} Only render questions if inside an open category {%- endcomment -%}
             {%- if category_open -%}
               <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
-                <button class="cora-faq-v2__question-trigger" aria-expanded="false" type="button">
+                
+                <button class="cora-faq-v2__question-trigger" aria-expanded="true" type="button">
                   <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
                   <span class="cora-faq-v2__icon cora-faq-v2__icon--question"></span>
                 </button>
-                <div class="cora-faq-v2__answer-wrapper">
+                
+                <div class="cora-faq-v2__answer-wrapper" style="max-height: none;">
                   <div class="cora-faq-v2__answer">
                     {{ block.settings.answer }}
                   </div>
                 </div>
+
               </div>
             {%- endif -%}
 
         {%- endcase -%}
       {%- endfor -%}
 
-      {%- comment -%} Close the last category if one was open {%- endcomment -%}
       {%- if category_open -%}
           </div>
         </details>
@@ -80,31 +81,30 @@
   document.addEventListener("DOMContentLoaded", function() {
     const section = document.getElementById("cora-faq-v2-{{ section.id }}");
     
-    // Question Accordion Logic
     const questionTriggers = section.querySelectorAll('.cora-faq-v2__question-trigger');
     questionTriggers.forEach(trigger => {
       trigger.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent any default button behavior
+        e.preventDefault(); 
         const content = this.nextElementSibling;
         const isOpen = this.getAttribute('aria-expanded') === 'true';
-        const parentCategoryContent = this.closest('.cora-faq-v2__category-content');
 
-        // Optional: Close other questions within the same category
-        if (parentCategoryContent) {
-            parentCategoryContent.querySelectorAll('.cora-faq-v2__question-trigger').forEach(otherBtn => {
-                if (otherBtn !== this && otherBtn.getAttribute('aria-expanded') === 'true') {
-                    otherBtn.setAttribute('aria-expanded', 'false');
-                    otherBtn.nextElementSibling.style.maxHeight = null;
-                }
-            });
-        }
-
-        // Toggle current question
+        // Toggle state
         this.setAttribute('aria-expanded', !isOpen);
-        if (!isOpen) {
+
+        if (isOpen) {
+          // CLOSING:
+          // 1. Set explicit height (because it was 'none') to enable transition
           content.style.maxHeight = content.scrollHeight + "px";
+          
+          // 2. Force reflow/repaint so browser registers the height
+          // This is a common trick: accessing offsetHeight forces the browser to calculate layout
+          content.offsetHeight; 
+
+          // 3. Set to 0 to trigger css transition
+          content.style.maxHeight = "0";
         } else {
-          content.style.maxHeight = null;
+          // OPENING:
+          content.style.maxHeight = content.scrollHeight + "px";
         }
       });
     });
