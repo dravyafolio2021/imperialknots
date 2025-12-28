@@ -1,0 +1,258 @@
+/* --- Cora FAQ V2 Section --- */
+.cora-faq-v2-section {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  overflow: hidden; /* Prevent scrollbar flicker */
+}
+
+.cora-faq-v2__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+.cora-faq-v2__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.cora-faq-v2__heading {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+}
+
+.cora-faq-v2__desc {
+  font-family: inherit;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* --- Main Wrapper --- */
+.cora-faq-v2__wrapper {
+  /* Desktop: CSS Grid for 2 columns */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 60px; /* Row gap, Column gap */
+  align-items: start;
+}
+
+/* --- Category --- */
+.cora-faq-v2__category {
+  /* Desktop: Category title spans both columns */
+  grid-column: 1 / -1;
+  width: 100%;
+  border-bottom: 2px solid #1a1a1a;
+  margin-top: 20px;
+}
+
+/* Remove default detail marker */
+.cora-faq-v2__category > summary {
+  list-style: none;
+}
+.cora-faq-v2__category > summary::-webkit-details-marker {
+  display: none;
+}
+
+.cora-faq-v2__category-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.cora-faq-v2__category-title {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.cora-faq-v2__icon--category {
+  transition: transform 0.3s ease;
+}
+details[open] .cora-faq-v2__icon--category {
+  transform: rotate(180deg);
+}
+
+.cora-faq-v2__category-content {
+  /* Desktop: The content within a category becomes a 2-column grid */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 60px; /* Column gap for questions */
+  padding-bottom: 20px;
+}
+
+/* --- Question Item --- */
+.cora-faq-v2__item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Trigger Button */
+.cora-faq-v2__question-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.cora-faq-v2__question-trigger:hover {
+  opacity: 0.7;
+}
+
+.cora-faq-v2__question {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a1a;
+  padding-right: 20px;
+  line-height: 1.4;
+}
+
+/* Icon Animation (Plus to Minus) */
+.cora-faq-v2__icon--question {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.cora-faq-v2__icon--question::before,
+.cora-faq-v2__icon--question::after {
+  content: '';
+  position: absolute;
+  background-color: #1a1a1a;
+  transition: transform 0.3s ease;
+}
+
+/* Horizontal Line */
+.cora-faq-v2__icon--question::before {
+  top: 50%; left: 0;
+  width: 100%; height: 1.5px;
+  transform: translateY(-50%);
+}
+
+/* Vertical Line */
+.cora-faq-v2__icon--question::after {
+  top: 0; left: 50%;
+  width: 1.5px; height: 100%;
+  transform: translateX(-50%);
+}
+
+/* Active State: Rotate vertical line to make it flat */
+.cora-faq-v2__question-trigger[aria-expanded="true"] .cora-faq-v2__icon--question::after {
+  transform: translateX(-50%) rotate(90deg);
+}
+
+/* Answer Content */
+.cora-faq-v2__answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cora-faq-v2__answer {
+  padding-bottom: 24px;
+  color: #555;
+  line-height: 1.7;
+  font-size: 16px;
+  padding-right: 20px;
+}
+
+.cora-faq-v2__answer p { margin-bottom: 15px; }
+.cora-faq-v2__answer p:last-child { margin-bottom: 0; }
+.cora-faq-v2__answer a { color: #1a1a1a; text-decoration: underline; }
+
+
+/* --- Mobile & Tablet Responsive Styles --- */
+@media (max-width: 900px) {
+  .cora-faq-v2-section {
+    padding: 60px 0; /* Remove side padding for full-width scroll */
+  }
+  
+  .cora-faq-v2__header {
+    padding: 0 20px; /* Restore padding for header */
+    margin-bottom: 40px;
+  }
+
+  /* Mobile: Scrollable Horizontal Categories */
+  .cora-faq-v2__wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    gap: 20px;
+    padding: 0 20px 20px; /* Padding for scroll container and shadow room */
+    scroll-snap-type: x mandatory;
+    
+    /* Hide scrollbar for cleaner look */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+  .cora-faq-v2__wrapper::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+
+  /* Mobile: Category Card */
+  .cora-faq-v2__category {
+    flex: 0 0 85vw; /* Fixed width for each category card */
+    width: 85vw;
+    max-width: 400px;
+    scroll-snap-align: start;
+    border-bottom: none; /* Remove desktop border */
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 0 20px;
+    margin-top: 0;
+    background-color: #fff;
+  }
+  
+  /* Ensure categories are open by default on mobile for better UX in a slider */
+  .cora-faq-v2__category[open] {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  /* Hide the chevron on mobile as it's less like an accordion and more like a card */
+  .cora-faq-v2__icon--category {
+      display: none;
+  }
+  .cora-faq-v2__category-trigger {
+      cursor: default; /* Not really clickable to toggle on mobile */
+      padding: 24px 0 16px;
+  }
+
+  /* Mobile: Single Column Questions within Category */
+  .cora-faq-v2__category-content {
+    display: block; /* Reset from grid */
+    padding-bottom: 10px;
+  }
+  
+  .cora-faq-v2__question-trigger {
+    padding: 16px 0;
+  }
+  .cora-faq-v2__question {
+    font-size: 16px;
+  }
+  .cora-faq-v2__answer {
+      padding-bottom: 16px;
+      font-size: 15px;
+  }
+}
