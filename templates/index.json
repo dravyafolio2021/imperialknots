@@ -509,11 +509,74 @@
         "category_bbLAK6",
         "question_kyFbDk"
       ],
+      "disabled": true,
       "name": "Advanced FAQ Widget",
       "settings": {
         "heading": "Frequently Asked Questions",
         "text": "Common questions about our products and shipping.",
         "enable_accordion": true,
+        "bg_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "cora_faq_v2_XWXtm4": {
+      "type": "cora-faq-v2",
+      "blocks": {
+        "category_CWJGQf": {
+          "type": "category",
+          "settings": {
+            "title": "General"
+          }
+        },
+        "question_ifmTAG": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?1",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "question_Kfh38c": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?2",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_7K3jmc": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question_yfthfF": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "question_6TwP9m": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_CWJGQf",
+        "question_ifmTAG",
+        "question_Kfh38c",
+        "category_7K3jmc",
+        "question_yfthfF",
+        "question_6TwP9m"
+      ],
+      "name": "FAQ V2 (Collapsible)",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "text": "Common questions about our products and shipping.",
         "bg_color": "#ffffff",
         "heading_color": "#1a1a1a",
         "padding_top": 80,
@@ -528,6 +591,7 @@
     "cora_style_grid_K3RUBY",
     "cora_product_grid_aPwt7d",
     "cora_features_jfEBK8",
-    "cora_faq_section_R8KehB"
+    "cora_faq_section_R8KehB",
+    "cora_faq_v2_XWXtm4"
   ]
 }
