@@ -11,6 +11,15 @@
   "sections": {
     "main": {
       "type": "apps",
+      "blocks": {
+        "cora_builder_canvas_qL9Nnx": {
+          "type": "shopify://apps/cora-builder/blocks/canvas/019b6a90-f478-74c0-a9ed-4bacf9286e87",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "cora_builder_canvas_qL9Nnx"
+      ],
       "settings": {}
     }
   },
