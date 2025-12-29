@@ -19,10 +19,24 @@
       "settings": {
         "heading": "You May Also Like"
       }
+    },
+    "1767020103dc26a5f5": {
+      "type": "apps",
+      "blocks": {
+        "cora_builder_canvas_jKEMBN": {
+          "type": "shopify://apps/cora-builder/blocks/canvas/019b6a90-f478-74c0-a9ed-4bacf9286e87",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "cora_builder_canvas_jKEMBN"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "cora_related_products_9P8nC6"
+    "cora_related_products_9P8nC6",
+    "1767020103dc26a5f5"
   ]
 }
