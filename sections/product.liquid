@@ -29,6 +29,11 @@
 <section class="cmp-section" id="MainProduct-{{ section.id }}">
   <div class="cmp-container">
     <div class="cmp-gallery">
+       <div class="cmp-meta">
+        {%- if product.collections.first -%}
+          <span class="cmp-category">{{ product.collections.first.title }}</span>
+        {%- endif -%}
+      </div>
       <div class="cmp-main-image">
         {%- if product.featured_image -%}
           <img
@@ -44,12 +49,7 @@
         {%- endif -%}
         <div class="cmp-image-counter">1 / {{ product.images.size }}</div>
       </div>
-       <div class="cmp-meta">
-        {%- if product.collections.first -%}
-          <span class="cmp-category">{{ product.collections.first.title }}</span>
-        {%- endif -%}
-        
-      </div>
+     
 
       {%- if product.images.size > 1 -%}
         <div class="cmp-thumbnails">
@@ -67,9 +67,7 @@
 
     <div class="cmp-info">
       <div class="cmp-meta">
-        {%- if product.collections.first -%}
-          <span class="cmp-category">{{ product.collections.first.title }}</span>
-        {%- endif -%}
+         
         {%- assign current_variant = product.selected_or_first_available_variant -%}
         <span class="cmp-sku"
           >SKU: <span id="Sku-{{ section.id }}">{{ current_variant.sku | default: 'N/A' }}</span></span
