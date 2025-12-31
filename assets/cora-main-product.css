@@ -1,43 +1,50 @@
 /* ASSET: cora-main-product.css 
   Purpose: Styles for the Split-Screen Product Page (Imperial Knots Design)
-  Updated: Gallery size optimized (Max width 500px)
+  Updated: Gallery is now STICKY, Info scrolls.
 */
 
 /* --- 1. LAYOUT STRUCTURE --- */
 .cmp-section {
   background-color: #fff;
   padding: 40px 20px;
+  /* Ensure no overflow hidden on parent, or sticky won't work */
+  overflow: visible; 
 }
 
-/* Force Flexbox Layout (Overrides Theme Defaults) */
+/* Force Flexbox Layout */
 .cmp-container {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 60px !important; 
   max-width: 1200px;
   margin: 0 auto;
-  align-items: flex-start;
-  justify-content: center; /* Centers content on wide screens */
+  /* Align start is required for sticky to work */
+  align-items: flex-start; 
+  justify-content: center;
+  position: relative;
 }
 
-/* LEFT COLUMN (Gallery) - SIZE OPTIMIZED */
+/* LEFT COLUMN (Gallery) - NOW STICKY */
 .cmp-gallery {
   flex: 1 1 400px !important;
   width: 50%;
-  
-  /* CRITICAL FIX: Limits image width, which automatically limits height */
   max-width: 500px !important; 
-  
   min-width: 300px;
+  
+  /* STICKY LOGIC */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 40px; /* Distance from top of screen */
+  align-self: flex-start;
+  height: fit-content; /* Important: prevents gallery from stretching to full height of container */
+  z-index: 10;
 }
 
-/* RIGHT COLUMN (Info) */
+/* RIGHT COLUMN (Info) - SCROLLABLE */
 .cmp-info {
-  flex: 0 0 450px !important; /* Fixed width for consistent look */
+  flex: 0 0 450px !important; 
   width: 450px;
-  position: sticky;
-  top: 40px;
-  z-index: 10;
+  position: relative; /* Removed sticky from here */
 }
 
 /* --- 2. GALLERY STYLES --- */
@@ -47,7 +54,7 @@
   border-radius: 8px;
   overflow: hidden;
   background-color: #f4f4f4;
-  aspect-ratio: 4 / 5; /* Portrait Rug Ratio */
+  aspect-ratio: 4 / 5;
   margin-bottom: 20px;
 }
 
@@ -143,7 +150,7 @@
   margin: 12px 0;
 }
 
-/* --- 4. VARIANT PILLS (The Buttons) --- */
+/* --- 4. VARIANT PILLS --- */
 .cmp-form-group { margin-bottom: 24px; }
 
 .cmp-option-header {
@@ -169,7 +176,6 @@
   gap: 10px;
 }
 
-/* CRITICAL: Hiding the default radio button */
 .cmp-option-input {
   position: absolute;
   opacity: 0;
@@ -177,7 +183,6 @@
   height: 0;
 }
 
-/* The Visible Label */
 .cmp-pill-label {
   display: inline-block;
   padding: 12px 20px;
@@ -193,19 +198,14 @@
   transition: all 0.2s ease;
 }
 
-/* Hover State */
-.cmp-pill-label:hover {
-  border-color: #000;
-}
+.cmp-pill-label:hover { border-color: #000; }
 
-/* Selected State */
 .cmp-option-input:checked + .cmp-pill-label {
   background-color: #000 !important;
   color: #fff !important;
   border-color: #000 !important;
 }
 
-/* Disabled/OOS State */
 .cmp-option-input:disabled + .cmp-pill-label {
   opacity: 0.5;
   cursor: not-allowed;
@@ -214,59 +214,28 @@
   border-color: #eee;
 }
 
-/* --- 5. ACTIONS (Qty + ATC) --- */
-.cmp-actions-row {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
+/* --- 5. ACTIONS --- */
+.cmp-actions-row { margin-top: 30px; margin-bottom: 30px; }
 
 .cmp-qty-label { 
-  font-size: 14px; 
-  font-weight: 600; 
-  margin-bottom: 8px; 
-  display: block; 
-  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block; font-family: 'Inter', sans-serif;
 }
 
 .cmp-qty-wrapper {
-  display: flex;
-  align-items: center;
-  border: 1px solid #e5e5e5;
-  border-radius: 6px;
-  width: 120px;
-  height: 44px;
-  margin-bottom: 20px;
+  display: flex; align-items: center; border: 1px solid #e5e5e5; border-radius: 6px; width: 120px; height: 44px; margin-bottom: 20px;
 }
 
 .cmp-qty-btn {
-  width: 40px; height: 100%; border: none; background: transparent;
-  font-size: 18px; cursor: pointer; color: #555;
-  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 100%; border: none; background: transparent; font-size: 18px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center;
 }
 
 .cmp-qty-input {
-  width: 40px; height: 100%; border: none; text-align: center; font-size: 16px;
-  appearance: none; -moz-appearance: textfield; font-family: 'Inter', sans-serif;
+  width: 40px; height: 100%; border: none; text-align: center; font-size: 16px; appearance: none; -moz-appearance: textfield; font-family: 'Inter', sans-serif;
 }
 
 .cmp-atc-btn {
-  width: 100%;
-  background-color: #1a1a1a;
-  color: #fff;
-  border: none;
-  height: 50px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: opacity 0.2s;
+  width: 100%; background-color: #1a1a1a; color: #fff; border: none; height: 50px; border-radius: 8px; font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.2s;
 }
-
 .cmp-atc-btn:hover { opacity: 0.9; }
 .cmp-atc-btn:disabled { background-color: #ccc; cursor: not-allowed; }
 
@@ -275,44 +244,17 @@
 .cmp-accordion-item { border-bottom: 1px solid #e5e5e5; }
 
 .cmp-accordion-header {
-  padding: 18px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  color: #1a1a1a;
+  padding: 18px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 500; font-size: 15px; font-family: 'Inter', sans-serif; color: #1a1a1a;
 }
-
-.cmp-accordion-icon {
-  font-size: 20px;
-  font-weight: 300;
-  transition: transform 0.3s ease;
-}
-
-.cmp-accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #555;
-  font-family: 'Inter', sans-serif;
-}
+.cmp-accordion-icon { font-size: 20px; font-weight: 300; transition: transform 0.3s ease; }
+.cmp-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; font-size: 14px; line-height: 1.6; color: #555; font-family: 'Inter', sans-serif; }
 .cmp-accordion-inner { padding-bottom: 20px; }
+.cmp-accordion-item[open] .cmp-accordion-icon { transform: rotate(45deg); }
 
-.cmp-accordion-item[open] .cmp-accordion-icon {
-  transform: rotate(45deg);
-}
-
-/* --- Mobile Responsiveness --- */
-@media (max-width: 600px) {
-
-/* --- 1. LAYOUT STRUCTURE --- */
-.cmp-section {
-  background-color: #fff;
-  padding: 40px 0;
-}
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+  .cmp-gallery {
+    /* Disable sticky on mobile so it doesn't overlap/float weirdly in a stack */
+    position: static; 
+  }
 }
