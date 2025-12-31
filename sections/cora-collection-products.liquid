@@ -14,11 +14,12 @@
 
 <div id="cora-prod-grid-{{ section.id }}" class="cora-catalog-section">
   <div class="cora-catalog-container">
-    <div class="cora-catalog-header">
+    {% comment %} <div class="cora-catalog-header">
       <h1 class="cora-catalog-title">{{ collection.title }}</h1>
       {% if collection.description != blank %}
-<div class="cora-catalog-desc">{{ collection.description | strip_html | truncatewords: 20 }}</div>      {% endif %}
-    </div>
+<div class="cora-catalog-desc">{{ collection.description | strip_html | truncatewords: 20 }}</div>      
+{% endif %}
+    </div> {% endcomment %}
 
     {% paginate collection.products by section.settings.products_per_page %}
       <div class="cora-grid-layout">
