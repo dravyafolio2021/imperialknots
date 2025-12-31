@@ -11,6 +11,26 @@
   "sections": {
     "main": {
       "type": "product",
+      "blocks": {
+        "accordion_FCpxbL": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Material & Care",
+            "content": ""
+          }
+        },
+        "accordion_Yg3Dg4": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Material & Care",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "accordion_FCpxbL",
+        "accordion_Yg3Dg4"
+      ],
       "settings": {}
     },
     "cora_related_products_9P8nC6": {
