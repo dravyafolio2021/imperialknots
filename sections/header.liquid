@@ -79,7 +79,7 @@
         {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
       </a>
 
-      {% if shop.customer_accounts_enabled %}
+      {% comment %} {% if shop.customer_accounts_enabled %}
         <div class="cora-auth-wrapper">
           {% if customer %}
             <a href="{{ routes.account_url }}" class="cora-user-pill">
@@ -91,7 +91,7 @@
             <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary">Sign up</a>
           {% endif %}
         </div>
-      {% endif %}
+      {% endif %} {% endcomment %}
     </div>
 
   </div>
