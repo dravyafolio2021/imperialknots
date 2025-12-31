@@ -16,8 +16,8 @@
       ],
       "name": "Catalog Banner",
       "settings": {
-        "heading": "{{ page.title }}",
-        "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
+        "heading": "Planning a Project? Connect with Us",
+        "subheading": "Be part of a creative ecosystem building the future of design & technology.\nBe part of a creative ecosystem building the future of design & technology.",
         "text_color": "#000000",
         "text_align": "center",
         "bg_color": "#f0ebe4",
