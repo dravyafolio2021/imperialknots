@@ -3,15 +3,18 @@
 .cas-section {
   padding: 80px 20px;
   background-color: #e6e6e6; /* Fallback color */
-  overflow: hidden;
+  /* CHANGED: Removed 'overflow: hidden' because it breaks sticky positioning */
+  overflow: visible; 
 }
 
 .cas-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  /* CHANGED: 'center' prevents scrolling. 'flex-start' allows the text to be taller than the image. */
+  align-items: flex-start; 
   gap: 80px;
+  position: relative;
 }
 
 /* CONTENT COLUMN */
@@ -58,7 +61,7 @@
   font-family: 'Assistant', sans-serif;
   font-size: 36px;
   font-weight: 600;
-  color: #c1a676; /* The Gold/Beige color from design */
+  color: #c1a676; 
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -71,19 +74,24 @@
   color: #888;
 }
 
-/* IMAGE COLUMN */
+/* IMAGE COLUMN (Sticky Wrapper) */
 .cas-image-wrapper {
   flex: 1;
-  position: relative;
+  /* NEW: Sticky Logic */
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 40px; /* Stops 40px from the top of the screen */
+  height: fit-content; /* Ensures wrapper doesn't stretch */
+  align-self: flex-start;
 }
 
 .cas-image {
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1; /* Square-ish portrait */
+  aspect-ratio: 1 / 1; 
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Soft shadow effect */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
   display: block;
 }
 
@@ -97,6 +105,7 @@
     flex-direction: column-reverse; /* Puts image on top */
     gap: 40px;
     text-align: center;
+    align-items: center; /* Revert to center for mobile stack */
   }
 
   .cas-content {
@@ -108,12 +117,14 @@
   }
 
   .cas-stats {
-    justify-content: center; /* Center stats on mobile */
+    justify-content: center; 
     gap: 30px;
   }
   
   .cas-image-wrapper {
     width: 100%;
-    max-width: 500px; /* Constraint image width on mobile */
+    max-width: 500px;
+    /* Reset sticky on mobile since layout is stacked */
+    position: static; 
   }
 }
