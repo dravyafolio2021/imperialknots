@@ -16,16 +16,18 @@
   height: 80px;
   display: flex;
   align-items: center;
-  /* Justify between pushes Menu (Left) and Icons (Right) apart */
   justify-content: space-between; 
 }
 
 /* =========================================
-   2. LOGO (Centered on Desktop)
+   2. LOGO (Left on Desktop)
    ========================================= */
 .cora-header__left {
   flex: 0 0 auto;
   z-index: 52;
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Spacing between logo and nav */
 }
 
 .cora-header__brand-link {
@@ -51,14 +53,13 @@
 }
 
 /* =========================================
-   3. NAVIGATION (Left on Desktop)
+   3. NAVIGATION (Center on Desktop)
    ========================================= */
 .cora-header__center {
-  /* Takes up left space */
   flex: 1; 
   display: flex;
-  /* Forces content to the start (Left) */
-  justify-content: flex-start; 
+  /* CHANGED: Centers the menu items */
+  justify-content: center; 
   height: 100%;
 }
 
@@ -102,7 +103,8 @@
 .cora-nav__dropdown {
   position: absolute;
   top: 100%;
-  left: 0; /* Align dropdown to left edge of link */
+  left: 50%; /* Center dropdown relative to link */
+  transform: translateX(-50%);
   background: #ffffff;
   border: 1px solid #e5e5e5;
   min-width: 200px;
@@ -112,6 +114,7 @@
   transition: all 0.2s ease;
   padding: 10px 0;
   z-index: 60;
+  text-align: left;
 }
 
 .cora-nav__item:hover .cora-nav__dropdown {
@@ -136,10 +139,9 @@
    4. ICONS & AUTH (Right)
    ========================================= */
 .cora-header__right {
-  /* Takes up right space */
-  flex: 1; 
+  flex: 0 0 auto; /* Don't stretch */
   display: flex;
-  justify-content: flex-end; /* Pushes content to Right */
+  justify-content: flex-end;
   align-items: center;
   gap: 15px;
 }
@@ -236,63 +238,50 @@
 }
 
 /* =========================================
-   5. DESKTOP SPECIFIC LAYOUT (Min 1025px)
-   ========================================= */
-@media (min-width: 1025px) {
-  /* ABSOLUTE CENTER THE LOGO */
-  .cora-header__left {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    display: flex;
-    justify-content: center;
-    z-index: 60; /* Higher than menu */
-  }
-}
-
-/* =========================================
-   6. MOBILE HAMBURGER
+   5. MOBILE HAMBURGER
    ========================================= */
 .cora-header__mobile-trigger { display: none; }
 .cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
 
 /* =========================================
-   7. RESPONSIVE LOGIC (Tablet & Mobile)
+   6. RESPONSIVE LOGIC (Tablet & Mobile)
    ========================================= */
 @media (max-width: 1024px) {
-  .cora-header__inner { justify-content: space-between;   padding: 0 ; }
+  .cora-header__inner { 
+    justify-content: space-between; 
+    padding: 0 20px; /* Ensure padding on mobile */
+  }
 
-.cora-header__brand-text {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 19px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  color: inherit;
-}
-  .cora-header__mobile-trigger { display: block; flex: 1; }
+  .cora-header__brand-text {
+    font-size: 19px;
+  }
+  
+  .cora-header__mobile-trigger { 
+    display: block; 
+    flex: 1; /* Occupies left space */
+  }
   
   /* Hide Desktop Nav & Auth */
   .cora-header__center, .cora-auth-wrapper { display: none; }
   
-  /* Mobile Logo Center */
+  /* Mobile Logo Center (Absolute for perfect centering) */
   .cora-header__left {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: auto;
-    display: flex;
+    margin-right: 0;
     justify-content: center;
   }
   
-  .cora-header__right { flex: 1; }
+  .cora-header__right { 
+    flex: 1; 
+  }
 }
 
 /* =========================================
-   8. MOBILE DRAWER
+   7. MOBILE DRAWER
    ========================================= */
 .cora-mobile-drawer {
   position: fixed;
