@@ -44,6 +44,14 @@
         {%- endif -%}
         <div class="cmp-image-counter">1 / {{ product.images.size }}</div>
       </div>
+       <div class="cmp-meta">
+        {%- if product.collections.first -%}
+          <span class="cmp-category">{{ product.collections.first.title }}</span>
+        {%- endif -%}
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        
+      </div>
+
       {%- if product.images.size > 1 -%}
         <div class="cmp-thumbnails">
           {%- for media in product.images -%}
