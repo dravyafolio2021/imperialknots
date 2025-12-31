@@ -339,7 +339,7 @@
 }
 
 .collection-sidebar {
-  flex: 0 0 280px; /* Fixed width sidebar */
+  flex: 0 0 260px; /* Fixed width sidebar */
 }
 
 .collection-main {
