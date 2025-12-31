@@ -249,7 +249,7 @@
 @media (max-width: 1024px) {
   .cora-header__inner { 
     justify-content: space-between; 
-    padding: 0 20px; /* Ensure padding on mobile */
+    padding: 0  ; /* Ensure padding on mobile */
   }
 
   .cora-header__brand-text {
