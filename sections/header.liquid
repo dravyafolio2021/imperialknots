@@ -16,16 +16,13 @@
       </label>
     </div>
 
-
     <div class="cora-header__left">
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
-        
         {%- if section.settings.logo_svg != blank -%}
           <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display: flex; align-items: center;">
             <style>.cora-header__logo-svg svg { width: 100%; height: auto; }</style>
             {{ section.settings.logo_svg }}
           </div>
-
         {%- elsif section.settings.logo_image != blank -%}
           <img 
             src="{{ section.settings.logo_image | img_url: '600x' }}" 
@@ -35,7 +32,6 @@
             height="auto"
             style="width: {{ section.settings.logo_width }}px;"
           >
-
         {%- else -%}
           <img 
             src="https://cdn.shopify.com/s/files/1/0694/0170/6565/files/Logo_430x.svg?v=1765908401#" 
@@ -46,18 +42,18 @@
             style="width: {{ section.settings.logo_width }}px;"
           >
         {%- endif -%}
-
       </a>
     </div>
     
     <div class="cora-header__center">
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
-          <div class="cora-nav__item">
+          <div class="cora-nav__item" data-trigger="{{ link.title | handleize }}">
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
               {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
             </a>
+            
             {% if link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -78,20 +74,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
         {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
       </a>
-
-      {% comment %} {% if shop.customer_accounts_enabled %}
-        <div class="cora-auth-wrapper">
-          {% if customer %}
-            <a href="{{ routes.account_url }}" class="cora-user-pill">
-              <span class="cora-avatar">{{ customer.first_name | first }}{{ customer.last_name | first }}</span>
-              <span style="font-size:13px;">{{ customer.first_name }}</span>
-            </a>
-          {% else %}
-            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost">Log in</a>
-            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary">Sign up</a>
-          {% endif %}
-        </div>
-      {% endif %} {% endcomment %}
     </div>
 
   </div>
@@ -137,6 +119,50 @@
   </div>
 </header>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. Find all triggers in the header
+    const triggers = document.querySelectorAll('.cora-nav__item[data-trigger]');
+    
+    // 2. Find all Mega Menu sections
+    const megaMenus = document.querySelectorAll('.cora-megamenu-wrapper');
+
+    triggers.forEach(trigger => {
+      const handle = trigger.getAttribute('data-trigger');
+      
+      // Look for a matching mega menu based on the handle
+      const targetMenu = document.querySelector(`.cora-megamenu-wrapper[data-menu-handle="${handle}"]`);
+
+      if (targetMenu) {
+        // Hide standard dropdown if Mega Menu exists
+        const standardDropdown = trigger.querySelector('.cora-nav__dropdown');
+        if(standardDropdown) standardDropdown.style.display = 'none';
+
+        // Move the Mega Menu into the header wrapper so it positions correctly
+        const header = document.querySelector('.cora-header');
+        header.appendChild(targetMenu);
+
+        // Hover Logic
+        trigger.addEventListener('mouseenter', () => {
+          targetMenu.classList.add('is-active');
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+           setTimeout(() => {
+             if (!targetMenu.matches(':hover')) {
+               targetMenu.classList.remove('is-active');
+             }
+           }, 100);
+        });
+
+        targetMenu.addEventListener('mouseleave', () => {
+          targetMenu.classList.remove('is-active');
+        });
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "Cora Header (Responsive)",
@@ -173,4 +199,4 @@
   ],
   "presets": [{ "name": "Cora Header (Responsive)" }]
 }
-{% endschema %} 
+{% endschema %}
