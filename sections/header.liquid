@@ -47,9 +47,19 @@
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
               {% if link.links != blank %}
-                <svg class="cora-chevron" viewBox="0 0 10 6">
-                  <path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
+              <svg
+  class="cora-chevron"
+  viewBox="0 0 10 6"
+  fill="none"
+  stroke="currentColor"
+>
+  <path
+    d="M1 1L5 5L9 1"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+</svg>
+
               {% endif %}
             </a>
 
