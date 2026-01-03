@@ -42,12 +42,15 @@
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
           
-          {% comment %} 1. Find if a Block matches this Link {% endcomment %}
+          {% comment %} --- LOGIC: Find matching Mega Menu Block --- {% endcomment %}
           {% assign mega_menu_block = nil %}
+          {% assign link_title_clean = link.title | downcase | strip %}
+          
           {% for block in section.blocks %}
-            {% assign trigger = block.settings.trigger_link | handleize %}
-            {% assign link_handle = link.title | handleize %}
-            {% if trigger == link_handle %}
+            {% assign trigger_clean = block.settings.trigger_link | downcase | strip %}
+            
+            {% comment %} Debug: Output comparisons in HTML comments {% endcomment %}
+            {% if trigger_clean == link_title_clean %}
               {% assign mega_menu_block = block %}
               {% break %}
             {% endif %}
@@ -61,7 +64,7 @@
               {% endif %}
             </a>
             
-            {% comment %} 2. RENDER MEGA MENU (If Block Exists) {% endcomment %}
+            {% comment %} --- RENDER MEGA MENU --- {% endcomment %}
             {% if mega_menu_block %}
               <div class="cora-megamenu-wrapper">
                 <div class="cora-mm-container">
@@ -78,7 +81,9 @@
                         </div>
                       {% endfor %}
                     {% else %}
-                      <p style="color:#999; font-size:13px; padding:20px;">Add nested menu items to "{{ link.title }}" in Navigation settings.</p>
+                      <p style="color:#999; font-size:13px; padding:20px;">
+                        This menu item has no nested links. Add them in Navigation settings to see them here.
+                      </p>
                     {% endif %}
                   </div>
 
@@ -105,7 +110,7 @@
                 </div>
               </div>
 
-            {% comment %} 3. RENDER STANDARD DROPDOWN (Fallback) {% endcomment %}
+            {% comment %} --- RENDER STANDARD DROPDOWN (Fallback) --- {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
