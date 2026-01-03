@@ -38,7 +38,12 @@
   fill: none !important;
   opacity: 1 !important;
 }
-
+/* FORCE DROPDOWN OPEN */
+.cora-nav__dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
 .cora-header__brand-link {
   display: flex;
   align-items: center;
