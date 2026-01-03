@@ -28,7 +28,9 @@
   display: flex;
   align-items: center;
 }
-
+.cora-header * {
+  outline: 1px solid red !important;
+}
 .cora-header__brand-link {
   display: flex;
   align-items: center;
