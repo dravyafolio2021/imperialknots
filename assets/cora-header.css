@@ -1,112 +1,335 @@
-/* RESET SAFETY */
-.cora-header * {
-  box-sizing: border-box;
-}
-
-/* HEADER */
+/* =========================================
+   1. BASE HEADER LAYOUT
+   ========================================= */
 .cora-header {
   width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
   position: relative;
   z-index: 50;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .cora-header__inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 70px;
+  padding: 0  ;
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
-/* LOGO */
+/* =========================================
+   2. LOGO (Left on Desktop)
+   ========================================= */
+.cora-header__left {
+  flex: 0 0 auto;
+  z-index: 52;
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Spacing between logo and nav */
+}
+
 .cora-header__brand-link {
-  font-weight: 700;
-  font-size: 18px;
   text-decoration: none;
-  color: #000;
+  color: inherit;
+  display: flex;
+  align-items: center;
 }
 
-/* NAV */
+.cora-header__brand-text {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: inherit;
+}
+
+.cora-header__logo-img {
+  display: block;
+  max-height: 45px;
+  width: auto;
+}
+
+/* =========================================
+   3. NAVIGATION (Center on Desktop)
+   ========================================= */
+.cora-header__center {
+  flex: 1; 
+  display: flex;
+  /* CHANGED: Centers the menu items */
+  justify-content: center; 
+  height: 100%;
+}
+
 .cora-header__nav {
   display: flex;
-  gap: 32px;
+  gap: 30px;
+  align-items: center;
+  height: 100%;
 }
 
 .cora-nav__item {
   position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .cora-nav__link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  color: #000;
-  font-weight: 500;
+  gap: 5px;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.cora-nav__link:hover {
+  opacity: 0.7;
 }
 
 .cora-chevron {
   width: 10px;
   height: 10px;
+  opacity: 0.6;
 }
 
-/* DROPDOWN */
+/* Dropdown Menu */
 .cora-nav__dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
-  min-width: 180px;
-  background: #fff;
-  border: 1px solid #ddd;
-  display: none;
+  left: 50%; /* Center dropdown relative to link */
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  padding: 10px 0;
+  z-index: 60;
+  text-align: left;
 }
 
 .cora-nav__item:hover .cora-nav__dropdown {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .cora-dropdown__link {
   display: block;
-  padding: 10px 14px;
+  padding: 10px 20px;
+  color: #333;
   text-decoration: none;
-  color: #000;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .cora-dropdown__link:hover {
-  background: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
-/* MEGA MENU */
-.cora-megamenu {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  display: none;
+/* =========================================
+   4. ICONS & AUTH (Right)
+   ========================================= */
+.cora-header__right {
+  flex: 0 0 auto; /* Don't stretch */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
 }
 
-.cora-megamenu.is-active {
-  display: block;
-}
-
-.cora-megamenu__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.cora-megamenu a {
-  display: block;
-  margin-top: 6px;
-  color: #444;
+.cora-header__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: inherit;
   text-decoration: none;
 }
+
+.cora-header__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5px;
+}
+
+.cora-cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #000;
+  color: #fff;
+  font-size: 10px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Auth Styles */
+.cora-auth-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #f0f0f0;
+}
+
+.cora-btn-shadcn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.cora-btn-ghost { color: #0f172a; background: transparent; }
+.cora-btn-ghost:hover { background-color: #f1f5f9; }
+
+.cora-btn-primary { background-color: #0f172a; color: #ffffff; }
+.cora-btn-primary:hover { background-color: #334155; }
+
+.cora-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #ffffff;
+}
+.cora-user-pill:hover { background-color: #f8fafc; border-color: #cbd5e1; }
+
+.cora-avatar {
+  width: 28px;
+  height: 28px;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   5. MOBILE HAMBURGER
+   ========================================= */
+.cora-header__mobile-trigger { display: none; }
+.cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
+
+/* =========================================
+   6. RESPONSIVE LOGIC (Tablet & Mobile)
+   ========================================= */
+@media (max-width: 1024px) {
+  .cora-header__inner { 
+    justify-content: space-between; 
+    padding: 0  ; /* Ensure padding on mobile */
+  }
+
+  .cora-header__brand-text {
+    font-size: 19px;
+  }
+  
+  .cora-header__mobile-trigger { 
+    display: block; 
+    flex: 1; /* Occupies left space */
+  }
+  
+  /* Hide Desktop Nav & Auth */
+  .cora-header__center, .cora-auth-wrapper { display: none; }
+  
+  /* Mobile Logo Center (Absolute for perfect centering) */
+  .cora-header__left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    margin-right: 0;
+    justify-content: center;
+  }
+  
+  .cora-header__right { 
+    flex: 1; 
+  }
+}
+
+/* =========================================
+   7. MOBILE DRAWER
+   ========================================= */
+.cora-mobile-drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 320px; height: 100vh;
+  background: #ffffff;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  display: flex; flex-direction: column;
+}
+
+.cora-mobile-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 90;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s;
+}
+
+#cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
+#cora-nav-toggle:checked ~ .cora-mobile-overlay { opacity: 1; visibility: visible; }
+#cora-nav-toggle:checked ~ body { overflow: hidden; }
+
+.cora-drawer__header { padding: 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.cora-drawer__close { font-size: 28px; cursor: pointer; line-height: 1; }
+
+.cora-drawer__nav { padding: 0; overflow-y: auto; flex: 1; }
+.cora-drawer__link, .cora-drawer__summary {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px; border-bottom: 1px solid #f5f5f5;
+  text-decoration: none; color: #1a1a1a; font-size: 16px; font-weight: 500;
+  background: #fff; cursor: pointer; list-style: none; transition: background 0.2s;
+}
+.cora-drawer__link:hover, .cora-drawer__summary:hover { background-color: #fafafa; }
+.cora-drawer__summary::-webkit-details-marker { display: none; }
+
+.cora-drawer__accordion[open] .cora-drawer__summary { border-bottom-color: transparent; padding-bottom: 10px; }
+.cora-drawer__submenu { background-color: #fafafa; padding-bottom: 10px; border-bottom: 1px solid #f5f5f5; }
+.cora-drawer__sublink { padding: 12px 24px 12px 40px; font-size: 15px; color: #555; border-bottom: none; background: transparent; }
+
+.cora-drawer__icon { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; transition: transform 0.3s ease; }
+.cora-drawer__accordion[open] .cora-drawer__icon { transform: rotate(45deg); }
+
+.cora-drawer__footer { padding: 20px; background: #ffffff; border-top: 1px solid #e5e5e5; margin-top: auto; flex-shrink: 0; }
+.cora-drawer__cta {
+  display: flex; justify-content: center; align-items: center; width: 100%;
+  padding: 16px; background-color: #1a1a1a; color: #ffffff;
+  text-decoration: none; text-transform: uppercase; font-size: 14px;
+  letter-spacing: 1px; font-weight: 600; border-radius: 4px; transition: opacity 0.2s;
+}
+.cora-drawer__cta:hover { opacity: 0.9; }
