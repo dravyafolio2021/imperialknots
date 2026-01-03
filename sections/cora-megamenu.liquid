@@ -4,7 +4,12 @@
   <div class="cora-mm-container">
     
     <div class="cora-mm-links">
-      {%- assign main_link = linklists[section.settings.menu].links | where: "title", section.settings.parent_link | first -%}
+      {%- assign main_link_handle = section.settings.parent_link | handleize -%}
+      {%- assign main_link = linklists[section.settings.menu].links | where: "handle", main_link_handle | first -%}
+      
+      {%- unless main_link -%}
+         {%- assign main_link = linklists[section.settings.menu].links | where: "title", section.settings.parent_link | first -%}
+      {%- endunless -%}
       
       {% if main_link %}
         {% for child_link in main_link.links limit: 2 %} <div class="cora-mm-col">
@@ -17,7 +22,10 @@
           </div>
         {% endfor %}
       {% else %}
-        <p style="padding: 20px;">Link "{{ section.settings.parent_link }}" not found in menu "{{ section.settings.menu }}". Check your settings.</p>
+        <p style="padding: 20px; color: red;">
+          Error: Could not find a link named "{{ section.settings.parent_link }}" in menu "{{ section.settings.menu }}". 
+          Please ensure the "Trigger Link Name" matches exactly.
+        </p>
       {% endif %}
     </div>
 
