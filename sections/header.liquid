@@ -42,7 +42,7 @@
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
           
-          {% comment %} --- LOGIC: Find matching Mega Menu Block --- {% endcomment %}
+          {% comment %} --- FIND MATCHING BLOCK --- {% endcomment %}
           {% assign mega_menu_block = nil %}
           {% assign link_handle = link.title | handleize %}
           
@@ -58,7 +58,11 @@
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
               {% if link.links != blank or mega_menu_block %}
-                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" style="margin-left: 6px;"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {% endif %}
+              
+              {% if mega_menu_block and request.design_mode %}
+                <span style="width:6px; height:6px; background:#00d000; border-radius:50%; margin-left:4px;" title="Mega Menu Connected"></span>
               {% endif %}
             </a>
             
@@ -79,28 +83,29 @@
                         </div>
                       {% endfor %}
                     {% else %}
-                      <p style="color:#999; font-size:13px; padding:20px;">
-                        Add nested items to "<b>{{ link.title }}</b>" in your Navigation settings.
-                      </p>
+                      <div style="padding: 20px; color: #666; font-size: 14px;">
+                        <p>No sub-links found for <strong>{{ link.title }}</strong>.</p>
+                        <p>Go to <em>Online Store > Navigation</em> and nest items under this link.</p>
+                      </div>
                     {% endif %}
                   </div>
 
                   <div class="cora-mm-promos">
                     {% if mega_menu_block.settings.promo_1_image %}
                       <a href="{{ mega_menu_block.settings.promo_1_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_1_title }}</span></div>
                       </a>
                     {% endif %}
                     {% if mega_menu_block.settings.promo_2_image %}
                       <a href="{{ mega_menu_block.settings.promo_2_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_2_title }}</span></div>
                       </a>
                     {% endif %}
                     {% if mega_menu_block.settings.promo_3_image %}
                       <a href="{{ mega_menu_block.settings.promo_3_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_3_title }}</span></div>
                       </a>
                     {% endif %}
@@ -108,7 +113,7 @@
                 </div>
               </div>
 
-            {% comment %} --- STANDARD DROPDOWN (If No Mega Menu) --- {% endcomment %}
+            {% comment %} --- RENDER STANDARD DROPDOWN --- {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -164,7 +169,7 @@
 {% schema %}
 {
   "name": "Cora Header",
-  "max_blocks": 5,
+  "max_blocks": 6,
   "settings": [
     { "type": "header", "content": "Logo" },
     { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
@@ -178,10 +183,10 @@
   ],
   "blocks": [
     {
-      "type": "mega_menu",
+      "type": "custom_mega_menu",
       "name": "Mega Menu",
       "settings": [
-        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "default": "Catalog", "info": "Must match a menu item name exactly." },
+        { "type": "text", "id": "trigger_link", "label": "Menu Item Name", "default": "Catalog", "info": "Enter the exact menu link name (e.g. Collections)" },
         { "type": "header", "content": "Promo 1" },
         { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
         { "type": "text", "id": "promo_1_title", "label": "Title" },

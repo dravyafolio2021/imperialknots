@@ -3,7 +3,7 @@
    ========================================= */
 .cora-header {
   width: 100%;
-  position: relative; /* Anchor for Mega Menu */
+  position: relative; 
   z-index: 100;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
@@ -66,16 +66,15 @@
   gap: 5px;
   transition: opacity 0.2s;
   cursor: pointer;
-  height: 100%;
-  /* Padding connects the hover area to the dropdown */
-  padding: 0 10px; 
+  height: 100%; 
+  padding: 0 15px; /* Wider hit area */
 }
 .cora-nav__link:hover { opacity: 0.7; }
 .cora-chevron { width: 10px; height: 10px; opacity: 0.6; }
 
 /* --- MEGA MENU LOGIC --- */
 .cora-nav__item.has-mega-menu {
-  position: static; /* Forces the child wrapper to align to the Header (relative parent) */
+  position: static; /* Allows menu to span full width */
 }
 
 .cora-megamenu-wrapper {
@@ -86,23 +85,22 @@
   background: #fff;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-  z-index: 1000;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  z-index: 1001;
   
-  /* Hide / Show */
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(5px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  pointer-events: none;
+  /* Hard Display Logic for reliability */
+  display: none; 
 }
 
-/* HOVER TRIGGERS */
+/* Hover Show */
 .cora-nav__item:hover .cora-megamenu-wrapper {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  display: block;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cora-mm-container {
@@ -114,7 +112,7 @@
   justify-content: space-between;
 }
 
-/* Columns */
+/* Links */
 .cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
 .cora-mm-col { min-width: 160px; }
 .cora-mm-heading {
@@ -142,10 +140,10 @@
   position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
   background: #ffffff; border: 1px solid #e5e5e5; min-width: 200px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  visibility: hidden; opacity: 0; transition: all 0.2s ease;
+  display: none;
   padding: 10px 0; z-index: 60; text-align: left;
 }
-.cora-nav__item:hover .cora-nav__dropdown { visibility: visible; opacity: 1; }
+.cora-nav__item:hover .cora-nav__dropdown { display: block; }
 .cora-dropdown__link { display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap; }
 .cora-dropdown__link:hover { background-color: #f5f5f5; }
 
