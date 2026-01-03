@@ -44,13 +44,11 @@
           
           {% comment %} --- LOGIC: Find matching Mega Menu Block --- {% endcomment %}
           {% assign mega_menu_block = nil %}
-          {% assign link_title_clean = link.title | downcase | strip %}
+          {% assign link_handle = link.title | handleize %}
           
           {% for block in section.blocks %}
-            {% assign trigger_clean = block.settings.trigger_link | downcase | strip %}
-            
-            {% comment %} Debug: Output comparisons in HTML comments {% endcomment %}
-            {% if trigger_clean == link_title_clean %}
+            {% assign trigger_handle = block.settings.trigger_link | handleize %}
+            {% if trigger_handle == link_handle %}
               {% assign mega_menu_block = block %}
               {% break %}
             {% endif %}
@@ -82,7 +80,7 @@
                       {% endfor %}
                     {% else %}
                       <p style="color:#999; font-size:13px; padding:20px;">
-                        This menu item has no nested links. Add them in Navigation settings to see them here.
+                        Add nested items to "<b>{{ link.title }}</b>" in your Navigation settings.
                       </p>
                     {% endif %}
                   </div>
@@ -110,7 +108,7 @@
                 </div>
               </div>
 
-            {% comment %} --- RENDER STANDARD DROPDOWN (Fallback) --- {% endcomment %}
+            {% comment %} --- STANDARD DROPDOWN (If No Mega Menu) --- {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -166,6 +164,7 @@
 {% schema %}
 {
   "name": "Cora Header",
+  "max_blocks": 5,
   "settings": [
     { "type": "header", "content": "Logo" },
     { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
@@ -182,7 +181,7 @@
       "type": "mega_menu",
       "name": "Mega Menu",
       "settings": [
-        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "default": "Catalog", "info": "Must match menu item name exactly." },
+        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "default": "Catalog", "info": "Must match a menu item name exactly." },
         { "type": "header", "content": "Promo 1" },
         { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
         { "type": "text", "id": "promo_1_title", "label": "Title" },

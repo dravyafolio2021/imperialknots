@@ -56,7 +56,6 @@
   align-items: center;
 }
 
-/* Increase specificty to ensure hover capture */
 .cora-nav__link {
   text-decoration: none;
   color: inherit;
@@ -67,38 +66,39 @@
   gap: 5px;
   transition: opacity 0.2s;
   cursor: pointer;
-  height: 100%; /* Important: Full height for easy hover */
-  padding: 0 5px; /* Adds a bit of buffer */
+  height: 100%;
+  /* Padding connects the hover area to the dropdown */
+  padding: 0 10px; 
 }
 .cora-nav__link:hover { opacity: 0.7; }
 .cora-chevron { width: 10px; height: 10px; opacity: 0.6; }
 
 /* --- MEGA MENU LOGIC --- */
 .cora-nav__item.has-mega-menu {
-  position: static; /* Allows absolute child to span full header width */
+  position: static; /* Forces the child wrapper to align to the Header (relative parent) */
 }
 
 .cora-megamenu-wrapper {
   position: absolute;
-  top: 100%; /* Attach to bottom of header */
+  top: 100%;
   left: 0;
   width: 100%;
   background: #fff;
+  border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  z-index: 999;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  z-index: 1000;
   
-  /* Transition Logic */
+  /* Hide / Show */
   visibility: hidden;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(5px);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
   pointer-events: none;
 }
 
-/* Hover State - Show Menu */
-.cora-nav__item:hover .cora-megamenu-wrapper,
-.cora-megamenu-wrapper:hover {
+/* HOVER TRIGGERS */
+.cora-nav__item:hover .cora-megamenu-wrapper {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
@@ -114,7 +114,7 @@
   justify-content: space-between;
 }
 
-/* Mega Menu Columns */
+/* Columns */
 .cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
 .cora-mm-col { min-width: 160px; }
 .cora-mm-heading {
@@ -126,7 +126,7 @@
 
 /* Promos */
 .cora-mm-promos { display: flex; gap: 20px; flex: 1; justify-content: flex-end; }
-.cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; }
+.cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; text-decoration: none;}
 .cora-mm-image-wrap { width: 100%; height: 100%; }
 .cora-mm-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .cora-mm-card:hover .cora-mm-image-wrap img { transform: scale(1.05); }
@@ -175,7 +175,7 @@
   .cora-header__right { flex: 1; }
 }
 
-/* Mobile Drawer (Standard) */
+/* Mobile Drawer */
 .cora-mobile-drawer { position: fixed; top: 0; left: 0; width: 320px; height: 100vh; background: #ffffff; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
 .cora-mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
 #cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
