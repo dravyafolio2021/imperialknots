@@ -3,7 +3,7 @@
    ========================================= */
 .cora-header {
   width: 100%;
-  position: relative;
+  position: relative; /* Anchor for Mega Menu */
   z-index: 50;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
@@ -20,7 +20,7 @@
 }
 
 /* =========================================
-   2. LOGO (Left on Desktop)
+   2. LOGO (Left)
    ========================================= */
 .cora-header__left {
   flex: 0 0 auto;
@@ -29,12 +29,11 @@
   align-items: center;
   margin-right: 20px;
 }
-
 .cora-header__brand-link { text-decoration: none; color: inherit; display: flex; align-items: center; }
 .cora-header__logo-img { display: block; max-height: 45px; width: auto; }
 
 /* =========================================
-   3. NAVIGATION (Center on Desktop)
+   3. NAVIGATION (Center)
    ========================================= */
 .cora-header__center {
   flex: 1; 
@@ -50,14 +49,15 @@
   height: 100%;
 }
 
-/* Nav Item */
+/* NAV ITEM (Generic) */
 .cora-nav__item {
-  position: relative;
+  position: relative; /* Default for standard dropdowns */
   height: 100%;
   display: flex;
   align-items: center;
 }
 
+/* LINK STYLE */
 .cora-nav__link {
   text-decoration: none;
   color: inherit;
@@ -68,13 +68,47 @@
   gap: 5px;
   transition: opacity 0.2s;
   cursor: pointer;
-  height: 100%; /* Full height for hover target */
+  height: 100%;
 }
-
 .cora-nav__link:hover { opacity: 0.7; }
 .cora-chevron { width: 10px; height: 10px; opacity: 0.6; }
 
-/* --- STANDARD DROPDOWN --- */
+/* -------------------------------------------
+   MEGA MENU TRICK (The Static Position)
+   ------------------------------------------- */
+.cora-nav__item.has-mega-menu {
+  position: static; /* Allows child absolute element to span full width of Header */
+}
+
+/* Mega Menu Wrapper */
+.cora-megamenu-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  z-index: 999;
+  
+  /* Hiding/Showing Logic */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* HOVER STATE: Show Menu */
+.cora-nav__item:hover .cora-megamenu-wrapper {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Standard Dropdown (Fallback) */
 .cora-nav__dropdown {
   position: absolute;
   top: 100%;
@@ -84,49 +118,20 @@
   border: 1px solid #e5e5e5;
   min-width: 200px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  opacity: 0;
   visibility: hidden;
+  opacity: 0;
   transition: all 0.2s ease;
   padding: 10px 0;
   z-index: 60;
   text-align: left;
 }
-.cora-nav__item:hover .cora-nav__dropdown { opacity: 1; visibility: visible; }
-.cora-dropdown__link {
-  display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap;
-}
+.cora-nav__item:hover .cora-nav__dropdown { visibility: visible; opacity: 1; }
+.cora-dropdown__link { display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap; }
 .cora-dropdown__link:hover { background-color: #f5f5f5; }
 
-
-/* --- MEGA MENU STYLES --- */
-/* This positions the mega menu relative to the header, not the link, for full width */
-.cora-megamenu-wrapper {
-  position: fixed; /* Fixed helps with overlay behavior, but absolute to header works too if header is relative */
-  position: absolute;
-  top: 100%; 
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  z-index: 999;
-  
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-/* Hover on the nav item triggers the mega menu inside it */
-.cora-nav__item:hover .cora-megamenu-wrapper {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
+/* -------------------------------------------
+   MEGA MENU INNER CONTENT
+   ------------------------------------------- */
 .cora-mm-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -136,36 +141,28 @@
   justify-content: space-between;
 }
 
-/* Links Column */
+/* Links (Left) */
 .cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
 .cora-mm-col { min-width: 160px; }
 .cora-mm-heading {
   font-family: 'Times New Roman', serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 20px 0; color: #1a1a1a;
 }
 .cora-mm-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-.cora-mm-link {
-  text-decoration: none; color: #555; font-family: 'Inter', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s;
-}
+.cora-mm-link { text-decoration: none; color: #555; font-family: 'Inter', sans-serif; font-size: 14px; transition: color 0.2s; }
 .cora-mm-link:hover { color: #000; text-decoration: underline; }
 
-/* Promos Column */
+/* Promos (Right) */
 .cora-mm-promos { display: flex; gap: 20px; flex: 1; justify-content: flex-end; }
-.cora-mm-card {
-  position: relative; width: 220px; height: 280px; display: block; text-decoration: none; overflow: hidden;
-}
+.cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; }
 .cora-mm-image-wrap { width: 100%; height: 100%; }
 .cora-mm-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .cora-mm-card:hover .cora-mm-image-wrap img { transform: scale(1.05); }
-
 .cora-mm-label {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   background: #ffffff; padding: 12px 20px; min-width: 140px; text-align: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 2;
 }
-.cora-mm-label span {
-  font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; color: #1a1a1a;
-}
-
+.cora-mm-label span { font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; color: #1a1a1a; }
 
 /* =========================================
    4. ICONS & AUTH (Right)
@@ -178,7 +175,7 @@
 }
 
 /* =========================================
-   5. MOBILE & RESPONSIVE
+   5. MOBILE 
    ========================================= */
 .cora-header__mobile-trigger { display: none; }
 .cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
@@ -193,23 +190,16 @@
   .cora-header__right { flex: 1; }
 }
 
-/* Mobile Drawer (Same as before) */
-.cora-mobile-drawer {
-  position: fixed; top: 0; left: 0; width: 320px; height: 100vh; background: #ffffff; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column;
-}
-.cora-mobile-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; opacity: 0; visibility: hidden; transition: opacity 0.3s;
-}
+/* Mobile Drawer (Same as previous) */
+.cora-mobile-drawer { position: fixed; top: 0; left: 0; width: 320px; height: 100vh; background: #ffffff; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+.cora-mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
 #cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
 #cora-nav-toggle:checked ~ .cora-mobile-overlay { opacity: 1; visibility: visible; }
 #cora-nav-toggle:checked ~ body { overflow: hidden; }
-
 .cora-drawer__header { padding: 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .cora-drawer__close { font-size: 28px; cursor: pointer; line-height: 1; }
 .cora-drawer__nav { padding: 0; overflow-y: auto; flex: 1; }
-.cora-drawer__link, .cora-drawer__summary {
-  display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid #f5f5f5; text-decoration: none; color: #1a1a1a; font-size: 16px; font-weight: 500; background: #fff; cursor: pointer; list-style: none; transition: background 0.2s;
-}
+.cora-drawer__link, .cora-drawer__summary { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid #f5f5f5; text-decoration: none; color: #1a1a1a; font-size: 16px; font-weight: 500; background: #fff; cursor: pointer; list-style: none; transition: background 0.2s; }
 .cora-drawer__link:hover, .cora-drawer__summary:hover { background-color: #fafafa; }
 .cora-drawer__summary::-webkit-details-marker { display: none; }
 .cora-drawer__accordion[open] .cora-drawer__summary { border-bottom-color: transparent; padding-bottom: 10px; }
@@ -218,5 +208,3 @@
 .cora-drawer__icon { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; transition: transform 0.3s ease; }
 .cora-drawer__accordion[open] .cora-drawer__icon { transform: rotate(45deg); }
 .cora-drawer__footer { padding: 20px; background: #ffffff; border-top: 1px solid #e5e5e5; margin-top: auto; flex-shrink: 0; }
-.cora-drawer__cta { display: flex; justify-content: center; align-items: center; width: 100%; padding: 16px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; font-weight: 600; border-radius: 4px; transition: opacity 0.2s; }
-.cora-drawer__cta:hover { opacity: 0.9; }

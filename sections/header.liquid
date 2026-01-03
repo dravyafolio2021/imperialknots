@@ -33,14 +33,7 @@
             style="width: {{ section.settings.logo_width }}px;"
           >
         {%- else -%}
-          <img 
-            src="https://cdn.shopify.com/s/files/1/0694/0170/6565/files/Logo_430x.svg?v=1765908401#" 
-            alt="{{ shop.name }}" 
-            class="cora-header__logo-img" 
-            width="{{ section.settings.logo_width }}" 
-            height="auto"
-            style="width: {{ section.settings.logo_width }}px;"
-          >
+          <span style="font-family:'Times New Roman', serif; font-size:24px; font-weight:bold; text-transform:uppercase;">{{ shop.name }}</span>
         {%- endif -%}
       </a>
     </div>
@@ -49,40 +42,44 @@
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
           
-          {% comment %} --- 1. FIND MATCHING BLOCK --- {% endcomment %}
+          {% comment %} 1. Find if a Block matches this Link {% endcomment %}
           {% assign mega_menu_block = nil %}
           {% for block in section.blocks %}
-            {% if block.type == 'mega_menu' %}
-              {% assign trigger_handle = block.settings.trigger_link | handleize %}
-              {% assign link_handle = link.title | handleize %}
-              {% if trigger_handle == link_handle %}
-                {% assign mega_menu_block = block %}
-                {% break %}
-              {% endif %}
+            {% assign trigger = block.settings.trigger_link | handleize %}
+            {% assign link_handle = link.title | handleize %}
+            {% if trigger == link_handle %}
+              {% assign mega_menu_block = block %}
+              {% break %}
             {% endif %}
           {% endfor %}
 
           <div class="cora-nav__item {% if mega_menu_block %}has-mega-menu{% endif %}">
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
-              {% if link.links != blank or mega_menu_block %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
+              {% if link.links != blank or mega_menu_block %}
+                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {% endif %}
             </a>
             
-            {% comment %} --- 2. RENDER MEGA MENU (If Block Found) --- {% endcomment %}
+            {% comment %} 2. RENDER MEGA MENU (If Block Exists) {% endcomment %}
             {% if mega_menu_block %}
               <div class="cora-megamenu-wrapper">
                 <div class="cora-mm-container">
                   <div class="cora-mm-links">
-                    {% for child_link in link.links limit: 2 %}
-                      <div class="cora-mm-col">
-                        <h4 class="cora-mm-heading">{{ child_link.title }}</h4>
-                        <ul class="cora-mm-list">
-                          {% for grandchild in child_link.links %}
-                            <li><a href="{{ grandchild.url }}" class="cora-mm-link">{{ grandchild.title }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      </div>
-                    {% endfor %}
+                    {% if link.links != blank %}
+                      {% for child_link in link.links limit: 2 %}
+                        <div class="cora-mm-col">
+                          <h4 class="cora-mm-heading">{{ child_link.title }}</h4>
+                          <ul class="cora-mm-list">
+                            {% for grandchild in child_link.links %}
+                              <li><a href="{{ grandchild.url }}" class="cora-mm-link">{{ grandchild.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      {% endfor %}
+                    {% else %}
+                      <p style="color:#999; font-size:13px; padding:20px;">Add nested menu items to "{{ link.title }}" in Navigation settings.</p>
+                    {% endif %}
                   </div>
 
                   <div class="cora-mm-promos">
@@ -108,7 +105,7 @@
                 </div>
               </div>
 
-            {% comment %} --- 3. RENDER STANDARD DROPDOWN (If No Block) --- {% endcomment %}
+            {% comment %} 3. RENDER STANDARD DROPDOWN (Fallback) {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -139,7 +136,6 @@
       <span style="font-weight:600; font-size:16px; text-transform:uppercase; letter-spacing:1px;">Menu</span>
       <label for="cora-nav-toggle" class="cora-drawer__close">&times;</label>
     </div>
-
     <nav class="cora-drawer__nav">
       {% for link in section.settings.menu.links %}
         {% if link.links != blank %}
@@ -159,19 +155,6 @@
         {% endif %}
       {% endfor %}
     </nav>
-    
-    <div class="cora-drawer__footer">
-      {% if shop.customer_accounts_enabled %}
-        {% if customer %}
-          <a href="{{ routes.account_url }}" class="cora-drawer__cta">My Account</a>
-        {% else %}
-          <div style="display: flex; gap: 12px;">
-            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost" style="flex: 1; border: 1px solid #e2e8f0; justify-content: center;">Log in</a>
-            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary" style="flex: 1; justify-content: center;">Sign up</a>
-          </div>
-        {% endif %}
-      {% endif %}
-    </div>
   </div>
 </header>
 
@@ -179,36 +162,33 @@
 {
   "name": "Cora Header",
   "settings": [
-    { "type": "header", "content": "Logo Settings" },
+    { "type": "header", "content": "Logo" },
     { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
-    { "type": "html", "id": "logo_svg", "label": "Custom SVG Logo" },
-    { "type": "range", "id": "logo_width", "min": 100, "max": 300, "step": 2, "default": 150, "label": "Logo Width (px)" },
+    { "type": "html", "id": "logo_svg", "label": "SVG Logo" },
+    { "type": "range", "id": "logo_width", "min": 50, "max": 300, "step": 5, "default": 150, "label": "Width (px)" },
     { "type": "header", "content": "Navigation" },
-    { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
-    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1a1a1a" }
   ],
   "blocks": [
     {
       "type": "mega_menu",
       "name": "Mega Menu",
       "settings": [
-        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "info": "Type the menu item name (e.g. Catalog)", "default": "Catalog" },
-        
+        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "default": "Catalog", "info": "Must match menu item name exactly." },
         { "type": "header", "content": "Promo 1" },
         { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
-        { "type": "text", "id": "promo_1_title", "label": "Title", "default": "In-Stock" },
+        { "type": "text", "id": "promo_1_title", "label": "Title" },
         { "type": "url", "id": "promo_1_link", "label": "Link" },
-        
         { "type": "header", "content": "Promo 2" },
         { "type": "image_picker", "id": "promo_2_image", "label": "Image" },
-        { "type": "text", "id": "promo_2_title", "label": "Title", "default": "Luxe" },
+        { "type": "text", "id": "promo_2_title", "label": "Title" },
         { "type": "url", "id": "promo_2_link", "label": "Link" },
-        
         { "type": "header", "content": "Promo 3" },
         { "type": "image_picker", "id": "promo_3_image", "label": "Image" },
-        { "type": "text", "id": "promo_3_title", "label": "Title", "default": "Best Sellers" },
+        { "type": "text", "id": "promo_3_title", "label": "Title" },
         { "type": "url", "id": "promo_3_link", "label": "Link" }
       ]
     }
