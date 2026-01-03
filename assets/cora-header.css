@@ -31,6 +31,14 @@
 .cora-header * {
   outline: 1px solid red !important;
 }
+/* FORCE SVG VISIBILITY */
+.cora-chevron {
+  display: inline-block !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  opacity: 1 !important;
+}
+
 .cora-header__brand-link {
   display: flex;
   align-items: center;
