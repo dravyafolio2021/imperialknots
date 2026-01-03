@@ -1,0 +1,141 @@
+/* Container for the specific mega menu */
+.cora-megamenu-wrapper {
+  position: absolute;
+  top: 100%; /* Pushes it right below the header */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  z-index: 999;
+  
+  /* HIDDEN BY DEFAULT - Toggled via JS/CSS */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Active State */
+.cora-megamenu-wrapper.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Inner Layout */
+.cora-mm-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+}
+
+/* --- LEFT SIDE: LINKS --- */
+.cora-mm-links {
+  display: flex;
+  gap: 60px;
+  flex: 0 0 auto;
+}
+
+.cora-mm-col {
+  min-width: 160px;
+}
+
+.cora-mm-heading {
+  font-family: 'Times New Roman', serif; /* Matching reference font */
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+  border-bottom: none;
+}
+
+.cora-mm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cora-mm-link {
+  text-decoration: none;
+  color: #555;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.cora-mm-link:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* --- RIGHT SIDE: PROMO CARDS --- */
+.cora-mm-promos {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.cora-mm-card {
+  position: relative;
+  width: 220px; /* Fixed width per card */
+  height: 280px; /* Portrait aspect ratio */
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  /* No border radius per reference image style */
+}
+
+.cora-mm-image-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.cora-mm-image-wrap img,
+.cora-mm-image-wrap svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cora-mm-card:hover .cora-mm-image-wrap img {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* White Box Label */
+.cora-mm-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 12px 20px;
+  min-width: 140px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.cora-mm-label span {
+  font-family: 'Times New Roman', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+}
