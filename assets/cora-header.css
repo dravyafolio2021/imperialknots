@@ -4,7 +4,7 @@
 .cora-header {
   width: 100%;
   position: relative; /* Anchor for Mega Menu */
-  z-index: 50;
+  z-index: 100;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -20,7 +20,7 @@
 }
 
 /* =========================================
-   2. LOGO (Left)
+   2. LOGO
    ========================================= */
 .cora-header__left {
   flex: 0 0 auto;
@@ -33,7 +33,7 @@
 .cora-header__logo-img { display: block; max-height: 45px; width: auto; }
 
 /* =========================================
-   3. NAVIGATION (Center)
+   3. NAVIGATION
    ========================================= */
 .cora-header__center {
   flex: 1; 
@@ -49,15 +49,14 @@
   height: 100%;
 }
 
-/* NAV ITEM (Generic) */
 .cora-nav__item {
-  position: relative; /* Default for standard dropdowns */
+  position: relative;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-/* LINK STYLE */
+/* Increase specificty to ensure hover capture */
 .cora-nav__link {
   text-decoration: none;
   color: inherit;
@@ -68,70 +67,44 @@
   gap: 5px;
   transition: opacity 0.2s;
   cursor: pointer;
-  height: 100%;
+  height: 100%; /* Important: Full height for easy hover */
+  padding: 0 5px; /* Adds a bit of buffer */
 }
 .cora-nav__link:hover { opacity: 0.7; }
 .cora-chevron { width: 10px; height: 10px; opacity: 0.6; }
 
-/* -------------------------------------------
-   MEGA MENU TRICK (The Static Position)
-   ------------------------------------------- */
+/* --- MEGA MENU LOGIC --- */
 .cora-nav__item.has-mega-menu {
-  position: static; /* Allows child absolute element to span full width of Header */
+  position: static; /* Allows absolute child to span full header width */
 }
 
-/* Mega Menu Wrapper */
 .cora-megamenu-wrapper {
   position: absolute;
-  top: 100%;
+  top: 100%; /* Attach to bottom of header */
   left: 0;
   width: 100%;
   background: #fff;
-  border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   box-shadow: 0 10px 40px rgba(0,0,0,0.05);
   z-index: 999;
   
-  /* Hiding/Showing Logic */
+  /* Transition Logic */
   visibility: hidden;
   opacity: 0;
   transform: translateY(10px);
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
   pointer-events: none;
 }
 
-/* HOVER STATE: Show Menu */
-.cora-nav__item:hover .cora-megamenu-wrapper {
+/* Hover State - Show Menu */
+.cora-nav__item:hover .cora-megamenu-wrapper,
+.cora-megamenu-wrapper:hover {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* Standard Dropdown (Fallback) */
-.cora-nav__dropdown {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  min-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.2s ease;
-  padding: 10px 0;
-  z-index: 60;
-  text-align: left;
-}
-.cora-nav__item:hover .cora-nav__dropdown { visibility: visible; opacity: 1; }
-.cora-dropdown__link { display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap; }
-.cora-dropdown__link:hover { background-color: #f5f5f5; }
-
-/* -------------------------------------------
-   MEGA MENU INNER CONTENT
-   ------------------------------------------- */
 .cora-mm-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -141,7 +114,7 @@
   justify-content: space-between;
 }
 
-/* Links (Left) */
+/* Mega Menu Columns */
 .cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
 .cora-mm-col { min-width: 160px; }
 .cora-mm-heading {
@@ -151,7 +124,7 @@
 .cora-mm-link { text-decoration: none; color: #555; font-family: 'Inter', sans-serif; font-size: 14px; transition: color 0.2s; }
 .cora-mm-link:hover { color: #000; text-decoration: underline; }
 
-/* Promos (Right) */
+/* Promos */
 .cora-mm-promos { display: flex; gap: 20px; flex: 1; justify-content: flex-end; }
 .cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; }
 .cora-mm-image-wrap { width: 100%; height: 100%; }
@@ -164,8 +137,20 @@
 }
 .cora-mm-label span { font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; color: #1a1a1a; }
 
+/* --- STANDARD DROPDOWN --- */
+.cora-nav__dropdown {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  background: #ffffff; border: 1px solid #e5e5e5; min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  visibility: hidden; opacity: 0; transition: all 0.2s ease;
+  padding: 10px 0; z-index: 60; text-align: left;
+}
+.cora-nav__item:hover .cora-nav__dropdown { visibility: visible; opacity: 1; }
+.cora-dropdown__link { display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap; }
+.cora-dropdown__link:hover { background-color: #f5f5f5; }
+
 /* =========================================
-   4. ICONS & AUTH (Right)
+   4. ICONS & AUTH
    ========================================= */
 .cora-header__right { flex: 0 0 auto; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
 .cora-header__icon { position: relative; display: flex; align-items: center; color: inherit; text-decoration: none; }
@@ -175,7 +160,7 @@
 }
 
 /* =========================================
-   5. MOBILE 
+   5. MOBILE
    ========================================= */
 .cora-header__mobile-trigger { display: none; }
 .cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
@@ -190,7 +175,7 @@
   .cora-header__right { flex: 1; }
 }
 
-/* Mobile Drawer (Same as previous) */
+/* Mobile Drawer (Standard) */
 .cora-mobile-drawer { position: fixed; top: 0; left: 0; width: 320px; height: 100vh; background: #ffffff; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
 .cora-mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
 #cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
