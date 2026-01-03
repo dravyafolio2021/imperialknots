@@ -1,10 +1,11 @@
 /* =========================================
-   1. BASE HEADER LAYOUT
-   ========================================= */
+   1. BASE HEADER
+========================================= */
+
 .cora-header {
   width: 100%;
-  position: relative; 
-  z-index: 100;
+  position: relative;
+  z-index: 50;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -12,33 +13,42 @@
 .cora-header__inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 /* =========================================
    2. LOGO
-   ========================================= */
+========================================= */
+
 .cora-header__left {
   flex: 0 0 auto;
-  z-index: 52;
   display: flex;
   align-items: center;
-  margin-right: 20px;
 }
-.cora-header__brand-link { text-decoration: none; color: inherit; display: flex; align-items: center; }
-.cora-header__logo-img { display: block; max-height: 45px; width: auto; }
+
+.cora-header__brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cora-header__logo-img {
+  max-height: 45px;
+  width: auto;
+}
 
 /* =========================================
-   3. NAVIGATION
-   ========================================= */
+   3. NAVIGATION (DESKTOP)
+========================================= */
+
 .cora-header__center {
-  flex: 1; 
+  flex: 1;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   height: 100%;
 }
 
@@ -63,131 +73,182 @@
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 5px;
-  transition: opacity 0.2s;
+  gap: 6px;
   cursor: pointer;
-  height: 100%; 
-  padding: 0 15px; /* Wider hit area */
 }
-.cora-nav__link:hover { opacity: 0.7; }
-.cora-chevron { width: 10px; height: 10px; opacity: 0.6; }
 
-/* --- MEGA MENU LOGIC --- */
-.cora-nav__item.has-mega-menu {
-  position: static; /* Allows menu to span full width */
+.cora-nav__link:hover {
+  opacity: 0.7;
 }
+
+.cora-chevron {
+  width: 10px;
+  height: 10px;
+  opacity: 0.6;
+}
+
+/* =========================================
+   4. STANDARD DROPDOWN (RESTORED)
+========================================= */
+
+.cora-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  padding: 10px 0;
+  z-index: 60;
+  text-align: left;
+}
+
+.cora-nav__item:hover .cora-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cora-dropdown__link {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cora-dropdown__link:hover {
+  background-color: #f5f5f5;
+}
+
+/* =========================================
+   5. MEGA MENU (ISOLATED – SAFE)
+========================================= */
 
 .cora-megamenu-wrapper {
   position: absolute;
-  top: 100%;
   left: 0;
+  top: 100%;
   width: 100%;
-  background: #fff;
+  background: #ffffff;
   border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-  z-index: 1001;
-  
-  /* Hard Display Logic for reliability */
-  display: none; 
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all 0.25s ease;
+  z-index: 40; /* BELOW dropdown */
 }
 
-/* Hover Show */
-.cora-nav__item:hover .cora-megamenu-wrapper {
-  display: block;
-  animation: fadeIn 0.2s ease-out;
+.cora-megamenu-wrapper.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.cora-mm-container {
+.cora-megamenu {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 40px;
+}
+
+.cora-megamenu__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+}
+
+.cora-megamenu__title {
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: block;
+  text-decoration: none;
+  color: #111;
+}
+
+.cora-megamenu__link {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+}
+
+.cora-megamenu__link:hover {
+  color: #000;
+}
+
+.cora-megamenu__media img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.cora-megamenu__cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #000;
+}
+
+/* =========================================
+   6. HEADER ICONS
+========================================= */
+
+.cora-header__right {
   display: flex;
-  gap: 60px;
-  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Links */
-.cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
-.cora-mm-col { min-width: 160px; }
-.cora-mm-heading {
-  font-family: 'Times New Roman', serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 20px 0; color: #1a1a1a;
+.cora-header__icon {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
 }
-.cora-mm-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-.cora-mm-link { text-decoration: none; color: #555; font-family: 'Inter', sans-serif; font-size: 14px; transition: color 0.2s; }
-.cora-mm-link:hover { color: #000; text-decoration: underline; }
 
-/* Promos */
-.cora-mm-promos { display: flex; gap: 20px; flex: 1; justify-content: flex-end; }
-.cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; text-decoration: none;}
-.cora-mm-image-wrap { width: 100%; height: 100%; }
-.cora-mm-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.cora-mm-card:hover .cora-mm-image-wrap img { transform: scale(1.05); }
-.cora-mm-label {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  background: #ffffff; padding: 12px 20px; min-width: 140px; text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 2;
+.cora-header__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5px;
 }
-.cora-mm-label span { font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; color: #1a1a1a; }
 
-/* --- STANDARD DROPDOWN --- */
-.cora-nav__dropdown {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  background: #ffffff; border: 1px solid #e5e5e5; min-width: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  display: none;
-  padding: 10px 0; z-index: 60; text-align: left;
-}
-.cora-nav__item:hover .cora-nav__dropdown { display: block; }
-.cora-dropdown__link { display: block; padding: 10px 20px; color: #333; text-decoration: none; font-size: 14px; white-space: nowrap; }
-.cora-dropdown__link:hover { background-color: #f5f5f5; }
-
-/* =========================================
-   4. ICONS & AUTH
-   ========================================= */
-.cora-header__right { flex: 0 0 auto; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
-.cora-header__icon { position: relative; display: flex; align-items: center; color: inherit; text-decoration: none; }
-.cora-header__icon svg { width: 22px; height: 22px; stroke-width: 1.5px; }
 .cora-cart-count {
-  position: absolute; top: -8px; right: -8px; background-color: #000; color: #fff; font-size: 10px; height: 16px; width: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* =========================================
-   5. MOBILE
-   ========================================= */
-.cora-header__mobile-trigger { display: none; }
-.cora-header__hamburger { cursor: pointer; display: flex; align-items: center; width: fit-content; }
+   7. MOBILE
+========================================= */
+
+.cora-header__mobile-trigger {
+  display: none;
+}
 
 @media (max-width: 1024px) {
-  .cora-header__inner { justify-content: space-between; padding: 0 20px; }
-  .cora-header__mobile-trigger { display: block; flex: 1; }
-  .cora-header__center, .cora-auth-wrapper { display: none; }
-  .cora-header__left {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: auto; margin-right: 0; justify-content: center;
+  .cora-header__center {
+    display: none;
   }
-  .cora-header__right { flex: 1; }
-}
 
-/* Mobile Drawer */
-.cora-mobile-drawer { position: fixed; top: 0; left: 0; width: 320px; height: 100vh; background: #ffffff; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
-.cora-mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
-#cora-nav-toggle:checked ~ .cora-mobile-drawer { transform: translateX(0); }
-#cora-nav-toggle:checked ~ .cora-mobile-overlay { opacity: 1; visibility: visible; }
-#cora-nav-toggle:checked ~ body { overflow: hidden; }
-.cora-drawer__header { padding: 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-.cora-drawer__close { font-size: 28px; cursor: pointer; line-height: 1; }
-.cora-drawer__nav { padding: 0; overflow-y: auto; flex: 1; }
-.cora-drawer__link, .cora-drawer__summary { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid #f5f5f5; text-decoration: none; color: #1a1a1a; font-size: 16px; font-weight: 500; background: #fff; cursor: pointer; list-style: none; transition: background 0.2s; }
-.cora-drawer__link:hover, .cora-drawer__summary:hover { background-color: #fafafa; }
-.cora-drawer__summary::-webkit-details-marker { display: none; }
-.cora-drawer__accordion[open] .cora-drawer__summary { border-bottom-color: transparent; padding-bottom: 10px; }
-.cora-drawer__submenu { background-color: #fafafa; padding-bottom: 10px; border-bottom: 1px solid #f5f5f5; }
-.cora-drawer__sublink { padding: 12px 24px 12px 40px; font-size: 15px; color: #555; border-bottom: none; background: transparent; }
-.cora-drawer__icon { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; transition: transform 0.3s ease; }
-.cora-drawer__accordion[open] .cora-drawer__icon { transform: rotate(45deg); }
-.cora-drawer__footer { padding: 20px; background: #ffffff; border-top: 1px solid #e5e5e5; margin-top: auto; flex-shrink: 0; }
+  .cora-header__mobile-trigger {
+    display: block;
+  }
+}
