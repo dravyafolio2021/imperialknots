@@ -48,19 +48,75 @@
     <div class="cora-header__center">
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
-          <div class="cora-nav__item" data-trigger="{{ link.title | handleize }}">
+          
+          {% comment %} --- CHECK FOR MEGA MENU BLOCK MATCH --- {% endcomment %}
+          {% assign mega_menu_block = nil %}
+          {% for block in section.blocks %}
+            {% if block.type == 'mega_menu' %}
+              {% assign trigger_handle = block.settings.trigger_link | handleize %}
+              {% assign link_handle = link.title | handleize %}
+              {% if trigger_handle == link_handle %}
+                {% assign mega_menu_block = block %}
+                {% break %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          <div class="cora-nav__item {% if mega_menu_block %}has-mega-menu{% endif %}">
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
-              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
+              {% if link.links != blank or mega_menu_block %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
             </a>
             
-            {% if link.links != blank %}
+            {% comment %} --- RENDER MEGA MENU --- {% endcomment %}
+            {% if mega_menu_block %}
+              <div class="cora-megamenu-wrapper">
+                <div class="cora-mm-container">
+                  <div class="cora-mm-links">
+                    {% for child_link in link.links limit: 2 %}
+                      <div class="cora-mm-col">
+                        <h4 class="cora-mm-heading">{{ child_link.title }}</h4>
+                        <ul class="cora-mm-list">
+                          {% for grandchild in child_link.links %}
+                            <li><a href="{{ grandchild.url }}" class="cora-mm-link">{{ grandchild.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <div class="cora-mm-promos">
+                    {% if mega_menu_block.settings.promo_1_image %}
+                      <a href="{{ mega_menu_block.settings.promo_1_link }}" class="cora-mm-card">
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_1_title }}</span></div>
+                      </a>
+                    {% endif %}
+                    {% if mega_menu_block.settings.promo_2_image %}
+                      <a href="{{ mega_menu_block.settings.promo_2_link }}" class="cora-mm-card">
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_2_title }}</span></div>
+                      </a>
+                    {% endif %}
+                    {% if mega_menu_block.settings.promo_3_image %}
+                      <a href="{{ mega_menu_block.settings.promo_3_link }}" class="cora-mm-card">
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_3_title }}</span></div>
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+            {% comment %} --- RENDER STANDARD DROPDOWN --- {% endcomment %}
+            {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
                   <a href="{{ child_link.url }}" class="cora-dropdown__link">{{ child_link.title }}</a>
                 {% endfor %}
               </div>
             {% endif %}
+
           </div>
         {% endfor %}
       </nav>
@@ -119,84 +175,41 @@
   </div>
 </header>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // 1. Find all triggers in the header
-    const triggers = document.querySelectorAll('.cora-nav__item[data-trigger]');
-    
-    // 2. Find all Mega Menu sections
-    const megaMenus = document.querySelectorAll('.cora-megamenu-wrapper');
-
-    triggers.forEach(trigger => {
-      const handle = trigger.getAttribute('data-trigger');
-      
-      // Look for a matching mega menu based on the handle
-      const targetMenu = document.querySelector(`.cora-megamenu-wrapper[data-menu-handle="${handle}"]`);
-
-      if (targetMenu) {
-        // Hide standard dropdown if Mega Menu exists
-        const standardDropdown = trigger.querySelector('.cora-nav__dropdown');
-        if(standardDropdown) standardDropdown.style.display = 'none';
-
-        // Move the Mega Menu into the header wrapper so it positions correctly
-        const header = document.querySelector('.cora-header');
-        header.appendChild(targetMenu);
-
-        // Hover Logic
-        trigger.addEventListener('mouseenter', () => {
-          targetMenu.classList.add('is-active');
-        });
-
-        trigger.addEventListener('mouseleave', () => {
-           setTimeout(() => {
-             if (!targetMenu.matches(':hover')) {
-               targetMenu.classList.remove('is-active');
-             }
-           }, 100);
-        });
-
-        targetMenu.addEventListener('mouseleave', () => {
-          targetMenu.classList.remove('is-active');
-        });
-      }
-    });
-  });
-</script>
-
 {% schema %}
 {
-  "name": "Cora Header (Responsive)",
+  "name": "Cora Header",
   "settings": [
-    { 
-      "type": "header", 
-      "content": "Logo Settings" 
-    },
-    { 
-      "type": "image_picker", 
-      "id": "logo_image", 
-      "label": "Logo Image" 
-    },
-    { 
-      "type": "html", 
-      "id": "logo_svg", 
-      "label": "Custom SVG Logo", 
-      "info": "Paste your SVG code here. This overrides the image logo." 
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 100,
-      "max": 300,
-      "step": 2,
-      "default": 150,
-      "label": "Logo Width (px)"
-    },
+    { "type": "header", "content": "Logo Settings" },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
+    { "type": "html", "id": "logo_svg", "label": "Custom SVG Logo" },
+    { "type": "range", "id": "logo_width", "min": 100, "max": 300, "step": 2, "default": 150, "label": "Logo Width (px)" },
     { "type": "header", "content": "Navigation" },
     { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
     { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
   ],
-  "presets": [{ "name": "Cora Header (Responsive)" }]
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega Menu",
+      "settings": [
+        { "type": "text", "id": "trigger_link", "label": "Trigger Link Name", "info": "e.g. Catalog", "default": "Catalog" },
+        { "type": "header", "content": "Promo 1" },
+        { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
+        { "type": "text", "id": "promo_1_title", "label": "Title", "default": "In-Stock" },
+        { "type": "url", "id": "promo_1_link", "label": "Link" },
+        { "type": "header", "content": "Promo 2" },
+        { "type": "image_picker", "id": "promo_2_image", "label": "Image" },
+        { "type": "text", "id": "promo_2_title", "label": "Title", "default": "Luxe" },
+        { "type": "url", "id": "promo_2_link", "label": "Link" },
+        { "type": "header", "content": "Promo 3" },
+        { "type": "image_picker", "id": "promo_3_image", "label": "Image" },
+        { "type": "text", "id": "promo_3_title", "label": "Title", "default": "Best Sellers" },
+        { "type": "url", "id": "promo_3_link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cora Header" }]
 }
 {% endschema %}
