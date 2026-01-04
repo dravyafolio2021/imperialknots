@@ -22,33 +22,34 @@
         "text_color": "#111111"
       }
     },
-    "cora_mega_menu_DcEnRw": {
-      "type": "cora-mega-menu",
+    "header_cora_emcDjA": {
+      "type": "header-cora",
       "blocks": {
-        "mega_menu_RKyNqt": {
+        "mega_menu_fhtDWL": {
           "type": "mega_menu",
           "settings": {
-            "menu_trigger": "Collections",
-            "source_menu": "main-menu",
-            "promo_1_image": "shopify://shop_images/AboutV2.png",
-            "promo_1_title": "In-Stock",
-            "promo_1_link": "",
-            "promo_2_title": "Luxe",
-            "promo_2_link": "",
-            "promo_3_title": "Best Sellers",
-            "promo_3_link": ""
+            "menu_trigger": "",
+            "promo_title": "New Arrivals",
+            "promo_subtitle": "Shop the latest collection",
+            "promo_link": ""
           }
         }
       },
       "block_order": [
-        "mega_menu_RKyNqt"
+        "mega_menu_fhtDWL"
       ],
-      "name": "Cora Mega Menu (Addon)",
-      "settings": {}
+      "name": "Cora Header",
+      "settings": {
+        "logo_width": 100,
+        "menu": "main-menu",
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "header_height": 80
+      }
     }
   },
   "order": [
     "header_mGm9D7",
-    "cora_mega_menu_DcEnRw"
+    "header_cora_emcDjA"
   ]
 }
