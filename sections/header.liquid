@@ -19,7 +19,7 @@
     <div class="cora-header__left">
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
         {%- if section.settings.logo_svg != blank -%}
-          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px;">
+          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display: flex; align-items: center;">
             <style>.cora-header__logo-svg svg { width: 100%; height: auto; }</style>
             {{ section.settings.logo_svg }}
           </div>
@@ -33,7 +33,14 @@
             style="width: {{ section.settings.logo_width }}px;"
           >
         {%- else -%}
-          <span style="font-family:'Times New Roman', serif; font-size:24px; font-weight:bold; text-transform:uppercase;">{{ shop.name }}</span>
+          <img 
+            src="https://cdn.shopify.com/s/files/1/0694/0170/6565/files/Logo_430x.svg?v=1765908401#" 
+            alt="{{ shop.name }}" 
+            class="cora-header__logo-img" 
+            width="{{ section.settings.logo_width }}" 
+            height="auto"
+            style="width: {{ section.settings.logo_width }}px;"
+          >
         {%- endif -%}
       </a>
     </div>
@@ -41,90 +48,29 @@
     <div class="cora-header__center">
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
-          
-          {% comment %} --- FIND MATCHING BLOCK --- {% endcomment %}
-          {% assign mega_block = nil %}
-          {% assign link_title_norm = link.title | downcase | strip %}
-          
-          {% for block in section.blocks %}
-            {% assign trigger_norm = block.settings.menu_handle | downcase | strip %}
-            {% if trigger_norm == link_title_norm %}
-              {% assign mega_block = block %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-
-          <div class="cora-nav__item {% if mega_block %}has-mega-menu{% endif %}" {{ mega_block.shopify_attributes }}>
+          <div class="cora-nav__item" data-trigger="{{ link.title | handleize }}">
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
-              {% if link.links != blank or mega_block %}
-                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
-              {% endif %}
+              {% if link.links != blank %}<svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>{% endif %}
             </a>
             
-            {% comment %} --- RENDER MEGA MENU --- {% endcomment %}
-            {% if mega_block %}
-              <div class="cora-mm-wrapper">
-                <div class="cora-mm-inner">
-                  
-                  <div class="cora-mm-columns">
-                    {% if link.links != blank %}
-                      {% for child_link in link.links limit: 2 %}
-                        <div class="cora-mm-col">
-                          <div class="cora-mm-heading">{{ child_link.title }}</div>
-                          <ul class="cora-mm-list">
-                            {% for grandchild in child_link.links %}
-                              <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                            {% endfor %}
-                          </ul>
-                        </div>
-                      {% endfor %}
-                    {% else %}
-                      <p class="cora-mm-empty">Add nested menu items to <strong>{{ link.title }}</strong> in Navigation settings.</p>
-                    {% endif %}
-                  </div>
-
-                  <div class="cora-mm-promos">
-                    {% if mega_block.settings.image_1 != blank %}
-                      <a href="{{ mega_block.settings.link_1 }}" class="cora-mm-promo">
-                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_1 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <span class="cora-mm-label">{{ mega_block.settings.text_1 }}</span>
-                      </a>
-                    {% endif %}
-                    {% if mega_block.settings.image_2 != blank %}
-                      <a href="{{ mega_block.settings.link_2 }}" class="cora-mm-promo">
-                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_2 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <span class="cora-mm-label">{{ mega_block.settings.text_2 }}</span>
-                      </a>
-                    {% endif %}
-                    {% if mega_block.settings.image_3 != blank %}
-                      <a href="{{ mega_block.settings.link_3 }}" class="cora-mm-promo">
-                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_3 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <span class="cora-mm-label">{{ mega_block.settings.text_3 }}</span>
-                      </a>
-                    {% endif %}
-                  </div>
-
-                </div>
-              </div>
-
-            {% comment %} --- RENDER STANDARD DROPDOWN --- {% endcomment %}
-            {% elsif link.links != blank %}
+            {% if link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
                   <a href="{{ child_link.url }}" class="cora-dropdown__link">{{ child_link.title }}</a>
                 {% endfor %}
               </div>
             {% endif %}
-
           </div>
         {% endfor %}
       </nav>
     </div>
 
     <div class="cora-header__right">
-      <a href="{{ routes.search_url }}" class="cora-header__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></a>
-      <a href="{{ routes.cart_url }}" class="cora-header__icon">
+      <a href="{{ routes.search_url }}" class="cora-header__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="cora-header__icon" aria-label="Cart" style="margin-right: 5px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
         {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
       </a>
@@ -134,17 +80,21 @@
 
   <div class="cora-mobile-drawer">
     <div class="cora-drawer__header">
-      <span>MENU</span>
+      <span style="font-weight:600; font-size:16px; text-transform:uppercase; letter-spacing:1px;">Menu</span>
       <label for="cora-nav-toggle" class="cora-drawer__close">&times;</label>
     </div>
+
     <nav class="cora-drawer__nav">
       {% for link in section.settings.menu.links %}
         {% if link.links != blank %}
           <details class="cora-drawer__accordion">
-            <summary class="cora-drawer__summary">{{ link.title }} <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5"/></svg></summary>
+            <summary class="cora-drawer__summary">
+              {{ link.title }}
+              <span class="cora-drawer__icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </summary>
             <div class="cora-drawer__submenu">
               {% for child_link in link.links %}
-                <a href="{{ child_link.url }}" class="cora-drawer__sublink">{{ child_link.title }}</a>
+                <a href="{{ child_link.url }}" class="cora-drawer__link cora-drawer__sublink">{{ child_link.title }}</a>
               {% endfor %}
             </div>
           </details>
@@ -153,48 +103,100 @@
         {% endif %}
       {% endfor %}
     </nav>
+    
+    <div class="cora-drawer__footer">
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="{{ routes.account_url }}" class="cora-drawer__cta">My Account</a>
+        {% else %}
+          <div style="display: flex; gap: 12px;">
+            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost" style="flex: 1; border: 1px solid #e2e8f0; justify-content: center;">Log in</a>
+            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary" style="flex: 1; justify-content: center;">Sign up</a>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
   </div>
 </header>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. Find all triggers in the header
+    const triggers = document.querySelectorAll('.cora-nav__item[data-trigger]');
+    
+    // 2. Find all Mega Menu sections
+    const megaMenus = document.querySelectorAll('.cora-megamenu-wrapper');
+
+    triggers.forEach(trigger => {
+      const handle = trigger.getAttribute('data-trigger');
+      
+      // Look for a matching mega menu based on the handle
+      const targetMenu = document.querySelector(`.cora-megamenu-wrapper[data-menu-handle="${handle}"]`);
+
+      if (targetMenu) {
+        // Hide standard dropdown if Mega Menu exists
+        const standardDropdown = trigger.querySelector('.cora-nav__dropdown');
+        if(standardDropdown) standardDropdown.style.display = 'none';
+
+        // Move the Mega Menu into the header wrapper so it positions correctly
+        const header = document.querySelector('.cora-header');
+        header.appendChild(targetMenu);
+
+        // Hover Logic
+        trigger.addEventListener('mouseenter', () => {
+          targetMenu.classList.add('is-active');
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+           setTimeout(() => {
+             if (!targetMenu.matches(':hover')) {
+               targetMenu.classList.remove('is-active');
+             }
+           }, 100);
+        });
+
+        targetMenu.addEventListener('mouseleave', () => {
+          targetMenu.classList.remove('is-active');
+        });
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Cora Header",
-  "max_blocks": 5,
+  "name": "Cora Header (Responsive)",
   "settings": [
-    { "type": "header", "content": "Logo" },
-    { "type": "image_picker", "id": "logo_image", "label": "Image" },
-    { "type": "html", "id": "logo_svg", "label": "SVG Code" },
-    { "type": "range", "id": "logo_width", "min": 50, "max": 300, "step": 5, "default": 150, "label": "Width (px)" },
-    { "type": "header", "content": "Menu" },
+    { 
+      "type": "header", 
+      "content": "Logo Settings" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "logo_image", 
+      "label": "Logo Image" 
+    },
+    { 
+      "type": "html", 
+      "id": "logo_svg", 
+      "label": "Custom SVG Logo", 
+      "info": "Paste your SVG code here. This overrides the image logo." 
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "default": 150,
+      "label": "Logo Width (px)"
+    },
+    { "type": "header", "content": "Navigation" },
     { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#1a1a1a" }
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
   ],
-  "blocks": [
-    {
-      "type": "mega_menu_fixed",
-      "name": "Mega Menu",
-      "settings": [
-        { "type": "text", "id": "menu_handle", "label": "Menu Item Name", "default": "Collections", "info": "Exact match (e.g. Catalog)" },
-        
-        { "type": "header", "content": "Promo 1" },
-        { "type": "image_picker", "id": "image_1", "label": "Image" },
-        { "type": "text", "id": "text_1", "label": "Label", "default": "In-Stock" },
-        { "type": "url", "id": "link_1", "label": "Link" },
-
-        { "type": "header", "content": "Promo 2" },
-        { "type": "image_picker", "id": "image_2", "label": "Image" },
-        { "type": "text", "id": "text_2", "label": "Label", "default": "Luxe" },
-        { "type": "url", "id": "link_2", "label": "Link" },
-
-        { "type": "header", "content": "Promo 3" },
-        { "type": "image_picker", "id": "image_3", "label": "Image" },
-        { "type": "text", "id": "text_3", "label": "Label", "default": "Best Sellers" },
-        { "type": "url", "id": "link_3", "label": "Link" }
-      ]
-    }
-  ],
-  "presets": [{ "name": "Cora Header" }]
+  "presets": [{ "name": "Cora Header (Responsive)" }]
 }
 {% endschema %}
