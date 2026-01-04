@@ -25,10 +25,19 @@
     "header_cora_emcDjA": {
       "type": "header-cora",
       "blocks": {
+        "mega_menu_zDXKiW": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_trigger": "CONTACT",
+            "promo_title": "New Arrivals",
+            "promo_subtitle": "Shop the latest collection",
+            "promo_link": ""
+          }
+        },
         "mega_menu_fhtDWL": {
           "type": "mega_menu",
           "settings": {
-            "menu_trigger": "",
+            "menu_trigger": "HOME",
             "promo_title": "New Arrivals",
             "promo_subtitle": "Shop the latest collection",
             "promo_link": ""
@@ -36,6 +45,7 @@
         }
       },
       "block_order": [
+        "mega_menu_zDXKiW",
         "mega_menu_fhtDWL"
       ],
       "name": "Cora Header",
