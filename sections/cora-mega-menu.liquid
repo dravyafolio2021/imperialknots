@@ -1,0 +1,199 @@
+{% comment %}
+  SECTION: CORA MEGA MENU (DETACHED)
+  Usage: Add this section to your page/template. It will inject itself into the header.
+{% endcomment %}
+
+<div id="cora-mega-menu-storage" style="display:none;">
+  {% for block in section.blocks %}
+    {% assign trigger = block.settings.menu_trigger | downcase | strip %}
+    
+    <div class="cora-mm-wrapper" data-trigger="{{ trigger }}">
+      <div class="cora-mm-container">
+        
+        <div class="cora-mm-links">
+          {% assign menu_handle = block.settings.source_menu | default: 'main-menu' %}
+          {% assign target_link_name = block.settings.menu_trigger %}
+          
+          {% comment %} Find the link in the menu that matches the trigger {% endcomment %}
+          {% assign parent_link = linklists[menu_handle].links | where: 'title', target_link_name | first %}
+          
+          {% if parent_link and parent_link.links != blank %}
+            {% for child in parent_link.links limit: 2 %}
+              <div class="cora-mm-col">
+                <div class="cora-mm-heading">{{ child.title }}</div>
+                <ul class="cora-mm-list">
+                  {% for grandchild in child.links %}
+                    <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endfor %}
+          {% else %}
+            <p style="padding: 20px; color: #777;">
+              Tip: Ensure Navigation has nested items for <strong>{{ target_link_name }}</strong>.
+            </p>
+          {% endif %}
+        </div>
+
+        <div class="cora-mm-promos">
+          {% for i in (1..3) %}
+            {% capture img_key %}promo_{{ i }}_image{% endcapture %}
+            {% capture txt_key %}promo_{{ i }}_title{% endcapture %}
+            {% capture url_key %}promo_{{ i }}_link{% endcapture %}
+            
+            {% if block.settings[img_key] != blank %}
+              <a href="{{ block.settings[url_key] }}" class="cora-mm-card">
+                <div class="cora-mm-img">
+                  <img src="{{ block.settings[img_key] | img_url: '400x500', crop: 'center' }}" loading="lazy">
+                </div>
+                <span class="cora-mm-label">{{ block.settings[txt_key] }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. Get the storage container and header
+    const storage = document.getElementById('cora-mega-menu-storage');
+    const header = document.querySelector('.cora-header');
+    
+    if (!storage || !header) return;
+
+    // 2. Move all mega menus from storage into the header (so they position correctly)
+    const menus = storage.querySelectorAll('.cora-mm-wrapper');
+    menus.forEach(menu => {
+      header.appendChild(menu); // Move DOM element
+    });
+
+    // 3. Set up Hover Logic
+    const links = header.querySelectorAll('.cora-nav__link');
+    
+    links.forEach(link => {
+      const title = link.getAttribute('data-link-title');
+      const menu = header.querySelector(`.cora-mm-wrapper[data-trigger="${title}"]`);
+      const parentItem = link.closest('.cora-nav__item');
+
+      if (menu && parentItem) {
+        // Hide standard dropdown if mega menu exists
+        const standardDrop = parentItem.querySelector('.cora-nav__dropdown');
+        if(standardDrop) standardDrop.style.display = 'none';
+
+        // Add Hover Events to Parent Item
+        parentItem.addEventListener('mouseenter', () => {
+          menu.classList.add('is-visible');
+        });
+        parentItem.addEventListener('mouseleave', () => {
+          menu.classList.remove('is-visible');
+        });
+        
+        // Keep menu open when hovering the menu itself
+        menu.addEventListener('mouseenter', () => {
+          menu.classList.add('is-visible');
+        });
+        menu.addEventListener('mouseleave', () => {
+          menu.classList.remove('is-visible');
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  /* --- MEGA MENU CSS (Injected) --- */
+  .cora-mm-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    z-index: 1001;
+    
+    /* Hidden State */
+    display: none; 
+  }
+
+  .cora-mm-wrapper.is-visible {
+    display: block;
+    animation: mmFadeIn 0.2s ease-out;
+  }
+
+  @keyframes mmFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cora-mm-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+  }
+
+  /* Left Columns */
+  .cora-mm-links { display: flex; gap: 60px; flex: 0 0 auto; }
+  .cora-mm-col { min-width: 160px; }
+  .cora-mm-heading {
+    font-family: 'Times New Roman', serif; font-size: 14px; font-weight: 700; 
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: #1a1a1a;
+  }
+  .cora-mm-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .cora-mm-list a { text-decoration: none; color: #555; font-family: 'Inter', sans-serif; font-size: 14px; transition: color 0.2s; }
+  .cora-mm-list a:hover { color: #000; text-decoration: underline; }
+
+  /* Right Promos */
+  .cora-mm-promos { display: flex; gap: 20px; flex: 1; justify-content: flex-end; }
+  .cora-mm-card { position: relative; width: 220px; height: 280px; display: block; overflow: hidden; text-decoration: none; }
+  .cora-mm-img { width: 100%; height: 100%; }
+  .cora-mm-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .cora-mm-card:hover .cora-mm-img img { transform: scale(1.05); }
+  .cora-mm-label {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: #fff; padding: 10px 20px; min-width: 120px; text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: 'Times New Roman', serif; 
+    font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; color: #1a1a1a;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cora Mega Menu (Addon)",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega Menu Item",
+      "settings": [
+        { "type": "text", "id": "menu_trigger", "label": "Link Name", "default": "Collections", "info": "Exact name of menu item" },
+        { "type": "link_list", "id": "source_menu", "label": "Source Menu", "default": "main-menu" },
+        
+        { "type": "header", "content": "Promo 1" },
+        { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
+        { "type": "text", "id": "promo_1_title", "label": "Label", "default": "In-Stock" },
+        { "type": "url", "id": "promo_1_link", "label": "Link" },
+
+        { "type": "header", "content": "Promo 2" },
+        { "type": "image_picker", "id": "promo_2_image", "label": "Image" },
+        { "type": "text", "id": "promo_2_title", "label": "Label", "default": "Luxe" },
+        { "type": "url", "id": "promo_2_link", "label": "Link" },
+
+        { "type": "header", "content": "Promo 3" },
+        { "type": "image_picker", "id": "promo_3_image", "label": "Image" },
+        { "type": "text", "id": "promo_3_title", "label": "Label", "default": "Best Sellers" },
+        { "type": "url", "id": "promo_3_link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cora Mega Menu (Addon)" }]
+}
+{% endschema %}
