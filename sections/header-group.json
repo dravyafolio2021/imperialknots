@@ -44,6 +44,8 @@
           "type": "mega_menu",
           "settings": {
             "menu_trigger": "COLLECTIONS",
+            "custom_menu_1": "footer",
+            "custom_menu_2": "customer-account-main-menu",
             "promo_1_img": "shopify://shop_images/AboutV2.png",
             "promo_1_text": "In-Stock",
             "promo_1_link": "",
