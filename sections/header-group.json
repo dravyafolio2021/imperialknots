@@ -43,35 +43,21 @@
         "mega_menu_zDXKiW": {
           "type": "mega_menu",
           "settings": {
-            "menu_trigger": "CONTACT",
-            "promo_image": "shopify://shop_images/AboutV2.png",
-            "promo_title": "New Arrivals",
-            "promo_subtitle": "Shop the latest collection",
-            "promo_link": ""
-          }
-        },
-        "mega_menu_fhtDWL": {
-          "type": "mega_menu",
-          "settings": {
-            "menu_trigger": "HOME",
-            "promo_title": "New Arrivals",
-            "promo_subtitle": "Shop the latest collection",
-            "promo_link": ""
+            "menu_trigger": "COLLECTIONS"
           }
         }
       },
       "block_order": [
-        "mega_menu_zDXKiW",
-        "mega_menu_fhtDWL"
+        "mega_menu_zDXKiW"
       ],
       "name": "Cora Header",
       "settings": {
         "logo": "shopify://shop_images/Logo.svg",
         "logo_width": 160,
         "menu": "main-menu",
+        "header_height": 80,
         "bg_color": "#ffffff",
-        "text_color": "#000000",
-        "header_height": 80
+        "text_color": "#000000"
       }
     }
   },
