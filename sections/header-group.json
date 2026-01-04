@@ -29,6 +29,7 @@
           "type": "mega_menu",
           "settings": {
             "menu_trigger": "CONTACT",
+            "promo_image": "shopify://shop_images/AboutV2.png",
             "promo_title": "New Arrivals",
             "promo_subtitle": "Shop the latest collection",
             "promo_link": ""
