@@ -42,8 +42,10 @@
       <nav class="cora-header__nav">
         {% for link in section.settings.menu.links %}
           
-          {% comment %} --- 1. FIND MATCHING BLOCK --- {% endcomment %}
+          {% comment %} --- FIND MATCHING BLOCK --- {% endcomment %}
           {% assign mega_menu_block = nil %}
+          
+          {% comment %} Use loose matching (downcase + strip) to avoid case sensitivity issues {% endcomment %}
           {% assign link_handle = link.title | downcase | strip %}
           
           {% for block in section.blocks %}
@@ -62,11 +64,10 @@
               {% endif %}
             </a>
             
-            {% comment %} --- 2. RENDER MEGA MENU (If Block Found) --- {% endcomment %}
+            {% comment %} --- RENDER MEGA MENU --- {% endcomment %}
             {% if mega_menu_block %}
               <div class="cora-megamenu-wrapper">
                 <div class="cora-mm-container">
-                  
                   <div class="cora-mm-links">
                     {% if link.links != blank %}
                       {% for child_link in link.links limit: 2 %}
@@ -80,45 +81,36 @@
                         </div>
                       {% endfor %}
                     {% else %}
-                       <p style="padding: 20px; color: #666; font-size: 13px;">
-                         To populate these columns, add nested menu items to <strong>{{ link.title }}</strong> in your <a href="/admin/menus" style="text-decoration: underline;">Navigation settings</a>.
-                       </p>
+                      <div style="padding: 20px; color: #666; font-size: 13px;">
+                        Add nested items to <strong>{{ link.title }}</strong> in your Navigation settings to populate this area.
+                      </div>
                     {% endif %}
                   </div>
 
                   <div class="cora-mm-promos">
                     {% if mega_menu_block.settings.promo_1_image %}
                       <a href="{{ mega_menu_block.settings.promo_1_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap">
-                          <img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}" loading="lazy">
-                        </div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_1_title }}</span></div>
                       </a>
                     {% endif %}
-
                     {% if mega_menu_block.settings.promo_2_image %}
                       <a href="{{ mega_menu_block.settings.promo_2_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap">
-                          <img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}" loading="lazy">
-                        </div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_2_title }}</span></div>
                       </a>
                     {% endif %}
-
                     {% if mega_menu_block.settings.promo_3_image %}
                       <a href="{{ mega_menu_block.settings.promo_3_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap">
-                          <img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}" loading="lazy">
-                        </div>
+                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
                         <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_3_title }}</span></div>
                       </a>
                     {% endif %}
                   </div>
-
                 </div>
               </div>
 
-            {% comment %} --- 3. RENDER STANDARD DROPDOWN (Fallback) --- {% endcomment %}
+            {% comment %} --- STANDARD DROPDOWN (Fallback) --- {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -206,7 +198,7 @@
           "type": "text", 
           "id": "menu_trigger", 
           "label": "Connect to Menu Item", 
-          "info": "Type the exact name of the menu item (e.g. Collections) to attach this mega menu.",
+          "info": "Type the exact name of the menu item (e.g. Collections).",
           "default": "Collections"
         },
         { "type": "header", "content": "Promo Card 1" },
