@@ -1,0 +1,335 @@
+{% comment %}
+  CORA HEADER - Custom Mega Menu Implementation
+  Place this in sections/header-cora.liquid
+{% endcomment %}
+
+<style>
+  /* Base Layout */
+  .cora-header {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    position: relative;
+    padding: 0 4rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .header-container {
+    display: flex;
+    justify_content: space-between;
+    align_items: center;
+    height: {{ section.settings.header_height }}px;
+    max-width: var(--page-width, 1440px);
+    margin: 0 auto;
+  }
+
+  /* Navigation */
+  .cora-nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative; /* Anchor for the mega menu */
+    cursor: pointer;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: currentColor;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .nav-item:hover .nav-link {
+    opacity: 0.7;
+  }
+
+  /* Mega Menu Dropdown */
+  .mega-menu-container {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw; /* Full screen width */
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    z-index: 999;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    
+    /* Centering logic adjustment */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  .nav-item:hover .mega-menu-container {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .mega-menu-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 300px; /* 3 cols for links, 1 for promo */
+    gap: 2rem;
+  }
+
+  /* Mega Menu Content */
+  .mm-column h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #000;
+    letter-spacing: 0.05em;
+  }
+
+  .mm-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mm-column li {
+    margin-bottom: 0.5rem;
+  }
+
+  .mm-column a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .mm-column a:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* Promo Block in Mega Menu */
+  .mm-promo {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    min-height: 250px;
+  }
+
+  .mm-promo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mm-promo-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+  }
+
+  .mm-promo-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+</style>
+
+<header class="cora-header">
+  <div class="header-container">
+    
+    <div class="header-logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | image_url: width: 300 }}" 
+               alt="{{ shop.name }}"
+               width="{{ section.settings.logo_width }}"
+               height="auto">
+        {% else %}
+          <span class="h3">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <nav class="cora-nav">
+      {% for link in linklists[section.settings.menu].links %}
+        
+        <div class="nav-item">
+          <a href="{{ link.url }}" class="nav-link">
+            {{ link.title }}
+          </a>
+
+          {% for block in section.blocks %}
+            {% assign trigger = block.settings.menu_trigger | handleize %}
+            {% assign link_handle = link.title | handleize %}
+            
+            {% if trigger == link_handle %}
+              <div class="mega-menu-container">
+                <div class="mega-menu-inner">
+                  
+                  {% if link.links != blank %}
+                     {% for child_link in link.links %}
+                       <div class="mm-column">
+                         <h4><a href="{{ child_link.url }}">{{ child_link.title }}</a></h4>
+                         <ul>
+                           {% for grandchild_link in child_link.links %}
+                             <li><a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                           {% endfor %}
+                         </ul>
+                       </div>
+                     {% endfor %}
+                  {% else %}
+                    <div class="mm-column">
+                      <p>No nested links found in Navigation settings for {{ link.title }}.</p>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.promo_image != blank %}
+                    <div class="mm-promo">
+                      <a href="{{ block.settings.promo_link }}">
+                        <img src="{{ block.settings.promo_image | image_url: width: 600 }}" loading="lazy" alt="Promo">
+                        <div class="mm-promo-text">
+                          <div class="mm-promo-title">{{ block.settings.promo_title }}</div>
+                          <div>{{ block.settings.promo_subtitle }}</div>
+                        </div>
+                      </a>
+                    </div>
+                  {% endif %}
+
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      {% endfor %}
+    </nav>
+
+    <div class="header-icons">
+      <a href="{{ routes.cart_url }}">Cart</a>
+    </div>
+
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Cora Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 100
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Header Height",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Item Name",
+          "info": "Must match the menu link title EXACTLY (e.g. 'Men')."
+        },
+        {
+          "type": "header",
+          "content": "Promotional Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "Promo Image"
+        },
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Promo Heading",
+          "default": "New Arrivals"
+        },
+        {
+          "type": "text",
+          "id": "promo_subtitle",
+          "label": "Promo Subtext",
+          "default": "Shop the latest collection"
+        },
+        {
+          "type": "url",
+          "id": "promo_link",
+          "label": "Link Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Header",
+      "blocks": [
+        {
+          "type": "mega_menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
