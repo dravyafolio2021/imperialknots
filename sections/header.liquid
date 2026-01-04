@@ -19,7 +19,7 @@
     <div class="cora-header__left">
       <a href="{{ routes.root_url }}" class="cora-header__brand-link">
         {%- if section.settings.logo_svg != blank -%}
-          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px; max-width: 100%; display: flex; align-items: center;">
+          <div class="cora-header__logo-svg" style="width: {{ section.settings.logo_width }}px;">
             <style>.cora-header__logo-svg svg { width: 100%; height: auto; }</style>
             {{ section.settings.logo_svg }}
           </div>
@@ -43,74 +43,72 @@
         {% for link in section.settings.menu.links %}
           
           {% comment %} --- FIND MATCHING BLOCK --- {% endcomment %}
-          {% assign mega_menu_block = nil %}
-          
-          {% comment %} Use loose matching (downcase + strip) to avoid case sensitivity issues {% endcomment %}
-          {% assign link_handle = link.title | downcase | strip %}
+          {% assign mega_block = nil %}
+          {% assign link_title_norm = link.title | downcase | strip %}
           
           {% for block in section.blocks %}
-            {% assign trigger_handle = block.settings.menu_trigger | downcase | strip %}
-            {% if trigger_handle == link_handle %}
-              {% assign mega_menu_block = block %}
+            {% assign trigger_norm = block.settings.menu_handle | downcase | strip %}
+            {% if trigger_norm == link_title_norm %}
+              {% assign mega_block = block %}
               {% break %}
             {% endif %}
           {% endfor %}
 
-          <div class="cora-nav__item {% if mega_menu_block %}has-mega-menu{% endif %}">
+          <div class="cora-nav__item {% if mega_block %}has-mega-menu{% endif %}" {{ mega_block.shopify_attributes }}>
             <a href="{{ link.url }}" class="cora-nav__link">
               {{ link.title }}
-              {% if link.links != blank or mega_menu_block %}
-                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" style="margin-left: 6px;"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {% if link.links != blank or mega_block %}
+                <svg class="cora-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor"><path d="M1 1L5 5L9 1" stroke-width="1.5" stroke-linecap="round"/></svg>
               {% endif %}
             </a>
             
             {% comment %} --- RENDER MEGA MENU --- {% endcomment %}
-            {% if mega_menu_block %}
-              <div class="cora-megamenu-wrapper">
-                <div class="cora-mm-container">
-                  <div class="cora-mm-links">
+            {% if mega_block %}
+              <div class="cora-mm-wrapper">
+                <div class="cora-mm-inner">
+                  
+                  <div class="cora-mm-columns">
                     {% if link.links != blank %}
                       {% for child_link in link.links limit: 2 %}
                         <div class="cora-mm-col">
-                          <h4 class="cora-mm-heading">{{ child_link.title }}</h4>
+                          <div class="cora-mm-heading">{{ child_link.title }}</div>
                           <ul class="cora-mm-list">
                             {% for grandchild in child_link.links %}
-                              <li><a href="{{ grandchild.url }}" class="cora-mm-link">{{ grandchild.title }}</a></li>
+                              <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
                             {% endfor %}
                           </ul>
                         </div>
                       {% endfor %}
                     {% else %}
-                      <div style="padding: 20px; color: #666; font-size: 13px;">
-                        Add nested items to <strong>{{ link.title }}</strong> in your Navigation settings to populate this area.
-                      </div>
+                      <p class="cora-mm-empty">Add nested menu items to <strong>{{ link.title }}</strong> in Navigation settings.</p>
                     {% endif %}
                   </div>
 
                   <div class="cora-mm-promos">
-                    {% if mega_menu_block.settings.promo_1_image %}
-                      <a href="{{ mega_menu_block.settings.promo_1_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_1_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_1_title }}</span></div>
+                    {% if mega_block.settings.image_1 != blank %}
+                      <a href="{{ mega_block.settings.link_1 }}" class="cora-mm-promo">
+                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_1 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <span class="cora-mm-label">{{ mega_block.settings.text_1 }}</span>
                       </a>
                     {% endif %}
-                    {% if mega_menu_block.settings.promo_2_image %}
-                      <a href="{{ mega_menu_block.settings.promo_2_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_2_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_2_title }}</span></div>
+                    {% if mega_block.settings.image_2 != blank %}
+                      <a href="{{ mega_block.settings.link_2 }}" class="cora-mm-promo">
+                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_2 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <span class="cora-mm-label">{{ mega_block.settings.text_2 }}</span>
                       </a>
                     {% endif %}
-                    {% if mega_menu_block.settings.promo_3_image %}
-                      <a href="{{ mega_menu_block.settings.promo_3_link }}" class="cora-mm-card">
-                        <div class="cora-mm-image-wrap"><img src="{{ mega_menu_block.settings.promo_3_image | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
-                        <div class="cora-mm-label"><span>{{ mega_menu_block.settings.promo_3_title }}</span></div>
+                    {% if mega_block.settings.image_3 != blank %}
+                      <a href="{{ mega_block.settings.link_3 }}" class="cora-mm-promo">
+                        <div class="cora-mm-img-box"><img src="{{ mega_block.settings.image_3 | img_url: '400x500', crop: 'center' }}" loading="lazy"></div>
+                        <span class="cora-mm-label">{{ mega_block.settings.text_3 }}</span>
                       </a>
                     {% endif %}
                   </div>
+
                 </div>
               </div>
 
-            {% comment %} --- STANDARD DROPDOWN (Fallback) --- {% endcomment %}
+            {% comment %} --- RENDER STANDARD DROPDOWN --- {% endcomment %}
             {% elsif link.links != blank %}
               <div class="cora-nav__dropdown">
                 {% for child_link in link.links %}
@@ -125,10 +123,8 @@
     </div>
 
     <div class="cora-header__right">
-      <a href="{{ routes.search_url }}" class="cora-header__icon" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </a>
-      <a href="{{ routes.cart_url }}" class="cora-header__icon" aria-label="Cart" style="margin-right: 5px;">
+      <a href="{{ routes.search_url }}" class="cora-header__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></a>
+      <a href="{{ routes.cart_url }}" class="cora-header__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
         {% if cart.item_count > 0 %}<span class="cora-cart-count">{{ cart.item_count }}</span>{% endif %}
       </a>
@@ -138,20 +134,17 @@
 
   <div class="cora-mobile-drawer">
     <div class="cora-drawer__header">
-      <span style="font-weight:600; font-size:16px; text-transform:uppercase; letter-spacing:1px;">Menu</span>
+      <span>MENU</span>
       <label for="cora-nav-toggle" class="cora-drawer__close">&times;</label>
     </div>
     <nav class="cora-drawer__nav">
       {% for link in section.settings.menu.links %}
         {% if link.links != blank %}
           <details class="cora-drawer__accordion">
-            <summary class="cora-drawer__summary">
-              {{ link.title }}
-              <span class="cora-drawer__icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-            </summary>
+            <summary class="cora-drawer__summary">{{ link.title }} <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M6 1V11M1 6H11" stroke-width="1.5"/></svg></summary>
             <div class="cora-drawer__submenu">
               {% for child_link in link.links %}
-                <a href="{{ child_link.url }}" class="cora-drawer__link cora-drawer__sublink">{{ child_link.title }}</a>
+                <a href="{{ child_link.url }}" class="cora-drawer__sublink">{{ child_link.title }}</a>
               {% endfor %}
             </div>
           </details>
@@ -160,62 +153,48 @@
         {% endif %}
       {% endfor %}
     </nav>
-    <div class="cora-drawer__footer">
-      {% if shop.customer_accounts_enabled %}
-        {% if customer %}
-          <a href="{{ routes.account_url }}" class="cora-drawer__cta">My Account</a>
-        {% else %}
-          <div style="display: flex; gap: 12px;">
-            <a href="{{ routes.account_login_url }}" class="cora-btn-shadcn cora-btn-ghost" style="flex: 1; border: 1px solid #e2e8f0; justify-content: center;">Log in</a>
-            <a href="{{ routes.account_register_url }}" class="cora-btn-shadcn cora-btn-primary" style="flex: 1; justify-content: center;">Sign up</a>
-          </div>
-        {% endif %}
-      {% endif %}
-    </div>
   </div>
 </header>
 
 {% schema %}
 {
-  "name": "Cora Header (Responsive)",
+  "name": "Cora Header",
+  "max_blocks": 5,
   "settings": [
-    { "type": "header", "content": "Logo Settings" },
-    { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
-    { "type": "html", "id": "logo_svg", "label": "Custom SVG Logo" },
-    { "type": "range", "id": "logo_width", "min": 100, "max": 300, "step": 2, "default": 150, "label": "Logo Width (px)" },
-    { "type": "header", "content": "Navigation" },
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo_image", "label": "Image" },
+    { "type": "html", "id": "logo_svg", "label": "SVG Code" },
+    { "type": "range", "id": "logo_width", "min": 50, "max": 300, "step": 5, "default": 150, "label": "Width (px)" },
+    { "type": "header", "content": "Menu" },
     { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
-    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#1a1a1a" }
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1a1a1a" }
   ],
   "blocks": [
     {
-      "type": "mega_menu",
+      "type": "mega_menu_fixed",
       "name": "Mega Menu",
       "settings": [
-        { 
-          "type": "text", 
-          "id": "menu_trigger", 
-          "label": "Connect to Menu Item", 
-          "info": "Type the exact name of the menu item (e.g. Collections).",
-          "default": "Collections"
-        },
-        { "type": "header", "content": "Promo Card 1" },
-        { "type": "image_picker", "id": "promo_1_image", "label": "Image" },
-        { "type": "text", "id": "promo_1_title", "label": "Label", "default": "In-Stock" },
-        { "type": "url", "id": "promo_1_link", "label": "Link" },
-        { "type": "header", "content": "Promo Card 2" },
-        { "type": "image_picker", "id": "promo_2_image", "label": "Image" },
-        { "type": "text", "id": "promo_2_title", "label": "Label", "default": "Luxe" },
-        { "type": "url", "id": "promo_2_link", "label": "Link" },
-        { "type": "header", "content": "Promo Card 3" },
-        { "type": "image_picker", "id": "promo_3_image", "label": "Image" },
-        { "type": "text", "id": "promo_3_title", "label": "Label", "default": "Best Sellers" },
-        { "type": "url", "id": "promo_3_link", "label": "Link" }
+        { "type": "text", "id": "menu_handle", "label": "Menu Item Name", "default": "Collections", "info": "Exact match (e.g. Catalog)" },
+        
+        { "type": "header", "content": "Promo 1" },
+        { "type": "image_picker", "id": "image_1", "label": "Image" },
+        { "type": "text", "id": "text_1", "label": "Label", "default": "In-Stock" },
+        { "type": "url", "id": "link_1", "label": "Link" },
+
+        { "type": "header", "content": "Promo 2" },
+        { "type": "image_picker", "id": "image_2", "label": "Image" },
+        { "type": "text", "id": "text_2", "label": "Label", "default": "Luxe" },
+        { "type": "url", "id": "link_2", "label": "Link" },
+
+        { "type": "header", "content": "Promo 3" },
+        { "type": "image_picker", "id": "image_3", "label": "Image" },
+        { "type": "text", "id": "text_3", "label": "Label", "default": "Best Sellers" },
+        { "type": "url", "id": "link_3", "label": "Link" }
       ]
     }
   ],
-  "presets": [{ "name": "Cora Header (Responsive)" }]
+  "presets": [{ "name": "Cora Header" }]
 }
 {% endschema %}
