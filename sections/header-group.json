@@ -18,7 +18,7 @@
         "text": "Free Shipping on All Orders | 30-Day Returns | Sustainably Crafted",
         "link_url": "",
         "aria_label": "Announcement Bar",
-        "bg_color_desktop": "#0B1220",
+        "bg_color_desktop": "#0b1220",
         "text_color": "#ffffff",
         "font_size_desktop": 14,
         "font_weight": "400",
@@ -27,7 +27,7 @@
         "speed": 25,
         "gap": 80,
         "direction": "left",
-        "bg_color_mobile": "#0B1220",
+        "bg_color_mobile": "#0b1220",
         "font_size_mobile": 13,
         "padding_top_mobile": 10,
         "padding_bottom_mobile": 10,
@@ -43,7 +43,16 @@
         "mega_menu_zDXKiW": {
           "type": "mega_menu",
           "settings": {
-            "menu_trigger": "COLLECTIONS"
+            "menu_trigger": "COLLECTIONS",
+            "promo_1_img": "shopify://shop_images/AboutV2.png",
+            "promo_1_text": "In-Stock",
+            "promo_1_link": "",
+            "promo_2_img": "shopify://shop_images/AboutV2-1.png",
+            "promo_2_text": "Luxe",
+            "promo_2_link": "",
+            "promo_3_img": "shopify://shop_images/AboutV2.png",
+            "promo_3_text": "Best Sellers",
+            "promo_3_link": ""
           }
         }
       },
