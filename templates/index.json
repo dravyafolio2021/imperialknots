@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "header_zNKk7P": {
+      "type": "header",
+      "disabled": true,
+      "name": " Header",
+      "settings": {
+        "logo_svg": "",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "bg_color": "#ffffff",
+        "text_color": "#111111"
+      }
+    },
     "cora_slider_zddH7H": {
       "type": "cora-slider",
       "blocks": {
@@ -600,6 +612,7 @@
     }
   },
   "order": [
+    "header_zNKk7P",
     "cora_slider_zddH7H",
     "cora_category_slider_9Dfbpf",
     "cora_collection_grid_JwBWdy",

@@ -11,15 +11,30 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
-    "header_mGm9D7": {
-      "type": "header",
-      "name": " Header",
+    "cora_topbar_f7At3f": {
+      "type": "cora-topbar",
+      "name": "Cora Topbar",
       "settings": {
-        "logo_svg": "",
-        "logo_width": 150,
-        "menu": "main-menu",
-        "bg_color": "#ffffff",
-        "text_color": "#111111"
+        "text": "Free Shipping on All Orders | 30-Day Returns | Sustainably Crafted",
+        "link_url": "",
+        "aria_label": "Announcement Bar",
+        "bg_color_desktop": "#0B1220",
+        "text_color": "#ffffff",
+        "font_size_desktop": 14,
+        "font_weight": "400",
+        "uppercase": false,
+        "letter_spacing": 0.5,
+        "speed": 25,
+        "gap": 80,
+        "direction": "left",
+        "bg_color_mobile": "#0B1220",
+        "font_size_mobile": 13,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10,
+        "hide_on_mobile": false,
+        "padding_top_desktop": 12,
+        "padding_bottom_desktop": 12,
+        "show_icon": false
       }
     },
     "header_cora_emcDjA": {
@@ -61,7 +76,7 @@
     }
   },
   "order": [
-    "header_mGm9D7",
+    "cora_topbar_f7At3f",
     "header_cora_emcDjA"
   ]
 }
