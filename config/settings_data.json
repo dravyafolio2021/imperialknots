@@ -9,6 +9,16 @@
  */
 {
   "current": {
+    "sections": {
+      "sitemap": {
+        "type": "sitemap",
+        "settings": {
+          "pages_menu": "main-menu",
+          "show_products": true,
+          "show_articles": true
+        }
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "776302416715791028": {
