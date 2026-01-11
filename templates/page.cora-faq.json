@@ -73,8 +73,8 @@
       ],
       "name": "FAQ V2 (Scrollable)",
       "settings": {
-        "heading": "Frequently Asked Questions",
-        "text": "Common questions about our products and shipping.",
+        "heading": "",
+        "text": "",
         "bg_color": "#ffffff",
         "heading_color": "#1a1a1a",
         "padding_top": 80,
