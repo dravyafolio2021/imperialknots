@@ -180,29 +180,25 @@
   }
 
   /* --- FIXED SCROLLING LOGIC --- */
-  .cora-faq-v2__questions-list {
-    display: flex;
-    flex-wrap: nowrap; /* Force single line */
-    overflow-x: auto;  /* Enable Scroll */
-    
-    gap: 16px;
-    padding: 10px 20px 30px; /* Right padding ensures last card isn't cut off */
-    
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
-    
-    /* Ensure it doesn't expand the page width */
-    width: 100%;
-    max-width: 100vw;
-    box-sizing: border-box;
-    
-    /* Hide scrollbar */
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    
-    /* Touch fix */
-    touch-action: pan-x;
-  }
+ .cora-faq-v2__questions-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 10px 20px 30px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  
+  /* --- CHANGE THIS --- */
+  width: 100%;
+  max-width: 100%; /* Changed from 100vw to 100% */
+  /* ------------------- */
+  
+  box-sizing: border-box;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  touch-action: pan-x;
+}
   
   .cora-faq-v2__questions-list::-webkit-scrollbar {
     display: none;
