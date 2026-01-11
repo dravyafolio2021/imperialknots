@@ -40,7 +40,7 @@
           "type": "link",
           "settings": {
             "title": "privacy-policy",
-            "path": "/pages/privacy-policy",
+            "path": "/pages/about-us?view=cora-privacy-policy",
             "status": "ready"
           }
         },
@@ -48,7 +48,7 @@
           "type": "link",
           "settings": {
             "title": "Custom Project",
-            "path": "/pages/project-page",
+            "path": "/pages/about-us?view=cora-project-page",
             "status": "ready"
           }
         },
