@@ -38,11 +38,11 @@
 }
 
 /* Category Group */
+/* Add this anywhere in your main CSS styles (outside media queries) */
 .cora-faq-v2__category-group {
+  min-width: 0; /* Critical: allows children to scroll without stretching the page */
   width: 100%;
-  margin-bottom: 20px;
 }
-
 /* Category Header */
 .cora-faq-v2__category-header {
   width: 100%;
@@ -181,24 +181,21 @@
 
   /* --- FIXED SCROLLING LOGIC --- */
  .cora-faq-v2__questions-list {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 16px;
-  padding: 10px 20px 30px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  
-  /* --- CHANGE THIS --- */
-  width: 100%;
-  max-width: 100%; /* Changed from 100vw to 100% */
-  /* ------------------- */
-  
-  box-sizing: border-box;
-  scrollbar-width: none; 
-  -ms-overflow-style: none;
-  touch-action: pan-x;
-}
+    display: flex !important;       /* Force flex row */
+    flex-wrap: nowrap !important;   /* Prevent wrapping to next line */
+    overflow-x: auto !important;    /* Enable horizontal scrolling */
+    
+    gap: 16px;
+    padding: 10px 5px 30px 5px;     /* Padding for shadows/spacing */
+    
+    /* Scroll Snapping (Optional - makes it feel like an app) */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; 
+    
+    /* Prevent Page Blowout */
+    width: 100%;
+    max-width: 100%; 
+  }
   
   .cora-faq-v2__questions-list::-webkit-scrollbar {
     display: none;
@@ -206,15 +203,15 @@
 
   /* Card Item */
   .cora-faq-v2__item {
-    flex: 0 0 85vw; /* Fixed width */
-    max-width: 350px;
-    scroll-snap-align: start;
+    flex: 0 0 85%;       /* Card width: 85% of screen width */
+    max-width: 350px;    /* Don't get too big on tablets */
+    scroll-snap-align: center; /* Snap to center of screen */
     
-    /* Card Look */
-    
+    /* styling adjustments */
+    background: #fff;
+    border: 1px solid #e5e5e5;
     border-radius: 8px;
     padding: 0 16px;
-    background: #fff;
   }
 
   .cora-faq-v2__question-trigger {
