@@ -12,6 +12,14 @@
     "client_presentation_bYGJeM": {
       "type": "client-presentation",
       "blocks": {
+        "link_4Nrahd": {
+          "type": "link",
+          "settings": {
+            "title": "Sitemap",
+            "path": "/pages/about-us?view=sitemap",
+            "status": "ready"
+          }
+        },
         "link_qq6gnD": {
           "type": "link",
           "settings": {
@@ -142,6 +150,7 @@
         }
       },
       "block_order": [
+        "link_4Nrahd",
         "link_qq6gnD",
         "link_9iNTge",
         "link_d6ffa8",
