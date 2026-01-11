@@ -72,7 +72,7 @@
           "type": "link",
           "settings": {
             "title": "catalog",
-            "path": "/pages/catalog",
+            "path": "/pages/about-us?view=cora-catalog",
             "status": "ready"
           }
         },
