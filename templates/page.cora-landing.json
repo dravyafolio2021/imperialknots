@@ -72,7 +72,15 @@
           "type": "link",
           "settings": {
             "title": "FAQ",
-            "path": "/pages/about-us?view=cora-custom-faq",
+            "path": "/pages/about-us?view=cora-faq",
+            "status": "ready"
+          }
+        },
+        "link_Qq6VAq": {
+          "type": "link",
+          "settings": {
+            "title": "About Us",
+            "path": "/pages/about-us",
             "status": "ready"
           }
         },
@@ -142,6 +150,7 @@
         "link_Tmw6Qp",
         "link_4gzFKm",
         "link_N47ycn",
+        "link_Qq6VAq",
         "link_xpkLR4",
         "link_LtpxgE",
         "link_V6Jxga",
