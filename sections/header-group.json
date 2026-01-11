@@ -44,8 +44,8 @@
           "type": "mega_menu",
           "settings": {
             "menu_trigger": "collections",
-            "custom_menu_1": "main-menu",
-            "custom_menu_2": "customer-account-main-menu",
+            "custom_menu_1": "shop-by-color",
+            "custom_menu_2": "shop-by-size",
             "promo_1_img": "shopify://shop_images/lg-2025-12-27T111601.242.jpg",
             "promo_1_text": "In-Stock",
             "promo_1_link": "",
