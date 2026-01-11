@@ -110,6 +110,7 @@
         },
         "link_V6Jxga": {
           "type": "link",
+          "disabled": true,
           "settings": {
             "title": "careers",
             "path": "/pages/careers",
@@ -129,14 +130,6 @@
           "settings": {
             "title": "collections",
             "path": "/collections",
-            "status": "ready"
-          }
-        },
-        "link_qQdYMX": {
-          "type": "link",
-          "settings": {
-            "title": "About Us",
-            "path": "/pages/about-us",
             "status": "ready"
           }
         },
@@ -165,7 +158,6 @@
         "link_V6Jxga",
         "link_Dqidwp",
         "link_aKYPFx",
-        "link_qQdYMX",
         "link_686QgC"
       ],
       "name": "Staging Link Manager",
