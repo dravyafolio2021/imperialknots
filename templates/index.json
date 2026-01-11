@@ -27,7 +27,7 @@
         "slide_ribDea": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
+            "image": "shopify://shop_images/ImageWithFallback_2000x_b80e4387-ee18-4692-a049-83e75f29fed4.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -42,10 +42,10 @@
             "overlay_opacity": 0.4
           }
         },
-        "slide_Gx4CtH": {
+        "slide_ieRLet": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
+            "image": "shopify://shop_images/ImageWithFallback_2000x_b80e4387-ee18-4692-a049-83e75f29fed4.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -63,7 +63,7 @@
       },
       "block_order": [
         "slide_ribDea",
-        "slide_Gx4CtH"
+        "slide_ieRLet"
       ],
       "name": "Slider  ",
       "settings": {
@@ -279,7 +279,6 @@
         "card_PbWBY8": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -292,7 +291,6 @@
         "card_eggEKi": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -305,7 +303,6 @@
         "card_TBd9xz": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -318,7 +315,6 @@
         "card_EBcBM7": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Natural Jute",
@@ -420,7 +416,6 @@
         "feature_Hb37kC": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Container.svg",
             "icon_alt": "Imperial Knots",
             "title": "Sustainably Crafted",
             "text": "Every rug is made with eco-friendly materials and ethical production practices"
@@ -429,7 +424,6 @@
         "feature_jMzcAN": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Container-1.svg",
             "icon_alt": "Imperial Knots",
             "title": "Artisan Partners",
             "text": "We work directly with master weavers, supporting traditional craftsmanship"
@@ -438,7 +432,6 @@
         "feature_GWzdzb": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Container-6.svg",
             "icon_alt": "Imperial Knots",
             "title": "Premium Quality",
             "text": "Hand-selected materials and rigorous quality control ensure lasting beauty"
@@ -447,7 +440,6 @@
         "feature_WgjimX": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Container-3.svg",
             "icon_alt": "Imperial Knots",
             "title": "Customer First",
             "text": "Free shipping, easy returns, and lifetime support for your investment"
