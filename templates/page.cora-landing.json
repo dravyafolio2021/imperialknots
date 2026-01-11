@@ -88,7 +88,7 @@
           "type": "link",
           "settings": {
             "title": "About Us",
-            "path": "/pages/about-us",
+            "path": "/pages/about-us?view=cora-aboutus",
             "status": "ready"
           }
         },
