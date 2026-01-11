@@ -1,6 +1,6 @@
 {% comment %}
-  CLIENT PRESENTATION DASHBOARD
-  A professional landing page to list all redesigned pages for client review.
+  CLIENT PRESENTATION DASHBOARD (Advanced)
+  Allows previewing new templates using the ?view= parameter.
 {% endcomment %}
 
 <style>
@@ -20,27 +20,14 @@
   }
 
   /* Header */
-  .cp-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .cp-heading {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: {{ section.settings.primary_color }};
-  }
-
-  .cp-subheading {
-    font-size: 1.2rem;
-    opacity: 0.8;
-  }
+  .cp-header { text-align: center; margin-bottom: 60px; }
+  .cp-heading { font-size: 3rem; font-weight: 700; margin-bottom: 10px; color: {{ section.settings.primary_color }}; }
+  .cp-subheading { font-size: 1.2rem; opacity: 0.8; }
 
   /* Grid */
   .cp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
   }
 
@@ -56,6 +43,7 @@
     flex-direction: column;
     border: 1px solid rgba(0,0,0,0.05);
     position: relative;
+    height: 100%;
   }
 
   .cp-card:hover {
@@ -66,15 +54,9 @@
 
   /* Status Badge */
   .cp-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    z-index: 2;
+    position: absolute; top: 15px; right: 15px; padding: 6px 12px;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; z-index: 2;
   }
   .status-ready { background: #d4edda; color: #155724; }
   .status-wip { background: #fff3cd; color: #856404; }
@@ -82,77 +64,36 @@
 
   /* Thumbnail */
   .cp-image {
-    width: 100%;
-    height: 200px;
-    background: #f8f9fa;
-    position: relative;
-    overflow: hidden;
+    width: 100%; height: 220px; background: #f8f9fa;
+    position: relative; overflow: hidden;
   }
-
-  .cp-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  
-  .cp-card:hover .cp-image img {
-    transform: scale(1.05);
-  }
-
-  .cp-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ccc;
-    font-size: 3rem;
-    background: #eee;
-  }
+  .cp-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .cp-card:hover .cp-image img { transform: scale(1.05); }
 
   /* Content */
-  .cp-content {
-    padding: 25px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cp-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #333;
-  }
-
-  .cp-desc {
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;
+  .cp-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+  .cp-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: #333; }
+  .cp-desc { font-size: 0.9rem; color: #666; line-height: 1.5; margin-bottom: 20px; }
+  
+  .cp-meta {
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: #999;
+    background: #f9f9f9;
+    padding: 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    margin-bottom: 15px;
+    word-break: break-all;
   }
 
   .cp-link-text {
-    margin-top: auto;
-    font-weight: 700;
-    color: {{ section.settings.primary_color }};
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-weight: 700; color: {{ section.settings.primary_color }};
+    text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 5px;
   }
-
-  .cp-link-text::after {
-    content: '→';
-    transition: transform 0.2s;
-  }
-
-  .cp-card:hover .cp-link-text::after {
-    transform: translateX(5px);
-  }
+  .cp-link-text::after { content: '→'; transition: transform 0.2s; }
+  .cp-card:hover .cp-link-text::after { transform: translateX(5px); }
 
 </style>
 
@@ -166,32 +107,53 @@
 
     <div class="cp-grid">
       {% for block in section.blocks %}
-        <a href="{{ block.settings.link }}" class="cp-card">
+        
+        {% comment %} 
+           LOGIC: Construct the Magic Link 
+           1. If 'suffix' is empty, use the normal Link picker.
+           2. If 'suffix' is set, append ?view=suffix to the Link picker URL.
+        {% endcomment %}
+        
+        {% assign final_link = block.settings.base_link %}
+        {% if block.settings.template_suffix != blank %}
+          {% if final_link contains '?' %}
+            {% assign final_link = final_link | append: '&view=' | append: block.settings.template_suffix %}
+          {% else %}
+             {% assign final_link = final_link | append: '?view=' | append: block.settings.template_suffix %}
+          {% endif %}
+        {% endif %}
+
+        <a href="{{ final_link }}" class="cp-card">
           
           {% if block.settings.status != 'none' %}
             <span class="cp-badge status-{{ block.settings.status }}">
               {% case block.settings.status %}
                 {% when 'ready' %} Ready for Review
                 {% when 'wip' %} In Progress
-                {% when 'review' %} Changes Requested
+                {% when 'review' %} Feedback Received
               {% endcase %}
             </span>
           {% endif %}
 
           <div class="cp-image">
             {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" loading="lazy" alt="{{ block.settings.title }}">
+              <img src="{{ block.settings.image | image_url: width: 600 }}" loading="lazy">
             {% else %}
-              <div class="cp-placeholder">
-                {{ 'image' | placeholder_svg_tag }}
-              </div>
+              {{ 'image' | placeholder_svg_tag }}
             {% endif %}
           </div>
 
           <div class="cp-content">
             <div class="cp-title">{{ block.settings.title }}</div>
             <div class="cp-desc">{{ block.settings.description }}</div>
-            <div class="cp-link-text">View Page</div>
+            
+            {% if block.settings.template_suffix != blank %}
+              <div class="cp-meta">
+                Template: {{ block.settings.template_suffix }}
+              </div>
+            {% endif %}
+
+            <div class="cp-link-text">Preview Design</div>
           </div>
         </a>
       {% endfor %}
@@ -204,83 +166,48 @@
 {
   "name": "Project Dashboard",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Project Name",
-      "default": "Imperial Knots Redesign"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Client Presentation Dashboard",
-      "default": "Click a page below to view the new design."
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#f4f7f6"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "primary_color",
-      "label": "Accent Color",
-      "default": "#E87034"
-    }
+    { "type": "text", "id": "title", "label": "Project Name", "default": "Redesign Dashboard" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Preview links for the new theme." },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f4f7f6" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#333333" },
+    { "type": "color", "id": "primary_color", "label": "Accent", "default": "#E87034" }
   ],
   "blocks": [
     {
       "type": "page_card",
       "name": "Page Preview",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Page Name",
-          "default": "Homepage v1"
+        { "type": "text", "id": "title", "label": "Page Name", "default": "New About Us" },
+        { "type": "textarea", "id": "description", "label": "Note", "default": "Redesigned layout with team section." },
+        { "type": "image_picker", "id": "image", "label": "Screenshot" },
+        
+        { "type": "header", "content": "Link Construction" },
+        { 
+          "type": "url", 
+          "id": "base_link", 
+          "label": "Base Page (Required)",
+          "info": "Select ANY existing page (e.g. Home or Contact)."
         },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Short Note",
-          "default": "New hero section and mega menu implementation."
+        { 
+          "type": "text", 
+          "id": "template_suffix", 
+          "label": "Template Suffix (Important)",
+          "info": "If your file is 'page.about-new.json', type: 'about-new'"
         },
+
         {
-          "type": "url",
-          "id": "link",
-          "label": "Link to Page"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Thumbnail Screenshot"
-        },
-        {
-          "type": "select",
-          "id": "status",
-          "label": "Status",
+          "type": "select", "id": "status", "label": "Status",
           "options": [
-            { "value": "ready", "label": "Ready for Review" },
-            { "value": "wip", "label": "In Progress" },
-            { "value": "review", "label": "Changes Requested" },
-            { "value": "none", "label": "No Badge" }
+            { "value": "ready", "label": "Ready" },
+            { "value": "wip", "label": "WIP" },
+            { "value": "review", "label": "Feedback" },
+            { "value": "none", "label": "None" }
           ],
           "default": "ready"
         }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Project Dashboard"
-    }
-  ]
+  "presets": [ { "name": "Project Dashboard" } ]
 }
 {% endschema %}
