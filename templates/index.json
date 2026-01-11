@@ -556,6 +556,13 @@
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         },
+        "question_w7EUxV": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?2",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
         "category_7K3jmc": {
           "type": "category",
           "settings": {
@@ -594,6 +601,7 @@
         "category_CWJGQf",
         "question_ifmTAG",
         "question_Kfh38c",
+        "question_w7EUxV",
         "category_7K3jmc",
         "question_yfthfF",
         "question_MyNQNM",
