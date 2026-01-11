@@ -9,21 +9,29 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "apps",
+    "cora_theme_preview_hT7B4d": {
+      "type": "cora-theme-preview",
       "blocks": {
-        "cora_builder_canvas_qL9Nnx": {
-          "type": "shopify://apps/cora-builder/blocks/canvas/019b6a90-f478-74c0-a9ed-4bacf9286e87",
-          "settings": {}
+        "template_qr6Ac4": {
+          "type": "template",
+          "settings": {
+            "title": "Home v1",
+            "url": "shopify://pages/sizes"
+          }
         }
       },
       "block_order": [
-        "cora_builder_canvas_qL9Nnx"
+        "template_qr6Ac4"
       ],
-      "settings": {}
+      "name": "Theme Preview Widget",
+      "settings": {
+        "heading": "Select Layout",
+        "cta_text": "Buy This Theme",
+        "cta_link": ""
+      }
     }
   },
   "order": [
-    "main"
+    "cora_theme_preview_hT7B4d"
   ]
 }
