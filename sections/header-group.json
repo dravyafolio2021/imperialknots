@@ -44,15 +44,12 @@
           "type": "mega_menu",
           "settings": {
             "menu_trigger": "COLLECTIONS",
-            "custom_menu_1": "footer",
+            "custom_menu_1": "main-menu",
             "custom_menu_2": "customer-account-main-menu",
-            "promo_1_img": "shopify://shop_images/AboutV2.png",
             "promo_1_text": "In-Stock",
             "promo_1_link": "",
-            "promo_2_img": "shopify://shop_images/AboutV2-1.png",
             "promo_2_text": "Luxe",
             "promo_2_link": "",
-            "promo_3_img": "shopify://shop_images/AboutV2.png",
             "promo_3_text": "Best Sellers",
             "promo_3_link": ""
           }
