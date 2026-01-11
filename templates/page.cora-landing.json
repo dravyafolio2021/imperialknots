@@ -17,7 +17,8 @@
           "settings": {
             "title": "Homepage v1",
             "description": "New hero section and mega menu implementation.",
-            "link": "",
+            "base_link": "shopify://pages/privacy-policy",
+            "template_suffix": "",
             "status": "ready"
           }
         },
@@ -26,7 +27,8 @@
           "settings": {
             "title": "Homepage v1",
             "description": "New hero section and mega menu implementation.",
-            "link": "",
+            "base_link": "",
+            "template_suffix": "",
             "status": "ready"
           }
         }
@@ -41,7 +43,7 @@
         "subtitle": "Click a page below to view the new design.",
         "bg_color": "#f4f7f6",
         "text_color": "#333333",
-        "primary_color": "#E87034"
+        "primary_color": "#e87034"
       }
     }
   },
