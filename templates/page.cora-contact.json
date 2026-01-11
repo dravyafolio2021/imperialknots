@@ -27,13 +27,27 @@
         "pb_mobile": 40
       }
     },
+    "contact_imperial_yhdzHp": {
+      "type": "contact-imperial",
+      "name": "Imperial Contact Form",
+      "settings": {
+        "heading": "Make an Inquiry",
+        "btn_text": "SUBMIT",
+        "success_msg": "Your message has been sent successfully."
+      }
+    },
+    "custom_section_fw6Yx4": {
+      "type": "custom-section",
+      "name": "t:general.custom_section",
+      "settings": {}
+    },
     "1765900774367887f7": {
       "type": "apps",
       "blocks": {
         "forms_inline_UDgy8h": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
-            "form_id": "33916",
+            "form_id": "792151",
             "text_color": "#202020",
             "button_background_color": "#202020",
             "button_label_color": "#ffffff",
@@ -162,6 +176,8 @@
   },
   "order": [
     "cora_catalog_banner_hCrRze",
+    "contact_imperial_yhdzHp",
+    "custom_section_fw6Yx4",
     "1765900774367887f7",
     "trust_badges_zy7jRj",
     "cora_contact_grid_Krbjb9"
