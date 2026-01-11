@@ -9,45 +9,156 @@
  */
 {
   "sections": {
-    "client_presentation_wmUDDM": {
+    "client_presentation_bYGJeM": {
       "type": "client-presentation",
       "blocks": {
-        "page_card_aGtBtG": {
-          "type": "page_card",
+        "link_qq6gnD": {
+          "type": "link",
           "settings": {
-            "title": "Homepage v1",
-            "description": "New hero section and mega menu implementation.",
-            "base_link": "shopify://pages/privacy-policy",
-            "template_suffix": "",
+            "title": "terms-of-service",
+            "path": "/pages/terms-of-service",
             "status": "ready"
           }
         },
-        "page_card_geq4ne": {
-          "type": "page_card",
+        "link_9iNTge": {
+          "type": "link",
           "settings": {
-            "title": "Homepage v1",
-            "description": "New hero section and mega menu implementation.",
-            "base_link": "",
-            "template_suffix": "",
+            "title": "Shipping-policy",
+            "path": "/pages/shipping-policy",
+            "status": "ready"
+          }
+        },
+        "link_d6ffa8": {
+          "type": "link",
+          "settings": {
+            "title": "rug-size-guide",
+            "path": "/pages/rug-size-guide",
+            "status": "ready"
+          }
+        },
+        "link_B8GGMM": {
+          "type": "link",
+          "settings": {
+            "title": "privacy-policy",
+            "path": "/pages/privacy-policy",
+            "status": "ready"
+          }
+        },
+        "link_LURrBH": {
+          "type": "link",
+          "settings": {
+            "title": "Custom Project",
+            "path": "/pages/project-page",
+            "status": "ready"
+          }
+        },
+        "link_Tmw6Qp": {
+          "type": "link",
+          "settings": {
+            "title": "influencer Us",
+            "path": "/pages/influencer-page",
+            "status": "ready"
+          }
+        },
+        "link_4gzFKm": {
+          "type": "link",
+          "settings": {
+            "title": "catalog",
+            "path": "/pages/catalog",
+            "status": "ready"
+          }
+        },
+        "link_N47ycn": {
+          "type": "link",
+          "settings": {
+            "title": "FAQ",
+            "path": "/pages/frequently-asked-questions",
+            "status": "ready"
+          }
+        },
+        "link_xpkLR4": {
+          "type": "link",
+          "settings": {
+            "title": "catalog",
+            "path": "/pages/catalog",
+            "status": "ready"
+          }
+        },
+        "link_LtpxgE": {
+          "type": "link",
+          "settings": {
+            "title": "custom Rugs",
+            "path": "/pages/custom-rugs",
+            "status": "ready"
+          }
+        },
+        "link_V6Jxga": {
+          "type": "link",
+          "settings": {
+            "title": "careers",
+            "path": "/pages/careers",
+            "status": "ready"
+          }
+        },
+        "link_Dqidwp": {
+          "type": "link",
+          "settings": {
+            "title": "Contact Us",
+            "path": "/pages/contact-us",
+            "status": "ready"
+          }
+        },
+        "link_aKYPFx": {
+          "type": "link",
+          "settings": {
+            "title": "collections",
+            "path": "/collections",
+            "status": "ready"
+          }
+        },
+        "link_qQdYMX": {
+          "type": "link",
+          "settings": {
+            "title": "About Us",
+            "path": "/pages/about-us",
+            "status": "ready"
+          }
+        },
+        "link_686QgC": {
+          "type": "link",
+          "settings": {
+            "title": "Blogs",
+            "path": "/blogs/news",
             "status": "ready"
           }
         }
       },
       "block_order": [
-        "page_card_aGtBtG",
-        "page_card_geq4ne"
+        "link_qq6gnD",
+        "link_9iNTge",
+        "link_d6ffa8",
+        "link_B8GGMM",
+        "link_LURrBH",
+        "link_Tmw6Qp",
+        "link_4gzFKm",
+        "link_N47ycn",
+        "link_xpkLR4",
+        "link_LtpxgE",
+        "link_V6Jxga",
+        "link_Dqidwp",
+        "link_aKYPFx",
+        "link_qQdYMX",
+        "link_686QgC"
       ],
-      "name": "Project Dashboard",
+      "name": "Staging Link Manager",
       "settings": {
-        "title": "Imperial Knots Redesign",
-        "subtitle": "Click a page below to view the new design.",
-        "bg_color": "#f4f7f6",
-        "text_color": "#333333",
-        "primary_color": "#e87034"
+        "base_url": "https://4yoe0k3nmq66t9va-78884929843.shopifypreview.com/",
+        "heading": "Client Review Dashboard",
+        "info_text": "Click below to review the latest designs. Links open in a new tab."
       }
     }
   },
   "order": [
-    "client_presentation_wmUDDM"
+    "client_presentation_bYGJeM"
   ]
 }
