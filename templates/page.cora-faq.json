@@ -16,7 +16,7 @@
       ],
       "name": "Catalog Banner",
       "settings": {
-        "heading": "{{ page.title }}",
+        "heading": "FAQ",
         "subheading": "Be part of a creative ecosystem building the future of design & technology.",
         "text_color": "#000000",
         "text_align": "center",
@@ -27,50 +27,63 @@
         "pb_mobile": 40
       }
     },
-    "cora_faq_accordion_dpCfhC": {
-      "type": "cora-faq-accordion",
+    "cora_faq_v2_TxMAQk": {
+      "type": "cora-faq-v2",
       "blocks": {
-        "faq_item_RbMRdD": {
-          "type": "faq_item",
+        "category_CPWity": {
+          "type": "category",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We offer a 30-day return policy for all unused items in their original packaging.</p>"
+            "title": "General"
           }
         },
-        "faq_item_qkgUzL": {
-          "type": "faq_item",
+        "question_gqNcDP": {
+          "type": "question",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We offer a 30-day return policy for all unused items in their original packaging.</p>"
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         },
-        "faq_item_Fmwx8L": {
-          "type": "faq_item",
+        "question_fipXHz": {
+          "type": "question",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We offer a 30-day return policy for all unused items in their original packaging.</p>"
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_KGDb6B": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question_wAmWGF": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         }
       },
       "block_order": [
-        "faq_item_RbMRdD",
-        "faq_item_qkgUzL",
-        "faq_item_Fmwx8L"
+        "category_CPWity",
+        "question_gqNcDP",
+        "question_fipXHz",
+        "category_KGDb6B",
+        "question_wAmWGF"
       ],
-      "name": "Cora FAQ Accordion",
+      "name": "FAQ V2 (Scrollable)",
       "settings": {
-        "heading": "",
-        "desc": "",
-        "enable_accordion_mode": true,
-        "padding_top": 60,
-        "padding_bottom": 60,
+        "heading": "Frequently Asked Questions",
+        "text": "Common questions about our products and shipping.",
         "bg_color": "#ffffff",
-        "text_color": "#1a1a1a"
+        "heading_color": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
     "cora_catalog_banner_VhtUQd",
-    "cora_faq_accordion_dpCfhC"
+    "cora_faq_v2_TxMAQk"
   ]
 }
