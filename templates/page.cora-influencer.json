@@ -12,10 +12,10 @@
     "hero": {
       "type": "cora-influencer-hero",
       "custom_css": [
-        ".cip-hero{background-color: #f0ebe4;}"
+        ".cip-hero {background-color: #f0ebe4;}"
       ],
       "settings": {
-        "heading": "{{ page.title }}",
+        "heading": "Influencer Form",
         "text": "Thank you for your interest in collaborating with us! We receive many requests each day and we may not be able to respond to you. By filling out the form below, you will be added to our database and will be notified if you are selected for a collaboration. You do not need to submit a form multiple times, we will keep your information on file. Influencers must have a shipping address within the 48 contiguous United States."
       }
     },
@@ -25,7 +25,7 @@
         "forms_inline_NgjNAt": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
-            "form_id": "772460",
+            "form_id": "823562",
             "text_color": "#202020",
             "button_background_color": "#202020",
             "button_label_color": "#ffffff",
