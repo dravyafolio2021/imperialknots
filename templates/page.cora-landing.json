@@ -24,7 +24,7 @@
           "type": "link",
           "settings": {
             "title": "Shipping-policy",
-            "path": "/pages/shipping-policy",
+            "path": "/pages/about-us?view=cora-shipping",
             "status": "ready"
           }
         },
