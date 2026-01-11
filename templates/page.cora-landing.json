@@ -64,7 +64,7 @@
           "type": "link",
           "settings": {
             "title": "catalog",
-            "path": "/pages/about-us?view=cora-catalog",
+            "path": "/pages/catalog",
             "status": "ready"
           }
         },
@@ -104,7 +104,7 @@
           "type": "link",
           "settings": {
             "title": "Contact Us",
-            "path": "/pages/contact-us",
+            "path": "/pages/about-us?view=cora-contact",
             "status": "ready"
           }
         },
