@@ -27,15 +27,6 @@
         "pb_mobile": 40
       }
     },
-    "contact_imperial_yhdzHp": {
-      "type": "contact-imperial",
-      "name": "Imperial Contact Form",
-      "settings": {
-        "heading": "Make an Inquiry",
-        "btn_text": "SUBMIT",
-        "success_msg": "Your message has been sent successfully."
-      }
-    },
     "custom_section_fw6Yx4": {
       "type": "custom-section",
       "name": "t:general.custom_section",
@@ -176,7 +167,6 @@
   },
   "order": [
     "cora_catalog_banner_hCrRze",
-    "contact_imperial_yhdzHp",
     "custom_section_fw6Yx4",
     "1765900774367887f7",
     "trust_badges_zy7jRj",
