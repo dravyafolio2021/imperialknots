@@ -1,213 +1,195 @@
 {% comment %}
-  CLIENT PRESENTATION DASHBOARD (Advanced)
-  Allows previewing new templates using the ?view= parameter.
+  STAGING LINK MANAGER
+  Dynamically builds preview URLs based on a master Base URL.
 {% endcomment %}
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
-
-  .cp-dashboard {
-    background-color: {{ section.settings.bg_color }};
-    min-height: 100vh;
-    padding: 60px 20px;
-    font-family: 'Quicksand', sans-serif;
-    color: {{ section.settings.text_color }};
+  .staging-board {
+    max-width: 900px;
+    margin: 60px auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    padding: 20px;
   }
 
-  .cp-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .sb-header {
+    background: #f4f4f4;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    border: 1px solid #ddd;
+    text-align: center;
   }
 
-  /* Header */
-  .cp-header { text-align: center; margin-bottom: 60px; }
-  .cp-heading { font-size: 3rem; font-weight: 700; margin-bottom: 10px; color: {{ section.settings.primary_color }}; }
-  .cp-subheading { font-size: 1.2rem; opacity: 0.8; }
+  .sb-title { margin: 0 0 10px 0; font-size: 24px; font-weight: 700; }
+  .sb-subtitle { margin: 0; color: #666; font-size: 14px; }
 
-  /* Grid */
-  .cp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
-  }
-
-  /* Card Item */
-  .cp-card {
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
+  /* The Link List */
+  .sb-list {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.05);
-    position: relative;
-    height: 100%;
+    gap: 15px;
   }
 
-  .cp-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    border-color: {{ section.settings.primary_color }};
+  .sb-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+    transition: box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
   }
 
-  /* Status Badge */
-  .cp-badge {
-    position: absolute; top: 15px; right: 15px; padding: 6px 12px;
-    border-radius: 20px; font-size: 0.75rem; font-weight: 700;
-    text-transform: uppercase; z-index: 2;
+  .sb-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-color: #E87034; /* Your Brand Color */
   }
-  .status-ready { background: #d4edda; color: #155724; }
-  .status-wip { background: #fff3cd; color: #856404; }
-  .status-review { background: #cce5ff; color: #004085; }
 
-  /* Thumbnail */
-  .cp-image {
-    width: 100%; height: 220px; background: #f8f9fa;
-    position: relative; overflow: hidden;
-  }
-  .cp-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .cp-card:hover .cp-image img { transform: scale(1.05); }
-
-  /* Content */
-  .cp-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-  .cp-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: #333; }
-  .cp-desc { font-size: 0.9rem; color: #666; line-height: 1.5; margin-bottom: 20px; }
+  .sb-name { font-weight: 600; font-size: 16px; }
+  .sb-path { font-size: 12px; color: #999; font-family: monospace; margin-top: 4px; }
   
-  .cp-meta {
-    margin-top: auto;
-    font-size: 0.8rem;
-    color: #999;
-    background: #f9f9f9;
-    padding: 8px;
+  .sb-status {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .sb-status.ready { background: #e6fffa; color: #047481; }
+  .sb-status.wip { background: #fffaf0; color: #9c4221; }
+
+  .sb-arrow { font-size: 20px; color: #ccc; margin-left: 15px; }
+  .sb-item:hover .sb-arrow { color: #E87034; }
+
+  /* Warning box if URL is missing */
+  .sb-warning {
+    background: #fff5f5;
+    color: #c53030;
+    padding: 15px;
     border-radius: 6px;
-    font-family: monospace;
-    margin-bottom: 15px;
-    word-break: break-all;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #fc8181;
+    display: none;
   }
-
-  .cp-link-text {
-    font-weight: 700; color: {{ section.settings.primary_color }};
-    text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
-    display: flex; align-items: center; gap: 5px;
-  }
-  .cp-link-text::after { content: '→'; transition: transform 0.2s; }
-  .cp-card:hover .cp-link-text::after { transform: translateX(5px); }
-
 </style>
 
-<div class="cp-dashboard">
-  <div class="cp-container">
-    
-    <div class="cp-header">
-      <h1 class="cp-heading">{{ section.settings.title }}</h1>
-      <p class="cp-subheading">{{ section.settings.subtitle }}</p>
-    </div>
+<div class="staging-board">
 
-    <div class="cp-grid">
-      {% for block in section.blocks %}
-        
-        {% comment %} 
-           LOGIC: Construct the Magic Link 
-           1. If 'suffix' is empty, use the normal Link picker.
-           2. If 'suffix' is set, append ?view=suffix to the Link picker URL.
-        {% endcomment %}
-        
-        {% assign final_link = block.settings.base_link %}
-        {% if block.settings.template_suffix != blank %}
-          {% if final_link contains '?' %}
-            {% assign final_link = final_link | append: '&view=' | append: block.settings.template_suffix %}
-          {% else %}
-             {% assign final_link = final_link | append: '?view=' | append: block.settings.template_suffix %}
-          {% endif %}
-        {% endif %}
-
-        <a href="{{ final_link }}" class="cp-card">
-          
-          {% if block.settings.status != 'none' %}
-            <span class="cp-badge status-{{ block.settings.status }}">
-              {% case block.settings.status %}
-                {% when 'ready' %} Ready for Review
-                {% when 'wip' %} In Progress
-                {% when 'review' %} Feedback Received
-              {% endcase %}
-            </span>
-          {% endif %}
-
-          <div class="cp-image">
-            {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" loading="lazy">
-            {% else %}
-              {{ 'image' | placeholder_svg_tag }}
-            {% endif %}
-          </div>
-
-          <div class="cp-content">
-            <div class="cp-title">{{ block.settings.title }}</div>
-            <div class="cp-desc">{{ block.settings.description }}</div>
-            
-            {% if block.settings.template_suffix != blank %}
-              <div class="cp-meta">
-                Template: {{ block.settings.template_suffix }}
-              </div>
-            {% endif %}
-
-            <div class="cp-link-text">Preview Design</div>
-          </div>
-        </a>
-      {% endfor %}
-    </div>
-
+  <div class="sb-header">
+    <h1 class="sb-title">{{ section.settings.heading }}</h1>
+    <p class="sb-subtitle">{{ section.settings.info_text }}</p>
   </div>
+
+  {% if section.settings.base_url == blank %}
+    <div class="sb-warning" style="display:block;">
+      ⚠️ <strong>Developer:</strong> Please paste the active Shopify Preview URL in the section settings.
+    </div>
+  {% endif %}
+
+  <div class="sb-list">
+    {% for block in section.blocks %}
+      {% comment %} 
+         LOGIC: Strip trailing slash from base, ensure leading slash on path 
+      {% endcomment %}
+      
+      {% assign base = section.settings.base_url | remove_last: '/' %}
+      {% assign path = block.settings.path %}
+      
+      {% unless path contains '/' %}
+        {% assign path = '/' | append: path %}
+      {% endunless %}
+
+      {% assign full_url = base | append: path %}
+
+      <a href="{{ full_url }}" target="_blank" class="sb-item">
+        <div>
+          <div class="sb-name">{{ block.settings.title }}</div>
+          <div class="sb-path">{{ path }}</div>
+        </div>
+        
+        <div style="display:flex; align-items:center; gap:10px;">
+          {% if block.settings.status == 'ready' %}
+            <span class="sb-status ready">Ready</span>
+          {% else %}
+            <span class="sb-status wip">WIP</span>
+          {% endif %}
+          <span class="sb-arrow">→</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
 </div>
 
 {% schema %}
 {
-  "name": "Project Dashboard",
+  "name": "Staging Link Manager",
   "settings": [
-    { "type": "text", "id": "title", "label": "Project Name", "default": "Redesign Dashboard" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Preview links for the new theme." },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f4f7f6" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#333333" },
-    { "type": "color", "id": "primary_color", "label": "Accent", "default": "#E87034" }
+    {
+      "type": "header",
+      "content": "MASTER CONFIGURATION"
+    },
+    {
+      "type": "text",
+      "id": "base_url",
+      "label": "Active Preview URL",
+      "info": "Paste the long Shopify Preview link here (e.g. https://4yoe...shopifypreview.com). ALL buttons below will use this.",
+      "placeholder": "https://..."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Client Review Dashboard"
+    },
+    {
+      "type": "textarea",
+      "id": "info_text",
+      "label": "Instructions",
+      "default": "Click below to review the latest designs. Links open in a new tab."
+    }
   ],
   "blocks": [
     {
-      "type": "page_card",
-      "name": "Page Preview",
+      "type": "link",
+      "name": "Page Link",
       "settings": [
-        { "type": "text", "id": "title", "label": "Page Name", "default": "New About Us" },
-        { "type": "textarea", "id": "description", "label": "Note", "default": "Redesigned layout with team section." },
-        { "type": "image_picker", "id": "image", "label": "Screenshot" },
-        
-        { "type": "header", "content": "Link Construction" },
-        { 
-          "type": "url", 
-          "id": "base_link", 
-          "label": "Base Page (Required)",
-          "info": "Select ANY existing page (e.g. Home or Contact)."
-        },
-        { 
-          "type": "text", 
-          "id": "template_suffix", 
-          "label": "Template Suffix (Important)",
-          "info": "If your file is 'page.about-new.json', type: 'about-new'"
-        },
-
         {
-          "type": "select", "id": "status", "label": "Status",
+          "type": "text",
+          "id": "title",
+          "label": "Page Name",
+          "default": "About Us"
+        },
+        {
+          "type": "text",
+          "id": "path",
+          "label": "Page Path (URL Handle)",
+          "default": "/pages/about-us",
+          "info": "Just the part after .com"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Status",
           "options": [
-            { "value": "ready", "label": "Ready" },
-            { "value": "wip", "label": "WIP" },
-            { "value": "review", "label": "Feedback" },
-            { "value": "none", "label": "None" }
+            { "value": "ready", "label": "Ready for Review" },
+            { "value": "wip", "label": "Work in Progress" }
           ],
           "default": "ready"
         }
       ]
     }
   ],
-  "presets": [ { "name": "Project Dashboard" } ]
+  "presets": [
+    {
+      "name": "Staging Link Manager"
+    }
+  ]
 }
 {% endschema %}
