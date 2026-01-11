@@ -9,29 +9,43 @@
  */
 {
   "sections": {
-    "cora_theme_preview_hT7B4d": {
-      "type": "cora-theme-preview",
+    "client_presentation_wmUDDM": {
+      "type": "client-presentation",
       "blocks": {
-        "template_qr6Ac4": {
-          "type": "template",
+        "page_card_aGtBtG": {
+          "type": "page_card",
           "settings": {
-            "title": "Home v1",
-            "url": "shopify://pages/sizes"
+            "title": "Homepage v1",
+            "description": "New hero section and mega menu implementation.",
+            "link": "",
+            "status": "ready"
+          }
+        },
+        "page_card_geq4ne": {
+          "type": "page_card",
+          "settings": {
+            "title": "Homepage v1",
+            "description": "New hero section and mega menu implementation.",
+            "link": "",
+            "status": "ready"
           }
         }
       },
       "block_order": [
-        "template_qr6Ac4"
+        "page_card_aGtBtG",
+        "page_card_geq4ne"
       ],
-      "name": "Theme Preview Widget",
+      "name": "Project Dashboard",
       "settings": {
-        "heading": "Select Layout",
-        "cta_text": "Buy This Theme",
-        "cta_link": ""
+        "title": "Imperial Knots Redesign",
+        "subtitle": "Click a page below to view the new design.",
+        "bg_color": "#f4f7f6",
+        "text_color": "#333333",
+        "primary_color": "#E87034"
       }
     }
   },
   "order": [
-    "cora_theme_preview_hT7B4d"
+    "client_presentation_wmUDDM"
   ]
 }
