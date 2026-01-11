@@ -1,0 +1,286 @@
+{% comment %}
+  CLIENT PRESENTATION DASHBOARD
+  A professional landing page to list all redesigned pages for client review.
+{% endcomment %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+  .cp-dashboard {
+    background-color: {{ section.settings.bg_color }};
+    min-height: 100vh;
+    padding: 60px 20px;
+    font-family: 'Quicksand', sans-serif;
+    color: {{ section.settings.text_color }};
+  }
+
+  .cp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .cp-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .cp-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: {{ section.settings.primary_color }};
+  }
+
+  .cp-subheading {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+
+  /* Grid */
+  .cp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  /* Card Item */
+  .cp-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .cp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: {{ section.settings.primary_color }};
+  }
+
+  /* Status Badge */
+  .cp-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .status-ready { background: #d4edda; color: #155724; }
+  .status-wip { background: #fff3cd; color: #856404; }
+  .status-review { background: #cce5ff; color: #004085; }
+
+  /* Thumbnail */
+  .cp-image {
+    width: 100%;
+    height: 200px;
+    background: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cp-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .cp-card:hover .cp-image img {
+    transform: scale(1.05);
+  }
+
+  .cp-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 3rem;
+    background: #eee;
+  }
+
+  /* Content */
+  .cp-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cp-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .cp-desc {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .cp-link-text {
+    margin-top: auto;
+    font-weight: 700;
+    color: {{ section.settings.primary_color }};
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cp-link-text::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
+  .cp-card:hover .cp-link-text::after {
+    transform: translateX(5px);
+  }
+
+</style>
+
+<div class="cp-dashboard">
+  <div class="cp-container">
+    
+    <div class="cp-header">
+      <h1 class="cp-heading">{{ section.settings.title }}</h1>
+      <p class="cp-subheading">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="cp-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link }}" class="cp-card">
+          
+          {% if block.settings.status != 'none' %}
+            <span class="cp-badge status-{{ block.settings.status }}">
+              {% case block.settings.status %}
+                {% when 'ready' %} Ready for Review
+                {% when 'wip' %} In Progress
+                {% when 'review' %} Changes Requested
+              {% endcase %}
+            </span>
+          {% endif %}
+
+          <div class="cp-image">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" loading="lazy" alt="{{ block.settings.title }}">
+            {% else %}
+              <div class="cp-placeholder">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="cp-content">
+            <div class="cp-title">{{ block.settings.title }}</div>
+            <div class="cp-desc">{{ block.settings.description }}</div>
+            <div class="cp-link-text">View Page</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Project Dashboard",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Project Name",
+      "default": "Imperial Knots Redesign"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Client Presentation Dashboard",
+      "default": "Click a page below to view the new design."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f7f6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Accent Color",
+      "default": "#E87034"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "page_card",
+      "name": "Page Preview",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Page Name",
+          "default": "Homepage v1"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short Note",
+          "default": "New hero section and mega menu implementation."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to Page"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail Screenshot"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Status",
+          "options": [
+            { "value": "ready", "label": "Ready for Review" },
+            { "value": "wip", "label": "In Progress" },
+            { "value": "review", "label": "Changes Requested" },
+            { "value": "none", "label": "No Badge" }
+          ],
+          "default": "ready"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Project Dashboard"
+    }
+  ]
+}
+{% endschema %}
