@@ -62,35 +62,34 @@
         "link_column_eixREN": {
           "type": "link_column",
           "settings": {
-            "title": "Column",
-            "menu": "main-menu"
+            "title": "Fetaured Collection",
+            "menu": "footer"
           }
         },
         "link_column_9PdLah": {
           "type": "link_column",
           "settings": {
-            "title": "Column",
-            "menu": "main-menu"
+            "title": "Shop by Color",
+            "menu": "shop-by-color"
           }
         },
         "link_column_cLifNk": {
           "type": "link_column",
           "settings": {
-            "title": "Column",
-            "menu": "main-menu"
+            "title": "Shop by Size",
+            "menu": "shop-by-size"
           }
         },
         "link_column_JTRC6G": {
           "type": "link_column",
           "settings": {
-            "title": "Column",
-            "menu": "main-menu"
+            "title": "Advance",
+            "menu": "extra"
           }
         },
         "social_V7f6HA": {
           "type": "social",
           "settings": {
-            "icon": "shopify://shop_images/Link.svg",
             "label": "Social",
             "url": "/",
             "target": "_blank"
@@ -99,7 +98,6 @@
         "social_HMBCEi": {
           "type": "social",
           "settings": {
-            "icon": "shopify://shop_images/Link-1.svg",
             "label": "Social",
             "url": "/",
             "target": "_blank"
@@ -108,7 +106,6 @@
         "brand_nE7kPJ": {
           "type": "brand",
           "settings": {
-            "logo": "shopify://shop_images/Logo.svg",
             "description": "Handcrafted luxury rugs woven by skilled Indian artisans. Bringing heritage craftsmanship to contemporary homes worldwide."
           }
         }
