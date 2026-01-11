@@ -72,7 +72,7 @@
           "type": "link",
           "settings": {
             "title": "FAQ",
-            "path": "/pages/frequently-asked-questions",
+            "path": "/pages/about-us?view=cora-custom-faq",
             "status": "ready"
           }
         },
