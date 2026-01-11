@@ -61,7 +61,7 @@
         "show_remaining": true,
         "bg_color": "#ffffff",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 20
       }
     }
   },
