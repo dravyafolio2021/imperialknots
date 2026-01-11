@@ -13,7 +13,7 @@
       "type": "cora-catalog-banner",
       "name": "Catalog Banner",
       "settings": {
-        "heading": "{{ page.title }}",
+        "heading": "Terms & Condition",
         "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
         "text_color": "#000000",
         "text_align": "center",
