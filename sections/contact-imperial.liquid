@@ -1,0 +1,205 @@
+{% comment %}
+  Imperial Knots Contact Form
+  - Sends directly to Owner Email
+  - Exact Custom Styling (Orange/Rounded/Split Layout)
+{% endcomment %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+  .ik-contact-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .ik-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+  }
+
+  .ik-title {
+    text-align: center;
+    color: #E87034;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  /* Success Message */
+  .ik-success {
+    background: #e6fffa;
+    color: #047481;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #b2f5ea;
+  }
+
+  /* Form Layout */
+  .ik-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ik-row-split {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .ik-row-split > div {
+    width: 50%;
+  }
+
+  @media (max-width: 600px) {
+    .ik-row-split { flex-direction: column; gap: 20px; }
+    .ik-row-split > div { width: 100%; }
+    .ik-form-container { padding: 20px; }
+  }
+
+  /* Inputs */
+  .ik-input {
+    width: 100%;
+    border: 1.5px solid #E87034;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #fff;
+  }
+
+  .ik-input:focus {
+    border-color: #C6551E;
+    box-shadow: 0 0 0 4px rgba(232, 112, 52, 0.15);
+  }
+
+  .ik-input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+  }
+
+  /* Textarea with Background Image */
+  .ik-textarea {
+    min-height: 180px;
+    resize: vertical;
+    background-color: #fff;
+    /* Background Image Logic */
+    {% if section.settings.bg_image != blank %}
+      background-image: url('{{ section.settings.bg_image | image_url: width: 600 }}');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+    {% endif %}
+  }
+
+  /* Submit Button */
+  .ik-btn {
+    width: 100%;
+    background-color: #E87034;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .ik-btn:hover {
+    background-color: #c05621;
+  }
+
+</style>
+
+<div class="ik-contact-section">
+  <div class="ik-form-container">
+    <h2 class="ik-title">{{ section.settings.heading }}</h2>
+
+    {% form 'contact' %}
+      
+      {% if form.posted_successfully? %}
+        <div class="ik-success">
+          <strong>Success!</strong> {{ section.settings.success_msg }}
+        </div>
+      {% elsif form.errors %}
+        <div class="ik-success" style="background:#fff5f5; color:#c53030; border-color:#fc8181;">
+          Please correct the errors marked below.
+        </div>
+      {% endif %}
+
+      <div class="ik-form-grid">
+        
+        <div>
+          <input type="text" name="contact[name]" id="ContactForm-name" class="ik-input" placeholder="Name Surname" value="{% if form.name %}{{ form.name }}{% endif %}" required>
+        </div>
+
+        <div class="ik-row-split">
+          <div>
+            <input type="tel" name="contact[phone]" id="ContactForm-phone" class="ik-input" placeholder="Mobile Number" value="{% if form.phone %}{{ form.phone }}{% endif %}">
+          </div>
+          <div>
+            <input type="email" name="contact[email]" id="ContactForm-email" class="ik-input" placeholder="Email ID" value="{% if form.email %}{{ form.email }}{% endif %}" required>
+          </div>
+        </div>
+
+        <div>
+          <textarea rows="10" name="contact[body]" id="ContactForm-body" class="ik-input ik-textarea" placeholder="Write your Message*" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" class="ik-btn">{{ section.settings.btn_text }}</button>
+
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Imperial Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Make an Inquiry"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Message Box Illustration",
+      "info": "Upload the faded landscape image here."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "SUBMIT"
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "label": "Success Message",
+      "default": "Your message has been sent successfully."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Imperial Contact Form"
+    }
+  ]
+}
+{% endschema %}
