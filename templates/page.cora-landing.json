@@ -16,7 +16,7 @@
           "type": "link",
           "settings": {
             "title": "terms-of-service",
-            "path": "/pages/terms-of-service",
+            "path": "/pages/about-us?view=cora-termsandcondition",
             "status": "ready"
           }
         },
