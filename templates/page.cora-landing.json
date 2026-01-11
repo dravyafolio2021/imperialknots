@@ -56,7 +56,7 @@
           "type": "link",
           "settings": {
             "title": "influencer Us",
-            "path": "/pages/influencer-page",
+            "path": "/pages/about-us?view=cora-influencer",
             "status": "ready"
           }
         },
