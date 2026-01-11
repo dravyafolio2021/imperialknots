@@ -600,6 +600,9 @@
         "category_7AFgjY",
         "question_6TwP9m"
       ],
+      "custom_css": [
+        "html, body {overflow-x: hidden;}"
+      ],
       "name": "FAQ V2 (Collapsible)",
       "settings": {
         "heading": "Frequently Asked Questions",
