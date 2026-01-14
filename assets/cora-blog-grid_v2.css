@@ -141,7 +141,7 @@
 
 .cora-btn {
   display: inline-block;
-  background-color: var(--accent-color);
+  background-color: #000000;
   color: #fff;
   padding: 14px 40px;
   border-radius: 50px;
