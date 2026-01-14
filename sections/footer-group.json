@@ -62,29 +62,29 @@
         "link_column_eixREN": {
           "type": "link_column",
           "settings": {
-            "title": "Fetaured Collection",
-            "menu": "footer"
+            "title": "Get to Know Us",
+            "menu": "get-to-know-us"
           }
         },
         "link_column_9PdLah": {
           "type": "link_column",
           "settings": {
-            "title": "Shop by Color",
-            "menu": "shop-by-color"
+            "title": "Guide & Policies",
+            "menu": "guide-amp-policies"
           }
         },
         "link_column_cLifNk": {
           "type": "link_column",
           "settings": {
-            "title": "Shop by Size",
-            "menu": "shop-by-size"
+            "title": "Quick Links",
+            "menu": "quick-links"
           }
         },
         "link_column_JTRC6G": {
           "type": "link_column",
           "settings": {
-            "title": "Advance",
-            "menu": "extra"
+            "title": "Services",
+            "menu": "services"
           }
         },
         "social_V7f6HA": {
