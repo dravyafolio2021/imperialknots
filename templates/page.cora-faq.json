@@ -16,8 +16,8 @@
       ],
       "name": "Catalog Banner",
       "settings": {
-        "heading": "FAQ",
-        "subheading": "Be part of a creative ecosystem building the future of design & technology.",
+        "heading": "Frequently Asked Questions",
+        "subheading": "",
         "text_color": "#000000",
         "text_align": "center",
         "bg_color": "#f0ebe4",
@@ -27,51 +27,393 @@
         "pb_mobile": 40
       }
     },
-    "cora_faq_v2_TxMAQk": {
+    "cora_faq_v2_bMhLa7": {
       "type": "cora-faq-v2",
       "blocks": {
-        "category_CPWity": {
+        "category_R8RDiJ": {
           "type": "category",
           "settings": {
             "title": "General"
           }
         },
-        "question_gqNcDP": {
+        "question_tkkLpB": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?",
+            "title": "What is your return policy?1",
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         },
-        "question_fipXHz": {
+        "question_ihzCA6": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?",
+            "title": "What is your return policy?2",
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
         },
-        "category_KGDb6B": {
+        "question_nTk9EE": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?2",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_nxcnab": {
           "type": "category",
           "settings": {
-            "title": "Shipping"
+            "title": "Custom & Bespoke Rugs"
           }
         },
-        "question_wAmWGF": {
+        "question_ENHQec": {
+          "type": "question",
+          "settings": {
+            "title": "Do you make customized rugs?",
+            "answer": "<p>Yes—choose your size, colors, material, pattern, and finish.</p>"
+          }
+        },
+        "question_ejC4h7": {
+          "type": "question",
+          "settings": {
+            "title": "What is a Bespoke Rug & how do I place my order?",
+            "answer": "<p>A fully made-to-order rug tailored to your specs. Share your dimensions, palette, references, or sketches; we’ll develop a visualization and proceed after your approval.</p>"
+          }
+        },
+        "question_yRJCy3": {
+          "type": "question",
+          "settings": {
+            "title": "What is the lead time for a custom rug?",
+            "answer": "<p>Typically 5–12 weeks, depending on size, design complexity, and technique.</p>"
+          }
+        },
+        "question_fgNXyM": {
+          "type": "question",
+          "settings": {
+            "title": "Can I provide my design for a custom rug?",
+            "answer": "<p>Absolutely—upload sketches, artwork, photos, or CAD files; we’ll translate them into a weave-ready map.</p>"
+          }
+        },
+        "question_fehcAi": {
+          "type": "question",
+          "settings": {
+            "title": "What materials and techniques are available for custom rugs?",
+            "answer": "<p>Materials: wool, silk, bamboo silk, viscose, jute, cotton.Techniques: hand-knotted, hand-tufted, flatweave, hand-woven.</p>"
+          }
+        },
+        "question_mcWfwW": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy for custom rugs?",
+            "answer": "<p>Custom pieces are made to your specifications and are <strong>non-returnable</strong> (except in case of confirmed manufacturing defects).</p>"
+          }
+        },
+        "category_HxdRFd": {
+          "type": "category",
+          "settings": {
+            "title": "Product & Quality"
+          }
+        },
+        "question_ExEBke": {
+          "type": "question",
+          "settings": {
+            "title": "What is the difference between hand-knotted, hand-tufted, and flatweave rugs?",
+            "answer": "<ul><li><strong>Hand-knotted:</strong> knot-by-knot on a loom; heirloom durability.</li><li><strong>Hand-tufted:</strong> tufting tool; faster, great value, sturdy.</li></ul><p><strong>Flatweave:</strong> no pile; lightweight, reversible, ideal for high traffic.</p>"
+          }
+        },
+        "question_idzMya": {
+          "type": "question",
+          "settings": {
+            "title": "Will I see the exact carpet I’m ordering?",
+            "answer": "<p>Yes—ready-made listings show the actual rug. For custom rugs, we share approval images; minor tone/texture variations are natural with hand-dyed fibers.</p>"
+          }
+        },
+        "question_G9igtW": {
           "type": "question",
           "settings": {
             "title": "What is your return policy?",
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_e4dxGQ": {
+          "type": "category",
+          "settings": {
+            "title": "Care & Maintenance"
+          }
+        },
+        "question_xbtqDh": {
+          "type": "question",
+          "settings": {
+            "title": "How should I clean my rug regularly?",
+            "answer": "<p>Vacuum weekly on low suction (no beater bar), shake out dust, and use a quality rug pad.</p>"
+          }
+        },
+        "question_EXEe3q": {
+          "type": "question",
+          "settings": {
+            "title": "How do I handle spills and stains on my rug?",
+            "answer": "<p>Blot immediately with a clean, dry cloth (don’t rub). Use mild soap with cool water if needed; call a rug-care professional for tough stains.</p>"
+          }
+        },
+        "question_fEPDWB": {
+          "type": "question",
+          "settings": {
+            "title": "Can I wash my rug at home?",
+            "answer": "<p>Avoid machine washing. Professional cleaning is recommended for handmade rugs.</p>"
+          }
+        },
+        "question_kCBhCw": {
+          "type": "question",
+          "settings": {
+            "title": "How often should I rotate my rug?",
+            "answer": "<p>Every <strong>3–6 months</strong> to even out wear and sun exposure.</p>"
+          }
+        },
+        "question_7EDfjy": {
+          "type": "question",
+          "settings": {
+            "title": "What should I do to protect my rug from sunlight?",
+            "answer": "<p>Use curtains/UV blinds, rotate routinely, and avoid prolonged direct sunlight.</p>"
+          }
+        },
+        "question_dLrrwF": {
+          "type": "question",
+          "settings": {
+            "title": "How do I store my rug properly?",
+            "answer": "<p>Clean, roll (don’t fold), wrap in breathable fabric or cotton sheeting, and store in a cool, dry space off the floor.</p>"
+          }
+        },
+        "question_fK9DDi": {
+          "type": "question",
+          "settings": {
+            "title": "How do I clean and maintain my handmade wool carpet?",
+            "answer": "<p>Regular low-suction vacuuming, prompt blotting of spills, professional deep clean every 12–18 months, and routine rotation.</p>"
+          }
+        },
+        "question_Mmq8EA": {
+          "type": "question",
+          "settings": {
+            "title": "Do handmade carpets shed?",
+            "answer": "<p>New wool rugs may shed lightly at first; this reduces with regular vacuuming and use.</p>"
+          }
+        },
+        "category_geKPKw": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping, Ordering & Cancellations"
+          }
+        },
+        "question_Ni93TQ": {
+          "type": "question",
+          "settings": {
+            "title": "Is there a time limit for canceling my order?",
+            "answer": "<p>Yes—within <strong>24 hours</strong> of placement. Once processed or shipped, the order can’t be canceled. For custom rugs, cancellation isn’t possible after production begins.</p>"
+          }
+        },
+        "question_CHKgex": {
+          "type": "question",
+          "settings": {
+            "title": "How can I cancel my order?",
+            "answer": "<p>Contact Customer Support with your order number <strong>as soon as possible</strong>. If it hasn’t been processed or shipped, we’ll cancel and confirm via email.</p>"
+          }
+        },
+        "question_EAXRBz": {
+          "type": "question",
+          "settings": {
+            "title": "Will I see the exact carpet I'm ordering?",
+            "answer": "<p>Yes for in-stock rugs; for custom rugs we provide approval photos before shipping.</p>"
+          }
+        },
+        "category_jX6Umw": {
+          "type": "category",
+          "settings": {
+            "title": "Returns & Refunds"
+          }
+        },
+        "question_VtPDAY": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>Unused, ready-made rugs may be returned within the stated window in original condition/packaging. <strong>Custom rugs are non-returnable.</strong></p>"
+          }
+        },
+        "question_b8LazT": {
+          "type": "question",
+          "settings": {
+            "title": "How do I initiate a return?",
+            "answer": "<p>Contact Customer Support with your order details to receive return instructions and an authorization.</p>"
+          }
+        },
+        "question_WAir3Q": {
+          "type": "question",
+          "settings": {
+            "title": "Do you offer free returns?",
+            "answer": "<p>Policies vary by region; return shipping/fees may apply. Custom rugs are not eligible.</p>"
+          }
+        },
+        "question_bK7tn6": {
+          "type": "question",
+          "settings": {
+            "title": "How long does it take to process a return?",
+            "answer": "<p>Typically <strong>7–10 business days</strong> after the rug is received and inspected.</p>"
+          }
+        },
+        "question_TjKCWH": {
+          "type": "question",
+          "settings": {
+            "title": "Will I receive a full refund?",
+            "answer": "<p>Eligible returns are refunded to the original payment method, minus any applicable shipping/fees.</p>"
+          }
+        },
+        "question_XU8hB7": {
+          "type": "question",
+          "settings": {
+            "title": "Can I exchange a rug?",
+            "answer": "<p>Yes—exchanges for standard sizes are possible if the rug is unused and within the return window.</p>"
+          }
+        },
+        "question_6jgdVF": {
+          "type": "question",
+          "settings": {
+            "title": "Do you offer refunds, and how are they processed?",
+            "answer": "<p>Yes—refunds are issued to the original payment method after inspection approval.</p>"
+          }
+        },
+        "category_6RPBUC": {
+          "type": "category",
+          "settings": {
+            "title": "Payments & Billing"
+          }
+        },
+        "question_bqpRbf": {
+          "type": "question",
+          "settings": {
+            "title": "What payment methods do you accept?",
+            "answer": "<p>Credit/debit cards (<strong>Visa, MasterCard, American Express</strong>), <strong>bank transfers, Razorpay, and EMIs</strong> (where available). All transactions use secure, encrypted gateways.</p>"
+          }
+        },
+        "question_3DyUHM": {
+          "type": "question",
+          "settings": {
+            "title": "Is my payment information secure?",
+            "answer": "<p>Yes—we use <strong>industry-standard encryption</strong> and secure payment gateways.</p>"
+          }
+        },
+        "question_fXjkQR": {
+          "type": "question",
+          "settings": {
+            "title": "Can I use multiple payment methods for one order?",
+            "answer": "<p>Generally no; contact support for partial-pay or manual invoice options.</p>"
+          }
+        },
+        "question_ALzt9M": {
+          "type": "question",
+          "settings": {
+            "title": "When will my card be charged?",
+            "answer": "<p>At checkout (time of purchase).</p>"
+          }
+        },
+        "question_ka3ptM": {
+          "type": "question",
+          "settings": {
+            "title": "Do you offer financing or installment payment options?",
+            "answer": "<p>EMI/installments may be available via Razorpay/issuer programs (availability varies by region and eligibility).</p>"
+          }
+        },
+        "question_aEbb8k": {
+          "type": "question",
+          "settings": {
+            "title": "What should I do if my payment is declined?",
+            "answer": "<p>Check card details and online/intl limits, try another method, or contact your bank. Our team can help with alternatives.</p>"
+          }
+        },
+        "question_3xGWDD": {
+          "type": "question",
+          "settings": {
+            "title": "How can I get a receipt for my purchase?",
+            "answer": "<p>Order confirmation and a tax invoice are emailed automatically after purchase.</p>"
+          }
+        },
+        "question_eiNzrf": {
+          "type": "question",
+          "settings": {
+            "title": "Are there any additional fees or charges?",
+            "answer": "<p>Your country may levy duties, taxes, or customs fees at import.</p>"
+          }
+        },
+        "question_hjzBTQ": {
+          "type": "question",
+          "settings": {
+            "title": "Can I change my payment method after placing an order?",
+            "answer": "<p><strong>No.</strong> Payment method can’t be changed once an order is placed. To use a different method, <strong>cancel within 24 hours</strong> (if not processed/shipped) and place a new order.</p>"
+          }
+        },
+        "question_pf8dnH": {
+          "type": "question",
+          "settings": {
+            "title": "Do you have gift cards?",
+            "answer": "<p>Yes—digital gift cards are available and redeemable site-wide.</p>"
+          }
+        },
+        "question_WhAHq7": {
+          "type": "question",
+          "settings": {
+            "title": "Still have questions?",
+            "answer": "<p>We’re here to help via live chat, email, or WhatsApp.</p>"
           }
         }
       },
       "block_order": [
-        "category_CPWity",
-        "question_gqNcDP",
-        "question_fipXHz",
-        "category_KGDb6B",
-        "question_wAmWGF"
+        "category_R8RDiJ",
+        "question_tkkLpB",
+        "question_ihzCA6",
+        "question_nTk9EE",
+        "category_nxcnab",
+        "question_ENHQec",
+        "question_ejC4h7",
+        "question_yRJCy3",
+        "question_fgNXyM",
+        "question_fehcAi",
+        "question_mcWfwW",
+        "category_HxdRFd",
+        "question_ExEBke",
+        "question_idzMya",
+        "question_G9igtW",
+        "category_e4dxGQ",
+        "question_xbtqDh",
+        "question_EXEe3q",
+        "question_fEPDWB",
+        "question_kCBhCw",
+        "question_7EDfjy",
+        "question_dLrrwF",
+        "question_fK9DDi",
+        "question_Mmq8EA",
+        "category_geKPKw",
+        "question_Ni93TQ",
+        "question_CHKgex",
+        "question_EAXRBz",
+        "category_jX6Umw",
+        "question_VtPDAY",
+        "question_b8LazT",
+        "question_WAir3Q",
+        "question_bK7tn6",
+        "question_TjKCWH",
+        "question_XU8hB7",
+        "question_6jgdVF",
+        "category_6RPBUC",
+        "question_bqpRbf",
+        "question_3DyUHM",
+        "question_fXjkQR",
+        "question_ALzt9M",
+        "question_ka3ptM",
+        "question_aEbb8k",
+        "question_3xGWDD",
+        "question_eiNzrf",
+        "question_hjzBTQ",
+        "question_pf8dnH",
+        "question_WhAHq7"
       ],
-      "name": "FAQ V2 (Scrollable)",
+      "custom_css": [
+        "html,body {overflow-x: hidden;}"
+      ],
+      "name": "FAQ V2 (Collapsible)",
       "settings": {
         "heading": "",
         "text": "",
@@ -84,6 +426,6 @@
   },
   "order": [
     "cora_catalog_banner_VhtUQd",
-    "cora_faq_v2_TxMAQk"
+    "cora_faq_v2_bMhLa7"
   ]
 }
