@@ -1,7 +1,7 @@
 {% comment %}
-  STAGING LINK MANAGER (FIXED)
-  - Auto-fixes missing 'https://'
-  - Prevents broken relative links
+  STAGING LINK MANAGER - V2 (Fixes Broken Links)
+  - Automatically adds 'https://' if missing
+  - Fixes the issue where links merge with your store domain
 {% endcomment %}
 
 <style>
@@ -47,7 +47,7 @@
 
   .sb-item:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border-color: #E87034; /* Your Brand Color */
+    border-color: #E87034; /* Brand Color */
   }
 
   .sb-name { font-weight: 600; font-size: 16px; }
@@ -67,7 +67,6 @@
   .sb-arrow { font-size: 20px; color: #ccc; margin-left: 15px; }
   .sb-item:hover .sb-arrow { color: #E87034; }
 
-  /* Warning box if URL is missing */
   .sb-warning {
     background: #fff5f5;
     color: #c53030;
@@ -76,7 +75,6 @@
     margin-bottom: 20px;
     text-align: center;
     border: 1px solid #fc8181;
-    display: none;
   }
 </style>
 
@@ -88,7 +86,7 @@
   </div>
 
   {% if section.settings.base_url == blank %}
-    <div class="sb-warning" style="display:block;">
+    <div class="sb-warning">
       ⚠️ <strong>Developer:</strong> Please paste the active Shopify Preview URL in the section settings.
     </div>
   {% endif %}
@@ -98,17 +96,19 @@
       
       {% assign base = section.settings.base_url | strip %}
       
-      {% comment %} 1. AUTO-FIX: Add https:// if missing {% endcomment %}
-      {% unless base contains 'http' %}
+      {% comment %} ----------------------------------------- {% endcomment %}
+      {% comment %} CRITICAL FIX: FORCE HTTPS IF MISSING      {% endcomment %}
+      {% comment %} ----------------------------------------- {% endcomment %}
+      {% unless base contains 'http://' or base contains 'https://' %}
         {% assign base = 'https://' | append: base %}
       {% endunless %}
 
-      {% comment %} 2. CLEANUP: Remove trailing slash from base {% endcomment %}
+      {% comment %} Clean up trailing slash {% endcomment %}
       {% assign base = base | remove_last: '/' %}
 
       {% assign path = block.settings.path %}
       
-      {% comment %} 3. CLEANUP: Ensure path starts with slash {% endcomment %}
+      {% comment %} Ensure path starts with slash {% endcomment %}
       {% unless path contains '/' %}
         {% assign path = '/' | append: path %}
       {% endunless %}
@@ -141,14 +141,14 @@
   "settings": [
     {
       "type": "header",
-      "content": "MASTER CONFIGURATION"
+      "content": "Configuration"
     },
     {
       "type": "text",
       "id": "base_url",
       "label": "Active Preview URL",
-      "info": "Paste the long Shopify Preview link here.",
-      "placeholder": "https://..."
+      "info": "Paste the generated preview link here. The code will automatically add https:// if you forget it.",
+      "placeholder": "e.g. 7vge...shopifypreview.com"
     },
     {
       "type": "text",
@@ -168,29 +168,12 @@
       "type": "link",
       "name": "Page Link",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Page Name",
-          "default": "About Us"
-        },
-        {
-          "type": "text",
-          "id": "path",
-          "label": "Page Path (URL Handle)",
-          "default": "/pages/about-us",
-          "info": "Just the part after .com"
-        },
-        {
-          "type": "select",
-          "id": "status",
-          "label": "Status",
-          "options": [
-            { "value": "ready", "label": "Ready for Review" },
-            { "value": "wip", "label": "Work in Progress" }
-          ],
-          "default": "ready"
-        }
+        { "type": "text", "id": "title", "label": "Page Name", "default": "About Us" },
+        { "type": "text", "id": "path", "label": "Page Path", "default": "/pages/about-us" },
+        { "type": "select", "id": "status", "label": "Status", "options": [
+          { "value": "ready", "label": "Ready" },
+          { "value": "wip", "label": "WIP" }
+        ], "default": "ready" }
       ]
     }
   ],
