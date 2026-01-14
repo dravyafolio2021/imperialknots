@@ -599,10 +599,24 @@
         "category_7AFgjY": {
           "type": "category",
           "settings": {
-            "title": "Shipping"
+            "title": "Product & Quality"
           }
         },
         "question_6TwP9m": {
+          "type": "question",
+          "settings": {
+            "title": "What is the difference between hand-knotted, hand-tufted, and flatweave rugs?",
+            "answer": "<ul><li><strong>Hand-knotted:</strong> knot-by-knot on a loom; heirloom durability.</li><li><strong>Hand-tufted:</strong> tufting tool; faster, great value, sturdy.</li></ul><p><strong>Flatweave:</strong> no pile; lightweight, reversible, ideal for high traffic.</p>"
+          }
+        },
+        "question_ah3RWq": {
+          "type": "question",
+          "settings": {
+            "title": "Will I see the exact carpet I’m ordering?",
+            "answer": "<p>Yes—ready-made listings show the actual rug. For custom rugs, we share approval images; minor tone/texture variations are natural with hand-dyed fibers.</p>"
+          }
+        },
+        "question_79y7kn": {
           "type": "question",
           "settings": {
             "title": "What is your return policy?",
@@ -623,7 +637,9 @@
         "question_tErmNV",
         "question_aYTBHy",
         "category_7AFgjY",
-        "question_6TwP9m"
+        "question_6TwP9m",
+        "question_ah3RWq",
+        "question_79y7kn"
       ],
       "custom_css": [
         "html,body {overflow-x: hidden;}"
