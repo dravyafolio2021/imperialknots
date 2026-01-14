@@ -462,6 +462,25 @@
         "layout": "grid"
       }
     },
+    "cora_blog_gHJL3D": {
+      "type": "cora-blog",
+      "name": "Cora Blog Grid v2",
+      "settings": {
+        "heading": "",
+        "blog": "news",
+        "post_limit": 3,
+        "text_alignment": "left",
+        "show_excerpt": true,
+        "show_author": false,
+        "bg_color": "#FFFFFF",
+        "title_color": "#222222",
+        "accent_color": "#E87034",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
     "cora_faq_section_R8KehB": {
       "type": "cora-faq-section",
       "blocks": {
@@ -923,6 +942,7 @@
     "cora_style_grid_K3RUBY",
     "cora_product_grid_aPwt7d",
     "cora_features_jfEBK8",
+    "cora_blog_gHJL3D",
     "cora_faq_section_R8KehB",
     "cora_faq_v2_XWXtm4"
   ]
