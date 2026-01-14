@@ -1,0 +1,134 @@
+/* cora-blog-grid.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.cora-blog-section {
+  background-color: var(--bg-color);
+  padding-top: var(--pt-mob);
+  padding-bottom: var(--pb-mob);
+  font-family: 'Poppins', sans-serif;
+}
+
+@media screen and (min-width: 990px) {
+  .cora-blog-section {
+    padding-top: var(--pt-desk);
+    padding-bottom: var(--pb-desk);
+  }
+}
+
+.cora-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.cora-section-header {
+  margin-bottom: 40px;
+  text-align: {{ section.settings.text_alignment }};
+}
+.cora-section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin: 0 0 10px 0;
+}
+.cora-section-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.cora-section-link:hover { text-decoration: underline; }
+
+/* GRID */
+.cora-blog-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile Default */
+  gap: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .cora-blog-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet */
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cora-blog-grid {
+    grid-template-columns: repeat(3, 1fr); /* Desktop */
+  }
+}
+
+/* CARD */
+.cora-blog-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  height: 100%;
+}
+
+.cora-blog-img-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background-color: #f4f4f4;
+}
+
+.cora-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cora-blog-card:hover .cora-blog-img {
+  transform: scale(1.05);
+}
+
+/* CONTENT */
+.cora-blog-meta {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cora-blog-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--title-color);
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+  transition: color 0.2s;
+}
+
+.cora-blog-card:hover .cora-blog-title {
+  color: var(--accent-color);
+}
+
+.cora-blog-excerpt {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cora-read-more {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #C8A375; /* Gold/Tan color from reference */
+  margin-top: auto; /* Pushes it to bottom if cards are different heights */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
