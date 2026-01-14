@@ -1,6 +1,7 @@
 {% comment %}
-  STAGING LINK MANAGER
-  Dynamically builds preview URLs based on a master Base URL.
+  STAGING LINK MANAGER (FIXED)
+  - Auto-fixes missing 'https://'
+  - Prevents broken relative links
 {% endcomment %}
 
 <style>
@@ -94,13 +95,20 @@
 
   <div class="sb-list">
     {% for block in section.blocks %}
-      {% comment %} 
-         LOGIC: Strip trailing slash from base, ensure leading slash on path 
-      {% endcomment %}
       
-      {% assign base = section.settings.base_url | remove_last: '/' %}
+      {% assign base = section.settings.base_url | strip %}
+      
+      {% comment %} 1. AUTO-FIX: Add https:// if missing {% endcomment %}
+      {% unless base contains 'http' %}
+        {% assign base = 'https://' | append: base %}
+      {% endunless %}
+
+      {% comment %} 2. CLEANUP: Remove trailing slash from base {% endcomment %}
+      {% assign base = base | remove_last: '/' %}
+
       {% assign path = block.settings.path %}
       
+      {% comment %} 3. CLEANUP: Ensure path starts with slash {% endcomment %}
       {% unless path contains '/' %}
         {% assign path = '/' | append: path %}
       {% endunless %}
@@ -139,7 +147,7 @@
       "type": "text",
       "id": "base_url",
       "label": "Active Preview URL",
-      "info": "Paste the long Shopify Preview link here (e.g. https://4yoe...shopifypreview.com). ALL buttons below will use this.",
+      "info": "Paste the long Shopify Preview link here.",
       "placeholder": "https://..."
     },
     {
