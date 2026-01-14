@@ -14,7 +14,7 @@
       "name": "Catalog Banner",
       "settings": {
         "heading": "Custom Rug Request",
-        "subheading": "Create your perfect rug. Tell us about your vision and our artisans will bring it to life.",
+        "subheading": "",
         "text_color": "#000000",
         "text_align": "center",
         "bg_color": "#f0ebe4",

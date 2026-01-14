@@ -9,13 +9,30 @@
  */
 {
   "sections": {
+    "cora_catalog_banner_PEAmx4": {
+      "type": "cora-catalog-banner",
+      "custom_css": [
+        "{background-color: #ffffff;}"
+      ],
+      "name": "Catalog Banner",
+      "settings": {
+        "heading": "Room-by-Room Guide",
+        "subheading": "",
+        "text_color": "#000000",
+        "text_align": "center",
+        "bg_color": "#F0EBE4",
+        "pt_desktop": 60,
+        "pb_desktop": 60,
+        "pt_mobile": 40,
+        "pb_mobile": 40
+      }
+    },
     "cora_size_guide_UaCRGQ": {
       "type": "cora-size-guide",
       "blocks": {
         "room_raqBUR": {
           "type": "room",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "room_name": "Living Room",
             "description": "Position the rug so front furniture legs rest on it, creating a cohesive seating area.",
             "size_1": "5' x 8'",
@@ -26,7 +43,6 @@
         "room_atGhip": {
           "type": "room",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "room_name": "Living Room",
             "description": "Position the rug so front furniture legs rest on it, creating a cohesive seating area.",
             "size_1": "5' x 8'",
@@ -37,7 +53,6 @@
         "room_jH3nhb": {
           "type": "room",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "room_name": "Living Room",
             "description": "Position the rug so front furniture legs rest on it, creating a cohesive seating area.",
             "size_1": "5' x 8'",
@@ -48,7 +63,6 @@
         "room_d9g4dj": {
           "type": "room",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_76fdc2e1-9250-46d9-b716-0836d33f7f31.png",
             "room_name": "Living Room",
             "description": "Position the rug so front furniture legs rest on it, creating a cohesive seating area.",
             "size_1": "5' x 8'",
@@ -64,13 +78,14 @@
         "room_d9g4dj"
       ],
       "settings": {
-        "kicker": "Find the Perfect Rug Size",
-        "heading": "Room-by-Room Guide",
-        "text": "Explore how different rug sizes work in various room settings."
+        "kicker": "",
+        "heading": "",
+        "text": ""
       }
     }
   },
   "order": [
+    "cora_catalog_banner_PEAmx4",
     "cora_size_guide_UaCRGQ"
   ]
 }

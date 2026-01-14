@@ -16,8 +16,8 @@
       ],
       "name": "Catalog Banner",
       "settings": {
-        "heading": "{{ page.title }}",
-        "subheading": "Browse our complete collection of handcrafted luxury rugs. Each piece is woven by skilled Indian artisans, blending traditional craftsmanship with contemporary design.",
+        "heading": "Contact Us",
+        "subheading": "",
         "text_color": "#000000",
         "text_align": "center",
         "bg_color": "#f0ebe4",
@@ -25,6 +25,15 @@
         "pb_desktop": 60,
         "pt_mobile": 40,
         "pb_mobile": 40
+      }
+    },
+    "contact_imperial_yhdzHp": {
+      "type": "contact-imperial",
+      "name": "Imperial Contact Form",
+      "settings": {
+        "heading": "Make an Inquiry",
+        "btn_text": "SUBMIT",
+        "success_msg": "Your message has been sent successfully."
       }
     },
     "custom_section_fw6Yx4": {
@@ -167,6 +176,7 @@
   },
   "order": [
     "cora_catalog_banner_hCrRze",
+    "contact_imperial_yhdzHp",
     "custom_section_fw6Yx4",
     "1765900774367887f7",
     "trust_badges_zy7jRj",
