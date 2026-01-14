@@ -602,6 +602,12 @@
             "title": "Product & Quality"
           }
         },
+        "category_ViDb9y": {
+          "type": "category",
+          "settings": {
+            "title": "Care & Maintenance"
+          }
+        },
         "question_6TwP9m": {
           "type": "question",
           "settings": {
@@ -637,6 +643,7 @@
         "question_tErmNV",
         "question_aYTBHy",
         "category_7AFgjY",
+        "category_ViDb9y",
         "question_6TwP9m",
         "question_ah3RWq",
         "question_79y7kn"
