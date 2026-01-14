@@ -12,6 +12,14 @@
     "client_presentation_bYGJeM": {
       "type": "client-presentation",
       "blocks": {
+        "link_xCJJMy": {
+          "type": "link",
+          "settings": {
+            "title": "Rug Warranty",
+            "path": "/pages/about-us?view=cora-rug-warrenty",
+            "status": "ready"
+          }
+        },
         "link_kbVGeC": {
           "type": "link",
           "settings": {
@@ -151,6 +159,7 @@
         }
       },
       "block_order": [
+        "link_xCJJMy",
         "link_kbVGeC",
         "link_4Nrahd",
         "link_qq6gnD",
