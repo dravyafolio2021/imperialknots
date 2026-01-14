@@ -34,3 +34,9 @@
     {% sections 'footer-group' %}
   </body>
 </html>
+
+
+
+{%- if template.name == 'collection' -%}
+    {% render 'schema-collection' %}
+  {%- endif -%}
