@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cora_catalog_banner_EDDTc4": {
+      "type": "cora-catalog-banner",
+      "custom_css": [
+        "{background-color: #ffffff;}"
+      ],
+      "name": "Catalog Banner",
+      "settings": {
+        "heading": "Privacy Policy",
+        "subheading": "",
+        "text_color": "#000000",
+        "text_align": "center",
+        "bg_color": "#f0ebe4",
+        "pt_desktop": 60,
+        "pb_desktop": 60,
+        "pt_mobile": 40,
+        "pb_mobile": 40
+      }
+    },
+    "cora_rich_text_9tm4xQ": {
+      "type": "cora-rich-text",
+      "blocks": {
+        "text_hy7P9f": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Last Updated:</strong> <em>[Add Date]</em></p><p>This Privacy Policy describes how <strong>Imperial Knots</strong> (“we”, “us”, or “our”) collects, uses, and shares your personal information when you visit or make a purchase from <a href=\"http://www.imperialknots.com\"><span style=\"text-decoration:underline\"><strong>www.imperialknots.com</strong></span></a> (the “Site”).</p><p></p><p></p><p><strong>1. PERSONAL INFORMATION WE COLLECT</strong></p><p><strong>Device Information</strong></p><p>When you visit the Site, we automatically collect information about your device, including:</p><ul><li>IP address</li><li>Browser type</li><li>Time zone</li><li>Cookies installed on your device</li><li>Pages or products you view</li><li>Websites or search terms that referred you to the Site</li><li>How you interact with the Site</li></ul><p>We collect this information using:</p><ul><li><strong>Cookies</strong></li><li><strong>Log files</strong></li><li><strong>Web beacons</strong>, <strong>tags</strong>, and <strong>pixels</strong></li></ul><p><strong>Order Information</strong></p><p>When you make (or attempt to make) a purchase, we collect:</p><ul><li>Name</li><li>Billing address</li><li>Shipping address</li><li>Payment information (such as credit/debit card details)</li><li>Email address</li><li>Phone number</li></ul><p>We refer to both Device Information and Order Information as <strong>“Personal Information.”</strong></p><p></p><p></p><p><strong>2. HOW WE USE YOUR PERSONAL INFORMATION</strong></p><p>We use Order Information to:</p><ul><li>Process payments and fulfill orders</li><li>Arrange shipping and provide order confirmations</li><li>Communicate with you regarding your order or inquiries</li><li>Screen for potential fraud and security risks</li><li>Send marketing communications (only if you opt-in)</li></ul><p>We use Device Information to:</p><ul><li>Improve and optimize our website experience</li><li>Analyze customer behavior and browsing patterns</li><li>Measure effectiveness of marketing and advertising campaigns</li></ul><p></p><p></p><p><strong>3. SHARING YOUR PERSONAL INFORMATION</strong></p><p>We share your personal information with third parties to help us operate our business. For example:</p><ul><li>We use <strong>Shopify</strong> to power our online store.<br/>Shopify Privacy Policy: <a href=\"https://www.shopify.com/legal/privacy\"><span style=\"text-decoration:underline\">https://www.shopify.com/legal/privacy</span></a></li><li>We use <strong>Google Analytics</strong> to understand website performance.<br/>Google Privacy Policy: <a href=\"https://policies.google.com/privacy\"><span style=\"text-decoration:underline\">https://policies.google.com/privacy</span><br/></a>Opt-out: <a href=\"https://tools.google.com/dlpage/gaoptout\"><span style=\"text-decoration:underline\">https://tools.google.com/dlpage/gaoptout</span></a></li><li>We may use <strong>Meta/Facebook Ads</strong>, <strong>Google Ads</strong>, and similar tools to show targeted advertisements.</li></ul><p>We may also share information when required to comply with applicable law or legal requests.</p><p></p><p></p><p><strong>4. BEHAVIOURAL & TARGETED ADVERTISING</strong></p><p>We use your personal information to provide <strong>relevant marketing communications</strong>.</p><p>You can opt out of targeted advertising using the links below:</p><ul><li>Facebook: <a href=\"https://www.facebook.com/settings/?tab=ads\"><span style=\"text-decoration:underline\">https://www.facebook.com/settings/?tab=ads</span></a></li><li>Google: <a href=\"https://www.google.com/settings/ads/anonymous\"><span style=\"text-decoration:underline\">https://www.google.com/settings/ads/anonymous</span></a></li></ul><p>You may also opt-out via:<br/><a href=\"http://optout.aboutads.info/\"><span style=\"text-decoration:underline\">http://optout.aboutads.info/</span></a></p><p></p><p></p><p><strong>5. COOKIES</strong></p><p>Cookies help provide a better browsing experience. You may disable cookies through your browser settings, but doing so may affect website functionality.</p><p>Learn more about cookies: <a href=\"http://www.allaboutcookies.org\"><span style=\"text-decoration:underline\">http://www.allaboutcookies.org</span></a></p><p></p><p></p><p><strong>6. DATA SECURITY</strong></p><p>We follow industry best standards to protect your personal information.<br/>Payment information is encrypted using <strong>SSL</strong> and stored securely.<br/>However, no method of online transmission is 100% secure.</p><p></p><p></p><p><strong>7. INTERNATIONAL DATA TRANSFERS</strong></p><p>Your information may be transferred outside India, including to service providers in other countries. By using the Site, you consent to such transfers.</p><p></p><p></p><p><strong>8. YOUR RIGHTS (GDPR & INTERNATIONAL USERS)</strong></p><p>Depending on your location, you may have the right to:</p><ul><li>Access personal information we hold about you</li><li>Request corrections or updates</li><li>Request deletion of your personal data</li><li>Withdraw consent to receive marketing communications</li></ul><p>To exercise these rights, contact us at:<br/><strong>info@imperialknots.com</strong></p><p></p><p></p><p><strong>9. DATA RETENTION</strong></p><p>We retain your Order Information unless and until you request that we delete it.</p><p></p><p></p><p><strong>10. AGE OF CONSENT</strong></p><p>By using our Site, you confirm that you are at least the age of majority in your location.</p><p></p><p></p><p><strong>11. CHANGES TO THIS POLICY</strong></p><p>We may update this Privacy Policy periodically. Changes will be posted on this page.</p><p></p><p></p><p><strong>12. CONTACT US</strong></p><p>For questions, concerns, or complaints, please contact:</p><p><strong>Imperial Knots</strong><br/>Email: <strong>info@imperialknots.com</strong><br/>Website: <a href=\"http://www.imperialknots.com\"><span style=\"text-decoration:underline\"><strong>www.imperialknots.com</strong></span></a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_hy7P9f"
+      ],
+      "settings": {
+        "width": "cora-width-narrow",
+        "text_alignment": "left",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "cora_catalog_banner_EDDTc4",
+    "cora_rich_text_9tm4xQ"
+  ]
+}
