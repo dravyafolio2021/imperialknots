@@ -551,21 +551,49 @@
         "category_7K3jmc": {
           "type": "category",
           "settings": {
-            "title": "Shipping"
+            "title": "Custom & Bespoke Rugs"
           }
         },
         "question_yfthfF": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "Do you make customized rugs?",
+            "answer": "<p>Yes—choose your size, colors, material, pattern, and finish.</p>"
+          }
+        },
+        "question_ekHQTK": {
+          "type": "question",
+          "settings": {
+            "title": "What is a Bespoke Rug & how do I place my order?",
+            "answer": "<p>A fully made-to-order rug tailored to your specs. Share your dimensions, palette, references, or sketches; we’ll develop a visualization and proceed after your approval.</p>"
+          }
+        },
+        "question_HnaiMz": {
+          "type": "question",
+          "settings": {
+            "title": "What is the lead time for a custom rug?",
+            "answer": "<p>Typically 5–12 weeks, depending on size, design complexity, and technique.</p>"
           }
         },
         "question_MyNQNM": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "Can I provide my design for a custom rug?",
+            "answer": "<p>Absolutely—upload sketches, artwork, photos, or CAD files; we’ll translate them into a weave-ready map.</p>"
+          }
+        },
+        "question_tErmNV": {
+          "type": "question",
+          "settings": {
+            "title": "What materials and techniques are available for custom rugs?",
+            "answer": "<p>Materials: wool, silk, bamboo silk, viscose, jute, cotton.Techniques: hand-knotted, hand-tufted, flatweave, hand-woven.</p>"
+          }
+        },
+        "question_aYTBHy": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy for custom rugs?",
+            "answer": "<p>Custom pieces are made to your specifications and are <strong>non-returnable</strong> (except in case of confirmed manufacturing defects).</p>"
           }
         },
         "category_7AFgjY": {
@@ -589,7 +617,11 @@
         "question_w7EUxV",
         "category_7K3jmc",
         "question_yfthfF",
+        "question_ekHQTK",
+        "question_HnaiMz",
         "question_MyNQNM",
+        "question_tErmNV",
+        "question_aYTBHy",
         "category_7AFgjY",
         "question_6TwP9m"
       ],
