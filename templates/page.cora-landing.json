@@ -12,6 +12,14 @@
     "client_presentation_bYGJeM": {
       "type": "client-presentation",
       "blocks": {
+        "link_kbVGeC": {
+          "type": "link",
+          "settings": {
+            "title": "Return Policy",
+            "path": "/pages/about-us?view=cora-return-policy",
+            "status": "ready"
+          }
+        },
         "link_4Nrahd": {
           "type": "link",
           "settings": {
@@ -143,6 +151,7 @@
         }
       },
       "block_order": [
+        "link_kbVGeC",
         "link_4Nrahd",
         "link_qq6gnD",
         "link_9iNTge",
