@@ -602,12 +602,6 @@
             "title": "Product & Quality"
           }
         },
-        "category_ViDb9y": {
-          "type": "category",
-          "settings": {
-            "title": "Care & Maintenance"
-          }
-        },
         "question_6TwP9m": {
           "type": "question",
           "settings": {
@@ -628,6 +622,68 @@
             "title": "What is your return policy?",
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
           }
+        },
+        "category_ViDb9y": {
+          "type": "category",
+          "settings": {
+            "title": "Care & Maintenance"
+          }
+        },
+        "question_Ne3qDV": {
+          "type": "question",
+          "settings": {
+            "title": "How should I clean my rug regularly?",
+            "answer": "<p>Vacuum weekly on low suction (no beater bar), shake out dust, and use a quality rug pad.</p>"
+          }
+        },
+        "question_W97LCd": {
+          "type": "question",
+          "settings": {
+            "title": "How do I handle spills and stains on my rug?",
+            "answer": "<p>Blot immediately with a clean, dry cloth (don’t rub). Use mild soap with cool water if needed; call a rug-care professional for tough stains.</p>"
+          }
+        },
+        "question_B7nqqc": {
+          "type": "question",
+          "settings": {
+            "title": "Can I wash my rug at home?",
+            "answer": "<p>Avoid machine washing. Professional cleaning is recommended for handmade rugs.</p>"
+          }
+        },
+        "question_yLQrBY": {
+          "type": "question",
+          "settings": {
+            "title": "How often should I rotate my rug?",
+            "answer": "<p>Every <strong>3–6 months</strong> to even out wear and sun exposure.</p>"
+          }
+        },
+        "question_Mc6rzG": {
+          "type": "question",
+          "settings": {
+            "title": "What should I do to protect my rug from sunlight?",
+            "answer": "<p>Use curtains/UV blinds, rotate routinely, and avoid prolonged direct sunlight.</p>"
+          }
+        },
+        "question_kt6WDt": {
+          "type": "question",
+          "settings": {
+            "title": "How do I store my rug properly?",
+            "answer": "<p>Clean, roll (don’t fold), wrap in breathable fabric or cotton sheeting, and store in a cool, dry space off the floor.</p>"
+          }
+        },
+        "question_bF8Hne": {
+          "type": "question",
+          "settings": {
+            "title": "How do I clean and maintain my handmade wool carpet?",
+            "answer": "<p>Regular low-suction vacuuming, prompt blotting of spills, professional deep clean every 12–18 months, and routine rotation.</p>"
+          }
+        },
+        "question_WrqBjY": {
+          "type": "question",
+          "settings": {
+            "title": "Do handmade carpets shed?",
+            "answer": "<p>New wool rugs may shed lightly at first; this reduces with regular vacuuming and use.</p>"
+          }
         }
       },
       "block_order": [
@@ -643,10 +699,18 @@
         "question_tErmNV",
         "question_aYTBHy",
         "category_7AFgjY",
-        "category_ViDb9y",
         "question_6TwP9m",
         "question_ah3RWq",
-        "question_79y7kn"
+        "question_79y7kn",
+        "category_ViDb9y",
+        "question_Ne3qDV",
+        "question_W97LCd",
+        "question_B7nqqc",
+        "question_yLQrBY",
+        "question_Mc6rzG",
+        "question_kt6WDt",
+        "question_bF8Hne",
+        "question_WrqBjY"
       ],
       "custom_css": [
         "html,body {overflow-x: hidden;}"
