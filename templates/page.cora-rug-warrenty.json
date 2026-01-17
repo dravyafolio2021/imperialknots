@@ -26,9 +26,17 @@
         "pt_mobile": 40,
         "pb_mobile": 40
       }
+    },
+    "cora_warranty_policy_yDUB7P": {
+      "type": "cora-warranty-policy",
+      "name": "Warranty Policy Doc",
+      "settings": {
+        "bg_color": "#ffffff"
+      }
     }
   },
   "order": [
-    "cora_catalog_banner_EDDTc4"
+    "cora_catalog_banner_EDDTc4",
+    "cora_warranty_policy_yDUB7P"
   ]
 }

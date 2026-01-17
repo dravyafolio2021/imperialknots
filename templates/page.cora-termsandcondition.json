@@ -26,9 +26,17 @@
         "pt_mobile": 40,
         "pb_mobile": 40
       }
+    },
+    "cora_terms_policy_y4ETpU": {
+      "type": "cora-terms-policy",
+      "name": "Terms & Conditions Doc",
+      "settings": {
+        "bg_color": "#ffffff"
+      }
     }
   },
   "order": [
-    "cora_catalog_banner_98hLd4"
+    "cora_catalog_banner_98hLd4",
+    "cora_terms_policy_y4ETpU"
   ]
 }
