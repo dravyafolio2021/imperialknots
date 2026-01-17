@@ -90,8 +90,9 @@
         "social_V7f6HA": {
           "type": "social",
           "settings": {
+            "icon": "shopify://shop_images/Link.svg",
             "label": "Social",
-            "url": "/",
+            "url": "https://www.instagram.com/imperial.knots/",
             "target": "_blank"
           }
         },
