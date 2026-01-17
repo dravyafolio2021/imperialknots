@@ -1,0 +1,233 @@
+{%- style -%}
+  #cora-privacy-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cora-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 8px;
+  }
+
+  /* TYPOGRAPHY */
+  .cora-policy-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  .cora-policy-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2f5496; /* Imperial Knots Blue */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-subheading {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #000;
+  }
+
+  .cora-policy-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .cora-policy-list {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+  .cora-policy-list li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .cora-link {
+    color: #2f5496;
+    text-decoration: underline;
+    word-break: break-all; /* Prevents long URLs from breaking layout */
+  }
+
+  .cora-highlight {
+    font-weight: 600;
+    color: #000;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cora-policy-container {
+      padding: 30px 20px;
+    }
+    .cora-policy-title {
+      font-size: 24px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="cora-privacy-{{ section.id }}">
+  <div class="cora-policy-container">
+    
+    <h1 class="cora-policy-title">Privacy Policy — Imperial Knots</h1>
+    <p class="cora-policy-intro">
+      <strong>Last Updated:</strong> {{ "now" | date: "%B %d, %Y" }}<br>
+      This Privacy Policy describes how Imperial Knots (“we”, “us”, or “our”) collects, uses, and shares your personal information when you visit or make a purchase from <a href="http://www.imperialknots.com" class="cora-link">www.imperialknots.com</a> (the “Site”).
+    </p>
+
+    <h2 class="cora-policy-heading">1. Personal Information We Collect</h2>
+    
+    <div class="cora-policy-subheading">Device Information</div>
+    <p class="cora-policy-text">When you visit the Site, we automatically collect information about your device, including:</p>
+    <ul class="cora-policy-list">
+      <li>IP address</li>
+      <li>Browser type</li>
+      <li>Time zone</li>
+      <li>Cookies installed on your device</li>
+      <li>Pages or products you view</li>
+      <li>Websites or search terms that referred you to the Site</li>
+      <li>How you interact with the Site</li>
+    </ul>
+    
+    <p class="cora-policy-text">We collect this information using:</p>
+    <ul class="cora-policy-list">
+      <li><strong>Cookies</strong></li>
+      <li><strong>Log files</strong></li>
+      <li><strong>Web beacons, tags, and pixels</strong></li>
+    </ul>
+
+    <div class="cora-policy-subheading">Order Information</div>
+    <p class="cora-policy-text">When you make (or attempt to make) a purchase, we collect:</p>
+    <ul class="cora-policy-list">
+      <li>Name</li>
+      <li>Billing address</li>
+      <li>Shipping address</li>
+      <li>Payment information (such as credit/debit card details)</li>
+      <li>Email address</li>
+      <li>Phone number</li>
+    </ul>
+    <p class="cora-policy-text">We refer to both Device Information and Order Information as <span class="cora-highlight">“Personal Information.”</span></p>
+
+    <h2 class="cora-policy-heading">2. How We Use Your Personal Information</h2>
+    <p class="cora-policy-text">We use Order Information to:</p>
+    <ul class="cora-policy-list">
+      <li>Process payments and fulfill orders</li>
+      <li>Arrange shipping and provide order confirmations</li>
+      <li>Communicate with you regarding your order or inquiries</li>
+      <li>Screen for potential fraud and security risks</li>
+      <li>Send marketing communications (only if you opt-in)</li>
+    </ul>
+    <p class="cora-policy-text">We use Device Information to:</p>
+    <ul class="cora-policy-list">
+      <li>Improve and optimize our website experience</li>
+      <li>Analyze customer behavior and browsing patterns</li>
+      <li>Measure effectiveness of marketing and advertising campaigns</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">3. Sharing Your Personal Information</h2>
+    <p class="cora-policy-text">We share your personal information with third parties to help us operate our business. For example:</p>
+    <ul class="cora-policy-list">
+      <li>
+        We use <span class="cora-highlight">Shopify</span> to power our online store.<br>
+        Shopify Privacy Policy: <a href="https://www.shopify.com/legal/privacy" class="cora-link" target="_blank">https://www.shopify.com/legal/privacy</a>
+      </li>
+      <li>
+        We use <span class="cora-highlight">Google Analytics</span> to understand website performance.<br>
+        Google Privacy Policy: <a href="https://policies.google.com/privacy" class="cora-link" target="_blank">https://policies.google.com/privacy</a><br>
+        Opt-out: <a href="https://tools.google.com/dlpage/gaoptout" class="cora-link" target="_blank">https://tools.google.com/dlpage/gaoptout</a>
+      </li>
+      <li>
+        We may use <span class="cora-highlight">Meta/Facebook Ads, Google Ads</span>, and similar tools to show targeted advertisements.
+      </li>
+    </ul>
+    <p class="cora-policy-text">We may also share information when required to comply with applicable law or legal requests.</p>
+
+    <h2 class="cora-policy-heading">4. Behavioural & Targeted Advertising</h2>
+    <p class="cora-policy-text">We use your personal information to provide <span class="cora-highlight">relevant marketing communications</span>.</p>
+    <p class="cora-policy-text">You can opt out of targeted advertising using the links below:</p>
+    <ul class="cora-policy-list">
+      <li>Facebook: <a href="https://www.facebook.com/settings/?tab=ads" class="cora-link" target="_blank">https://www.facebook.com/settings/?tab=ads</a></li>
+      <li>Google: <a href="https://www.google.com/settings/ads/anonymous" class="cora-link" target="_blank">https://www.google.com/settings/ads/anonymous</a></li>
+      <li>Opt-out Portal: <a href="http://optout.aboutads.info/" class="cora-link" target="_blank">http://optout.aboutads.info/</a></li>
+    </ul>
+
+    <h2 class="cora-policy-heading">5. Cookies</h2>
+    <p class="cora-policy-text">Cookies help provide a better browsing experience. You may disable cookies through your browser settings, but doing so may affect website functionality.</p>
+    <p class="cora-policy-text">Learn more: <a href="http://www.allaboutcookies.org" class="cora-link" target="_blank">http://www.allaboutcookies.org</a></p>
+
+    <h2 class="cora-policy-heading">6. Data Security</h2>
+    <p class="cora-policy-text">We follow industry best standards to protect your personal information. Payment information is encrypted using <span class="cora-highlight">SSL</span> and stored securely. However, no method of online transmission is 100% secure.</p>
+
+    <h2 class="cora-policy-heading">7. International Data Transfers</h2>
+    <p class="cora-policy-text">Your information may be transferred outside India, including to service providers in other countries. By using the Site, you consent to such transfers.</p>
+
+    <h2 class="cora-policy-heading">8. Your Rights (GDPR & International Users)</h2>
+    <p class="cora-policy-text">Depending on your location, you may have the right to:</p>
+    <ul class="cora-policy-list">
+      <li>Access personal information we hold about you</li>
+      <li>Request corrections or updates</li>
+      <li>Request deletion of your personal data</li>
+      <li>Withdraw consent to receive marketing communications</li>
+    </ul>
+    <p class="cora-policy-text">To exercise these rights, contact us at: <span class="cora-highlight">info@imperialknots.com</span></p>
+
+    <h2 class="cora-policy-heading">9. Data Retention</h2>
+    <p class="cora-policy-text">We retain your Order Information unless and until you request that we delete it.</p>
+
+    <h2 class="cora-policy-heading">10. Age of Consent</h2>
+    <p class="cora-policy-text">By using our Site, you confirm that you are at least the age of majority in your location.</p>
+
+    <h2 class="cora-policy-heading">11. Changes to This Policy</h2>
+    <p class="cora-policy-text">We may update this Privacy Policy periodically. Changes will be posted on this page.</p>
+
+    <h2 class="cora-policy-heading">12. Contact Us</h2>
+    <p class="cora-policy-text">For questions, concerns, or complaints, please contact:</p>
+    <p class="cora-policy-text">
+      <strong>Imperial Knots</strong><br>
+      Email: <a href="mailto:info@imperialknots.com" class="cora-link">info@imperialknots.com</a><br>
+      Website: <a href="http://www.imperialknots.com" class="cora-link">www.imperialknots.com</a>
+    </p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Privacy Policy Doc",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f4f4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Privacy Policy Doc"
+    }
+  ]
+}
+{% endschema %}
