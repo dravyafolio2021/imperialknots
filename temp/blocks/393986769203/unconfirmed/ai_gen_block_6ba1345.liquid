@@ -1,6 +1,450 @@
+{% doc %}
+  @prompt
+    Can you make a rich text rendering bloakcwhich can render all the content like google dc
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-rich-text-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.vertical_padding }}px {{ block.settings.horizontal_padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_width }}px;
+    margin: 0 auto;
+    font-family: {{ block.settings.font_family.family }}, {{ block.settings.font_family.fallback_families }};
+    font-size: {{ block.settings.base_font_size }}px;
+    line-height: {{ block.settings.line_height }};
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h1,
+  .ai-rich-text-container-{{ ai_gen_id }} h2,
+  .ai-rich-text-container-{{ ai_gen_id }} h3,
+  .ai-rich-text-container-{{ ai_gen_id }} h4,
+  .ai-rich-text-container-{{ ai_gen_id }} h5,
+  .ai-rich-text-container-{{ ai_gen_id }} h6 {
+    margin: 1.5em 0 0.5em;
+    font-weight: {{ block.settings.heading_weight }};
+    color: {{ block.settings.heading_color }};
+    line-height: 1.3;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h1:first-child,
+  .ai-rich-text-container-{{ ai_gen_id }} h2:first-child,
+  .ai-rich-text-container-{{ ai_gen_id }} h3:first-child,
+  .ai-rich-text-container-{{ ai_gen_id }} h4:first-child,
+  .ai-rich-text-container-{{ ai_gen_id }} h5:first-child,
+  .ai-rich-text-container-{{ ai_gen_id }} h6:first-child {
+    margin-top: 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h1 {
+    font-size: 2.5em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h2 {
+    font-size: 2em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h3 {
+    font-size: 1.75em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h4 {
+    font-size: 1.5em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h5 {
+    font-size: 1.25em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} h6 {
+    font-size: 1.1em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} p {
+    margin: 1em 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} p:first-child {
+    margin-top: 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} strong,
+  .ai-rich-text-container-{{ ai_gen_id }} b {
+    font-weight: 700;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} em,
+  .ai-rich-text-container-{{ ai_gen_id }} i {
+    font-style: italic;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} a:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} ul,
+  .ai-rich-text-container-{{ ai_gen_id }} ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} ul {
+    list-style-type: disc;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} ol {
+    list-style-type: decimal;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} li {
+    margin: 0.5em 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} ul ul,
+  .ai-rich-text-container-{{ ai_gen_id }} ol ul {
+    list-style-type: circle;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} ul ul ul,
+  .ai-rich-text-container-{{ ai_gen_id }} ol ul ul {
+    list-style-type: square;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid {{ block.settings.blockquote_border_color }};
+    background-color: {{ block.settings.blockquote_bg_color }};
+    font-style: italic;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} blockquote p {
+    margin: 0;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} hr {
+    margin: 2em 0;
+    border: none;
+    border-top: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em 0;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} table {
+    width: 100%;
+    margin: 1.5em 0;
+    border-collapse: collapse;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} table th,
+  .ai-rich-text-container-{{ ai_gen_id }} table td {
+    padding: 0.75em 1em;
+    border: 1px solid {{ block.settings.table_border_color }};
+    text-align: left;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} table th {
+    background-color: {{ block.settings.table_header_bg }};
+    font-weight: 700;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} table tr:nth-child(even) {
+    background-color: {{ block.settings.table_row_bg }};
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} code {
+    padding: 0.2em 0.4em;
+    background-color: {{ block.settings.code_bg_color }};
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} pre {
+    margin: 1.5em 0;
+    padding: 1em;
+    background-color: {{ block.settings.code_bg_color }};
+    border-radius: {{ block.settings.code_border_radius }}px;
+    overflow-x: auto;
+  }
+
+  .ai-rich-text-container-{{ ai_gen_id }} pre code {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-rich-text-{{ ai_gen_id }} {
+      padding: {{ block.settings.vertical_padding | times: 0.6 }}px {{ block.settings.horizontal_padding | times: 0.6 }}px;
+    }
+
+    .ai-rich-text-container-{{ ai_gen_id }} {
+      font-size: {{ block.settings.base_font_size | times: 0.9 }}px;
+    }
+
+    .ai-rich-text-container-{{ ai_gen_id }} h1 {
+      font-size: 2em;
+    }
+
+    .ai-rich-text-container-{{ ai_gen_id }} h2 {
+      font-size: 1.75em;
+    }
+
+    .ai-rich-text-container-{{ ai_gen_id }} h3 {
+      font-size: 1.5em;
+    }
+
+    .ai-rich-text-container-{{ ai_gen_id }} table {
+      font-size: 0.9em;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-rich-text-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-rich-text-container-{{ ai_gen_id }}">
+    {% if block.settings.content != blank %}
+      {{ block.settings.content }}
+    {% else %}
+      <p>Add your rich text content here. You can use headings, paragraphs, lists, links, bold, italic, blockquotes, and more to create beautifully formatted content.</p>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Rich text content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Rich text content"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Content width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "font_family",
+      "label": "Font",
+      "default": "work_sans_n4"
+    },
+    {
+      "type": "range",
+      "id": "base_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Base font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "label": "Line height",
+      "default": 1.6
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#0066CC"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Links hover",
+      "default": "#004499"
+    },
+    {
+      "type": "header",
+      "content": "Blockquote style"
+    },
+    {
+      "type": "color",
+      "id": "blockquote_bg_color",
+      "label": "Background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "blockquote_border_color",
+      "label": "Border",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "header",
+      "content": "Table style"
+    },
+    {
+      "type": "color",
+      "id": "table_border_color",
+      "label": "Border",
+      "default": "#DDDDDD"
+    },
+    {
+      "type": "color",
+      "id": "table_header_bg",
+      "label": "Header background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "table_row_bg",
+      "label": "Alternate row background",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "header",
+      "content": "Code style"
+    },
+    {
+      "type": "color",
+      "id": "code_bg_color",
+      "label": "Background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Other elements"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#DDDDDD"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text content"
+    }
+  ]
+}
 {% endschema %}
