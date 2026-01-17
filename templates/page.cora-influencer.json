@@ -44,10 +44,29 @@
         "forms_inline_NgjNAt"
       ],
       "settings": {}
+    },
+    "blocks_3jUEMR": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7026512_dhBbrX": {
+          "type": "ai_gen_block_7026512",
+          "settings": {
+            "custom_liquid": "",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7026512_dhBbrX"
+      ],
+      "name": "Custom liquid",
+      "settings": {}
     }
   },
   "order": [
     "hero",
-    "1765899789632cbd28"
+    "1765899789632cbd28",
+    "blocks_3jUEMR"
   ]
 }
