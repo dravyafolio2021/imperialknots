@@ -24,69 +24,16 @@
         "pb_mobile": 40
       }
     },
-    "17686539815d9ce234": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_6ba1345_4h7VyD": {
-          "type": "ai_gen_block_6ba1345",
-          "settings": {
-            "content": "<h3><strong>Shipping Policy – Imperial Knots</strong></h3><p>This Shipping Policy (“Policy”) applies to all products purchased from Imperial Knots through our official website. By placing an order, the customer (“You” or “Customer”) agrees to the terms stated herein.</p><p></p><p> </p><p><strong>1. Domestic Shipping (Within India)</strong></p><p><strong>1.1 Shipping Charges</strong><br/>Shipping within India is provided <strong>free of charge</strong> on all standard orders, unless otherwise stated. Requests for expedited or special delivery services will incur additional charges, which shall be communicated prior to dispatch.</p><p><strong>1.2 Processing and Delivery Timelines</strong></p><p><strong>Product Category</strong></p><p><strong>Estimated Dispatch Time*</strong></p><p><strong>Estimated Delivery Time*</strong></p><p>In-Stock </p><p>3–5 working days</p><p>7–10 working days</p><p>Custom Orders</p><p>5-6 weeks</p><p>6 weeks</p><p>*Working days exclude weekends and public holidays. Delivery timelines may vary due to courier availability, transit conditions, and destination location.</p><p>All goods are inspected prior to dispatch to ensure compliance with our quality standards.</p><p></p><p></p><p><strong>2. Custom and Made-to-Order Rugs</strong></p><p>Custom rugs are handcrafted specifically to Customer specifications. Production and delivery timelines vary based on design complexity, weaving density, and size.</p><p>As a general estimation:</p><p>For a 156-knot rug, production time is approximately <strong>1 week per 2 inches of length</strong>.</p><p>Imperial Knots shall provide an estimated timeline at the time of order confirmation. Such timelines are indicative and may be subject to extension due to artisanal production processes.</p><p></p><p></p><p><strong>3. International Shipping</strong></p><p><strong>3.1 Processing and Delivery</strong></p><ul><li>Throws and accessory items are typically dispatched within <strong>5–6 working days</strong> from the date of order.</li><li>Delivery timelines generally range from <strong>15–20 working days</strong> from dispatch.</li><li>Delivery time may vary based on customs clearance procedures in the destination country.</li></ul><p><strong>3.2 Import Duties, Taxes, and Customs Clearance</strong><br/>All customs duties, import taxes, brokerage fees, and other applicable charges imposed by the destination country’s authorities are the sole responsibility of the Customer. These charges are not included in the product price or shipping fees paid at checkout.</p><p>Imperial Knots shall not be liable for delays caused by customs processing or refusal of goods by customs authorities.</p><p><strong>3.3 Currency and Payment</strong><br/>Prices displayed on the website are in INR. For international transactions, Customers may complete payments via Razorpay or CCAvenue in their selected currency.</p><p></p><p></p><p><strong>4. Order Confirmation and Tracking</strong></p><p>Upon successfully placing an order, Customers will receive:</p><ol><li><strong>Order Confirmation</strong> via email and/or WhatsApp.</li><li><strong>Shipping Notification</strong> including tracking details once the order has been dispatched.</li></ol><p>The Customer is responsible for ensuring that the contact information provided at checkout is accurate.</p><p></p><p></p><p><strong>5. Delivery and Risk of Loss</strong></p><p>All products are shipped using third-party logistics and courier services.<br/>Risk of loss and title transfers to the Customer <strong>upon handover of the product to the carrier</strong>.</p><p>Imperial Knots is not responsible for:</p><ul><li>Incorrect address information provided at checkout</li><li>Delays arising from courier operations, weather conditions, or customs clearance</li></ul><p></p><p></p><p><strong>6. Contact Information</strong></p><p>For inquiries, clarification, or assistance related to shipping or delivery, please contact:</p><p><strong>Customer Support – Imperial Knots</strong><br/>Email: <strong>info@imperialknots.com</strong></p>",
-            "content_width": 800,
-            "vertical_padding": 40,
-            "horizontal_padding": 20,
-            "font_family": "work_sans_n4",
-            "base_font_size": 16,
-            "line_height": 1.6,
-            "heading_weight": "700",
-            "background_color": "#FFFFFF",
-            "text_color": "#333333",
-            "heading_color": "#000000",
-            "link_color": "#0066CC",
-            "link_hover_color": "#004499",
-            "blockquote_bg_color": "#F5F5F5",
-            "blockquote_border_color": "#CCCCCC",
-            "table_border_color": "#DDDDDD",
-            "table_header_bg": "#F5F5F5",
-            "table_row_bg": "#FAFAFA",
-            "code_bg_color": "#F5F5F5",
-            "code_border_radius": 4,
-            "divider_color": "#DDDDDD",
-            "image_border_radius": 4
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_6ba1345_4h7VyD"
-      ],
-      "settings": {}
-    },
-    "main": {
-      "type": "cora-rich-text",
-      "blocks": {
-        "text_rcTCf8": {
-          "type": "text",
-          "settings": {
-            "text": "<p>This Shipping Policy (“Policy”) applies to all products purchased from Imperial Knots through our official website. By placing an order, the customer (“You” or “Customer”) agrees to the terms stated herein.</p><p></p><p></p><p><strong>1. Domestic Shipping (Within India)</strong></p><p><strong>1.1 Shipping Charges</strong><br/>Shipping within India is provided <strong>free of charge</strong> on all standard orders, unless otherwise stated. Requests for expedited or special delivery services will incur additional charges, which shall be communicated prior to dispatch.</p><p><strong>1.2 Processing and Delivery Timelines</strong></p><p><strong>Product Category</strong></p><p><strong>Estimated Dispatch Time*</strong></p><p><strong>Estimated Delivery Time*</strong></p><p>In-Stock </p><p>3–5 working days</p><p>7–10 working days</p><p>Custom Orders</p><p>5-6 weeks</p><p>6 weeks</p><p>*Working days exclude weekends and public holidays. Delivery timelines may vary due to courier availability, transit conditions, and destination location.</p><p>All goods are inspected prior to dispatch to ensure compliance with our quality standards.</p><p></p><p></p><p><strong>2. Custom and Made-to-Order Rugs</strong></p><p>Custom rugs are handcrafted specifically to Customer specifications. Production and delivery timelines vary based on design complexity, weaving density, and size.</p><p>As a general estimation:</p><p>For a 156-knot rug, production time is approximately <strong>1 week per 2 inches of length</strong>.</p><p>Imperial Knots shall provide an estimated timeline at the time of order confirmation. Such timelines are indicative and may be subject to extension due to artisanal production processes.</p><p></p><p></p><p><strong>3. International Shipping</strong></p><p><strong>3.1 Processing and Delivery</strong></p><ul><li>Throws and accessory items are typically dispatched within <strong>5–6 working days</strong> from the date of order.</li><li>Delivery timelines generally range from <strong>15–20 working days</strong> from dispatch.</li><li>Delivery time may vary based on customs clearance procedures in the destination country.</li></ul><p><strong>3.2 Import Duties, Taxes, and Customs Clearance</strong><br/>All customs duties, import taxes, brokerage fees, and other applicable charges imposed by the destination country’s authorities are the sole responsibility of the Customer. These charges are not included in the product price or shipping fees paid at checkout.</p><p>Imperial Knots shall not be liable for delays caused by customs processing or refusal of goods by customs authorities.</p><p><strong>3.3 Currency and Payment</strong><br/>Prices displayed on the website are in INR. For international transactions, Customers may complete payments via Razorpay or CCAvenue in their selected currency.</p><p></p><p></p><p><strong>4. Order Confirmation and Tracking</strong></p><p>Upon successfully placing an order, Customers will receive:</p><ol><li><strong>Order Confirmation</strong> via email and/or WhatsApp.</li><li><strong>Shipping Notification</strong> including tracking details once the order has been dispatched.</li></ol><p>The Customer is responsible for ensuring that the contact information provided at checkout is accurate.</p><p></p><p></p><p><strong>5. Delivery and Risk of Loss</strong></p><p>All products are shipped using third-party logistics and courier services.<br/>Risk of loss and title transfers to the Customer <strong>upon handover of the product to the carrier</strong>.</p><p>Imperial Knots is not responsible for:</p><ul><li>Incorrect address information provided at checkout</li><li>Delays arising from courier operations, weather conditions, or customs clearance</li></ul><p></p><p></p><p><strong>6. Contact Information</strong></p><p>For inquiries, clarification, or assistance related to shipping or delivery, please contact:</p><p><strong>Customer Support – Imperial Knots</strong><br/>Email: <strong>info@imperialknots.com</strong></p>"
-          }
-        }
-      },
-      "block_order": [
-        "text_rcTCf8"
-      ],
+    "cora_shipping_policy_m3AKJn": {
+      "type": "cora-shipping-policy",
+      "name": "Shipping Policy Doc",
       "settings": {
-        "width": "cora-width-narrow",
-        "text_alignment": "left",
-        "bg_color": "#ffffff",
-        "text_color": "#1a1a1a",
-        "padding_top": 60,
-        "padding_bottom": 60
+        "bg_color": "#ffffff"
       }
     }
   },
   "order": [
     "cora_catalog_banner_bY7kTR",
-    "17686539815d9ce234",
-    "main"
+    "cora_shipping_policy_m3AKJn"
   ]
 }
