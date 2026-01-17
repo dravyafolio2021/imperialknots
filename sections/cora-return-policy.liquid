@@ -1,0 +1,292 @@
+{%- style -%}
+  #cora-return-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cora-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+     border-radius: 8px;
+  }
+
+  /* TYPOGRAPHY */
+  .cora-policy-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 15px;
+  }
+
+  .cora-policy-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color:rgb(46, 46, 46); /* Imperial Blue */
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-subheading {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #000;
+  }
+
+  .cora-policy-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .cora-policy-list {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+  .cora-policy-list li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .cora-highlight {
+    font-weight: 600;
+    color: #000;
+  }
+
+  .cora-link {
+    color: #2f5496;
+    text-decoration: underline;
+  }
+
+  /* TABLE STYLING */
+  .cora-table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+
+  .cora-policy-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+  }
+
+  .cora-policy-table th {
+    background-color: #f8f9fa;
+    text-align: left;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .cora-policy-table td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cora-policy-container {
+      padding: 30px 20px;
+    }
+    .cora-policy-title {
+      font-size: 24px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="cora-return-{{ section.id }}">
+  <div class="cora-policy-container">
+    
+    <h1 class="cora-policy-title">Return & Exchange Policy</h1>
+    <p class="cora-policy-intro">
+      <strong>Effective Date:</strong> January 11, 2025<br>
+    </p>
+
+    <h2 class="cora-policy-heading">Overview</h2>
+    <p class="cora-policy-text">We want you to love your Imperial Knots rug. However, if your purchase does not meet your expectations, you may be eligible to return or exchange it according to the guidelines below. Please read carefully before placing an order.</p>
+
+    <h2 class="cora-policy-heading">Return Eligibility</h2>
+    <ul class="cora-policy-list">
+      <li>Return requests must be submitted <span class="cora-highlight">within 2 days of delivery</span>.</li>
+      <li>Rugs must be in <span class="cora-highlight">original condition</span>, which means:
+        <ul style="margin-top:5px;">
+          <li>Not used or placed on the floor</li>
+          <li>Not cleaned, washed, or altered</li>
+          <li>Free from <span class="cora-highlight">stains, odors, dust, marks, or pet hair</span></li>
+          <li>All <span class="cora-highlight">tags, labels, packaging, and serial numbers</span> intact</li>
+          <li>All Returns are subject to a <span class="cora-highlight">10% restocking fee</span></li>
+        </ul>
+      </li>
+    </ul>
+    <p class="cora-policy-text"><span class="cora-highlight">Any use or damage voids eligibility for return.</span> We reserve the right to deny returns that do not meet these conditions.</p>
+
+    <div class="cora-policy-subheading">Non-Returnable Items</div>
+    <ul class="cora-policy-list">
+      <li><span class="cora-highlight">Custom & Made-to-Order rugs</span></li>
+      <li>Rugs purchased under <span class="cora-highlight">sale, promotion, or clearance events</span></li>
+      <li>Rugs that fail quality inspection upon return</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Exchange Policy</h2>
+    <ul class="cora-policy-list">
+      <li>Exchange requests may be made <span class="cora-highlight">within 5 days of delivery</span>.</li>
+      <li>Exchange is processed <span class="cora-highlight">only after Quality Control approval</span>.</li>
+      <li>Exchanges are allowed for <span class="cora-highlight">equal or higher-value items</span> (price difference applies).</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Custom Orders</div>
+    <ul class="cora-policy-list">
+      <li><span class="cora-highlight">Cannot be canceled after confirmation</span></li>
+      <li><span class="cora-highlight">No returns allowed</span></li>
+      <li>Exchange only in case of a verified manufacturing defect</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">How to Raise a Return or Exchange Request</h2>
+    <p class="cora-policy-text">Email <a href="mailto:info@imperialknots.com" class="cora-link">info@imperialknots.com</a> with:</p>
+    <ol class="cora-policy-list">
+      <li>Order Number</li>
+      <li>Reason for return or exchange</li>
+      <li>Clear photos of the rug and packaging</li>
+      <li>If defective: detailed photos highlighting the issue</li>
+    </ol>
+
+    <h2 class="cora-policy-heading">Pickup & Shipping</h2>
+    <ul class="cora-policy-list">
+      <li><span class="cora-highlight">Free return pickup within India only.</span></li>
+      <li>Customers must pack the rug in original packaging OR roll it securely with bubble wrap + tape.</li>
+      <li>If the rug is <span class="cora-highlight">damaged in transit because of improper packing</span>, QC will <span class="cora-highlight">reject</span> the return.</li>
+      <li><span class="cora-highlight">No refund or exchange</span> will be applicable in such cases.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Quality Control Inspection</h2>
+    <p class="cora-policy-text">Once we receive the returned item, it goes through <span class="cora-highlight">Quality Control</span>:</p>
+    
+    <div class="cora-table-wrapper">
+      <table class="cora-policy-table">
+        <thead>
+          <tr>
+            <th>QC Result</th>
+            <th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cora-highlight">Approved</span></td>
+            <td>Refund or Exchange is processed</td>
+          </tr>
+          <tr>
+            <td><span class="cora-highlight">Rejected</span><br>(rug used, altered, soiled, or damaged)</td>
+            <td>Rug is returned to you <span class="cora-highlight">at your cost</span> with <span class="cora-highlight">no refund or exchange</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="cora-policy-heading">Refund Policy</h2>
+    <ul class="cora-policy-list">
+      <li>Refunds are initiated <span class="cora-highlight">within 5–7 working days</span> after QC approval.</li>
+      <li>Refunds are issued to the <span class="cora-highlight">original payment method</span> or <span class="cora-highlight">store credit</span>.</li>
+      <li>Shipping charges (if applicable) are <span class="cora-highlight">non-refundable</span>.</li>
+    </ul>
+
+    <div class="cora-policy-subheading">International Orders</div>
+    <ul class="cora-policy-list">
+      <li>Customers must <span class="cora-highlight">arrange and pay</span> for return shipping.</li>
+      <li>Imperial Knots is <span class="cora-highlight">not liable</span> for damage during international transit.</li>
+      <li>If the rug arrives damaged internationally, we will assist in filing a <span class="cora-highlight">claim with the carrier</span>.</li>
+      <li>Refunds are issued in the <span class="cora-highlight">original payment currency</span>.</li>
+      <li>Bank fees, currency conversion losses, or foreign exchange differences are the customer’s responsibility.</li>
+      <li><span class="cora-highlight">No refunds via bank transfer</span> for international orders.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Order Cancellation</h2>
+    <ul class="cora-policy-list">
+      <li>Orders canceled <span class="cora-highlight">within 24 hours</span> may be accepted.</li>
+      <li>Orders canceled after 24 hours are subject to a 10% restocking fee.</li>
+      <li>Orders <span class="cora-highlight">cannot be canceled once shipped</span>.</li>
+    </ul>
+    <p class="cora-policy-text">Imperial Knots may also cancel orders at its sole discretion in cases of: Pricing errors, Stock unavailability, Policy non-compliance, or Suspected fraud.</p>
+
+    <h2 class="cora-policy-heading">Fraud & Chargeback Policy</h2>
+    <ul class="cora-policy-list">
+      <li>All payments are secured via verified payment gateways.</li>
+      <li>Unauthorized or wrongful chargebacks may result in:
+        <ul style="margin-top:5px;">
+          <li>Permanent account ban</li>
+          <li>Legal recovery of funds</li>
+        </ul>
+      </li>
+      <li>If suspicious activity is detected, Imperial Knots may: Hold shipments, Request ID proof, or Report to authorities.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Other Terms</h2>
+    
+    <div class="cora-policy-subheading">GST & Invoicing</div>
+    <ul class="cora-policy-list">
+      <li><span class="cora-highlight">Digital invoices</span> are emailed once your order ships.</li>
+      <li>Business buyers requiring <span class="cora-highlight">GST Input Credit (ITC)</span> must provide GSTIN at checkout.</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Gift Cards & Store Credit</div>
+    <ul class="cora-policy-list">
+      <li>Gift cards are <span class="cora-highlight">digital</span> and valid for <span class="cora-highlight">12 months</span>.</li>
+      <li>Store credits <span class="cora-highlight">cannot be converted to cash</span>.</li>
+      <li>Lost or stolen gift cards cannot be replaced.</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Liability Disclaimer</div>
+    <ul class="cora-policy-list">
+      <li>Imperial Knots is responsible for the rug <span class="cora-highlight">until successful delivery</span>.</li>
+      <li>After delivery, we are <span class="cora-highlight">not liable</span> for: Misuse, Incorrect cleaning, Storage damage, or Wear and tear.</li>
+      <li>Rugs damaged, soiled, or altered after delivery are <span class="cora-highlight">not eligible</span> for return.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Contact Us</h2>
+    <p class="cora-policy-text">For return or exchange assistance:</p>
+    <p class="cora-policy-text">
+      <strong>Imperial Mastercrafts</strong><br>
+      Email: <a href="mailto:info@imperialknots.com" class="cora-link">info@imperialknots.com</a>
+    </p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Return Policy Doc",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f4f4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Return Policy Doc"
+    }
+  ]
+}
+{% endschema %}
