@@ -12,10 +12,10 @@
     "cora_about_page_GNeGhL": {
       "type": "cora-about-page",
       "settings": {
-        "image_desktop": "shopify://shop_images/ImageWithFallback_91036001-0b48-4aec-82ac-e06dd9880de2.png",
-        "image_mobile": "shopify://shop_images/ImageWithFallback-1_32644480-c89b-45bf-b701-5a6daf5b5d02.png",
+        "image_desktop": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
+        "image_mobile": "shopify://shop_images/ImageWithFallback.png",
         "overlay_opacity": 30,
-        "heading": "Our Journey in Every Thread",
+        "heading": "Luxury Handmade Carpets & Rugs Since 1977",
         "subheading": "Crafted in India. Cherished Worldwide."
       }
     },
@@ -24,7 +24,7 @@
       "name": "Our Story ",
       "settings": {
         "heading": "Our Story",
-        "content": "<p>Imperial Knots was founded in 2010 in the heart of Jaipur, India's rug-making capital, with a vision to preserve traditional hand-knotting techniques while bringing contemporary designs to global markets.</p><p>Our founder, inspired by generations of master weavers in their family, saw an opportunity to bridge the gap between authentic Indian craftsmanship and modern luxury interiors. What started as a small workshop with five artisans has grown into a thriving design house employing over 200 skilled craftspeople.Imperial Knots was founded in 2010 in the heart of Jaipur, India's rug-making capital, with a vision to preserve traditional hand-knotting techniques while bringing contemporary designs to global markets.</p><p>Our founder, inspired by generations of master weavers in their family, saw an opportunity to bridge the gap between authentic Indian craftsmanship and modern luxury interiors. What started as a small workshop with five artisans has grown into a thriving design house employing over 200 skilled craftspeople.Imperial Knots was founded in 2010 in the heart of Jaipur, India's rug-making capital, with a vision to preserve traditional hand-knotting techniques while bringing contemporary designs to global markets.</p><p>Our founder, inspired by generations of master weavers in their family, saw an opportunity to bridge the gap between authentic Indian craftsmanship and modern luxury interiors. What started as a small workshop with five artisans has grown into a thriving design house employing over 200 skilled craftspeople.</p>",
+        "content": "<p>Imperial Knots is India’s most trusted destination for <strong>luxury handmade carpets, designer rugs, and custom rugs</strong>, proudly preserving the art of fine rug weaving since 1977. With nearly five decades of expertise, we are a leading <strong>carpet manufacturer and exporter</strong>, offering premium <strong>hand-knotted carpets, hand-tufted rugs, hand-woven dhurries, kilims, and sustainable jute rugs</strong> to customers across India and around the world.</p><p>Rooted in the historic weaving hubs of <strong>Mirzapur and Bhadohi</strong>, our rugs are handcrafted by master artisans using time-honoured techniques passed down through generations. Every Imperial Knots rug reflects exceptional craftsmanship, ethical sourcing, and timeless design—created to elevate homes, hotels, offices, and commercial spaces.</p><p></p><h2>Handcrafted Excellence & Premium Materials</h2><p>At Imperial Knots, we specialize in authentic <strong>hand-knotted rugs</strong>, considered the finest and most durable carpets in the world. These heirloom-quality rugs are meticulously woven knot by knot using <strong>New Zealand wool, bamboo silk, silk, viscose, mohair wool, cotton, and natural fibres</strong>, offering exceptional longevity, intricate detail, and luxurious texture.</p><p>In addition to hand-knotted carpets, our collections include:</p><ul><li><strong>Hand-tufted rugs</strong> for modern, decorative interiors</li><li><strong>Flatweave dhurries and kilims</strong> for lightweight, reversible use</li><li><strong>Eco-friendly jute rugs</strong> for sustainable, natural living</li></ul><p>Each rug is thoughtfully designed to balance beauty, durability, and comfort—making it suitable for both <strong>residential and commercial use</strong>.</p><h2>Rugs for Every Style, Space & Interior Vision</h2><p>Our curated collections feature thousands of designs across <strong>modern rugs, contemporary carpets, traditional Persian rugs, Moroccan rugs, geometric rugs, abstract rugs, floral rugs, shag rugs, and transitional styles</strong>. Available in all standard and custom sizes, including <strong>large area rugs and hallway runners</strong>, our rugs are crafted to suit every interior aesthetic.</p><p>Explore rugs by color—from <strong>neutral grey, beige, ivory, and brown rugs</strong> to bold <strong>blue, green, red, yellow, pink, and multicolor carpets</strong>—carefully curated to complement modern, classic, bohemian, or minimalist interiors.</p>",
         "image": "shopify://shop_images/ILS-59_2.jpg",
         "stat_1_num": "200+",
         "stat_1_label": "Artisans",
@@ -44,7 +44,6 @@
         "process_step_r63Jxx": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/AboutV2-1.png",
             "title": "Yarn Dyeing",
             "caption": "Natural and synthetic dyes carefully selected."
           }
@@ -52,7 +51,6 @@
         "process_step_drzynN": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/AboutV2-2.png",
             "title": "Hand-Knotting",
             "caption": "Each knot tied by skilled artisans."
           }
@@ -60,7 +58,6 @@
         "process_step_C79LYE": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/AboutV2.png",
             "title": "Quality Checks",
             "caption": "Rigorous inspection ensures luxury standards."
           }
@@ -71,10 +68,34 @@
         "process_step_drzynN",
         "process_step_C79LYE"
       ],
+      "disabled": true,
       "name": "Craftsmanship Grid",
       "settings": {
         "heading": "Craftsmanship & Production",
         "text": "Each rug passes through multiple stages of meticulous craftsmanship."
+      }
+    },
+    "cora_rich_text_xmFkkY": {
+      "type": "cora-rich-text",
+      "blocks": {
+        "text_HPhRxU": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Custom Rugs & Bespoke Carpet Solutions</h2><p>Imperial Knots is renowned for its <strong>custom rug and bespoke carpet services</strong>, allowing complete personalization of size, color, pattern, and material. Whether you are designing a private residence, luxury villa, corporate office, or hospitality project, our expert team works closely with interior designers, architects, and clients to create one-of-a-kind rugs tailored to your exact specifications.</p><p>We also offer specialized solutions for:</p><ul><li><strong>Luxury hotel carpets & hotel rugs</strong></li><li><strong>Office rugs & commercial carpets</strong></li><li><strong>Reception areas, showrooms, retail stores & conference rooms</strong></li><li><strong>Durable broadloom carpets for high-traffic spaces</strong></li></ul><h2>Ethical Craftsmanship & Care & Fair Commitment</h2><p>Imperial Knots is a proud <strong>founding member of Care & Fair</strong>, an international NGO dedicated to the welfare of carpet-weaving communities. Our commitment ensures <strong>fair wages, safe working conditions, education for artisans’ children, healthcare support, and zero child labour</strong>. When you buy a rug from Imperial Knots, you directly support ethical craftsmanship and sustainable livelihoods.</p><h2>Shop Rugs Online with Confidence – India & Worldwide Shipping</h2><p>As India’s leading <strong>online carpet store</strong>, we offer a seamless shopping experience with <strong>free shipping across India</strong> and secure international delivery to major global destinations. Choose from <strong>ready-to-ship rugs</strong> for quick delivery or place made-to-order and custom rug requests with confidence.</p><p>From luxury homes to five-star hotels, Imperial Knots continues to be the preferred choice for those seeking the <strong>best carpets in India</strong>, combining heritage craftsmanship, modern design, and ethical excellence.</p><p><strong>Imperial Knots – Hand Knotted Carpets & Luxury Rugs Since 1977</strong><br/>Timeless design. Ethical craftsmanship. Global delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_HPhRxU"
+      ],
+      "name": "Cora Rich Text",
+      "settings": {
+        "width": "cora-width-wide",
+        "text_alignment": "left",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "cora_ethics_grid_fGwEiE": {
@@ -130,6 +151,7 @@
     "cora_about_page_GNeGhL",
     "cora_about_story_Ly8xm7",
     "cora_craftsmanship_7a7RJA",
+    "cora_rich_text_xmFkkY",
     "cora_ethics_grid_fGwEiE"
   ]
 }

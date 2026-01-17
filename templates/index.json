@@ -409,6 +409,7 @@
         "feature_Hb37kC": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-7.svg",
             "icon_alt": "Imperial Knots",
             "title": "Sustainably Crafted",
             "text": "Every rug is made with eco-friendly materials and ethical production practices"
@@ -417,6 +418,7 @@
         "feature_jMzcAN": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-8.svg",
             "icon_alt": "Imperial Knots",
             "title": "Artisan Partners",
             "text": "We work directly with master weavers, supporting traditional craftsmanship"
@@ -425,6 +427,7 @@
         "feature_GWzdzb": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-2.svg",
             "icon_alt": "Imperial Knots",
             "title": "Premium Quality",
             "text": "Hand-selected materials and rigorous quality control ensure lasting beauty"
@@ -433,6 +436,7 @@
         "feature_WgjimX": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-3.svg",
             "icon_alt": "Imperial Knots",
             "title": "Customer First",
             "text": "Free shipping, easy returns, and lifetime support for your investment"
@@ -470,11 +474,14 @@
         "blog": "news",
         "post_limit": 3,
         "text_alignment": "left",
+        "show_view_all_top": false,
+        "show_bottom_btn": true,
+        "btn_text": "View All Posts",
         "show_excerpt": true,
         "show_author": false,
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "title_color": "#222222",
-        "accent_color": "#E87034",
+        "accent_color": "#e87034",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
