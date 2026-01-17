@@ -1,0 +1,700 @@
+{% doc %}
+  @prompt
+    I need you to make a supper rich text editor like google doc.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-rich-editor-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+  }
+
+  .ai-rich-editor__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    background-color: {{ block.settings.editor_bg_color }};
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.editor_border_radius }}px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-rich-editor__toolbar-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 12px;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    background-color: {{ block.settings.toolbar_bg_color }};
+    border-radius: {{ block.settings.editor_border_radius }}px {{ block.settings.editor_border_radius }}px 0 0;
+  }
+
+  .ai-rich-editor__toolbar-group-{{ ai_gen_id }} {
+    display: flex;
+    gap: 2px;
+    padding: 0 8px;
+    border-right: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-rich-editor__toolbar-group-{{ ai_gen_id }}:last-child {
+    border-right: none;
+  }
+
+  .ai-rich-editor__toolbar-btn-{{ ai_gen_id }} {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: {{ block.settings.toolbar_icon_color }};
+    transition: all 0.2s ease;
+  }
+
+  .ai-rich-editor__toolbar-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.toolbar_hover_bg }};
+    border-color: {{ block.settings.border_color }};
+  }
+
+  .ai-rich-editor__toolbar-btn-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.toolbar_active_bg }};
+    color: {{ block.settings.toolbar_active_color }};
+  }
+
+  .ai-rich-editor__toolbar-select-{{ ai_gen_id }} {
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: 4px;
+    background-color: {{ block.settings.editor_bg_color }};
+    color: {{ block.settings.text_color }};
+    cursor: pointer;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} {
+    min-height: {{ block.settings.min_height }}px;
+    padding: 24px;
+    font-size: {{ block.settings.font_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    outline: none;
+    overflow-y: auto;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }}:empty:before {
+    content: attr(data-placeholder);
+    color: {{ block.settings.placeholder_color }};
+    pointer-events: none;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.67em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.75em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 0.83em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} p {
+    margin: 1em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} ul,
+  .ai-rich-editor__content-{{ ai_gen_id }} ol {
+    margin: 1em 0;
+    padding-left: 40px;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} blockquote {
+    margin: 1em 0;
+    padding-left: 16px;
+    border-left: 4px solid {{ block.settings.border_color }};
+    color: #666;
+    font-style: italic;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} table td,
+  .ai-rich-editor__content-{{ ai_gen_id }} table th {
+    border: 1px solid {{ block.settings.border_color }};
+    padding: 8px;
+    text-align: left;
+  }
+
+  .ai-rich-editor__content-{{ ai_gen_id }} table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+
+  .ai-rich-editor__footer-{{ ai_gen_id }} {
+    padding: 12px 24px;
+    border-top: 1px solid {{ block.settings.border_color }};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .ai-rich-editor__word-count-{{ ai_gen_id }} {
+    color: #666;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-rich-editor__toolbar-{{ ai_gen_id }} {
+      gap: 2px;
+      padding: 8px;
+    }
+
+    .ai-rich-editor__toolbar-group-{{ ai_gen_id }} {
+      padding: 0 4px;
+    }
+
+    .ai-rich-editor__toolbar-btn-{{ ai_gen_id }} {
+      width: 28px;
+      height: 28px;
+    }
+
+    .ai-rich-editor__content-{{ ai_gen_id }} {
+      padding: 16px;
+      font-size: 14px;
+    }
+  }
+{% endstyle %}
+
+<rich-text-editor-{{ ai_gen_id }} class="ai-rich-editor-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-rich-editor__container-{{ ai_gen_id }}">
+    <div class="ai-rich-editor__toolbar-{{ ai_gen_id }}">
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <select class="ai-rich-editor__toolbar-select-{{ ai_gen_id }}" data-command="formatBlock">
+          <option value="p">Paragraph</option>
+          <option value="h1">Heading 1</option>
+          <option value="h2">Heading 2</option>
+          <option value="h3">Heading 3</option>
+        </select>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="bold" title="Bold (Ctrl+B)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 2h5a3 3 0 0 1 0 6H4V2z"/>
+            <path d="M4 8h6a3 3 0 0 1 0 6H4V8z"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="italic" title="Italic (Ctrl+I)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="10" y1="2" x2="6" y2="14"/>
+            <line x1="7" y1="2" x2="13" y2="2"/>
+            <line x1="3" y1="14" x2="9" y2="14"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="underline" title="Underline (Ctrl+U)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 2v5a4 4 0 0 0 8 0V2"/>
+            <line x1="2" y1="14" x2="14" y2="14"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="strikeThrough" title="Strikethrough">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="8" x2="14" y2="8"/>
+            <path d="M6 4c0-1 1-2 3-2s3 1 3 2-1 2-3 2"/>
+            <path d="M6 12c0 1 1 2 3 2s3-1 3-2"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="justifyLeft" title="Align Left">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="3" x2="14" y2="3"/>
+            <line x1="2" y1="7" x2="10" y2="7"/>
+            <line x1="2" y1="11" x2="14" y2="11"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="justifyCenter" title="Align Center">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="3" x2="14" y2="3"/>
+            <line x1="5" y1="7" x2="11" y2="7"/>
+            <line x1="2" y1="11" x2="14" y2="11"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="justifyRight" title="Align Right">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="3" x2="14" y2="3"/>
+            <line x1="6" y1="7" x2="14" y2="7"/>
+            <line x1="2" y1="11" x2="14" y2="11"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="justifyFull" title="Justify">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="3" x2="14" y2="3"/>
+            <line x1="2" y1="7" x2="14" y2="7"/>
+            <line x1="2" y1="11" x2="14" y2="11"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="insertUnorderedList" title="Bullet List">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="4" x2="14" y2="4"/>
+            <line x1="6" y1="8" x2="14" y2="8"/>
+            <line x1="6" y1="12" x2="14" y2="12"/>
+            <circle cx="3" cy="4" r="1" fill="currentColor"/>
+            <circle cx="3" cy="8" r="1" fill="currentColor"/>
+            <circle cx="3" cy="12" r="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="insertOrderedList" title="Numbered List">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="4" x2="14" y2="4"/>
+            <line x1="6" y1="8" x2="14" y2="8"/>
+            <line x1="6" y1="12" x2="14" y2="12"/>
+            <text x="2" y="5" font-size="4" fill="currentColor">1</text>
+            <text x="2" y="9" font-size="4" fill="currentColor">2</text>
+            <text x="2" y="13" font-size="4" fill="currentColor">3</text>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="indent" title="Indent">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="3" x2="14" y2="3"/>
+            <line x1="6" y1="7" x2="14" y2="7"/>
+            <line x1="6" y1="11" x2="14" y2="11"/>
+            <polyline points="2,5 4,7 2,9"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="outdent" title="Outdent">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="3" x2="14" y2="3"/>
+            <line x1="6" y1="7" x2="14" y2="7"/>
+            <line x1="6" y1="11" x2="14" y2="11"/>
+            <polyline points="4,5 2,7 4,9"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="createLink" title="Insert Link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 9l2-2m-2 2L5 7m2 2l2 2m2-6l1-1a2 2 0 0 1 3 3l-1 1m-6 6l-1 1a2 2 0 0 1-3-3l1-1"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="unlink" title="Remove Link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 9l2-2m-2 2L5 7m2 2l2 2m2-6l1-1a2 2 0 0 1 3 3l-1 1m-6 6l-1 1a2 2 0 0 1-3-3l1-1"/>
+            <line x1="2" y1="2" x2="14" y2="14"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="insertHorizontalRule" title="Horizontal Line">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="2" y1="8" x2="14" y2="8"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="formatBlock" data-value="blockquote" title="Quote">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 6c0-1.7 1.3-3 3-3V2C4.2 2 2 4.2 2 7v5h4V7H3V6zm8 0c0-1.7 1.3-3 3-3V2c-1.8 0-4 2.2-4 5v5h4V7h-3V6z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="undo" title="Undo (Ctrl+Z)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 7h8a4 4 0 0 1 0 8H9"/>
+            <polyline points="6,4 3,7 6,10"/>
+          </svg>
+        </button>
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="redo" title="Redo (Ctrl+Y)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 7H5a4 4 0 0 0 0 8h2"/>
+            <polyline points="10,4 13,7 10,10"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-rich-editor__toolbar-group-{{ ai_gen_id }}">
+        <button class="ai-rich-editor__toolbar-btn-{{ ai_gen_id }}" data-command="removeFormat" title="Clear Formatting">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2h8M8 2v10"/>
+            <line x1="2" y1="14" x2="14" y2="2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="ai-rich-editor__content-{{ ai_gen_id }}"
+      contenteditable="true"
+      data-placeholder="{{ block.settings.placeholder }}"
+      spellcheck="true"
+    >{{ block.settings.initial_content }}</div>
+
+    <div class="ai-rich-editor__footer-{{ ai_gen_id }}">
+      <div class="ai-rich-editor__word-count-{{ ai_gen_id }}">
+        <span data-word-count>0</span> words
+      </div>
+    </div>
+  </div>
+</rich-text-editor-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class RichTextEditor{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+      this.toolbar = null;
+      this.editor = null;
+      this.wordCountEl = null;
+    }
+
+    connectedCallback() {
+      this.toolbar = this.querySelector('.ai-rich-editor__toolbar-{{ ai_gen_id }}');
+      this.editor = this.querySelector('.ai-rich-editor__content-{{ ai_gen_id }}');
+      this.wordCountEl = this.querySelector('[data-word-count]');
+      
+      this.setupToolbar();
+      this.setupEditor();
+      this.updateWordCount();
+    }
+
+    setupToolbar() {
+      const buttons = this.toolbar.querySelectorAll('.ai-rich-editor__toolbar-btn-{{ ai_gen_id }}');
+      const select = this.toolbar.querySelector('.ai-rich-editor__toolbar-select-{{ ai_gen_id }}');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          const command = button.dataset.command;
+          const value = button.dataset.value || null;
+
+          if (command === 'createLink') {
+            const url = prompt('Enter URL:');
+            if (url) {
+              document.execCommand(command, false, url);
+            }
+          } else {
+            document.execCommand(command, false, value);
+          }
+
+          this.editor.focus();
+          this.updateToolbarState();
+        });
+      });
+
+      if (select) {
+        select.addEventListener('change', (e) => {
+          const value = e.target.value;
+          document.execCommand('formatBlock', false, value);
+          this.editor.focus();
+          this.updateToolbarState();
+        });
+      }
+
+      this.editor.addEventListener('mouseup', () => this.updateToolbarState());
+      this.editor.addEventListener('keyup', () => this.updateToolbarState());
+    }
+
+    setupEditor() {
+      this.editor.addEventListener('input', () => {
+        this.updateWordCount();
+      });
+
+      this.editor.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const text = e.clipboardData.getData('text/plain');
+        document.execCommand('insertText', false, text);
+      });
+
+      this.editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.metaKey) {
+          switch(e.key.toLowerCase()) {
+            case 'b':
+              e.preventDefault();
+              document.execCommand('bold');
+              this.updateToolbarState();
+              break;
+            case 'i':
+              e.preventDefault();
+              document.execCommand('italic');
+              this.updateToolbarState();
+              break;
+            case 'u':
+              e.preventDefault();
+              document.execCommand('underline');
+              this.updateToolbarState();
+              break;
+            case 'z':
+              if (e.shiftKey) {
+                e.preventDefault();
+                document.execCommand('redo');
+              } else {
+                e.preventDefault();
+                document.execCommand('undo');
+              }
+              break;
+            case 'y':
+              e.preventDefault();
+              document.execCommand('redo');
+              break;
+          }
+        }
+      });
+    }
+
+    updateToolbarState() {
+      const buttons = this.toolbar.querySelectorAll('.ai-rich-editor__toolbar-btn-{{ ai_gen_id }}');
+      
+      buttons.forEach(button => {
+        const command = button.dataset.command;
+        if (command && command !== 'createLink' && command !== 'unlink' && 
+            command !== 'insertHorizontalRule' && command !== 'undo' && 
+            command !== 'redo' && command !== 'removeFormat') {
+          if (document.queryCommandState(command)) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+      });
+    }
+
+    updateWordCount() {
+      const text = this.editor.innerText.trim();
+      const words = text.length > 0 ? text.split(/\s+/).length : 0;
+      if (this.wordCountEl) {
+        this.wordCountEl.textContent = words;
+      }
+    }
+  }
+
+  customElements.define('rich-text-editor-{{ ai_gen_id }}', RichTextEditor{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rich text editor",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "initial_content",
+      "label": "Initial content",
+      "default": "<p>Start typing your content here...</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder text",
+      "default": "Start typing..."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Outer padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "editor_bg_color",
+      "label": "Editor background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "toolbar_bg_color",
+      "label": "Toolbar background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "toolbar_hover_bg",
+      "label": "Toolbar hover background",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "toolbar_active_bg",
+      "label": "Toolbar active background",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "color",
+      "id": "toolbar_icon_color",
+      "label": "Toolbar icon",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "toolbar_active_color",
+      "label": "Toolbar active icon",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link",
+      "default": "#0066cc"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Outer border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "editor_border_radius",
+      "label": "Editor border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text editor"
+    }
+  ],
+  "tag": null
+}
+{% endschema %}
