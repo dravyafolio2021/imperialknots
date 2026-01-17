@@ -56,6 +56,13 @@
       "name": "Mobile Sticky Bar",
       "settings": {}
     },
+    "cora_terms_policy_fzjtiq": {
+      "type": "cora-terms-policy",
+      "name": "Terms & Conditions Doc",
+      "settings": {
+        "bg_color": "#ffffff"
+      }
+    },
     "footer_7fh9kJ": {
       "type": "footer",
       "blocks": {
@@ -133,6 +140,7 @@
   },
   "order": [
     "cora_mobile_bar_CjRGRt",
+    "cora_terms_policy_fzjtiq",
     "footer_7fh9kJ"
   ]
 }

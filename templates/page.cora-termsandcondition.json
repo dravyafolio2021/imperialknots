@@ -26,32 +26,9 @@
         "pt_mobile": 40,
         "pb_mobile": 40
       }
-    },
-    "main": {
-      "type": "cora-rich-text",
-      "blocks": {
-        "text_j6rmQ6": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>Last Updated: 1/11/2025</strong></p><p>Welcome to Imperial Knots. This website is operated by <strong>Imperial Mastercrafts</strong> (“we”, “us”, or “our”). By accessing or making a purchase from this website, you agree to be bound by these Terms & Conditions. If you do not agree, please discontinue use of this website.</p><p>We may update these Terms from time to time. Continued use of the site signifies your acceptance of any revised Terms.</p><p></p><p></p><p><strong>1. GENERAL USE</strong></p><p>By using this website, you confirm that you are at least <strong>18 years old</strong>, or using it under the supervision of a parent or legal guardian.<br/>We reserve the right to refuse or discontinue service at our discretion.</p><p></p><p></p><p><strong>2. PRODUCT DISPLAY & INFORMATION</strong></p><p>We make every effort to display product colors and textures accurately.<br/>However, <strong>color variations may occur</strong> due to individual monitor settings and photography lighting.</p><p>Product availability and pricing may change without notice.</p><p></p><p></p><p><strong>3. PRICING & ORDER ACCEPTANCE</strong></p><p>All orders placed constitute an <strong>offer</strong> to purchase. We may accept or decline any order at our discretion.<br/>If an order is canceled after payment, a <strong>full refund</strong> will be issued.</p><p></p><p></p><p><strong>4. ORDER CANCELLATION POLICY</strong></p><ul><li>Cancellation <strong>within 24 hours</strong> of placing an order may be accepted.</li><li>Cancellations after 24 hours incur a <strong>10% restocking fee</strong>.</li><li>Orders <strong>cannot be canceled</strong> once processed or shipped.</li></ul><p></p><p></p><p><strong>5. SHIPPING & DELIVERY</strong></p><p>We ship through trusted courier services.<br/>Customer is responsible for providing accurate shipping details.</p><p>If delivery fails due to incorrect/incomplete information or receiver unavailability, <strong>re-delivery charges apply</strong>.</p><p>Delivery concerns must be reported <strong>within 15 days of receipt</strong>.</p><p></p><p></p><p><strong>6. RETURNS & EXCHANGES</strong></p><p>Returns are accepted strictly in accordance with our <strong>Return Policy</strong>.</p><p></p><p></p><p><strong>7. COPYRIGHT & WEBSITE CONTENT</strong></p><p>This website, including its design, text, graphics, product images, and content, is the <strong>exclusive intellectual property of Imperial Mastercrafts</strong> and is protected under applicable copyright laws.</p><ul><li><strong>Copying, reproducing, altering, or imitating any part of the website is strictly prohibited.</strong></li><li>This includes content displayed on our social media platforms (Instagram, Facebook, Pinterest, YouTube, Twitter, etc.).</li><li>Any unauthorized reproduction, plagiarism, or misuse <strong>may result in legal action</strong> under laws governed by the <strong>Supreme Court of India</strong>.</li></ul><p></p><p></p><p><strong>8. TRADEMARKS</strong></p><p>All trademarks, logos, brand names, and product names displayed on this website are the <strong>property of Imperial Mastercrafts</strong>.</p><p>You may not use any mark without <strong>prior written consent</strong>.</p><p></p><p></p><p><strong>9. THIRD-PARTY LINKS</strong></p><p>Our website may contain links to third-party websites.<br/>These are provided for convenience only — <strong>we do not control or endorse these websites</strong> and are not responsible for any content or consequences arising from their use.</p><p></p><p></p><p><strong>10. PROHIBITED USER CONDUCT</strong></p><p>You agree <strong>NOT</strong> to upload, share, transmit, or publish any content that:</p><ul><li>Belongs to another person without authorization</li><li>Is defamatory, obscene, pornographic, harmful, hateful, abusive, or unlawful</li><li>Encourages harm to minors</li><li>Infringes any copyright, trademark, or proprietary rights</li><li>Violates any Indian law</li><li>Contains malware, viruses, or disruptive code</li><li>Impersonates another individual</li><li>Threatens national security, sovereignty, or public order</li><li>Disrupts or overloads the website infrastructure</li></ul><p>Any violation may lead to <strong>account suspension, legal liability, and/or reporting to authorities.</strong></p><p></p><p></p><p><strong>11. CREDIT / DEBIT CARD & PAYMENT INFORMATION</strong></p><p>You confirm that the payment information you provide is <strong>accurate and lawfully owned by you</strong>.</p><p>We <strong>do not store card details</strong> and do not share such data except where required:</p><ul><li>For verification</li><li>For fraud prevention</li><li>Under court or legal authority directives</li></ul><p>We are <strong>not responsible</strong> for credit card fraud. The responsibility to prove unauthorized usage lies with the user.</p><p></p><p></p><p><strong>12. LIMITATION OF LIABILITY</strong></p><p>Imperial Mastercrafts is not liable for:</p><ul><li>Delivery delays or courier issues beyond our control</li><li>Unauthorized access to customer data</li><li>Any loss arising from fraudulent card activity</li><li>Service interruptions, data errors, or website downtime</li></ul><p>All products and website services are provided <strong>“as is”</strong>.</p><p></p><p></p><p><strong>13. INDEMNIFICATION</strong></p><p>You agree to indemnify and hold Imperial Mastercrafts harmless from any claims arising out of:</p><ul><li>Your misuse of the website</li><li>Your breach of these terms</li><li>Your violation of laws or third-party rights</li></ul><p></p><p></p><p><strong>14. GOVERNING LAW</strong></p><p>These Terms are governed by the laws of <strong>India</strong>, and all disputes are subject exclusively to the jurisdiction of <strong>courts in Delhi</strong>.</p><p></p><p></p><p><strong>15. CONTACT INFORMATION</strong></p><p>For queries, please contact:<br/><strong>Email:</strong> info@imperialknots.com<br/><br/></p>"
-          }
-        }
-      },
-      "block_order": [
-        "text_j6rmQ6"
-      ],
-      "settings": {
-        "width": "cora-width-narrow",
-        "text_alignment": "left",
-        "bg_color": "#ffffff",
-        "text_color": "#1a1a1a",
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
     }
   },
   "order": [
-    "cora_catalog_banner_98hLd4",
-    "main"
+    "cora_catalog_banner_98hLd4"
   ]
 }
