@@ -1,0 +1,211 @@
+{%- style -%}
+  #cora-warranty-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cora-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+     border-radius: 8px;
+  }
+
+  /* TYPOGRAPHY */
+  .cora-policy-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 15px;
+  }
+
+  .cora-policy-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color:rgb(30, 30, 30); /* Imperial Blue */
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .cora-policy-subheading {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #000;
+  }
+
+  .cora-policy-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .cora-policy-list {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+  .cora-policy-list li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .cora-highlight {
+    font-weight: 600;
+    color: #000;
+  }
+
+  .cora-link {
+    color: #2f5496;
+    text-decoration: underline;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cora-policy-container {
+      padding: 30px 20px;
+    }
+    .cora-policy-title {
+      font-size: 24px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="cora-warranty-{{ section.id }}">
+  <div class="cora-policy-container">
+    
+    <h1 class="cora-policy-title">Imperial Knots – Rug Warranty</h1>
+    <p class="cora-policy-intro">
+      We are committed to the quality and craftsmanship of our rugs. All Imperial Knots rugs include a 
+      <span class="cora-highlight">6-month warranty</span> from the date of delivery against 
+      <span class="cora-highlight">manufacturing defects</span>.
+    </p>
+
+    <h2 class="cora-policy-heading">What’s Covered</h2>
+    <p class="cora-policy-text">This warranty covers defects in:</p>
+    <ul class="cora-policy-list">
+      <li>Weaving or construction</li>
+      <li>Materials or workmanship</li>
+      <li>Issues that impact the rug’s structure, durability, or appearance</li>
+    </ul>
+    <p class="cora-policy-text">The warranty applies only to the <span class="cora-highlight">original purchaser</span> and is <span class="cora-highlight">non-transferable</span>.</p>
+
+    <h2 class="cora-policy-heading">What’s Not Covered (Exclusions)</h2>
+    <p class="cora-policy-text">This warranty does <span class="cora-highlight">not</span> cover damage or changes that occur as part of normal use or natural characteristics of handcrafted rugs.</p>
+
+    <div class="cora-policy-subheading">Normal Characteristics (Not Defects):</div>
+    <ul class="cora-policy-list">
+      <li>Natural fiber slubs or texture variation</li>
+      <li>Minor weaving variances</li>
+      <li>Loose yarn ends (“sprouting”)</li>
+      <li>Initial shedding</li>
+      <li>Light packaging odour</li>
+      <li>Temporary fold/crease marks</li>
+      <li>Size variation up to <span class="cora-highlight">±3%</span></li>
+      <li>Colour variation due to natural dye lots</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Wear & Use Over Time:</div>
+    <ul class="cora-policy-list">
+      <li>Normal wear and tear</li>
+      <li>Pile crushing or flattening</li>
+      <li>Shading, watermarking, or texture change</li>
+      <li>Fringe variations</li>
+      <li>Sunlight/UV colour fading</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Damage from Use or Environment:</div>
+    <ul class="cora-policy-list">
+      <li>Stains and spills</li>
+      <li>Pet-related damage</li>
+      <li>Snags, pulls, burns</li>
+      <li>Moth/insect damage</li>
+      <li>Mold/mildew</li>
+      <li>Water/chemical exposure</li>
+      <li>Improper or harsh cleaning methods</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Improper Placement or Handling:</div>
+    <ul class="cora-policy-list">
+      <li>Use <span class="cora-highlight">without a rug pad</span> on hard floors</li>
+      <li>Cutting, trimming, or altering the rug</li>
+      <li>Use in <span class="cora-highlight">commercial/high-traffic</span> settings if the rug is rated for residential use</li>
+      <li>Damage from heavy furniture without protective pads/casters</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Third-Party or Storage Damage:</div>
+    <ul class="cora-policy-list">
+      <li>Repairs or cleaning by non-approved providers</li>
+      <li>Damage that occurs during storage after delivery</li>
+    </ul>
+
+    <div class="cora-policy-subheading">Transit Damage:</div>
+    <ul class="cora-policy-list">
+      <li>Must be reported <span class="cora-highlight">within 48 hours of delivery</span>; claims outside this window are not covered.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">How to Report a Concern</h2>
+    <p class="cora-policy-text">If you believe your rug has a manufacturing defect:</p>
+    <ol class="cora-policy-list">
+      <li>Email <a href="mailto:customercare@imperialknots.com" class="cora-link">customercare@imperialknots.com</a> or call <span class="cora-highlight">+91-95591-40222</span></li>
+      <li>Provide your <span class="cora-highlight">order number</span></li>
+      <li>Share:
+        <ul style="margin-top: 5px;">
+          <li>At least 3-4 <span class="cora-highlight">clear photos</span> showing the rug and the concern</li>
+          <li>A short <span class="cora-highlight">video</span> if the issue is structural or movement-related</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2 class="cora-policy-heading">What Happens Next</h2>
+    <ul class="cora-policy-list">
+      <li>We review the issue and may request further details or schedule an inspection.</li>
+      <li>If the defect is covered, we will <span class="cora-highlight">repair, replace, or refund</span> the rug based on what we determine is the most suitable solution.</li>
+      <li>If a replacement is issued, the warranty continues from the <span class="cora-highlight">original delivery date</span>, not renewed.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Shipping for Inspection</h2>
+    <ul class="cora-policy-list">
+      <li>The customer initially covers shipping for return evaluation.</li>
+      <li>If a manufacturing defect is confirmed, <span class="cora-highlight">we will reimburse or arrange pickup</span>.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">Policy Updates</h2>
+    <p class="cora-policy-text">Imperial Knots may update this policy from time to time. The latest version will always be available through our customer support team or on our website.</p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Warranty Policy Doc",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f4f4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Warranty Policy Doc"
+    }
+  ]
+}
+{% endschema %}
