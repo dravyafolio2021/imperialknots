@@ -99,8 +99,18 @@
         "social_HMBCEi": {
           "type": "social",
           "settings": {
+            "icon": "shopify://shop_images/Link-1_6ed2e80e-898b-4828-80e2-d4c7ca24ef3a.svg",
             "label": "Social",
-            "url": "/",
+            "url": "https://www.facebook.com/imperial.knots",
+            "target": "_blank"
+          }
+        },
+        "social_nR7X6j": {
+          "type": "social",
+          "settings": {
+            "icon": "shopify://shop_images/Link-1.svg",
+            "label": "Social",
+            "url": "https://twitter.com/imperialknots",
             "target": "_blank"
           }
         },
@@ -118,6 +128,7 @@
         "link_column_JTRC6G",
         "social_V7f6HA",
         "social_HMBCEi",
+        "social_nR7X6j",
         "brand_nE7kPJ"
       ],
       "name": "Cora Footer ",
