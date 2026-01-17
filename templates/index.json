@@ -549,30 +549,26 @@
       "blocks": {
         "category_CWJGQf": {
           "type": "category",
-          "disabled": true,
           "settings": {
-            "title": "General"
+            "title": "About Imperial Knots"
           }
         },
         "question_ifmTAG": {
           "type": "question",
-          "disabled": true,
           "settings": {
-            "title": "What is your return policy?1",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "What makes Imperial Knots carpets different?",
+            "answer": "<p>Handcrafted by skilled Indian artisans, using premium natural materials and ethical, small-batch production. Expect authentic techniques, durable construction, and timeless design.</p>"
           }
         },
         "question_Kfh38c": {
           "type": "question",
-          "disabled": true,
           "settings": {
-            "title": "What is your return policy?2",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "Where are Imperial Knots rugs made?",
+            "answer": "<p>In India, by artisan weaving communities using traditional knotting and weaving methods.<br/><br/></p>"
           }
         },
         "question_w7EUxV": {
           "type": "question",
-          "disabled": true,
           "settings": {
             "title": "What is your return policy?2",
             "answer": "<p>We accept returns within 30 days of purchase.</p>"
