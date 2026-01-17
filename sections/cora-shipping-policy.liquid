@@ -1,0 +1,215 @@
+{%- style -%}
+  #cora-policy-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cora-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 8px;
+  }
+
+  /* TYPOGRAPHY */
+  .cora-policy-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .cora-policy-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  .cora-policy-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2f5496; /* Matches the Blue in your doc */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+
+  .cora-policy-subheading {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #000;
+  }
+
+  .cora-policy-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .cora-policy-list {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+  .cora-policy-list li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  /* TABLE STYLING */
+  .cora-table-wrapper {
+    overflow-x: auto; /* Scroll on mobile */
+    margin: 20px 0;
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+
+  .cora-policy-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px; /* Ensures it doesn't squish on mobile */
+  }
+
+  .cora-policy-table th {
+    background-color: #f8f9fa;
+    text-align: left;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .cora-policy-table td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .cora-highlight {
+    font-weight: 600;
+    color: #000;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cora-policy-container {
+      padding: 30px 20px;
+    }
+    .cora-policy-title {
+      font-size: 24px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="cora-policy-{{ section.id }}">
+  <div class="cora-policy-container">
+    
+    <h1 class="cora-policy-title">Shipping Policy – Imperial Knots</h1>
+    <p class="cora-policy-intro">This Shipping Policy (“Policy”) applies to all products purchased from Imperial Knots through our official website.</p>
+
+    <h2 class="cora-policy-heading">1. Domestic Shipping (Within India)</h2>
+    
+    <div class="cora-policy-subheading">1.1 Shipping Charges</div>
+    <p class="cora-policy-text">Shipping within India is provided <span class="cora-highlight">free of charge</span> on all standard orders, unless otherwise stated. Requests for expedited or special delivery services will incur additional charges, which shall be communicated prior to dispatch.</p>
+
+    <div class="cora-policy-subheading">1.2 Processing and Delivery Timelines</div>
+    <div class="cora-table-wrapper">
+      <table class="cora-policy-table">
+        <thead>
+          <tr>
+            <th>Product Category</th>
+            <th>Estimated Dispatch Time*</th>
+            <th>Estimated Delivery Time*</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>In-Stock</td>
+            <td>3–5 working days</td>
+            <td>7–10 working days</td>
+          </tr>
+          <tr>
+            <td>Custom Orders</td>
+            <td>5–6 weeks</td>
+            <td>6 weeks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cora-policy-text" style="font-size: 12px; color: #666; font-style: italic;">*Working days exclude weekends and public holidays. Delivery timelines may vary due to courier availability, transit conditions, and destination location.</p>
+    <p class="cora-policy-text">All goods are inspected prior to dispatch to ensure compliance with our quality standards.</p>
+
+    <h2 class="cora-policy-heading">2. Custom and Made-to-Order Rugs</h2>
+    <p class="cora-policy-text">Custom rugs are handcrafted specifically to Customer specifications. Production and delivery timelines vary based on design complexity, weaving density, and size.</p>
+    <p class="cora-policy-text">As a general estimation:</p>
+    <p class="cora-policy-text">For a 156-knot rug, production time is approximately <span class="cora-highlight">1 week per 2 inches of length</span>.</p>
+    <p class="cora-policy-text">Imperial Knots shall provide an estimated timeline at the time of order confirmation. Such timelines are indicative and may be subject to extension due to artisanal production processes.</p>
+
+    <h2 class="cora-policy-heading">3. International Shipping</h2>
+    
+    <div class="cora-policy-subheading">3.1 Processing and Delivery</div>
+    <ul class="cora-policy-list">
+      <li>Throws and accessory items are typically dispatched within <span class="cora-highlight">5–6 working days</span> from the date of order.</li>
+      <li>Delivery timelines generally range from <span class="cora-highlight">15–20 working days</span> from dispatch.</li>
+      <li>Delivery time may vary based on customs clearance procedures in the destination country.</li>
+    </ul>
+
+    <div class="cora-policy-subheading">3.2 Import Duties, Taxes, and Customs Clearance</div>
+    <p class="cora-policy-text">All customs duties, import taxes, brokerage fees, and other applicable charges imposed by the destination country’s authorities are the sole responsibility of the Customer. These charges are not included in the product price or shipping fees paid at checkout.</p>
+    <p class="cora-policy-text">Imperial Knots shall not be liable for delays caused by customs processing or refusal of goods by customs authorities.</p>
+
+    <div class="cora-policy-subheading">3.3 Currency and Payment</div>
+    <p class="cora-policy-text">Prices displayed on the website are in INR. For international transactions, Customers may complete payments via Razorpay or CCAvenue in their selected currency.</p>
+
+    <h2 class="cora-policy-heading">4. Order Confirmation and Tracking</h2>
+    <p class="cora-policy-text">Upon successfully placing an order, Customers will receive:</p>
+    <ol class="cora-policy-list">
+      <li><span class="cora-highlight">Order Confirmation</span> via email and/or WhatsApp.</li>
+      <li><span class="cora-highlight">Shipping Notification</span> including tracking details once the order has been dispatched.</li>
+    </ol>
+    <p class="cora-policy-text">The Customer is responsible for ensuring that the contact information provided at checkout is accurate.</p>
+
+    <h2 class="cora-policy-heading">5. Delivery and Risk of Loss</h2>
+    <p class="cora-policy-text">All products are shipped using third-party logistics and courier services. Risk of loss and title transfers to the Customer <span class="cora-highlight">upon handover of the product to the carrier</span>.</p>
+    <p class="cora-policy-text">Imperial Knots is not responsible for:</p>
+    <ul class="cora-policy-list">
+      <li>Incorrect address information provided at checkout.</li>
+      <li>Delays arising from courier operations, weather conditions, or customs clearance.</li>
+    </ul>
+
+    <h2 class="cora-policy-heading">6. Contact Information</h2>
+    <p class="cora-policy-text">For inquiries, clarification, or assistance related to shipping or delivery, please contact:</p>
+    <p class="cora-policy-text">
+      <strong>Customer Support – Imperial Knots</strong><br>
+      Email: <a href="mailto:info@imperialknots.com" style="color: inherit; text-decoration: underline;">info@imperialknots.com</a>
+    </p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shipping Policy Doc",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f4f4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shipping Policy Doc"
+    }
+  ]
+}
+{% endschema %}
