@@ -1,14 +1,18 @@
 {{ 'cora-cart.css' | asset_url | stylesheet_tag }}
 
-<section class="cora-cart-section">
+<div class="cora-cart-section">
   <div class="cora-cart-container">
 
-    <header class="cora-cart-header">
+    <div class="cora-cart-header">
       <h1 class="cora-cart-title">{{ 'cart.title' | t }}</h1>
-      <div class="cora-cart-subtitle">
-        {{ cart.item_count }} items in your bag
-      </div>
-    </header>
+      <span class="cora-cart-subtitle">
+        {% if cart.item_count > 0 %}
+          You have {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in your cart
+        {% else %}
+          Your cart is currently empty
+        {% endif %}
+      </span>
+    </div>
 
     <form action="{{ routes.cart_url }}" method="post" id="cart-form">
       
@@ -19,25 +23,35 @@
             {% for item in cart.items %}
               <div class="cora-cart-item">
                 
-                <a href="{{ item.url }}">
-                  {% if item.image %}
-                    <img src="{{ item.image | img_url: '400x' }}" alt="{{ item.title | escape }}" class="cora-item-image">
-                  {% else %}
-                    {{ 'product-1' | placeholder_svg_tag: 'cora-item-image' }}
-                  {% endif %}
-                </a>
+                {% if item.image %}
+                  <a href="{{ item.url }}">
+                    <img 
+                      src="{{ item.image | img_url: '400x' }}" 
+                      alt="{{ item.title | escape }}" 
+                      class="cora-item-image"
+                      loading="lazy"
+                    >
+                  </a>
+                {% else %}
+                  <div class="cora-item-image" style="background:#eee;"></div>
+                {% endif %}
 
                 <div class="cora-item-details">
                   <div>
-                    <a href="{{ item.url }}" class="cora-item-title">{{ item.product.title }}</a>
+                    <h3 class="cora-item-title">
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    </h3>
+                    
                     {% unless item.product.has_only_default_variant %}
                       <div class="cora-item-variant">{{ item.variant.title }}</div>
                     {% endunless %}
                   </div>
 
-                  <div>
+                  <div style="margin-top: 15px;">
                     <div class="cora-qty-pill">
-                      <button type="button" class="cora-qty-btn" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.form.submit()">−</button>
+                      <button type="button" class="cora-qty-btn" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.form.submit()">
+                        &minus;
+                      </button>
                       <input 
                         type="number" 
                         name="updates[]" 
@@ -46,34 +60,56 @@
                         class="cora-qty-input"
                         aria-label="Quantity"
                       >
-                      <button type="button" class="cora-qty-btn" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.form.submit()">+</button>
+                      <button type="button" class="cora-qty-btn" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.form.submit()">
+                        &plus;
+                      </button>
                     </div>
-                    
+
                     <br>
-                    <a href="{{ item.url_to_remove }}" class="cora-item-remove">Remove</a>
+                    <a href="{{ item.url_to_remove }}" class="cora-item-remove">
+                      REMOVE
+                    </a>
                   </div>
                 </div>
 
                 <div class="cora-item-price-col">
-                  {{ item.final_line_price | money }}
+                  {% if item.original_line_price != item.final_line_price %}
+                    <div class="cora-cart-item__discounted-prices">
+                      <span class="visually-hidden">
+                        {{ 'products.product.price.regular_price' | t }}
+                      </span>
+                      <s class="cora-cart-item__old-price price price--end">
+                        {{ item.original_line_price | money }}
+                      </s>
+                      <span class="visually-hidden">
+                        {{ 'products.product.price.sale_price' | t }}
+                      </span>
+                      <span class="price price--end">
+                        {{ item.final_line_price | money }}
+                      </span>
+                    </div>
+                  {% else %}
+                    <span class="price price--end">
+                      {{ item.original_line_price | money }}
+                    </span>
+                  {% endif %}
                 </div>
 
               </div>
             {% endfor %}
           </div>
 
-          <aside class="cora-cart-summary">
-            <h2 class="cora-summary-title">Summary</h2>
+          <div class="cora-cart-summary">
+            <h2 class="cora-summary-title">Order Summary</h2>
             
             <div class="cora-summary-row">
               <span>Subtotal</span>
               <span>{{ cart.total_price | money }}</span>
             </div>
             
-            <div class="cora-summary-row">
-              <span>Shipping</span>
-              <span style="color:#888;">Calculated at checkout</span>
-            </div>
+            <p style="font-size: 13px; color: #888; margin-top: 10px; line-height: 1.5;">
+              Shipping costs, taxes, and discounts will be calculated at checkout.
+            </p>
 
             <div class="cora-summary-row total">
               <span>Total</span>
@@ -83,27 +119,27 @@
             <button type="submit" name="checkout" class="cora-checkout-btn">
               Proceed to Checkout
             </button>
-            
-            <div style="text-align:center; margin-top:20px; font-size:12px; color:#999;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              Secure Checkout
+
+            <div style="text-align: center; margin-top: 20px;">
+               <img src="https://cdn.shopify.com/s/files/1/0663/6660/3507/files/payment-icons.png?v=1666175478" alt="Payment Methods" style="max-width: 100%; opacity: 0.7;">
             </div>
-          </aside>
+          </div>
 
         </div>
 
       {% else %}
-        
         <div class="cora-cart-empty">
-          <h2 class="cora-cart-title" style="font-size:32px;">Your bag is empty</h2>
-          <p style="color:#666; margin-bottom:30px;">Browse our collection to find your perfect rug.</p>
-          <a href="{{ routes.all_products_collection_url }}" class="cora-empty-btn">Continue Shopping</a>
+          <div style="font-size: 60px; margin-bottom: 20px;">🛍️</div>
+          <h2 class="cora-cart-title" style="font-size: 32px; margin-bottom: 10px;">Your cart is empty</h2>
+          <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any items yet.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="cora-empty-btn">Start Shopping</a>
         </div>
-
       {% endif %}
+
     </form>
+
   </div>
-</section>
+</div>
 
 {% schema %}
 {
@@ -111,35 +147,3 @@
   "settings": []
 }
 {% endschema %}
-
-{% comment %} {{ 'cora-cart.css' | asset_url | stylesheet_tag }}
-<h1>{{ 'cart.title' | t }}</h1>
-
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
-
-{% schema %}
-{
-  "name": "t:general.cart",
-  "settings": []
-}
-{% endschema %} {% endcomment %}
