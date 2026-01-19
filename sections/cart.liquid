@@ -1,5 +1,28 @@
 {{ 'cora-cart.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  /* Overriding the title for a cleaner, modern look */
+  .cora-cart-title {
+    font-family: var(--font-heading-family), 'Poppins', sans-serif; /* Uses theme font */
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #000;
+  }
+  
+  /* Payment Icons Container */
+  .cora-payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    opacity: 0.8;
+  }
+  .cora-payment-icons svg {
+    height: 24px;
+    width: auto;
+  }
+{%- endstyle -%}
+
 <div class="cora-cart-section">
   <div class="cora-cart-container">
 
@@ -7,9 +30,9 @@
       <h1 class="cora-cart-title">{{ 'cart.title' | t }}</h1>
       <span class="cora-cart-subtitle">
         {% if cart.item_count > 0 %}
-          You have {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in your cart
+          YOU HAVE {{ cart.item_count }} ITEM{% if cart.item_count != 1 %}S{% endif %} IN YOUR CART
         {% else %}
-          Your cart is currently empty
+          YOUR CART IS CURRENTLY EMPTY
         {% endif %}
       </span>
     </div>
@@ -33,13 +56,15 @@
                     >
                   </a>
                 {% else %}
-                  <div class="cora-item-image" style="background:#eee;"></div>
+                  <div class="cora-item-image" style="background:#f4f4f4; display:flex; align-items:center; justify-content:center;">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
                 {% endif %}
 
                 <div class="cora-item-details">
                   <div>
                     <h3 class="cora-item-title">
-                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      <a href="{{ item.url }}" style="text-transform: uppercase; letter-spacing: 0.5px;">{{ item.product.title }}</a>
                     </h3>
                     
                     {% unless item.product.has_only_default_variant %}
@@ -66,8 +91,8 @@
                     </div>
 
                     <br>
-                    <a href="{{ item.url_to_remove }}" class="cora-item-remove">
-                      REMOVE
+                    <a href="{{ item.url_to_remove }}" class="cora-item-remove" style="text-transform: uppercase; font-size: 11px; letter-spacing: 1px;">
+                      Remove
                     </a>
                   </div>
                 </div>
@@ -75,21 +100,15 @@
                 <div class="cora-item-price-col">
                   {% if item.original_line_price != item.final_line_price %}
                     <div class="cora-cart-item__discounted-prices">
-                      <span class="visually-hidden">
-                        {{ 'products.product.price.regular_price' | t }}
-                      </span>
-                      <s class="cora-cart-item__old-price price price--end">
+                      <s class="cora-cart-item__old-price price" style="color:#999; margin-right:5px;">
                         {{ item.original_line_price | money }}
                       </s>
-                      <span class="visually-hidden">
-                        {{ 'products.product.price.sale_price' | t }}
-                      </span>
-                      <span class="price price--end">
+                      <span class="price" style="color:#d32f2f;">
                         {{ item.final_line_price | money }}
                       </span>
                     </div>
                   {% else %}
-                    <span class="price price--end">
+                    <span class="price">
                       {{ item.original_line_price | money }}
                     </span>
                   {% endif %}
@@ -100,7 +119,7 @@
           </div>
 
           <div class="cora-cart-summary">
-            <h2 class="cora-summary-title">Order Summary</h2>
+            <h2 class="cora-summary-title" style="font-family: inherit;">Order Summary</h2>
             
             <div class="cora-summary-row">
               <span>Subtotal</span>
@@ -120,9 +139,20 @@
               Proceed to Checkout
             </button>
 
-            <div style="text-align: center; margin-top: 20px;">
-               <img src="https://cdn.shopify.com/s/files/1/0663/6660/3507/files/payment-icons.png?v=1666175478" alt="Payment Methods" style="max-width: 100%; opacity: 0.7;">
+            <div class="cora-payment-icons">
+              <ul class="list list-payment" role="list" style="display:flex; gap:10px; justify-content:center; list-style:none; padding:0;">
+                {%- for type in shop.enabled_payment_types -%}
+                  <li class="list-payment__item">
+                    {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                {%- endfor -%}
+              </ul>
             </div>
+            
+            <div style="text-align: center; margin-top: 10px; font-size: 11px; color: #999;">
+               Secure Checkout
+            </div>
+
           </div>
 
         </div>
