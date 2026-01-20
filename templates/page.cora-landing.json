@@ -12,6 +12,14 @@
     "client_presentation_bYGJeM": {
       "type": "client-presentation",
       "blocks": {
+        "link_tREKwg": {
+          "type": "link",
+          "settings": {
+            "title": "Gift Card",
+            "path": "/products/imperial-knots-gift-card",
+            "status": "ready"
+          }
+        },
         "link_xCJJMy": {
           "type": "link",
           "settings": {
@@ -151,6 +159,7 @@
         }
       },
       "block_order": [
+        "link_tREKwg",
         "link_xCJJMy",
         "link_kbVGeC",
         "link_4Nrahd",
@@ -171,7 +180,7 @@
       ],
       "name": "Staging Link Manager",
       "settings": {
-        "base_url": "https://7o2gxa1sms9chvt8-78884929843.shopifypreview.com",
+        "base_url": "https://fz366qb4mip19shs-78884929843.shopifypreview.com",
         "heading": "Client Review Dashboard",
         "info_text": "Click below to review the latest designs. Links open in a new tab."
       }
