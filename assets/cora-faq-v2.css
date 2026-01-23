@@ -4,46 +4,44 @@
   padding: 60px 20px;
   background-color: #ffffff;
   color: #1a1a1a;
-  /* Smooth transition for the scaling effect */
   transition: all 0.3s ease;
 }
 
-/* SCALING LOGIC: Container is narrower and slightly scaled down */
+/* Scaled Container */
 .cora-faq-v2__container {
-  max-width: 900px; /* Reduced from 1200px */
+  max-width: 900px;
   margin: 0 auto;
-  /* Optional: Literal scale down if width isn't enough */
   transform: scale(0.98); 
   transform-origin: top center;
 }
 
-/* --- Header (Now Clickable) --- */
+/* --- Header (Edge-to-Edge Layout) --- */
 .cora-faq-v2__header {
-  margin-bottom: 40px;
-  cursor: pointer; /* Indicates clickability */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+  margin-bottom: 20px; /* Reduced margin since it's closed */
+  cursor: pointer;
+  display: block; /* Changed from flex column to block for cleaner flow */
   user-select: none;
+  border-bottom: 1px solid #e5e5e5; /* Optional: Adds a separator line like screenshot */
+  padding-bottom: 20px;
 }
 
 .cora-faq-v2__header-row {
   display: flex;
   align-items: center;
-  gap: 15px;
-  justify-content: center;
+  justify-content: space-between; /* Pushes Text Left, Icon Right */
+  width: 100%;
 }
 
 .cora-faq-v2__heading {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-family: 'Assistant', sans-serif; /* Updated Font */
+  font-size: 32px; /* Adjusted size for Assistant font */
+  font-weight: 600;
   margin: 0;
   color: inherit;
+  text-align: left;
 }
 
-/* Main Section Toggle Icon */
+/* Toggle Icon */
 .cora-faq-v2__section-icon {
   width: 24px;
   height: 24px;
@@ -51,6 +49,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 .cora-faq-v2__section-icon svg {
   width: 100%;
@@ -64,26 +63,26 @@
   transform: rotate(180deg);
 }
 
+/* Subtext (Optional description below heading) */
 .cora-faq-v2__desc {
-  font-family: inherit;
+  font-family: 'Assistant', sans-serif;
   font-size: 16px;
   color: #666;
-  margin-top: 10px;
-  text-align: center;
+  margin-top: 5px;
+  text-align: left; /* Aligned left with title */
 }
 
 /* --- Main Wrapper (Collapsible) --- */
 .cora-faq-v2__main-collapsible {
   overflow: hidden;
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-  opacity: 0; /* Hidden by default */
-  max-height: 0;
+  opacity: 0; 
+  max-height: 0; /* Closed by default */
 }
 
 /* State: Open */
 .cora-faq-v2__main-collapsible.is-open {
   opacity: 1;
-  /* Max-height set via JS, but we need a visible state style */
 }
 
 /* Inner Layout */
@@ -92,7 +91,7 @@
   grid-template-columns: 1fr;
   gap: 60px; 
   align-items: start;
-  padding-top: 20px; /* Space after opening */
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
@@ -118,6 +117,7 @@
 }
 
 .cora-faq-v2__category-title {
+  font-family: 'Assistant', sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -177,6 +177,7 @@
 }
 
 .cora-faq-v2__question {
+  font-family: 'Assistant', sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: #1a1a1a;
@@ -210,36 +211,20 @@
   line-height: 1.6;
   font-size: 16px;
   padding-right: 20px;
+  font-family: 'Assistant', sans-serif;
 }
 .cora-faq-v2__answer p { margin-bottom: 10px; }
 
 
 /* --- Mobile Responsive --- */
 @media (max-width: 900px) {
-  .cora-faq-v2-section {
-    padding: 40px 0;
-  }
-  
-  .cora-faq-v2__container {
-    max-width: 100%; 
-    transform: none; /* Reset scale on mobile for better readability */
-  }
+  .cora-faq-v2-section { padding: 40px 0; }
+  .cora-faq-v2__container { max-width: 100%; transform: none; }
+  .cora-faq-v2__header { padding: 0 20px 20px 20px; } /* Adjust padding */
+  .cora-faq-v2__category-header { padding-left: 20px; padding-right: 20px; }
+  .cora-faq-v2__wrapper { gap: 40px; }
 
-  .cora-faq-v2__header {
-    padding: 0 20px;
-  }
-
-  /* Make the header button respect padding */
-  .cora-faq-v2__category-header {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .cora-faq-v2__wrapper {
-    gap: 40px;
-  }
-
-  /* Horizontal Scroll Logic for Questions on Mobile */
+  /* Horizontal Scroll Logic on Mobile */
   .cora-faq-v2__questions-list {
     display: flex !important;       
     flex-wrap: nowrap !important;   
@@ -251,9 +236,7 @@
     width: 100%;
   }
   
-  .cora-faq-v2__questions-list::-webkit-scrollbar {
-    display: none;
-  }
+  .cora-faq-v2__questions-list::-webkit-scrollbar { display: none; }
 
   .cora-faq-v2__item {
     flex: 0 0 85%;       

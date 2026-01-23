@@ -1,4 +1,3 @@
-
 {{ 'cora-faq-v2.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -16,59 +15,71 @@
   <div class="cora-faq-v2__container">
     
     {%- if section.settings.heading != blank -%}
-      <div class="cora-faq-v2__header">
-        <h2 class="cora-faq-v2__heading">{{ section.settings.heading }}</h2>
+      <div class="cora-faq-v2__header" id="faq-section-trigger-{{ section.id }}" aria-expanded="{% if section.settings.default_open %}true{% else %}false{% endif %}">
+        
+        <div class="cora-faq-v2__header-row">
+          <h2 class="cora-faq-v2__heading">{{ section.settings.heading }}</h2>
+          <span class="cora-faq-v2__section-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
         {%- if section.settings.text != blank -%}
           <div class="cora-faq-v2__desc">{{ section.settings.text }}</div>
         {%- endif -%}
+        
       </div>
     {%- endif -%}
 
-    <div class="cora-faq-v2__wrapper">
-      {%- assign in_group = false -%}
+    <div class="cora-faq-v2__main-collapsible" id="faq-section-content-{{ section.id }}" {% if section.settings.default_open %}style="max-height: none; opacity: 1;" class="cora-faq-v2__main-collapsible is-open"{% endif %}>
+      <div class="cora-faq-v2__wrapper">
+        {%- assign in_group = false -%}
 
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'category' -%}
-          {%- if in_group -%}
-            </div> </div> </div> {%- endif -%}
+        {%- for block in section.blocks -%}
           
-          {%- assign in_group = true -%}
-          
-          <div class="cora-faq-v2__category-group" {{ block.shopify_attributes }}>
+          {%- if block.type == 'category' -%}
+            {%- if in_group -%}
+              </div> </div> </div> 
+            {%- endif -%}
             
-            <button class="cora-faq-v2__category-header" aria-expanded="false" type="button">
-              <h3 class="cora-faq-v2__category-title">{{ block.settings.title }}</h3>
-              <span class="cora-faq-v2__cat-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </span>
-            </button>
+            {%- assign in_group = true -%}
             
-            <div class="cora-faq-v2__questions-wrapper" style="max-height: 0;">
-              <div class="cora-faq-v2__questions-list">
-        
-        {%- elsif block.type == 'question' -%}
-          {%- if in_group -%}
-            <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
-              <button class="cora-faq-v2__question-trigger" aria-expanded="false" type="button">
-                <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
-                <span class="cora-faq-v2__icon"></span>
+            <div class="cora-faq-v2__category-group" {{ block.shopify_attributes }}>
+              <button class="cora-faq-v2__category-header" aria-expanded="false" type="button">
+                <h3 class="cora-faq-v2__category-title">{{ block.settings.title }}</h3>
+                <span class="cora-faq-v2__cat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
               </button>
               
-              <div class="cora-faq-v2__answer-wrapper" style="max-height: 0;">
-                <div class="cora-faq-v2__answer">
-                  {{ block.settings.answer }}
+              <div class="cora-faq-v2__questions-wrapper" style="max-height: 0;">
+                <div class="cora-faq-v2__questions-list">
+          
+          {%- elsif block.type == 'question' -%}
+            {%- if in_group -%}
+              <div class="cora-faq-v2__item" {{ block.shopify_attributes }}>
+                <button class="cora-faq-v2__question-trigger" aria-expanded="false" type="button">
+                  <span class="cora-faq-v2__question">{{ block.settings.title }}</span>
+                  <span class="cora-faq-v2__icon"></span>
+                </button>
+                
+                <div class="cora-faq-v2__answer-wrapper" style="max-height: 0;">
+                  <div class="cora-faq-v2__answer">
+                    {{ block.settings.answer }}
+                  </div>
                 </div>
               </div>
-            </div>
+            {%- endif -%}
+          
           {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
+        {%- endfor -%}
 
-      {%- if in_group -%}
-        </div>
-          </div>
-        </div>
-      {%- endif -%}
+        {%- if in_group -%}
+          </div> </div> </div>
+        {%- endif -%}
+      </div>
     </div>
 
   </div>
@@ -76,22 +87,50 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const section = document.getElementById("cora-faq-v2-{{ section.id }}");
-    
-    // Helper function for accordion animation
+    const sectionId = "{{ section.id }}";
+    const section = document.getElementById(`cora-faq-v2-${sectionId}`);
+    const mainTrigger = document.getElementById(`faq-section-trigger-${sectionId}`);
+    const mainContent = document.getElementById(`faq-section-content-${sectionId}`);
+
+    // 1. Main Section Toggle Logic
+    if(mainTrigger && mainContent) {
+      mainTrigger.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        if (isExpanded) {
+          // Close
+          mainContent.style.maxHeight = mainContent.scrollHeight + "px";
+          mainContent.offsetHeight; 
+          mainContent.style.maxHeight = "0";
+          mainContent.style.opacity = "0";
+          mainContent.classList.remove('is-open');
+        } else {
+          // Open
+          mainContent.classList.add('is-open');
+          mainContent.style.maxHeight = mainContent.scrollHeight + "px";
+          mainContent.style.opacity = "1";
+          
+          setTimeout(() => {
+            if(this.getAttribute('aria-expanded') === 'true') {
+              mainContent.style.maxHeight = "none";
+            }
+          }, 500);
+        }
+      });
+    }
+
+    // 2. Inner Accordion Logic
     const toggleAccordion = (trigger, content) => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true';
       trigger.setAttribute('aria-expanded', !isOpen);
 
       if (isOpen) {
-        // Closing
-        content.style.maxHeight = content.scrollHeight + "px"; // Set explicit height
-        content.offsetHeight; // Force reflow
-        content.style.maxHeight = "0"; // Collapse
-      } else {
-        // Opening
         content.style.maxHeight = content.scrollHeight + "px";
-        // Optional: Remove max-height after transition to allow content resizing
+        content.offsetHeight;
+        content.style.maxHeight = "0";
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
         setTimeout(() => {
            if(trigger.getAttribute('aria-expanded') === 'true') {
              content.style.maxHeight = "none"; 
@@ -100,7 +139,6 @@
       }
     };
 
-    // 1. Question Toggles
     const questionTriggers = section.querySelectorAll('.cora-faq-v2__question-trigger');
     questionTriggers.forEach(trigger => {
       trigger.addEventListener('click', function(e) {
@@ -109,7 +147,6 @@
       });
     });
 
-    // 2. Category Group Toggles
     const categoryTriggers = section.querySelectorAll('.cora-faq-v2__category-header');
     categoryTriggers.forEach(trigger => {
       trigger.addEventListener('click', function(e) {
@@ -127,6 +164,7 @@
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
     { "type": "textarea", "id": "text", "label": "Description", "default": "Common questions about our products and shipping." },
+    { "type": "checkbox", "id": "default_open", "label": "Keep section open by default?", "default": false },
     { "type": "header", "content": "Style" },
     { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
     { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#1a1a1a" },
