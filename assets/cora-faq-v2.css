@@ -1,48 +1,107 @@
 /* --- Cora FAQ V2 Section --- */
 .cora-faq-v2-section {
   width: 100%;
-  padding: 80px 20px;
+  padding: 60px 20px;
   background-color: #ffffff;
   color: #1a1a1a;
-  /* CHANGED: Removed overflow: hidden from section to allow inner scroll bubbling */
+  /* Smooth transition for the scaling effect */
+  transition: all 0.3s ease;
 }
 
+/* SCALING LOGIC: Container is narrower and slightly scaled down */
 .cora-faq-v2__container {
-  max-width: 1200px;
+  max-width: 900px; /* Reduced from 1200px */
   margin: 0 auto;
+  /* Optional: Literal scale down if width isn't enough */
+  transform: scale(0.98); 
+  transform-origin: top center;
 }
 
-/* Header */
+/* --- Header (Now Clickable) --- */
 .cora-faq-v2__header {
-  text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  cursor: pointer; /* Indicates clickability */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  user-select: none;
 }
+
+.cora-faq-v2__header-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
 .cora-faq-v2__heading {
   font-family: "Times New Roman", Times, serif;
   font-size: 36px;
   font-weight: 400;
-  margin: 0 0 16px 0;
+  margin: 0;
+  color: inherit;
 }
+
+/* Main Section Toggle Icon */
+.cora-faq-v2__section-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cora-faq-v2__section-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 2px;
+}
+
+/* Rotate icon when section is OPEN */
+.cora-faq-v2__header[aria-expanded="true"] .cora-faq-v2__section-icon {
+  transform: rotate(180deg);
+}
+
 .cora-faq-v2__desc {
   font-family: inherit;
   font-size: 16px;
   color: #666;
+  margin-top: 10px;
+  text-align: center;
 }
 
-/* Wrapper */
+/* --- Main Wrapper (Collapsible) --- */
+.cora-faq-v2__main-collapsible {
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  opacity: 0; /* Hidden by default */
+  max-height: 0;
+}
+
+/* State: Open */
+.cora-faq-v2__main-collapsible.is-open {
+  opacity: 1;
+  /* Max-height set via JS, but we need a visible state style */
+}
+
+/* Inner Layout */
 .cora-faq-v2__wrapper {
   display: grid;
   grid-template-columns: 1fr;
   gap: 60px; 
   align-items: start;
+  padding-top: 20px; /* Space after opening */
+  padding-bottom: 40px;
 }
 
 /* Category Group */
-/* Add this anywhere in your main CSS styles (outside media queries) */
 .cora-faq-v2__category-group {
-  min-width: 0; /* Critical: allows children to scroll without stretching the page */
+  min-width: 0;
   width: 100%;
 }
+
 /* Category Header */
 .cora-faq-v2__category-header {
   width: 100%;
@@ -83,14 +142,14 @@
   transform: rotate(90deg);
 }
 
-/* Questions Wrapper (Collapsible) */
+/* Questions Wrapper */
 .cora-faq-v2__questions-wrapper {
   overflow: hidden;
   transition: max-height 0.35s ease;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
-/* Questions List (Desktop Grid) */
+/* Questions List */
 .cora-faq-v2__questions-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -155,18 +214,19 @@
 .cora-faq-v2__answer p { margin-bottom: 10px; }
 
 
-/* --- Mobile Responsive (Horizontal Scroll Fix) --- */
+/* --- Mobile Responsive --- */
 @media (max-width: 900px) {
   .cora-faq-v2-section {
-    padding: 60px 0; /* Full width for scroll */
+    padding: 40px 0;
   }
   
   .cora-faq-v2__container {
-    max-width: 100%; /* Allow container to fill screen */
+    max-width: 100%; 
+    transform: none; /* Reset scale on mobile for better readability */
   }
 
   .cora-faq-v2__header {
-    padding: 0 20px; /* Restore padding for header */
+    padding: 0 20px;
   }
 
   /* Make the header button respect padding */
@@ -179,49 +239,34 @@
     gap: 40px;
   }
 
-  /* --- FIXED SCROLLING LOGIC --- */
- .cora-faq-v2__questions-list {
-    display: flex !important;       /* Force flex row */
-    flex-wrap: nowrap !important;   /* Prevent wrapping to next line */
-    overflow-x: auto !important;    /* Enable horizontal scrolling */
-    
+  /* Horizontal Scroll Logic for Questions on Mobile */
+  .cora-faq-v2__questions-list {
+    display: flex !important;       
+    flex-wrap: nowrap !important;   
+    overflow-x: auto !important;    
     gap: 16px;
-    padding: 10px 5px 30px 5px;     /* Padding for shadows/spacing */
-    
-    /* Scroll Snapping (Optional - makes it feel like an app) */
+    padding: 10px 10px 30px 20px;     
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; 
-    
-    /* Prevent Page Blowout */
     width: 100%;
-    max-width: 100%; 
   }
   
   .cora-faq-v2__questions-list::-webkit-scrollbar {
     display: none;
   }
 
-  /* Card Item */
   .cora-faq-v2__item {
-    flex: 0 0 85%;       /* Card width: 85% of screen width */
-    max-width: 350px;    /* Don't get too big on tablets */
-    scroll-snap-align: center; /* Snap to center of screen */
-    
-    /* styling adjustments */
+    flex: 0 0 85%;       
+    max-width: 350px;    
+    scroll-snap-align: center;
     background: #fff;
-    border: 0 solid #e5e5e5;
-    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
     padding: 0 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
   }
 
-  .cora-faq-v2__question-trigger {
-    padding: 20px 0 10px;
-  }
-  .cora-faq-v2__answer {
-    padding-bottom: 20px;
-    font-size: 15px;
-  }
-  .cora-faq-v2__question {
-    font-size: 16px;
-  }
+  .cora-faq-v2__question-trigger { padding: 20px 0 10px; }
+  .cora-faq-v2__answer { padding-bottom: 20px; font-size: 15px; }
+  .cora-faq-v2__question { font-size: 16px; }
 }
