@@ -7,8 +7,8 @@
   aria-label="{{ section.settings.heading | default: 'Catalog banner' }}"
   style="
     padding-top: {{ section.settings.pt_desktop | default: 60 }}px;
-    padding-bottom: {{ section.settings.pb_desktop | default: 60 }}px;
-    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    padding-bottom: {{ section.settings.pb_desktop | default: 4 }}px;
+    
     {% if section.settings.bg_image_desktop != blank %}
       background-image: url('{{ section.settings.bg_image_desktop | image_url: '2000x' }}');
 
