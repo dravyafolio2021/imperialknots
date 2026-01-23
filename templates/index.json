@@ -27,7 +27,7 @@
         "slide_ribDea": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_5d79e106-9fea-4577-976b-c892c554c705.png",
+            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -42,10 +42,10 @@
             "overlay_opacity": 0.4
           }
         },
-        "slide_rDR8jY": {
+        "slide_m3qFgk": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ImageWithFallback_5d79e106-9fea-4577-976b-c892c554c705.png",
+            "image": "shopify://shop_images/ImageWithFallback_d5dae4f0-5ccb-44e7-8f4f-c8c6ab8eb2fa.png",
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugsElevate your space with luxury rugs",
             "subtitle": "",
@@ -63,7 +63,7 @@
       },
       "block_order": [
         "slide_ribDea",
-        "slide_rDR8jY"
+        "slide_m3qFgk"
       ],
       "name": "Slider  ",
       "settings": {
