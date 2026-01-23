@@ -461,7 +461,7 @@
       "type": "cora-blog",
       "name": "Cora Blog Grid v2",
       "settings": {
-        "heading": "Our Blogs",
+        "heading": "",
         "blog": "news",
         "post_limit": 3,
         "text_alignment": "center",
@@ -925,6 +925,7 @@
       "settings": {
         "heading": "Frequently Asked Questions",
         "text": "Common questions about our products and shipping.",
+        "default_open": false,
         "bg_color": "#ffffff",
         "heading_color": "#1a1a1a",
         "padding_top": 80,
