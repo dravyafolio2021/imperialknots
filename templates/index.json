@@ -461,10 +461,10 @@
       "type": "cora-blog",
       "name": "Cora Blog Grid v2",
       "settings": {
-        "heading": "",
+        "heading": "Our Blogs",
         "blog": "news",
         "post_limit": 3,
-        "text_alignment": "left",
+        "text_alignment": "center",
         "show_view_all_top": false,
         "show_bottom_btn": true,
         "btn_text": "View All Posts",
