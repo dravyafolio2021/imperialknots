@@ -424,6 +424,24 @@
                           </ul>
                         {% endif %}
                      </div>
+                     <div class="mm-column">
+                        {% if mega_block.settings.custom_menu_3 != blank %}
+                          <h4>{{ linklists[mega_block.settings.custom_menu_3].title }}</h4>
+                          <ul>
+                            {% for sub_link in linklists[mega_block.settings.custom_menu_3].links %}
+                              <li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% elsif link.links.size > 1 %}
+                          {% assign child_2 = link.links[1] %}
+                          <h4><a href="{{ child_2.url }}">{{ child_2.title }}</a></h4>
+                          <ul>
+                            {% for grand_child in child_2.links %}
+                              <li><a href="{{ grand_child.url }}">{{ grand_child.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                     </div>
 
                      <a href="{{ mega_block.settings.promo_1_link }}" class="mm-promo-card">
                        {% if mega_block.settings.promo_1_img %}
@@ -548,10 +566,7 @@
         { "type": "text", "id": "promo_2_text", "label": "Overlay Text", "default": "Luxe" },
         { "type": "url", "id": "promo_2_link", "label": "Link" },
 
-        { "type": "header", "content": "Promo Card 3" },
-        { "type": "image_picker", "id": "promo_3_img", "label": "Image" },
-        { "type": "text", "id": "promo_3_text", "label": "Overlay Text", "default": "Best Sellers" },
-        { "type": "url", "id": "promo_3_link", "label": "Link" }
+      
       ]
     },
     {
@@ -568,3 +583,9 @@
   ]
 }
 {% endschema %}
+
+
+{% comment %} { "type": "header", "content": "Promo Card 3" },
+{ "type": "image_picker", "id": "promo_3_img", "label": "Image" },
+{ "type": "text", "id": "promo_3_text", "label": "Overlay Text", "default": "Best Sellers" },
+{ "type": "url", "id": "promo_3_link", "label": "Link" } {% endcomment %}
