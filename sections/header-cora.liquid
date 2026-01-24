@@ -4,276 +4,275 @@
 {% endcomment %}
 
 <style>
-  /* --------------------------
-     1. BASE LAYOUT & VARIABLES
-  --------------------------- */
-  :root {
-    --header-height: {{ section.settings.header_height }}px;
-    --header-bg: {{ section.settings.bg_color }};
-    --header-text: {{ section.settings.text_color }};
-  }
-
-  .cora-header {
-    background: var(--header-bg);
-    color: var(--header-text);
-    position: relative;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    z-index: 1000;
-  }
-
-  .header-container {
-    display: grid;
-    /* Desktop: Logo | Nav | Icons */
-    /* Mobile: Hamburger | Logo | Icons */
-    grid-template-columns: 1fr auto 1fr; 
-    align-items: center;
-    height: var(--header-height);
-    max-width: var(--page-width, 1600px);
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  /* --------------------------
-     2. LOGO (Centered)
-  --------------------------- */
-  .header-logo {
-    justify-self: center;
-    text-align: center;
-    z-index: 1001;
-  }
-  
-  .header-logo img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-  }
-
-  /* --------------------------
-     3. DESKTOP NAVIGATION
-  --------------------------- */
-  .cora-nav-desktop {
-    justify-self: center;
-    display: flex;
-    height: 100%;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  /* Hide Desktop Nav on Mobile */
-  @media screen and (max-width: 989px) {
-    .cora-nav-desktop { display: none; }
-    .header-logo { grid-column: 2; } 
-  }
-
-  @media screen and (min-width: 990px) {
-    .header-container {
-      grid-template-columns: auto 1fr auto; 
-      padding: 0 ;
+    /* --------------------------
+       1. BASE LAYOUT & VARIABLES
+    --------------------------- */
+    :root {
+      --header-height: {{ section.settings.header_height }}px;
+      --header-bg: {{ section.settings.bg_color }};
+      --header-text: {{ section.settings.text_color }};
     }
-    .header-logo { justify-self: start; }
-  }
-@media screen and (max-width:764px){
- .header-container {
-      grid-template-columns: auto 1fr auto; 
-      padding: 0 ;
-    }}
-  .nav-item {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
 
-  .nav-link {
-    text-decoration: none;
-    color: currentColor;
-    font-weight: 500;
-    font-size: 0.95rem; 
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.5rem 0;
-    position: relative;
-  }
+    .cora-header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
 
-  .nav-link:hover { opacity: 0.7; }
+    .header-container {
+      display: grid;
+      /* Desktop: Logo | Nav | Icons */
+      /* Mobile: Hamburger | Logo | Icons */
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      height: var(--header-height);
+      max-width: var(--page-width, 1600px);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-  /* --------------------------
-     4. MEGA MENU (Desktop)
-  --------------------------- */
-  .mega-menu-container {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: #ffffff;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    z-index: 999;
-    transform: translateY(10px);
-    transition: all 0.25s ease;
-  }
+    /* --------------------------
+       2. LOGO (Centered)
+    --------------------------- */
+    .header-logo {
+      justify-self: center;
+      text-align: center;
+      z-index: 1001;
+    }
 
-  .nav-item:hover .mega-menu-container {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .header-logo img {
+      display: block;
+      height: auto;
+      max-width: 100%;
+    }
 
-  .mega-menu-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    display: grid;
-    /* Layout: Menu1 Menu2 | Promo Promo Promo */
-    grid-template-columns: 1.2fr 1.2fr 1fr 1fr 1fr;
-    gap: 2rem;
-  }
+    /* --------------------------
+       3. DESKTOP NAVIGATION
+    --------------------------- */
+    .cora-nav-desktop {
+      justify-self: center;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      gap: 2.5rem;
+    }
 
-  /* Link Columns */
-  .mm-column h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.05em;
-    color: #000;
-  }
+    /* Hide Desktop Nav on Mobile */
+    @media screen and (max-width: 989px) {
+      .cora-nav-desktop { display: none; }
+      .header-logo { grid-column: 2; }
+    }
 
-  .mm-column ul { list-style: none; padding: 0; margin: 0; }
-  .mm-column li { margin-bottom: 0.8rem; }
-  
-  .mm-column a {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-    text-transform: uppercase;
-  }
-  .mm-column a:hover { color: #000; text-decoration: underline; }
+    @media screen and (min-width: 990px) {
+      .header-container {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 ;
+      }
+      .header-logo { justify-self: start; }
+    }
+  @media screen and (max-width:764px){
+   .header-container {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 ;
+      }}
+    .nav-item {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
 
-  /* Promo Cards */
-  .mm-promo-card {
-    position: relative;
-    height: 320px; 
-    width: 100%;
-    overflow: hidden;
-    text-decoration: none;
-  }
+    .nav-link {
+      text-decoration: none;
+      color: currentColor;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+      position: relative;
+    }
 
-  .mm-promo-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
+    .nav-link:hover { opacity: 0.7; }
 
-  .mm-promo-card:hover img { transform: scale(1.05); }
+    /* --------------------------
+       4. MEGA MENU (Desktop)
+    --------------------------- */
+    .mega-menu-container {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #e5e5e5;
+      border-bottom: 1px solid #e5e5e5;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      z-index: 999;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+    }
 
-  .mm-promo-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    padding: 1rem 1.5rem;
-    min-width: 70%;
-    text-align: center;
-    color: #000;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
+    .nav-item:hover .mega-menu-container {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  /* --------------------------
-     5. MOBILE MENU (Drawer)
-  --------------------------- */
-  .header-mobile-toggle {
-    display: none;
-    justify-self: start;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: currentColor;
-  }
+    .mega-menu-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      /* Layout: Menu1 Menu2 | Promo Promo Promo */
+      grid-template-columns: 1.2fr 1.2fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
 
-  .mobile-drawer {
-    position: fixed;
-    top: 0; left: -100%;
-    width: 85%; max-width: 350px;
-    height: 100vh;
-    background: #fff;
-    z-index: 2000;
-    transition: left 0.3s ease-in-out;
-    padding: 2rem;
-    overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-  }
+    /* Link Columns */
+    .mm-column h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.05em;
+      color: #000;
+    }
 
-  .mobile-drawer.active { left: 0; }
-  
-  .mobile-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s;
-  }
-  .mobile-overlay.active { opacity: 1; visibility: visible; }
+    .mm-column ul { list-style: none; padding: 0; margin: 0; }
+    .mm-column li { margin-bottom: 0.8rem; }
 
-  .drawer-close {
-    position: absolute; top: 1rem; right: 1rem;
-    background: none; border: none;
-    font-size: 1.5rem; cursor: pointer;
-  }
+    .mm-column a {
+      text-decoration: none;
+      color: #555;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+      text-transform: uppercase;
+    }
+    .mm-column a:hover { color: #000; text-decoration: underline; }
 
-  .mobile-nav-list { list-style: none; padding: 0; margin-top: 2rem; }
-  .mobile-nav-item { border-bottom: 1px solid #eee; }
-  
-  .mobile-link {
-    display: flex; justify-content: space-between;
-    width: 100%; padding: 1rem 0;
-    text-decoration: none; color: #000;
-    font-size: 1.1rem; font-weight: 500;
-    background: none; border: none;
-    text-align: left; cursor: pointer;
-  }
+    /* Promo Cards */
+    .mm-promo-card {
+      position: relative;
+      height: 320px;
+      width: 100%;
+      overflow: hidden;
+      text-decoration: none;
+    }
 
-  .mobile-submenu { display: none; padding-left: 1rem; background: #f9f9f9; }
-  .mobile-submenu.open { display: block; }
-  .mobile-submenu a { display: block; padding: 0.8rem 0; text-decoration: none; color: #555; }
+    .mm-promo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
 
-  @media screen and (max-width: 989px) {
-    .header-mobile-toggle { display: block; }
-  }
+    .mm-promo-card:hover img { transform: scale(1.05); }
 
-  /* --------------------------
-     6. ICONS
-  --------------------------- */
-  .header-icons {
-    justify-self: end;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .icon-link { color: currentColor; text-decoration: none; position: relative; }
-  .cart-count-bubble {
-    position: absolute; top: -5px; right: -8px;
-    background: #000; color: #fff;
-    font-size: 10px; font-weight: bold;
-    height: 18px; width: 18px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
+    .mm-promo-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffffff;
+      padding: 1rem 1.5rem;
+      min-width: 70%;
+      text-align: center;
+      color: #000;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* --------------------------
+       5. MOBILE MENU (Drawer)
+    --------------------------- */
+    .header-mobile-toggle {
+      display: none;
+      justify-self: start;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: currentColor;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0; left: -100%;
+      width: 85%; max-width: 350px;
+      height: 100vh;
+      background: #fff;
+      z-index: 2000;
+      transition: left 0.3s ease-in-out;
+      padding: 2rem;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .mobile-drawer.active { left: 0; }
+
+    .mobile-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+    }
+    .mobile-overlay.active { opacity: 1; visibility: visible; }
+
+    .drawer-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.5rem; cursor: pointer;
+    }
+
+    .mobile-nav-list { list-style: none; padding: 0; margin-top: 2rem; }
+    .mobile-nav-item { border-bottom: 1px solid #eee; }
+
+    .mobile-link {
+      display: flex; justify-content: space-between;
+      width: 100%; padding: 1rem 0;
+      text-decoration: none; color: #000;
+      font-size: 1.1rem; font-weight: 500;
+      background: none; border: none;
+      text-align: left; cursor: pointer;
+    }
+
+    .mobile-submenu { display: none; padding-left: 1rem; background: #f9f9f9; }
+    .mobile-submenu.open { display: block; }
+    .mobile-submenu a { display: block; padding: 0.8rem 0; text-decoration: none; color: #555; }
+
+    @media screen and (max-width: 989px) {
+      .header-mobile-toggle { display: block; }
+    }
+
+    /* --------------------------
+       6. ICONS
+    --------------------------- */
+    .header-icons {
+      justify-self: end;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .icon-link { color: currentColor; text-decoration: none; position: relative; }
+    .cart-count-bubble {
+      position: absolute; top: -5px; right: -8px;
+      background: #000; color: #fff;
+      font-size: 10px; font-weight: bold;
+      height: 18px; width: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
 </style>
 
 <header class="cora-header">
   <div class="header-container">
-    
     <button class="header-mobile-toggle" onclick="toggleDrawer()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -285,10 +284,12 @@
     <div class="header-logo">
       <a href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}
-          <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-               alt="{{ shop.name }}"
-               width="{{ section.settings.logo_width }}"
-               height="auto">
+          <img
+            src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+          >
         {% else %}
           <span style="font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">{{ shop.name }}</span>
         {% endif %}
@@ -297,11 +298,10 @@
 
     <nav class="cora-nav-desktop">
       {% for link in linklists[section.settings.menu].links %}
-        
         <div class="nav-item">
           <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
 
-          {% assign mega_block = nil %}
+          {% assign mega_block = null %}
           {% for block in section.blocks %}
             {% assign trigger = block.settings.menu_trigger | handleize %}
             {% assign link_handle = link.title | handleize %}
@@ -311,78 +311,88 @@
           {% endfor %}
 
           {% if mega_block %}
-             <div class="mega-menu-container">
-                <div class="mega-menu-inner">
-                   
-                   <div class="mm-column">
-                      {% if mega_block.settings.custom_menu_1 != blank %}
-                        <h4>{{ linklists[mega_block.settings.custom_menu_1].title }}</h4>
-                        <ul>
-                          {% for sub_link in linklists[mega_block.settings.custom_menu_1].links %}
-                            <li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      {% elsif link.links.size > 0 %}
-                        {% assign child_1 = link.links[0] %}
-                        <h4><a href="{{ child_1.url }}">{{ child_1.title }}</a></h4>
-                        <ul>
-                          {% for grand_child in child_1.links %}
-                            <li><a href="{{ grand_child.url }}">{{ grand_child.title }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      {% else %}
-                        <p>Select a menu in block settings.</p>
-                      {% endif %}
-                   </div>
-
-                   <div class="mm-column">
-                      {% if mega_block.settings.custom_menu_2 != blank %}
-                        <h4>{{ linklists[mega_block.settings.custom_menu_2].title }}</h4>
-                        <ul>
-                          {% for sub_link in linklists[mega_block.settings.custom_menu_2].links %}
-                            <li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      {% elsif link.links.size > 1 %}
-                        {% assign child_2 = link.links[1] %}
-                        <h4><a href="{{ child_2.url }}">{{ child_2.title }}</a></h4>
-                        <ul>
-                          {% for grand_child in child_2.links %}
-                            <li><a href="{{ grand_child.url }}">{{ grand_child.title }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                   </div>
-
-                   <a href="{{ mega_block.settings.promo_1_link }}" class="mm-promo-card">
-                     {% if mega_block.settings.promo_1_img %}
-                       <img src="{{ mega_block.settings.promo_1_img | image_url: width: 400 }}" loading="lazy">
-                     {% else %}
-                       {{ 'collection-1' | placeholder_svg_tag }}
-                     {% endif %}
-                     <div class="mm-promo-overlay">{{ mega_block.settings.promo_1_text }}</div>
-                   </a>
-
-                   <a href="{{ mega_block.settings.promo_2_link }}" class="mm-promo-card">
-                     {% if mega_block.settings.promo_2_img %}
-                       <img src="{{ mega_block.settings.promo_2_img | image_url: width: 400 }}" loading="lazy">
-                     {% else %}
-                       {{ 'collection-2' | placeholder_svg_tag }}
-                     {% endif %}
-                     <div class="mm-promo-overlay">{{ mega_block.settings.promo_2_text }}</div>
-                   </a>
-
-                   <a href="{{ mega_block.settings.promo_3_link }}" class="mm-promo-card">
-                     {% if mega_block.settings.promo_3_img %}
-                       <img src="{{ mega_block.settings.promo_3_img | image_url: width: 400 }}" loading="lazy">
-                     {% else %}
-                       {{ 'collection-3' | placeholder_svg_tag }}
-                     {% endif %}
-                     <div class="mm-promo-overlay">{{ mega_block.settings.promo_3_text }}</div>
-                   </a>
-
+            <div class="mega-menu-container">
+              <div class="mega-menu-inner">
+                <div class="mm-column">
+                  {% if mega_block.settings.custom_menu_1 != blank %}
+                    <h4>{{ linklists[mega_block.settings.custom_menu_1].title }}</h4>
+                    <ul>
+                      {% for sub_link in linklists[mega_block.settings.custom_menu_1].links %}
+                        <li>
+                          <a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% elsif link.links.size > 0 %}
+                    {% assign child_1 = link.links[0] %}
+                    <h4>
+                      <a href="{{ child_1.url }}">{{ child_1.title }}</a>
+                    </h4>
+                    <ul>
+                      {% for grand_child in child_1.links %}
+                        <li>
+                          <a href="{{ grand_child.url }}">{{ grand_child.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    <p>Select a menu in block settings.</p>
+                  {% endif %}
                 </div>
-             </div>
+
+                <div class="mm-column">
+                  {% if mega_block.settings.custom_menu_2 != blank %}
+                    <h4>{{ linklists[mega_block.settings.custom_menu_2].title }}</h4>
+                    <ul>
+                      {% for sub_link in linklists[mega_block.settings.custom_menu_2].links %}
+                        <li>
+                          <a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% elsif link.links.size > 1 %}
+                    {% assign child_2 = link.links[1] %}
+                    <h4>
+                      <a href="{{ child_2.url }}">{{ child_2.title }}</a>
+                    </h4>
+                    <ul>
+                      {% for grand_child in child_2.links %}
+                        <li>
+                          <a href="{{ grand_child.url }}">{{ grand_child.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+
+                <a href="{{ mega_block.settings.promo_1_link }}" class="mm-promo-card">
+                  {% if mega_block.settings.promo_1_img %}
+                    <img src="{{ mega_block.settings.promo_1_img | image_url: width: 400 }}" loading="lazy">
+                  {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                  {% endif %}
+                  <div class="mm-promo-overlay">{{ mega_block.settings.promo_1_text }}</div>
+                </a>
+
+                <a href="{{ mega_block.settings.promo_2_link }}" class="mm-promo-card">
+                  {% if mega_block.settings.promo_2_img %}
+                    <img src="{{ mega_block.settings.promo_2_img | image_url: width: 400 }}" loading="lazy">
+                  {% else %}
+                    {{ 'collection-2' | placeholder_svg_tag }}
+                  {% endif %}
+                  <div class="mm-promo-overlay">{{ mega_block.settings.promo_2_text }}</div>
+                </a>
+
+                <a href="{{ mega_block.settings.promo_3_link }}" class="mm-promo-card">
+                  {% if mega_block.settings.promo_3_img %}
+                    <img src="{{ mega_block.settings.promo_3_img | image_url: width: 400 }}" loading="lazy">
+                  {% else %}
+                    {{ 'collection-3' | placeholder_svg_tag }}
+                  {% endif %}
+                  <div class="mm-promo-overlay">{{ mega_block.settings.promo_3_text }}</div>
+                </a>
+              </div>
+            </div>
           {% endif %}
         </div>
       {% endfor %}
@@ -390,14 +400,19 @@
 
     <div class="header-icons">
       <a href="{{ routes.search_url }}" class="icon-link">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </a>
       <a href="{{ routes.cart_url }}" class="icon-link">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6V20C3 20.53 3.21 21.03 3.58 21.41C3.96 21.78 4.46 22 5 22H19C19.53 22 20.03 21.78 20.41 21.41C20.78 21.03 21 20.53 21 20V6L18 2H6Z"></path><path d="M3 6H21"></path><path d="M16 10C16 11.06 15.57 12.07 14.82 12.82C14.07 13.57 13.06 14 12 14C10.93 14 9.92 13.57 9.17 12.82C8.42 12.07 8 11.06 8 10"></path></svg>
-        {% if cart.item_count > 0 %}<div class="cart-count-bubble">{{ cart.item_count }}</div>{% endif %}
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6V20C3 20.53 3.21 21.03 3.58 21.41C3.96 21.78 4.46 22 5 22H19C19.53 22 20.03 21.78 20.41 21.41C20.78 21.03 21 20.53 21 20V6L18 2H6Z"></path><path d="M3 6H21"></path><path d="M16 10C16 11.06 15.57 12.07 14.82 12.82C14.07 13.57 13.06 14 12 14C10.93 14 9.92 13.57 9.17 12.82C8.42 12.07 8 11.06 8 10"></path>
+        </svg>
+        {% if cart.item_count > 0 %}
+          <div class="cart-count-bubble">{{ cart.item_count }}</div>
+        {% endif %}
       </a>
     </div>
-
   </div>
 </header>
 
@@ -437,7 +452,7 @@
     const btnSpan = btn.querySelector('span');
     const submenu = btn.nextElementSibling;
     submenu.classList.toggle('open');
-    if(btnSpan) btnSpan.textContent = submenu.classList.contains('open') ? '-' : '+';
+    if (btnSpan) btnSpan.textContent = submenu.classList.contains('open') ? '-' : '+';
   }
 </script>
 
@@ -458,7 +473,7 @@
       "name": "Mega Menu (3 Promos)",
       "settings": [
         { "type": "text", "id": "menu_trigger", "label": "Trigger Word", "info": "E.g. 'Collections'" },
-        
+
         { "type": "header", "content": "Text Columns" },
         { "type": "paragraph", "content": "Select menus to override automatic nested links." },
         { "type": "link_list", "id": "custom_menu_1", "label": "Column 1 Menu" },
