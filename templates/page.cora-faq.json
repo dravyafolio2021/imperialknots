@@ -27,6 +27,61 @@
         "pb_mobile": 40
       }
     },
+    "cora_faq_page_HrzH8D": {
+      "type": "cora_faq_page",
+      "blocks": {
+        "category_HC8NcK": {
+          "type": "category",
+          "settings": {
+            "title": "General"
+          }
+        },
+        "question_YxWnmj": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "question_mtQwfM": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        },
+        "category_jcVY66": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question_b8NzNt": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_HC8NcK",
+        "question_YxWnmj",
+        "question_mtQwfM",
+        "category_jcVY66",
+        "question_b8NzNt"
+      ],
+      "name": "FAQ V2 (Page)",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "text": "Common questions about our products and shipping.",
+        "default_open": false,
+        "bg_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "cora_faq_v2_MHQXFg": {
       "type": "cora-faq-v2",
       "blocks": {
@@ -417,6 +472,7 @@
       "settings": {
         "heading": "Frequently Asked Questions",
         "text": "Common questions about our products and shipping.",
+        "default_open": false,
         "bg_color": "#ffffff",
         "heading_color": "#1a1a1a",
         "padding_top": 80,
@@ -426,6 +482,7 @@
   },
   "order": [
     "cora_catalog_banner_VhtUQd",
+    "cora_faq_page_HrzH8D",
     "cora_faq_v2_MHQXFg"
   ]
 }
