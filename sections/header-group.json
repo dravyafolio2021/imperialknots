@@ -40,10 +40,28 @@
     "header_cora_emcDjA": {
       "type": "header-cora",
       "blocks": {
+        "mega_menu_links_mXPyB7": {
+          "type": "mega_menu_links",
+          "settings": {
+            "menu_trigger": "color",
+            "menu_1": "",
+            "menu_2": "",
+            "menu_3": ""
+          }
+        },
+        "mega_menu_links_RL3JaM": {
+          "type": "mega_menu_links",
+          "settings": {
+            "menu_trigger": "style",
+            "menu_1": "shop-by-color",
+            "menu_2": "",
+            "menu_3": ""
+          }
+        },
         "mega_menu_zDXKiW": {
           "type": "mega_menu",
           "settings": {
-            "menu_trigger": "collections",
+            "menu_trigger": "shop",
             "custom_menu_1": "main-menu",
             "custom_menu_2": "customer-account-main-menu",
             "promo_1_img": "shopify://shop_images/lg-2025-12-27T111601.242.jpg",
@@ -59,6 +77,8 @@
         }
       },
       "block_order": [
+        "mega_menu_links_mXPyB7",
+        "mega_menu_links_RL3JaM",
         "mega_menu_zDXKiW"
       ],
       "name": "Cora Header",
