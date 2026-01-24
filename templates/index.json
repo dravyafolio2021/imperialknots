@@ -546,7 +546,7 @@
             "line_color": "#e0e0e0",
             "spacing_top": 40,
             "spacing_bottom": 40,
-            "desktop_width_percent": 80
+            "desktop_width_percent": 65
           },
           "blocks": {}
         }
