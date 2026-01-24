@@ -535,6 +535,27 @@
         "padding_bottom": 80
       }
     },
+    "1769237259ca68f108": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8f0bc0d_ABhjJw": {
+          "type": "ai_gen_block_8f0bc0d",
+          "settings": {
+            "line_style": "solid",
+            "line_thickness": 1,
+            "line_color": "#e0e0e0",
+            "spacing_top": 40,
+            "spacing_bottom": 40,
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8f0bc0d_ABhjJw"
+      ],
+      "settings": {}
+    },
     "cora_faq_v2_XWXtm4": {
       "type": "cora-faq-v2",
       "blocks": {
@@ -943,6 +964,7 @@
     "cora_features_jfEBK8",
     "cora_blog_gHJL3D",
     "cora_faq_section_R8KehB",
+    "1769237259ca68f108",
     "cora_faq_v2_XWXtm4"
   ]
 }
