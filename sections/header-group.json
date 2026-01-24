@@ -42,6 +42,7 @@
       "blocks": {
         "mega_menu_links_mXPyB7": {
           "type": "mega_menu_links",
+          "name": "color",
           "settings": {
             "menu_trigger": "color",
             "menu_1": "shop-by-color",
@@ -51,6 +52,7 @@
         },
         "mega_menu_links_RL3JaM": {
           "type": "mega_menu_links",
+          "name": "Style",
           "settings": {
             "menu_trigger": "style",
             "menu_1": "shop-by-color",
