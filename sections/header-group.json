@@ -46,7 +46,7 @@
           "settings": {
             "menu_trigger": "color",
             "menu_1": "shop-by-color",
-            "menu_2": "shop-by-color-1",
+            "menu_2": "",
             "menu_3": ""
           }
         },
@@ -55,7 +55,7 @@
           "name": "Style",
           "settings": {
             "menu_trigger": "style",
-            "menu_1": "shop-by-color",
+            "menu_1": "shop-by-style",
             "menu_2": "",
             "menu_3": ""
           }
