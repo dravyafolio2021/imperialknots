@@ -417,7 +417,7 @@
         "default_open": true,
         "bg_color": "#ffffff",
         "heading_color": "#1a1a1a",
-        "padding_top": 80,
+        "padding_top": 20,
         "padding_bottom": 80
       }
     },
