@@ -44,8 +44,8 @@
           "type": "mega_menu_links",
           "settings": {
             "menu_trigger": "color",
-            "menu_1": "",
-            "menu_2": "",
+            "menu_1": "shop-by-color",
+            "menu_2": "shop-by-color-1",
             "menu_3": ""
           }
         },
