@@ -433,10 +433,10 @@
                             {% endfor %}
                           </ul>
                         {% elsif link.links.size > 1 %}
-                          {% assign child_2 = link.links[1] %}
-                          <h4><a href="{{ child_2.url }}">{{ child_2.title }}</a></h4>
+                          {% assign child_3 = link.links[1] %}
+                          <h4><a href="{{ child_3.url }}">{{ child_3.title }}</a></h4>
                           <ul>
-                            {% for grand_child in child_2.links %}
+                            {% for grand_child in child_3.links %}
                               <li><a href="{{ grand_child.url }}">{{ grand_child.title }}</a></li>
                             {% endfor %}
                           </ul>
