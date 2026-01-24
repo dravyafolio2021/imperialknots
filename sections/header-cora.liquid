@@ -461,15 +461,7 @@
                        <div class="mm-promo-overlay">{{ mega_block.settings.promo_2_text }}</div>
                      </a>
 
-                     <a href="{{ mega_block.settings.promo_3_link }}" class="mm-promo-card">
-                       {% if mega_block.settings.promo_3_img %}
-                         <img src="{{ mega_block.settings.promo_3_img | image_url: width: 400 }}" loading="lazy">
-                       {% else %}
-                         {{ 'collection-3' | placeholder_svg_tag }}
-                       {% endif %}
-                       <div class="mm-promo-overlay">{{ mega_block.settings.promo_3_text }}</div>
-                     </a>
-
+                    
                   </div>
                 {% endif %}
              </div>
