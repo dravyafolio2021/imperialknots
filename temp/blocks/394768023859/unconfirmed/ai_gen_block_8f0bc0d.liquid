@@ -1,6 +1,141 @@
+{% doc %}
+  @prompt
+    generate a simple section seprator
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-separator-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.spacing_top }}px 0 {{ block.settings.spacing_bottom }}px;
+  }
+
+  .ai-separator-container-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    margin: 0 auto;
+  }
+
+  .ai-separator-line-{{ ai_gen_id }} {
+    height: {{ block.settings.line_thickness }}px;
+    background-color: {{ block.settings.line_color }};
+    border: none;
+    margin: 0;
+    {% if block.settings.line_style == 'dashed' %}
+      background: repeating-linear-gradient(
+        to right,
+        {{ block.settings.line_color }} 0px,
+        {{ block.settings.line_color }} 10px,
+        transparent 10px,
+        transparent 20px
+      );
+    {% elsif block.settings.line_style == 'dotted' %}
+      background: repeating-linear-gradient(
+        to right,
+        {{ block.settings.line_color }} 0px,
+        {{ block.settings.line_color }} 5px,
+        transparent 5px,
+        transparent 15px
+      );
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-separator-container-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-separator-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-separator-container-{{ ai_gen_id }}">
+    <hr class="ai-separator-line-{{ ai_gen_id }}">
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Section separator",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Line style"
+    },
+    {
+      "type": "select",
+      "id": "line_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "label": "Thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section separator"
+    }
+  ]
+}
 {% endschema %}
