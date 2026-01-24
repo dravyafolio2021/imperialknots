@@ -403,6 +403,7 @@
         "feature_Hb37kC": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-7.svg",
             "icon_alt": "Imperial Knots",
             "title": "Sustainably Crafted",
             "text": "Every rug is made with eco-friendly materials and ethical production practices"
@@ -411,6 +412,7 @@
         "feature_jMzcAN": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-2.svg",
             "icon_alt": "Imperial Knots",
             "title": "Artisan Partners",
             "text": "We work directly with master weavers, supporting traditional craftsmanship"
@@ -419,6 +421,7 @@
         "feature_GWzdzb": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Container-8.svg",
             "icon_alt": "Imperial Knots",
             "title": "Premium Quality",
             "text": "Hand-selected materials and rigorous quality control ensure lasting beauty"
