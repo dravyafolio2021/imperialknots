@@ -226,7 +226,7 @@
             "image": "shopify://shop_images/KCJ-300.jpg",
             "image_alt": "Solids",
             "title": "Solids",
-            "link": "shopify://collections/solids"
+            "link": "https://www.imperialknots.com/collections/solids"
           }
         },
         "card_pe9cji": {
@@ -235,7 +235,7 @@
             "image": "shopify://shop_images/lg_-_2025-12-10T154114.837.jpg",
             "image_alt": "Floral",
             "title": "Floral",
-            "link": "shopify://collections/floral-carpets"
+            "link": "https://www.imperialknots.com/collections/floral-carpets"
           }
         },
         "card_MAx87j": {
@@ -244,7 +244,7 @@
             "image": "shopify://shop_images/ivory_red_stripes_hand_woven_dhurrie_rug_closeup.jpg",
             "image_alt": "Stripes",
             "title": "Stripes",
-            "link": "shopify://collections/flatweave-rugs-india"
+            "link": "https://www.imperialknots.com/collections/striped-rugs-india"
           }
         },
         "card_nbHmT8": {
@@ -253,7 +253,7 @@
             "image": "shopify://shop_images/IKD-10747.jpg",
             "image_alt": "Geometric",
             "title": "Geometric",
-            "link": ""
+            "link": "https://www.imperialknots.com/collections/geometric-rugs"
           }
         },
         "card_ppMKin": {
@@ -262,7 +262,7 @@
             "image": "shopify://shop_images/ST-1707_2.jpg",
             "image_alt": "Kids",
             "title": "Kids",
-            "link": "shopify://collections/floral-carpets"
+            "link": "https://www.imperialknots.com/collections/kids"
           }
         },
         "card_EVURRb": {
@@ -271,7 +271,7 @@
             "image": "shopify://shop_images/ST-1232_3_9012325f-66ad-46ce-a390-0af287664682.jpg",
             "image_alt": "Moroccan",
             "title": "Moroccan",
-            "link": "shopify://collections/floral-carpets"
+            "link": "https://www.imperialknots.com/collections/moroccan-carpets"
           }
         },
         "card_RpkGX9": {
@@ -289,7 +289,7 @@
             "image": "shopify://shop_images/IMT-25-2937.jpg",
             "image_alt": "Bespoke",
             "title": "Bespoke",
-            "link": ""
+            "link": "https://www.imperialknots.com/collections/broadloom-carpets-india"
           }
         },
         "card_Q4itwV": {
@@ -298,7 +298,7 @@
             "image": "shopify://shop_images/IMP6_IKT-280402_2.jpg",
             "image_alt": "Modern",
             "title": "Modern",
-            "link": ""
+            "link": "https://www.imperialknots.com/collections/modern-rugs"
           }
         },
         "card_tWNhCt": {
@@ -307,7 +307,7 @@
             "image": "shopify://shop_images/DIM-471_2.jpg",
             "image_alt": "Chevron",
             "title": "Chevron",
-            "link": ""
+            "link": "https://www.imperialknots.com/collections/chevron-rugs"
           }
         },
         "card_xiFHcP": {
@@ -316,7 +316,7 @@
             "image": "shopify://shop_images/KCD-126_5X8_6.jpg",
             "image_alt": "Kilims",
             "title": "Kilims",
-            "link": "shopify://collections/floral-carpets"
+            "link": "https://www.imperialknots.com/collections/kilims"
           }
         }
       },
@@ -364,7 +364,7 @@
             "title": "Multicolor",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/all/multicolor",
             "overlay_opacity": 0.5
           }
         },
@@ -376,7 +376,7 @@
             "title": "Purple",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/purple-rugs-india",
             "overlay_opacity": 0.5
           }
         },
@@ -388,7 +388,7 @@
             "title": "Green",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/all/green",
             "overlay_opacity": 0.5
           }
         },
@@ -400,7 +400,7 @@
             "title": "Yellow",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/yellow-rugs-india",
             "overlay_opacity": 0.5
           }
         },
@@ -412,7 +412,7 @@
             "title": "Pink",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/pink-rugs-india",
             "overlay_opacity": 0.5
           }
         },
@@ -424,7 +424,7 @@
             "title": "Ivory",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/ivory-white-rugs",
             "overlay_opacity": 0.5
           }
         },
@@ -436,7 +436,7 @@
             "title": "Red",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/red-carpets-india",
             "overlay_opacity": 0.5
           }
         },
@@ -448,7 +448,7 @@
             "title": "Blue",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/blue-carpets-india",
             "overlay_opacity": 0.5
           }
         },
@@ -460,7 +460,7 @@
             "title": "Beige",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/beige-carpets-rugs-india",
             "overlay_opacity": 0.5
           }
         },
@@ -472,7 +472,7 @@
             "title": "Grey",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/grey-rugs-india",
             "overlay_opacity": 0.5
           }
         },
@@ -484,7 +484,7 @@
             "title": "Black & White",
             "subtitle": "",
             "cta_text": "Shop Now",
-            "link": "",
+            "link": "https://www.imperialknots.com/collections/black-white-carpets-india",
             "overlay_opacity": 0.5
           }
         }
