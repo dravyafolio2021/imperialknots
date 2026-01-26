@@ -514,7 +514,7 @@
         "product_card_peyXXe": {
           "type": "product_card",
           "settings": {
-            "product": "beige-and-grey-moroccan-hand-woven-dhurrie-dim-209",
+            "product": "beige-black-modern-hand-tufted-carpet-tim-2271",
             "override_image_alt": "imperial knots",
             "badge_text": "BESTSELLER",
             "badge_bg": "#ffffff",
@@ -525,7 +525,7 @@
         "product_card_bekCw3": {
           "type": "product_card",
           "settings": {
-            "product": "beige-and-grey-moroccan-hand-woven-dhurrie-dim-209",
+            "product": "beige-shaggy-hand-made-carpet-in_ils-58",
             "override_image_alt": "imperial knots",
             "badge_text": "BESTSELLER",
             "badge_bg": "#ffffff",
@@ -536,7 +536,7 @@
         "product_card_nCaUqC": {
           "type": "product_card",
           "settings": {
-            "product": "beige-and-grey-moroccan-hand-woven-dhurrie-dim-209",
+            "product": "beige-brown-geometric-hand-woven-dhurrie-dim-330",
             "override_image_alt": "imperial knots",
             "badge_text": "BESTSELLER",
             "badge_bg": "#ffffff",
@@ -547,7 +547,29 @@
         "product_card_RGdhDy": {
           "type": "product_card",
           "settings": {
-            "product": "beige-and-grey-moroccan-hand-woven-dhurrie-dim-209",
+            "product": "beige-moroccan-hand-knotted-carpet-in_ick-152",
+            "override_image_alt": "imperial knots",
+            "badge_text": "BESTSELLER",
+            "badge_bg": "#ffffff",
+            "badge_color": "#111111",
+            "hide_price": false
+          }
+        },
+        "product_card_Wm7AmL": {
+          "type": "product_card",
+          "settings": {
+            "product": "black-and-white-bespoke-hand-tufted-carpet-tim-2304",
+            "override_image_alt": "imperial knots",
+            "badge_text": "BESTSELLER",
+            "badge_bg": "#ffffff",
+            "badge_color": "#111111",
+            "hide_price": false
+          }
+        },
+        "product_card_yHjwGt": {
+          "type": "product_card",
+          "settings": {
+            "product": "beige-and-black-geometric-hand-woven-dhurrie-kcd-325",
             "override_image_alt": "imperial knots",
             "badge_text": "BESTSELLER",
             "badge_bg": "#ffffff",
@@ -561,7 +583,9 @@
         "product_card_peyXXe",
         "product_card_bekCw3",
         "product_card_nCaUqC",
-        "product_card_RGdhDy"
+        "product_card_RGdhDy",
+        "product_card_Wm7AmL",
+        "product_card_yHjwGt"
       ],
       "name": "Trending Product Grid",
       "settings": {
