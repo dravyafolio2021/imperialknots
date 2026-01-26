@@ -385,6 +385,7 @@
         "card_Hd3xx4": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/KCJ-320.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Green",
@@ -397,6 +398,7 @@
         "card_YVGDDD": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/yellow_kilim_hand_woven_dhurrie_closeup_imperial_knots.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Yellow",
@@ -409,6 +411,7 @@
         "card_fdyXFq": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/DIM-609.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Pink",
@@ -421,6 +424,7 @@
         "card_6LyMhm": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IEK-15.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Ivory",
@@ -433,6 +437,7 @@
         "card_VEFd7U": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/imperial_knots_red_geometric_hand_tufted_carpet_front.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Red",
@@ -445,6 +450,7 @@
         "card_nahNrz": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IEK-12.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Blue",
@@ -457,6 +463,7 @@
         "card_KPKYyt": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IEK-24.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Beige",
@@ -469,6 +476,7 @@
         "card_CtRRRV": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IMT-25-2921.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Grey",
@@ -481,6 +489,7 @@
         "card_hKMm8b": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IMT-25-2939.jpg",
             "image_alt": "Imperial Knots",
             "kicker": "",
             "title": "Black & White",
