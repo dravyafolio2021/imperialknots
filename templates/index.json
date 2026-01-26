@@ -351,32 +351,128 @@
           "settings": {
             "image_alt": "Imperial Knots",
             "kicker": "",
-            "title": "Natural Jute",
-            "subtitle": "Eco-friendly",
+            "title": "Multicolor",
+            "subtitle": "",
             "cta_text": "Shop Now",
             "link": "",
             "overlay_opacity": 0.5
           }
         },
-        "card_PbWBY8": {
+        "card_dPgPA9": {
           "type": "card",
           "settings": {
             "image_alt": "Imperial Knots",
             "kicker": "",
-            "title": "Natural Jute",
-            "subtitle": "Eco-friendly",
+            "title": "Purple",
+            "subtitle": "",
             "cta_text": "Shop Now",
             "link": "",
             "overlay_opacity": 0.5
           }
         },
-        "card_6brmPg": {
+        "card_Hd3xx4": {
           "type": "card",
           "settings": {
             "image_alt": "Imperial Knots",
             "kicker": "",
-            "title": "Natural Jute",
-            "subtitle": "Eco-friendly",
+            "title": "Green",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_YVGDDD": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Yellow",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_fdyXFq": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Pink",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_6LyMhm": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Ivory",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_VEFd7U": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Red",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_nahNrz": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Blue",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_KPKYyt": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Beige",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_CtRRRV": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Grey",
+            "subtitle": "",
+            "cta_text": "Shop Now",
+            "link": "",
+            "overlay_opacity": 0.5
+          }
+        },
+        "card_hKMm8b": {
+          "type": "card",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "kicker": "",
+            "title": "Black & White",
+            "subtitle": "",
             "cta_text": "Shop Now",
             "link": "",
             "overlay_opacity": 0.5
@@ -386,8 +482,16 @@
       "block_order": [
         "heading_TzhgTe",
         "card_mV3HWr",
-        "card_PbWBY8",
-        "card_6brmPg"
+        "card_dPgPA9",
+        "card_Hd3xx4",
+        "card_YVGDDD",
+        "card_fdyXFq",
+        "card_6LyMhm",
+        "card_VEFd7U",
+        "card_nahNrz",
+        "card_KPKYyt",
+        "card_CtRRRV",
+        "card_hKMm8b"
       ],
       "name": "Style Grid",
       "settings": {
