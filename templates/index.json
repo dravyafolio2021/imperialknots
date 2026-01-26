@@ -214,7 +214,7 @@
         "card_eerzQJ": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ILS-59_2.jpg",
+            "image": "shopify://shop_images/TIM-2197_5X8_6.jpg",
             "image_alt": "Suzani",
             "title": "Suzani",
             "link": "shopify://collections/suzani"
@@ -223,7 +223,7 @@
         "card_XzWMVc": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ILS-59_2.jpg",
+            "image": "shopify://shop_images/KCJ-300.jpg",
             "image_alt": "Solids",
             "title": "Solids",
             "link": "shopify://collections/solids"
@@ -232,6 +232,7 @@
         "card_pe9cji": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/lg_-_2025-12-10T154114.837.jpg",
             "image_alt": "Floral",
             "title": "Floral",
             "link": "shopify://collections/floral-carpets"
@@ -240,6 +241,7 @@
         "card_MAx87j": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ivory_red_stripes_hand_woven_dhurrie_rug_closeup.jpg",
             "image_alt": "Stripes",
             "title": "Stripes",
             "link": "shopify://collections/flatweave-rugs-india"
@@ -248,6 +250,7 @@
         "card_nbHmT8": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IKD-10747.jpg",
             "image_alt": "Geometric",
             "title": "Geometric",
             "link": ""
@@ -256,6 +259,7 @@
         "card_ppMKin": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ST-1707_2.jpg",
             "image_alt": "Kids",
             "title": "Kids",
             "link": "shopify://collections/floral-carpets"
@@ -264,6 +268,7 @@
         "card_EVURRb": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ST-1232_3_9012325f-66ad-46ce-a390-0af287664682.jpg",
             "image_alt": "Moroccan",
             "title": "Moroccan",
             "link": "shopify://collections/floral-carpets"
@@ -272,6 +277,7 @@
         "card_RpkGX9": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/TM-26_57-69.jpg",
             "image_alt": "",
             "title": "Traditional",
             "link": ""
@@ -280,7 +286,8 @@
         "card_3BQDXX": {
           "type": "card",
           "settings": {
-            "image_alt": "",
+            "image": "shopify://shop_images/IMT-25-2937.jpg",
+            "image_alt": "Bespoke",
             "title": "Bespoke",
             "link": ""
           }
@@ -288,6 +295,7 @@
         "card_Q4itwV": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IMP6_IKT-280402_2.jpg",
             "image_alt": "Modern",
             "title": "Modern",
             "link": ""
@@ -296,6 +304,7 @@
         "card_tWNhCt": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/DIM-471_2.jpg",
             "image_alt": "Chevron",
             "title": "Chevron",
             "link": ""
@@ -304,6 +313,7 @@
         "card_xiFHcP": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/KCD-126_5X8_6.jpg",
             "image_alt": "Kilims",
             "title": "Kilims",
             "link": "shopify://collections/floral-carpets"
