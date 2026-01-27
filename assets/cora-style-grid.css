@@ -39,7 +39,7 @@
 /* card */
 .cora-style-grid__card {
   position: relative;
-  overflow: visible;
+  overflow: visible;cora-style-grid__media
 }
 .cora-style-grid__card-link {
   display: block;
