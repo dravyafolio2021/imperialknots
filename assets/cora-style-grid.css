@@ -145,7 +145,7 @@
 
 @media (max-width: 900px) {
   .cora-style-grid__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr;
     gap: 18px;
   }
   .cora-style-grid__content {
