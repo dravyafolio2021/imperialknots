@@ -86,99 +86,99 @@
           "settings": {
             "image": "shopify://shop_images/TIM-2287_1.jpg",
             "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_FxTVpA": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Category Image",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_PyPWDb": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_Kd9PPc": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_gcbpqn": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_AVfze9": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_HMfM8q": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_4zyWYB": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_w7TADG": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_t6e6q8": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_wDgbet": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
-          }
-        },
-        "category_WLwYAd": {
-          "type": "category",
-          "settings": {
-            "image_alt": "Imperial Knots",
-            "title": "Category",
-            "link": ""
+            "title": "Suzani",
+            "link": "https://j2cev1v8448gebbj-78884929843.shopifypreview.com/collections/suzani"
           }
         },
         "category_FeKVLc": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Kilims",
+            "link": ""
+          }
+        },
+        "category_ERMqeP": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Chevron",
+            "link": ""
+          }
+        },
+        "category_8b6r8E": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Modern",
+            "link": ""
+          }
+        },
+        "category_kwhqr8": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Bespoke",
+            "link": ""
+          }
+        },
+        "category_tAtQXh": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Traditional",
+            "link": ""
+          }
+        },
+        "category_CxtHRd": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Moroccan",
+            "link": ""
+          }
+        },
+        "category_DW4qxM": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Kids",
+            "link": ""
+          }
+        },
+        "category_x3GdQt": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Geometric",
+            "link": ""
+          }
+        },
+        "category_GgdJPf": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Stripes",
+            "link": ""
+          }
+        },
+        "category_LQjiE4": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Floral",
+            "link": ""
+          }
+        },
+        "category_UT6iwR": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Imperial Knots",
+            "title": "Solids",
+            "link": ""
+          }
+        },
+        "category_bhQjf9": {
           "type": "category",
           "settings": {
             "image_alt": "Imperial Knots",
@@ -189,18 +189,18 @@
       },
       "block_order": [
         "category_cRxzta",
-        "category_FxTVpA",
-        "category_PyPWDb",
-        "category_Kd9PPc",
-        "category_gcbpqn",
-        "category_AVfze9",
-        "category_HMfM8q",
-        "category_4zyWYB",
-        "category_w7TADG",
-        "category_t6e6q8",
-        "category_wDgbet",
-        "category_WLwYAd",
-        "category_FeKVLc"
+        "category_FeKVLc",
+        "category_ERMqeP",
+        "category_8b6r8E",
+        "category_kwhqr8",
+        "category_tAtQXh",
+        "category_CxtHRd",
+        "category_DW4qxM",
+        "category_x3GdQt",
+        "category_GgdJPf",
+        "category_LQjiE4",
+        "category_UT6iwR",
+        "category_bhQjf9"
       ],
       "name": "Category Slider",
       "settings": {
