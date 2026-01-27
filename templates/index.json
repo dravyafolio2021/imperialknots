@@ -93,6 +93,7 @@
         "category_FeKVLc": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IKD-10814.jpg",
             "image_alt": "Imperial Knots",
             "title": "Kilims",
             "link": "https://www.imperialknots.com/collections/kilims"
@@ -101,6 +102,7 @@
         "category_ERMqeP": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/DIM-528_1_b6716963-5f91-42df-af5e-53bdefe7ddd8.jpg",
             "image_alt": "Imperial Knots",
             "title": "Chevron",
             "link": "https://www.imperialknots.com/collections/chevron-rugs"
@@ -109,6 +111,7 @@
         "category_8b6r8E": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/TIM_2675.jpg",
             "image_alt": "Imperial Knots",
             "title": "Modern",
             "link": "https://www.imperialknots.com/collections/modern-rugs"
@@ -117,6 +120,7 @@
         "category_kwhqr8": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/TIM-2659.jpg",
             "image_alt": "Imperial Knots",
             "title": "Bespoke",
             "link": "https://www.imperialknots.com/collections/broadloom-carpets-india"
@@ -125,6 +129,7 @@
         "category_tAtQXh": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IMT-25-2935.jpg",
             "image_alt": "Imperial Knots",
             "title": "Traditional",
             "link": ""
@@ -133,6 +138,7 @@
         "category_CxtHRd": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/ST-1721.jpg",
             "image_alt": "Imperial Knots",
             "title": "Moroccan",
             "link": "https://www.imperialknots.com/collections/moroccan-carpets"
@@ -141,6 +147,7 @@
         "category_DW4qxM": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/ST-1703_2.jpg",
             "image_alt": "Imperial Knots",
             "title": "Kids",
             "link": "https://www.imperialknots.com/collections/kids"
@@ -149,6 +156,7 @@
         "category_x3GdQt": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IKD-10814.jpg",
             "image_alt": "Imperial Knots",
             "title": "Geometric",
             "link": "https://www.imperialknots.com/collections/geometric-rugs"
@@ -157,6 +165,7 @@
         "category_GgdJPf": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/DIM-540_1.jpg",
             "image_alt": "Imperial Knots",
             "title": "Stripes",
             "link": "https://www.imperialknots.com/collections/striped-rugs-india"
@@ -165,6 +174,7 @@
         "category_LQjiE4": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IMT-25-2937.jpg",
             "image_alt": "Imperial Knots",
             "title": "Floral",
             "link": "https://www.imperialknots.com/collections/floral-carpets"
@@ -173,6 +183,7 @@
         "category_UT6iwR": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IMP6_S-266_1.jpg",
             "image_alt": "Imperial Knots",
             "title": "Solids",
             "link": "https://www.imperialknots.com/collections/solids"
