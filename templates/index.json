@@ -90,6 +90,14 @@
             "link": ""
           }
         },
+        "category_FxTVpA": {
+          "type": "category",
+          "settings": {
+            "image_alt": "Category Image",
+            "title": "Category",
+            "link": ""
+          }
+        },
         "category_PyPWDb": {
           "type": "category",
           "settings": {
@@ -181,6 +189,7 @@
       },
       "block_order": [
         "category_cRxzta",
+        "category_FxTVpA",
         "category_PyPWDb",
         "category_Kd9PPc",
         "category_gcbpqn",
