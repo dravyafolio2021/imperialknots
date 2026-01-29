@@ -436,7 +436,7 @@
                      </div>
                      <div class="mm-column">
                         {% if mega_block.settings.custom_menu_3 != blank %}
-                          <h4>{{ linklists[mega_block.settings.custom_menu_3].title }}</h4>
+                          {% comment %} <h4>{{ linklists[mega_block.settings.custom_menu_3].title }}</h4> {% endcomment %}
                           <ul>
                             {% for sub_link in linklists[mega_block.settings.custom_menu_3].links %}
                               <li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
