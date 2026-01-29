@@ -55,9 +55,9 @@
           "name": "Style",
           "settings": {
             "menu_trigger": "style",
-            "menu_1": "shop-by-style",
-            "menu_2": "",
-            "menu_3": ""
+            "menu_1": "shop-by-style-c1",
+            "menu_2": "shop-by-style-c2",
+            "menu_3": "shop-by-style-c3"
           }
         },
         "mega_menu_zDXKiW": {
