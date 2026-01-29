@@ -10,7 +10,7 @@
   padding-right: 20px;
 }
 
-/* header */
+/* --- HEADER --- */
 .cora-product-grid__header {
   text-align: center;
   margin-bottom: 20px;
@@ -22,12 +22,7 @@
   margin: 0 0 8px 0;
   color: #111;
 }
-.cora-style-grid__title {
-  font-family: "Assistant", sans-serif;
-  font-size: 24px;
-  margin: 0 0 8px 0;
-  color: #0b1220;
-}
+
 .cora-product-grid__description {
   font-family: Inter, sans-serif;
   font-size: 14px;
@@ -35,18 +30,41 @@
   color: rgba(10, 20, 30, 0.66);
 }
 
-/* grid */
+/* --- CAROUSEL LAYOUT (Replaces Grid) --- */
 .cora-product-grid__grid {
-  display: grid;
-  gap: 22px;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: start;
+  display: flex;              /* Switch to Flexbox */
+  gap: 20px;                  /* Space between cards */
+  overflow-x: auto;           /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Enable "Snapping" effect */
+  padding-bottom: 20px;       /* Breathing room for shadows */
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Hide Scrollbar (Clean look) */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE 10+ */
 }
 
-/* card */
+/* Hide Scrollbar for Chrome/Safari */
+.cora-product-grid__grid::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* --- CARD SIZING --- */
 .cora-product-grid__card {
   background: transparent;
+  
+  /* Carousel Sizing Logic */
+  min-width: 280px;           
+  flex: 0 0 280px;            /* Fix width to 280px */
+  scroll-snap-align: start;   /* Snap to start */
+  position: relative;
 }
+
 .cora-product-grid__card-link {
   text-decoration: none;
   color: inherit;
@@ -55,22 +73,23 @@
   overflow: visible;
 }
 
-/* media */
+/* --- MEDIA / IMAGES --- */
 .cora-product-grid__media-wrap {
   position: relative;
   display: block;
   border-radius: 12px;
   overflow: hidden;
+  /* Enforce aspect ratio on container to prevent jumps */
+  aspect-ratio: 4 / 5;
 }
 .cora-product-grid__media-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  aspect-ratio: 4 / 5;
 }
 
-/* badge */
+/* --- BADGE --- */
 .cora-product-grid__badge {
   position: absolute;
   top: 10px;
@@ -84,7 +103,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* meta */
+/* --- META INFO --- */
 .cora-product-grid__meta {
   margin-top: 10px;
   display: flex;
@@ -110,18 +129,8 @@
   font-size: 12px;
 }
 
-/* responsive rules */
-@media (max-width: 1400px) {
-  .cora-product-grid__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-}
+/* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 900px) {
-  .cora-product-grid__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
   .cora-product-grid__title {
     font-size: 13px;
   }
@@ -132,32 +141,35 @@
     font-size: 11px;
   }
   .cora-product-grid__inner {
-    max-width: 1400px;
-    margin: 0 auto;
     padding-left: 0;
     padding-right: 0;
   }
-}
-@media (max-width: 480px) {
+  
+  /* Add padding to the scroll container so first card isn't flush with edge */
   .cora-product-grid__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .cora-product-grid__media-wrap img {
-    aspect-ratio: 3 / 4;
-  }
-  .cora-product-grid__title {
-    font-size: 14px;
-  }
-  .cora-product-grid__inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 16px;
   }
 }
 
-/* focus */
+@media (max-width: 480px) {
+  /* Mobile Peek Effect */
+  .cora-product-grid__card {
+    min-width: 75vw;
+    flex: 0 0 75vw;
+  }
+  
+  .cora-product-grid__media-wrap img {
+    aspect-ratio: 3 / 4; /* Slightly taller on mobile if desired */
+  }
+  
+  .cora-product-grid__title {
+    font-size: 14px;
+  }
+}
+
+/* focus accessibility */
 .cora-product-grid__card-link:focus {
   outline: 3px solid rgba(0, 120, 230, 0.12);
   outline-offset: 6px;
