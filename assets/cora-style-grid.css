@@ -29,18 +29,50 @@
 }
 
 /* grid layout */
-.cora-style-grid__grid {
+/* .cora-style-grid__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
   align-items: start;
+} */
+ .cora-style-grid__grid {
+  display: flex;              /* Switch to Flexbox */
+  gap: 20px;                  /* Space between cards */
+  overflow-x: auto;           /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Enable "Snapping" effect */
+  padding-bottom: 20px;       /* Breathing room for shadows */
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Hide Scrollbar (Clean look) */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE 10+ */
+}
+
+/* Hide Scrollbar for Chrome/Safari */
+.cora-style-grid__grid::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* --- CAROUSEL ITEM SIZING --- */
+.cora-style-grid__card {
+  /* Set a fixed width for desktop cards so they don't squish */
+  min-width: 300px;           
+  flex: 0 0 300px;            /* Don't grow, don't shrink, stay at 300px */
+  scroll-snap-align: start;   /* Snap to the start of the container */
+  
+  position: relative;
+  overflow: visible;
 }
 
 /* card */
-.cora-style-grid__card {
+/* .cora-style-grid__card {
   position: relative;
   overflow: visible;cora-style-grid__media
-}
+} */
 .cora-style-grid__card-link {
   display: block;
   text-decoration: none;
