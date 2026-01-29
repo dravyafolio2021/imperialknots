@@ -46,8 +46,8 @@
           "settings": {
             "menu_trigger": "color",
             "menu_1": "shop-by-color-c1",
-            "menu_2": "shop-by-color-c2",
-            "menu_3": ""
+            "menu_2": "",
+            "menu_3": "shop-by-color-c2"
           }
         },
         "mega_menu_links_RL3JaM": {
