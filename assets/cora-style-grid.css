@@ -201,26 +201,7 @@
   }
 }
 
-@media (max-width: 480px) {
-  .cora-style-grid__grid {
-    gap: 14px;
-  }
-  .cora-style-grid__card {
-     /* Peek effect */
-    min-width: 75vw;
-    flex: 0 0 75vw;
-  }
-  .cora-style-grid__title {
-    font-size: 20px;
-  }
-}
 
-.cora-style-grid__media--placeholder {
-  background: linear-gradient(180deg, #f6f6f6, #eaeef0);
-}
-.cora-style-grid {
-  overflow: visible;
-}
 
 
 @media (max-width: 480px) {
