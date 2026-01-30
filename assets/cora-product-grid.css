@@ -152,28 +152,30 @@
 }
 
 @media (max-width: 480px) {
-  .cora-product-grid__grid {
-    gap: 16px; /* Increased gap slightly for better separation */
-  }
   .cora-product-grid__inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-left: 0;
-  padding-right: 0;
-}
-  /* --- MOBILE FIX: 1 Large Card + Peek --- */
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .cora-product-grid__grid {
+    gap: 12px;
+    /* Add padding to grid directly so first item isn't flush to edge */
+    padding-left: 20px; 
+    padding-right: 20px;
+  }
+
+  /* --- MOBILE FIX: 2 Full Cards + 3rd Peek --- */
   .cora-product-grid__card {
-    min-width: 75vw;  /* Takes up 75% of the screen */
-    flex: 0 0 75vw;
+    min-width: 42vw;  /* 42% width allows 2 cards (84%) + gap to fit */
+    flex: 0 0 42vw;
   }
   
   .cora-product-grid__media-wrap {
-    /* Optional: Make image square on small cards to save vertical space */
-    aspect-ratio: 3/4; 
+    aspect-ratio: 3/4; /* Kept 3:4 ratio as requested */
   }
   
   .cora-product-grid__title {
-    font-size: 15px; /* Bumped up font size for readability */
+    font-size: 14px; /* Adjusted size for smaller cards */
   }
 }
 
