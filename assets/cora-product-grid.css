@@ -169,7 +169,7 @@
   
   .cora-product-grid__media-wrap {
     /* Optional: Make image square on small cards to save vertical space */
-    aspect-ratio: 1 / 1; 
+    aspect-ratio: 3/4; 
   }
   
   .cora-product-grid__title {
