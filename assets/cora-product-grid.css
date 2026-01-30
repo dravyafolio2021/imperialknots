@@ -153,13 +153,13 @@
 
 @media (max-width: 480px) {
   .cora-product-grid__grid {
-    gap: 12px;
+    gap: 16px; /* Increased gap slightly for better separation */
   }
   
-  /* --- MOBILE FIX: 2 Full Cards + 3rd Peek --- */
+  /* --- MOBILE FIX: 1 Large Card + Peek --- */
   .cora-product-grid__card {
-    min-width: 42vw; 
-    flex: 0 0 42vw;
+    min-width: 75vw;  /* Takes up 75% of the screen */
+    flex: 0 0 75vw;
   }
   
   .cora-product-grid__media-wrap {
@@ -168,7 +168,7 @@
   }
   
   .cora-product-grid__title {
-    font-size: 13px;
+    font-size: 15px; /* Bumped up font size for readability */
   }
 }
 
