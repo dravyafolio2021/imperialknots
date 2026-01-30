@@ -221,3 +221,31 @@
 .cora-style-grid {
   overflow: visible;
 }
+
+
+@media (max-width: 480px) {
+  .cora-style-grid__grid {
+    gap: 12px; /* Slightly tighter gap for mobile */
+  }
+
+  .cora-style-grid__card {
+    /* Logic: 40vw width x 2 cards = 80% 
+       + gaps + padding leaves room for the 3rd card to "peek" 
+    */
+    min-width: 42vw; 
+    flex: 0 0 42vw;
+  }
+
+  .cora-style-grid__title {
+    font-size: 20px;
+  }
+  
+  /* Optional: Adjust font sizes inside the small cards so they fit */
+  .cora-style-grid__card-title {
+    font-size: 16px; 
+  }
+  .cora-style-grid__card-cta {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
