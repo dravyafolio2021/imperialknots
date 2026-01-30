@@ -155,7 +155,12 @@
   .cora-product-grid__grid {
     gap: 16px; /* Increased gap slightly for better separation */
   }
-  
+  .cora-product-grid__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+}
   /* --- MOBILE FIX: 1 Large Card + Peek --- */
   .cora-product-grid__card {
     min-width: 75vw;  /* Takes up 75% of the screen */
