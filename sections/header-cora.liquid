@@ -148,12 +148,20 @@
   }
 
   /* NEW: Flex Layout for Simple Columns (1, 2, or 3 cols) */
-  .mega-menu-inner.simple-columns {
-    display: flex;
-    gap: 3rem;
-    padding: 2rem 2.5rem; /* Tighter padding for dropdown */
-    max-width: none;
-  }
+/* UPDATED: Flex Layout for Simple Columns (Centered) */
+.mega-menu-inner.simple-columns {
+  display: flex;
+  justify-content: center; /* Centers columns horizontally */
+  text-align: center;      /* Centers text inside the columns */
+  gap: 4rem;               /* Increased gap for better spacing */
+  padding: 2rem 2.5rem;
+  max-width: none;
+}
+
+/* Optional: Ensure the links inside list items are also centered */
+.mega-menu-inner.simple-columns .mm-column li {
+  text-align: center;
+}
 
   /* Link Columns */
   .mm-column h4 {
