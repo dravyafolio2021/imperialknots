@@ -50,7 +50,8 @@
 .cora-catalog-banner__heading {
   font-family: "Assistant", sans-serif;
   margin: 0 0 12px 0;
-  color: var(--cora-heading-color);
+  /* color: var(--cora-heading-color); */
+  color: #ffffff;
   font-weight: 700;
   line-height: 1.02;
   font-size: clamp(28px, 6.5vw, 64px);
