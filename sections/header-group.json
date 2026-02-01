@@ -18,7 +18,7 @@
         "text": "Free Shipping on All Orders | 30-Day Returns | Sustainably Crafted",
         "link_url": "",
         "aria_label": "Announcement Bar",
-        "bg_color_desktop": "#0b1220",
+        "bg_color_desktop": "#000000",
         "text_color": "#ffffff",
         "font_size_desktop": 14,
         "font_weight": "400",
