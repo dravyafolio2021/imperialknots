@@ -9,20 +9,23 @@
  */
 {
   "sections": {
-    "cora_catalog_banner_EDDTc4": {
-      "type": "cora-catalog-banner",
-      "custom_css": [],
-      "name": "Catalog Banner",
+    "cora_page_banner_8eEL9D": {
+      "type": "cora_page_banner",
+      "name": "Page Banner (Cora)",
       "settings": {
-        "heading": "Privacy Policy",
-        "subheading": "",
-        "text_color": "#000000",
+        "custom_title": "Privacy Policy",
+        "subtext": "",
+        "show_breadcrumbs": true,
+        "bg_color": "#FFF9F5",
+        "overlay_opacity": 0,
+        "text_color": "#322C29",
         "text_align": "center",
-        "bg_color": "#FFFFFF",
-        "pt_desktop": 60,
-        "pb_desktop": 60,
-        "pt_mobile": 40,
-        "pb_mobile": 40
+        "show_wave": false,
+        "wave_color": "#FFFFFF",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "cora_privacy_policy_HwgAzN": {
@@ -34,7 +37,7 @@
     }
   },
   "order": [
-    "cora_catalog_banner_EDDTc4",
+    "cora_page_banner_8eEL9D",
     "cora_privacy_policy_HwgAzN"
   ]
 }
