@@ -7,7 +7,7 @@
   aria-label="{{ section.settings.heading | default: 'Catalog banner' }}"
   style="
     padding-top: {{ section.settings.pt_desktop | default: 60 }}px;
-    padding-bottom: {{ section.settings.pb_desktop | default: 4 }}px;
+    padding-bottom: {{ section.settings.pb_desktop | default: 60 }}px;
     
     {% if section.settings.bg_image_desktop != blank %}
       background-image: url('{{ section.settings.bg_image_desktop | image_url: '2000x' }}');
@@ -18,7 +18,7 @@
   "
 >
   <div class="cora-catalog-banner__inner {% if section.settings.text_align == 'left' %}align-left{% elsif section.settings.text_align == 'right' %}align-right{% else %}align-center{% endif %}">
-    <h1 class="cora-catalog-banner__heading">
+    <h1 class="cora-catalog-banner__heading" style="color: {{ section.settings.text_color | default: '#000' }}; ">
       {{ section.settings.heading | default: 'Product Catalog' }}
     </h1>
 
