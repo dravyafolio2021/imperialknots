@@ -1,0 +1,280 @@
+{%- style -%}
+  .cora-page-banner {
+    position: relative;
+    background-color: {{ section.settings.bg_color }};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    {% if section.settings.bg_image != blank %}
+      background-image: url({{ section.settings.bg_image | image_url: width: 2000 }});
+    {% endif %}
+    /* Dynamic Spacing Variables */
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+
+  /* Overlay for text readability */
+  .cora-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    z-index: 1;
+  }
+
+  .cora-banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .cora-banner-title {
+    font-family: 'Poppins', sans-serif; /* Matching your theme */
+    color: {{ section.settings.text_color }};
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .cora-banner-subtext {
+    color: {{ section.settings.text_color }};
+    font-size: 16px;
+    margin-top: 12px;
+    opacity: 0.9;
+  }
+  
+  .cora-banner-subtext p { margin: 0; }
+
+  /* Breadcrumbs */
+  .cora-breadcrumbs {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.7;
+    font-weight: 600;
+  }
+  .cora-breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* The Wave Decoration */
+  .cora-banner-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .cora-banner-wave svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* DESKTOP STYLES */
+  @media screen and (min-width: 990px) {
+    .cora-page-banner {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+    .cora-banner-title {
+      font-size: 48px;
+    }
+    .cora-banner-subtext {
+      font-size: 18px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="cora-page-banner">
+  {%- if section.settings.overlay_opacity > 0 -%}
+    <div class="cora-banner-overlay"></div>
+  {%- endif -%}
+
+  <div class="cora-banner-content">
+    
+    {%- if section.settings.show_breadcrumbs -%}
+      <div class="cora-breadcrumbs">
+        <a href="{{ routes.root_url }}">Home</a> 
+        <span>/</span> 
+        <span>{{ page.title }}</span>
+      </div>
+    {%- endif -%}
+
+    <h1 class="cora-banner-title">
+      {%- if section.settings.custom_title != blank -%}
+        {{ section.settings.custom_title }}
+      {%- else -%}
+        {{ page.title }}
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.subtext != blank -%}
+      <div class="cora-banner-subtext rte">
+        {{ section.settings.subtext }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_wave -%}
+    <div class="cora-banner-wave">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 60C240 100 480 120 720 100C960 80 1200 40 1440 60V120H0V60Z" fill="{{ section.settings.wave_color }}"/>
+      </svg>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Page Banner (Cora)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Custom Title",
+      "info": "Leave blank to use the default Page Title automatically."
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtitle / Description",
+      "info": "Great for 'Last Updated' dates."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show Breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Design & Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFF9F5"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "label": "Image Overlay Opacity",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#322C29"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Wave Decoration"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Wave Color",
+      "default": "#FFFFFF",
+      "info": "Match this to the background color of the section BELOW this banner."
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "default": 80,
+      "unit": "px",
+      "label": "Top Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "default": 80,
+      "unit": "px",
+      "label": "Bottom Padding"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Top Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Bottom Padding"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Banner (Cora)"
+    }
+  ]
+}
+{% endschema %}
