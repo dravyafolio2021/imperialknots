@@ -14,6 +14,7 @@
       "blocks": {
         "filter_group_Exgfb9": {
           "type": "filter_group",
+          "name": "Color",
           "settings": {
             "filter_name": "Color",
             "default_open": true
@@ -21,6 +22,7 @@
         },
         "filter_group_gXF33m": {
           "type": "filter_group",
+          "name": "Product type",
           "settings": {
             "filter_name": "Product type",
             "default_open": true
@@ -28,15 +30,9 @@
         },
         "filter_group_KyHfaj": {
           "type": "filter_group",
+          "name": "Delivery Time:",
           "settings": {
             "filter_name": "Delivery Time:",
-            "default_open": true
-          }
-        },
-        "filter_group_Qrww8g": {
-          "type": "filter_group",
-          "settings": {
-            "filter_name": "Color",
             "default_open": true
           }
         },
@@ -51,7 +47,6 @@
         "filter_group_Exgfb9",
         "filter_group_gXF33m",
         "filter_group_KyHfaj",
-        "filter_group_Qrww8g",
         "price_range_H7Aeez"
       ],
       "settings": {
