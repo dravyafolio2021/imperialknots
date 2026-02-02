@@ -1,0 +1,191 @@
+{%- style -%}
+  .cora-simple-text-section {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  .cora-simple-text-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  .cora-simple-text-content {
+    color: {{ section.settings.text_color }};
+    font-family: 'Inter', sans-serif; /* Uses your theme's body font */
+    font-size: {{ section.settings.font_size_mobile }}px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    margin: 0;
+    
+    {% if section.settings.uppercase %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .cora-simple-text-content p {
+    margin: 0 0 16px 0;
+  }
+  .cora-simple-text-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* DESKTOP STYLES */
+  @media screen and (min-width: 768px) {
+    .cora-simple-text-section {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+    .cora-simple-text-content {
+      font-size: {{ section.settings.font_size_desktop }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="cora-simple-text-section">
+  <div class="cora-simple-text-container">
+    <div class="cora-simple-text-content">
+      {%- if section.settings.text != blank -%}
+        {{ section.settings.text }}
+      {%- else -%}
+        <p>PLEASE NOTE: THE IMAGES WE DISPLAY HAVE THE MOST ACCURATE COLOR POSSIBLE. DUE TO DIFFERENCES IN COMPUTER MONITORS, WE CANNOT BE RESPONSIBLE FOR VARIATIONS IN COLOR BETWEEN THE ACTUAL PRODUCT AND YOUR SCREEN.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cora Simple Text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text Content",
+      "default": "<p>PLEASE NOTE: THE IMAGES WE DISPLAY HAVE THE MOST ACCURATE COLOR POSSIBLE.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Uppercase Text",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style & Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#888888"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "justify", "label": "Justified" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1400,
+      "step": 50,
+      "default": 1200,
+      "unit": "px",
+      "label": "Container Max Width"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14,
+      "unit": "px",
+      "label": "Font Size (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 12,
+      "unit": "px",
+      "label": "Font Size (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px",
+      "label": "Top Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 20,
+      "unit": "px",
+      "label": "Top Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 20,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cora Simple Text"
+    }
+  ]
+}
+{% endschema %}
