@@ -18,12 +18,38 @@
             "heading": "Material & Care",
             "content": ""
           }
+        },
+        "accordion_pCCHdx": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Material & Care",
+            "content": ""
+          }
         }
       },
       "block_order": [
-        "accordion_FCpxbL"
+        "accordion_FCpxbL",
+        "accordion_pCCHdx"
       ],
       "settings": {}
+    },
+    "cora_simple_text_iqdRzR": {
+      "type": "cora_simple_text",
+      "name": "Cora Simple Text",
+      "settings": {
+        "text": "<p>PLEASE NOTE: THE IMAGES WE DISPLAY HAVE THE MOST ACCURATE COLOR POSSIBLE.</p>",
+        "uppercase": true,
+        "bg_color": "#FFFFFF",
+        "text_color": "#888888",
+        "text_alignment": "left",
+        "max_width": 1200,
+        "font_size_desktop": 14,
+        "font_size_mobile": 12,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
     },
     "cora_related_products_9P8nC6": {
       "type": "cora-related-products",
@@ -31,15 +57,11 @@
       "settings": {
         "heading": "You May Also Like"
       }
-    },
-    "1767020103dc26a5f5": {
-      "type": "apps",
-      "settings": {}
     }
   },
   "order": [
     "main",
-    "cora_related_products_9P8nC6",
-    "1767020103dc26a5f5"
+    "cora_simple_text_iqdRzR",
+    "cora_related_products_9P8nC6"
   ]
 }
