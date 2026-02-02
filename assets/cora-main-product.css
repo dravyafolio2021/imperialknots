@@ -257,4 +257,11 @@
     /* Disable sticky on mobile so it doesn't overlap/float weirdly in a stack */
     position: static; 
   }
+  .cmp-section {
+  background-color: #fff;
+  padding: 40px 0;
+  /* Ensure no overflow hidden on parent, or sticky won't work */
+  overflow: visible; 
+}
+
 }
