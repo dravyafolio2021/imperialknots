@@ -265,3 +265,15 @@
 }
 
 }
+
+/* Remove Spinner Arrows (Chrome, Safari, Edge, Opera) */
+.cmp-qty-input::-webkit-outer-spin-button,
+.cmp-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove Spinner Arrows (Firefox) */
+.cmp-qty-input {
+  -moz-appearance: textfield;
+}
