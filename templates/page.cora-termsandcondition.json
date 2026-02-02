@@ -9,22 +9,23 @@
  */
 {
   "sections": {
-    "cora_catalog_banner_98hLd4": {
-      "type": "cora-catalog-banner",
-      "custom_css": [
-        "{background-color: #ffffff;}"
-      ],
-      "name": "Catalog Banner",
+    "cora_page_banner_VpRi4B": {
+      "type": "cora_page_banner",
+      "name": "Page Banner (Cora)",
       "settings": {
-        "heading": "Terms & Condition",
-        "subheading": "",
-        "text_color": "#000000",
+        "custom_title": "Terms & Condition",
+        "subtext": "",
+        "show_breadcrumbs": true,
+        "bg_color": "#000000",
+        "overlay_opacity": 0,
+        "text_color": "#ffffff",
         "text_align": "center",
-        "bg_color": "#f0ebe4",
-        "pt_desktop": 60,
-        "pb_desktop": 60,
-        "pt_mobile": 40,
-        "pb_mobile": 40
+        "show_wave": false,
+        "wave_color": "#ffffff",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "cora_terms_policy_y4ETpU": {
@@ -36,7 +37,7 @@
     }
   },
   "order": [
-    "cora_catalog_banner_98hLd4",
+    "cora_page_banner_VpRi4B",
     "cora_terms_policy_y4ETpU"
   ]
 }
