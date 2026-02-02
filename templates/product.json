@@ -18,18 +18,10 @@
             "heading": "Material & Care",
             "content": ""
           }
-        },
-        "accordion_Yg3Dg4": {
-          "type": "accordion",
-          "settings": {
-            "heading": "Disclaimer",
-            "content": ""
-          }
         }
       },
       "block_order": [
-        "accordion_FCpxbL",
-        "accordion_Yg3Dg4"
+        "accordion_FCpxbL"
       ],
       "settings": {}
     },
