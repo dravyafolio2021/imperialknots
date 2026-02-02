@@ -1,5 +1,49 @@
 {{ 'cora-footer.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%} 
+  -------------------------------------------------------
+  DARK MODE LOGIC 
+  Automatically overrides text colors if "Dark" is selected 
+  -------------------------------------------------------
+{%- endcomment -%}
+{%- if section.settings.color_scheme == 'dark' -%}
+  <style>
+    /* Force Text to White */
+    #cora-footer-{{ section.id }} { color: #ffffff !important; }
+    
+    /* Lighten descriptions and links (Opacity 0.7 -> 0.8 white) */
+    #cora-footer-{{ section.id }} .cora-footer__brand-desc,
+    #cora-footer-{{ section.id }} .cora-footer__link,
+    #cora-footer-{{ section.id }} .cora-footer__copyright,
+    #cora-footer-{{ section.id }} .cora-footer__trust {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    /* Headings */
+    #cora-footer-{{ section.id }} .cora-footer__col-title {
+      color: #ffffff !important;
+    }
+
+    /* Divider Lines */
+    #cora-footer-{{ section.id }} .cora-footer__divider,
+    #cora-footer-{{ section.id }} .cora-footer__col {
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    /* Icons (Chevron) */
+    #cora-footer-{{ section.id }} .cora-footer__col-icon svg {
+      stroke: #ffffff !important;
+    }
+
+    /* Social Icons Backgrounds */
+    #cora-footer-{{ section.id }} .cora-footer__social-link img {
+      background: rgba(255, 255, 255, 0.1) !important;
+      /* Invert black icons to white if needed */
+      filter: invert(1) brightness(2); 
+    }
+  </style>
+{%- endif -%}
+
 <section
   id="cora-footer-{{ section.id }}"
   class="cora-footer"
@@ -29,7 +73,6 @@
                 >
               </a>
             {% else %}
-              <!-- fallback demo image (replace with theme asset on deploy) -->
               <a href="{{ routes.root_url }}" class="cora-footer__logo-link" aria-label="{{ shop.name }}">
                 <img
                   src="{{ 'Logo.svg' | asset_url }}"
@@ -68,7 +111,8 @@
           </div>
         {% endif %}
       {% endfor %}
-<div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
+
+      <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
         {% for block in section.blocks %}
           {% if block.type == 'link_column' %}
             <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
@@ -96,32 +140,7 @@
           {% endif %}
         {% endfor %}
       </div>
-      {%- comment -%} LINK COLUMNS (merchant can add multiple) {%- endcomment -%}
-      {% comment %} <div class="cora-footer__columns" role="navigation" aria-label="Footer menus">
-        {% for block in section.blocks %}
-          {% if block.type == 'link_column' %}
-            <div class="cora-footer__col" aria-label="{{ block.settings.title }}">
-              {% if block.settings.title != blank %}
-                <h4 class="cora-footer__col-title">{{ block.settings.title }}</h4>
-              {% endif %}
-
-              {% if block.settings.menu %}
-                <ul class="cora-footer__links" aria-hidden="false">
-                  {% assign list_handle = block.settings.menu %}
-                  {% for link in linklists[list_handle].links %}
-                    <li class="cora-footer__link-item">
-                      <a class="cora-footer__link" href="{{ link.url }}">{{ link.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div> {% endcomment %}
     </div>
-    <!-- /.cora-footer__top -->
-
     <div class="cora-footer__divider" role="presentation" aria-hidden="true"></div>
 
     <div class="cora-footer__bottom">
@@ -129,8 +148,7 @@
         {% if section.settings.copyright_text != blank %}
           {{ section.settings.copyright_text }}
         {% else %}
-          &copy; {{ 'now' | date: '%Y' }}
-          {{ shop.name }}. All rights reserved.
+          &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
         {% endif %}
       </div>
 
@@ -138,7 +156,6 @@
         {% if section.settings.trust_text != blank %}
           <div class="cora-footer__trust">{{ section.settings.trust_text }}</div>
         {% endif %}
- 
       </div>
     </div>
   </div>
@@ -148,6 +165,24 @@
 {
   "name": "Cora Footer ",
   "settings": [
+    {
+      "type": "header",
+      "content": "Theme Mode"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "options": [
+        { "value": "light", "label": "Light (Dark Text)" },
+        { "value": "dark", "label": "Dark (White Text)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
     { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Footer" },
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
@@ -213,4 +248,3 @@
   "presets": [{ "name": "Cora Footer ", "category": "Global" }]
 }
 {% endschema %}
- 
