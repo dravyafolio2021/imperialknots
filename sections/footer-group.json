@@ -131,10 +131,14 @@
         "social_nR7X6j",
         "brand_nE7kPJ"
       ],
+      "custom_css": [
+        "{background-color: #222222;}"
+      ],
       "name": "Cora Footer ",
       "settings": {
+        "color_scheme": "dark",
         "aria_label": "Footer",
-        "bg_color": "#ffffff",
+        "bg_color": "#222222",
         "padding_top": 40,
         "padding_bottom": 40,
         "copyright_text": "© 2026 Imperial Knots. All rights reserved.",
