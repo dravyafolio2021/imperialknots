@@ -12,6 +12,12 @@
     "main": {
       "type": "collection",
       "blocks": {
+        "price_range_H7Aeez": {
+          "type": "price_range",
+          "settings": {
+            "default_open": true
+          }
+        },
         "filter_group_rXtDRY": {
           "type": "filter_group",
           "name": "Color",
@@ -35,19 +41,13 @@
             "filter_name": "Delivery Time:",
             "default_open": true
           }
-        },
-        "price_range_H7Aeez": {
-          "type": "price_range",
-          "settings": {
-            "default_open": true
-          }
         }
       },
       "block_order": [
+        "price_range_H7Aeez",
         "filter_group_rXtDRY",
         "filter_group_gXF33m",
-        "filter_group_KyHfaj",
-        "price_range_H7Aeez"
+        "filter_group_KyHfaj"
       ],
       "settings": {
         "products_per_page": 24,
