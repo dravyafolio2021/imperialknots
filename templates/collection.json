@@ -12,7 +12,7 @@
     "main": {
       "type": "collection",
       "blocks": {
-        "filter_group_Exgfb9": {
+        "filter_group_rXtDRY": {
           "type": "filter_group",
           "name": "Color",
           "settings": {
@@ -44,7 +44,7 @@
         }
       },
       "block_order": [
-        "filter_group_Exgfb9",
+        "filter_group_rXtDRY",
         "filter_group_gXF33m",
         "filter_group_KyHfaj",
         "price_range_H7Aeez"
