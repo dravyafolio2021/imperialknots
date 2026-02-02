@@ -16,7 +16,7 @@
           "type": "filter_group",
           "name": "Color",
           "settings": {
-            "filter_name": "Color",
+            "filter_name": "Color:",
             "default_open": true
           }
         },
