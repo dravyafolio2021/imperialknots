@@ -105,13 +105,13 @@
 
   <div class="cora-banner-content">
     
-    {%- if section.settings.show_breadcrumbs -%}
+    {% comment %} {%- if section.settings.show_breadcrumbs -%}
       <div class="cora-breadcrumbs">
         <a href="{{ routes.root_url }}">Home</a> 
         <span>/</span> 
         <span>{{ page.title }}</span>
       </div>
-    {%- endif -%}
+    {%- endif -%} {% endcomment %}
 
     <h1 class="cora-banner-title">
       {%- if section.settings.custom_title != blank -%}
