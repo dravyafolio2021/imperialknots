@@ -160,7 +160,7 @@
   background: white;
   padding: 4px 8px;
   font-family: "Inter", sans-serif; /* BODY FONT (Small Label) */
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 4px;
@@ -325,6 +325,11 @@
   .cora-pagination__btn {
     font-size: 13px;
   }
+  .product-badge {
+  font-size: 8px;
+
+}
+
 }
 
 
