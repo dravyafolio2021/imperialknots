@@ -88,7 +88,7 @@
                               {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
                               {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
                               
-                              <a href="{{ tag_url }}" class="filter-label">
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
                                 <input type="checkbox" checked onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
@@ -97,7 +97,7 @@
                               {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
                               {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
                               
-                              <a href="{{ tag_url }}" class="filter-label">
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
                                 <input type="checkbox" onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
