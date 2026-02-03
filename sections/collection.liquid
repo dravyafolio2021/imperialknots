@@ -63,14 +63,10 @@
                 {%- endif -%}
               {%- endfor -%}
 
-              {%- comment -%} BLOCK: MANUAL TAG LIST (FIXED) {%- endcomment -%}
+            {%- comment -%} BLOCK: MANUAL TAG LIST (FIXED) {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
-                <details
-                  {% if block.settings.default_open %}
-                    open
-                  {% endif %}
-                >
+                <details {% if block.settings.default_open %}open{% endif %}>
                   <summary class="filter-title">
                     <span>{{ block.settings.title }}</span>
                     <span class="icon-chevron"></span>
@@ -80,16 +76,29 @@
                       {%- assign custom_tags = block.settings.tag_list | split: '|' -%}
                       {%- for tag in custom_tags -%}
                         {%- assign clean_tag = tag | strip -%}
+                        
                         {%- if collection.all_tags contains clean_tag -%}
                           <li class="filter-item">
+                            {%- comment -%} 
+                              STEP 1: Generate the correct URL depending on if the tag is active or not.
+                              We use 'split' to pull just the URL out of Shopify's auto-generated link.
+                            {%- endcomment -%}
+                            
                             {%- if current_tags contains clean_tag -%}
-                              <a href="{{ clean_tag | link_to_remove_tag: clean_tag }}" class="filter-label">
-                                <input type="checkbox" checked style="pointer-events:none;">
+                              {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              
+                              <a href="{{ tag_url }}" class="filter-label">
+                                <input type="checkbox" checked onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
+
                             {%- else -%}
-                              <a href="{{ clean_tag | link_to_add_tag: clean_tag }}" class="filter-label">
-                                <input type="checkbox" style="pointer-events:none;">
+                              {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              
+                              <a href="{{ tag_url }}" class="filter-label">
+                                <input type="checkbox" onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
                             {%- endif -%}
