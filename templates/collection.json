@@ -12,6 +12,14 @@
     "main": {
       "type": "collection",
       "blocks": {
+        "tag_group_bgfxT9": {
+          "type": "tag_group",
+          "settings": {
+            "title": "Filter By Material",
+            "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
+            "default_open": true
+          }
+        },
         "filter_group_KyHfaj": {
           "type": "filter_group",
           "name": "Delivery Time:",
@@ -53,6 +61,7 @@
         }
       },
       "block_order": [
+        "tag_group_bgfxT9",
         "filter_group_KyHfaj",
         "price_range_H7Aeez",
         "filter_group_GHR4wG",
