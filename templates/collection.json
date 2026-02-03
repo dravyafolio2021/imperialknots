@@ -20,14 +20,6 @@
             "default_open": true
           }
         },
-        "filter_group_PnhLkH": {
-          "type": "filter_group",
-          "name": "Color",
-          "settings": {
-            "filter_name": "Color",
-            "default_open": false
-          }
-        },
         "price_range_H7Aeez": {
           "type": "price_range",
           "settings": {
@@ -53,7 +45,6 @@
       },
       "block_order": [
         "filter_group_KyHfaj",
-        "filter_group_PnhLkH",
         "price_range_H7Aeez",
         "filter_group_rXtDRY",
         "filter_group_gXF33m"
