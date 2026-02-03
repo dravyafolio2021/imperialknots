@@ -17,7 +17,7 @@
           "settings": {
             "title": "Filter By Material",
             "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
-            "default_open": true
+            "default_open": false
           }
         },
         "filter_group_KyHfaj": {
