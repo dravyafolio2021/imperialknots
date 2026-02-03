@@ -150,7 +150,7 @@
         {%- endfor -%}
 
         {%- comment -%} AUTO SHOW REMAINING FILTERS {%- endcomment -%}
-        {%- if section.settings.show_remaining -%}
+        {% comment %} {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
 
@@ -173,7 +173,7 @@
               {% render 'cora-filter-item', filter: filter, default_open: false %}
             {%- endif -%}
           {%- endfor -%}
-        {%- endif -%}
+        {%- endif -%} {% endcomment %}
       </form>
     </div>
   </aside>
