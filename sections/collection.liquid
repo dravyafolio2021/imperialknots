@@ -64,7 +64,39 @@
                   {% render 'cora-filter-item', filter: filter, block: block %}
                 {%- endif -%}
               {%- endfor -%}
-
+{%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
+            {%- when 'tag_group' -%}
+              <div class="filter-group">
+                <details {% if block.settings.default_open %}open{% endif %}>
+                  <summary class="filter-title">
+                    <span>{{ block.settings.title }}</span>
+                    <span class="icon-chevron"></span>
+                  </summary>
+                  <div class="filter-content">
+                    <ul class="filter-list">
+                      {%- assign custom_tags = block.settings.tag_list | split: '|' -%}
+                      {%- for tag in custom_tags -%}
+                        {%- assign clean_tag = tag | strip -%}
+                        {%- if collection.all_tags contains clean_tag -%}
+                          <li class="filter-item">
+                            {%- if current_tags contains clean_tag -%}
+                              <a href="{{ clean_tag | link_to_remove_tag: clean_tag }}" class="filter-label">
+                                <input type="checkbox" checked onclick="this.parentElement.click()">
+                                {{ clean_tag }}
+                              </a>
+                            {%- else -%}
+                              <a href="{{ clean_tag | link_to_add_tag: clean_tag }}" class="filter-label">
+                                <input type="checkbox" onclick="this.parentElement.click()">
+                                {{ clean_tag }}
+                              </a>
+                            {%- endif -%}
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </details>
+              </div>
               {%- comment -%} BLOCK: PRICE RANGE {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
@@ -158,7 +190,7 @@
           </div>
         {% endfor %}
       </div>
-   
+
       {% if paginate.pages > 1 %}
         <nav class="cora-pagination" role="navigation" aria-label="Pagination">
           <div class="cora-pagination__left">
@@ -279,6 +311,31 @@
           "default": "Color"
         },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
+      ]
+    },
+    {
+      "type": "tag_group",
+      "name": "Tag List (Manual)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Filter Title",
+          "default": "Filter By Material"
+        },
+        {
+          "type": "textarea",
+          "id": "tag_list",
+          "label": "Tags to Show",
+          "default": "Wool|Jute|Cotton",
+          "info": "Separate exact tag names with a pipe '|'. Example: Wool|Cotton|Silk"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "Open by default",
+          "default": true
+        }
       ]
     },
     {
