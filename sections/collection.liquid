@@ -30,6 +30,35 @@
 
       <form class="filter-form">
         {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
+         {%- if section.settings.show_remaining -%}
+          {%- for filter in collection.filters -%}
+            {%- assign rendered = false -%}
+
+            {%- comment -%} 1. Check if this filter was already rendered by a block above {%- endcomment -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'price_range' -%}{% assign rendered = true %}{%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- assign b_name = block.settings.filter_name | downcase -%}
+                {%- assign f_label = filter.label | downcase -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}
+                  {% assign rendered = true %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- comment -%} 2. If NOT rendered yet, show ONLY if it is "Availability" {%- endcomment -%}
+            {%- if rendered == false -%}
+              {%- assign clean_label = filter.label | downcase -%}
+              {%- if clean_label == 'availability' -%}
+                {% render 'cora-filter-item', filter: filter, default_open: false %}
+              {%- endif -%}
+            {%- endif -%}
+            
+          {%- endfor -%}
+        {%- endif -%}
 
         {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
         {%- for block in section.blocks -%}
