@@ -108,11 +108,7 @@
 
                         {%- if collection.all_tags contains clean_tag -%}
                           <li class="filter-item">
-                            {%- comment -%}
-                              STEP 1: Generate the correct URL depending on if the tag is active or not.
-                              We use 'split' to pull just the URL out of Shopify's auto-generated link.
-                            {%- endcomment -%}
-
+                          
                             {%- if current_tags contains clean_tag -%}
                               {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
                               {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
@@ -148,8 +144,6 @@
               {%- endfor -%}
           {%- endcase -%}
         {%- endfor -%}
-
-       
       </form>
     </div>
   </aside>
