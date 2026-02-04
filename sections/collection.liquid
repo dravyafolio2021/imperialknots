@@ -53,7 +53,7 @@
             {%- if rendered == false -%}
               {%- assign clean_label = filter.label | downcase -%}
               {%- if clean_label == 'availability' -%}
-                {% render 'cora-filter-item', filter: filter, default_open: false %}
+                {% render 'cora-filter-item', filter: filter, default_open: true %}
               {%- endif -%}
             {%- endif -%}
             
