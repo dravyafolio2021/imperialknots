@@ -14,6 +14,7 @@
       "blocks": {
         "price_range_H7Aeez": {
           "type": "price_range",
+          "disabled": true,
           "settings": {
             "default_open": false
           }
@@ -33,6 +34,14 @@
             "title": "Filter By Material",
             "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
             "default_open": false
+          }
+        },
+        "tag_group_fVap7t": {
+          "type": "tag_group",
+          "settings": {
+            "title": "Filter By Shape",
+            "tag_list": "Runner|Round",
+            "default_open": true
           }
         },
         "filter_group_KyHfaj": {
@@ -58,6 +67,7 @@
         "price_range_H7Aeez",
         "filter_group_rXtDRY",
         "tag_group_bgfxT9",
+        "tag_group_fVap7t",
         "filter_group_KyHfaj",
         "filter_group_gXF33m"
       ],
