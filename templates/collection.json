@@ -18,7 +18,7 @@
             "default_open": false
           }
         },
-        "tag_group_bgfxT9": {
+        "tag_group_XwBU7F": {
           "type": "tag_group",
           "settings": {
             "title": "Filter By Material",
@@ -37,7 +37,7 @@
       },
       "block_order": [
         "price_range_H7Aeez",
-        "tag_group_bgfxT9",
+        "tag_group_XwBU7F",
         "tag_group_fVap7t"
       ],
       "settings": {
