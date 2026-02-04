@@ -18,27 +18,59 @@
             "default_open": false
           }
         },
-        "tag_group_XwBU7F": {
+        "tag_group_34hrhn": {
           "type": "tag_group",
+          "name": "Filter By Size",
           "settings": {
-            "title": "Filter By Material",
-            "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
+            "title": "Filter By Size",
+            "tag_list": "Runner|Round|3 FT (W) X 5 FT (L)|4 FT (W) X 6 FT (L)|5 FT (W) X 8 FT (L)|6 FT (W) X 9 FT (L)|8 FT (W) X 10 FT (L)|9 FT (W) X 12 FT (L)",
+            "default_open": false
+          }
+        },
+        "tag_group_GnBqqw": {
+          "type": "tag_group",
+          "name": "Filter By Color",
+          "settings": {
+            "title": "Filter By Color",
+            "tag_list": "BLUE|RED|IVORY|PINK|GREEN|BLACK|WHITE|PURPLE|GREY|YELLOW|BROWN|BLACK-AND-WHITE|MULTICOLOR|BLACK AND WHITE",
             "default_open": false
           }
         },
         "tag_group_fVap7t": {
           "type": "tag_group",
+          "name": "Filter By Shape",
           "settings": {
             "title": "Filter By Shape",
             "tag_list": "Runner|Round",
-            "default_open": true
+            "default_open": false
+          }
+        },
+        "tag_group_C7cfgt": {
+          "type": "tag_group",
+          "name": "Filter By Weave",
+          "settings": {
+            "title": "Filter By Weave",
+            "tag_list": "HAND TUFTED|HAND WOVEN|HAND LOOM|HAND KNOTTED|SHAGGY",
+            "default_open": false
+          }
+        },
+        "tag_group_XwBU7F": {
+          "type": "tag_group",
+          "name": "Filter By Material",
+          "settings": {
+            "title": "Filter By Material",
+            "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
+            "default_open": false
           }
         }
       },
       "block_order": [
         "price_range_H7Aeez",
-        "tag_group_XwBU7F",
-        "tag_group_fVap7t"
+        "tag_group_34hrhn",
+        "tag_group_GnBqqw",
+        "tag_group_fVap7t",
+        "tag_group_C7cfgt",
+        "tag_group_XwBU7F"
       ],
       "settings": {
         "products_per_page": 24,
