@@ -27,14 +27,12 @@
         <span class="filter-header-title">Filters</span>
         <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
       </div>
-      
-    
+
       <form class="filter-form">
         {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
-            
-            {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
+              {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
             {%- when 'text' -%}
               <div class="sidebar-block sidebar-text" {{ block.shopify_attributes }}>
                 {% if block.settings.title != blank %}
@@ -43,28 +41,37 @@
                 <p>{{ block.settings.text }}</p>
               </div>
 
-            {%- comment -%} BLOCK: PROMO IMAGE {%- endcomment -%}
+              {%- comment -%} BLOCK: PROMO IMAGE {%- endcomment -%}
             {%- when 'image' -%}
               <div class="sidebar-block sidebar-image" {{ block.shopify_attributes }}>
                 {% if block.settings.image %}
-                  <img src="{{ block.settings.image | img_url: '400x' }}" alt="Promo" loading="lazy" style="width:100%; border-radius:8px;">
+                  <img
+                    src="{{ block.settings.image | img_url: '400x' }}"
+                    alt="Promo"
+                    loading="lazy"
+                    style="width:100%; border-radius:8px;"
+                  >
                 {% endif %}
               </div>
 
-            {%- comment -%} BLOCK: SPECIFIC FILTER (e.g. Color, Size, Availability) {%- endcomment -%}
+              {%- comment -%} BLOCK: SPECIFIC FILTER (e.g. Color, Size, Availability) {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
-              {%- for filter in collection.filters -%}
+              {% comment %} {%- for filter in collection.filters -%}
                 {%- assign current_filter = filter.label | downcase -%}
                 {%- if current_filter == target_filter -%}
                   {% render 'cora-filter-item', filter: filter, block: block %}
                 {%- endif -%}
-              {%- endfor -%}
+              {%- endfor -%} {% endcomment %}
 
-            {%- comment -%} BLOCK: MANUAL TAG LIST (e.g. Material) {%- endcomment -%}
+              {%- comment -%} BLOCK: MANUAL TAG LIST (e.g. Material) {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
-                <details {% if block.settings.default_open %} open {% endif %}>
+                <details
+                  {% if block.settings.default_open %}
+                    open
+                  {% endif %}
+                >
                   <summary class="filter-title">
                     <span>{{ block.settings.title }}</span>
                     <span class="icon-chevron"></span>
@@ -99,7 +106,6 @@
                 </details>
               </div>
 
-         
               {%- comment -%} BLOCK: PRICE RANGE {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
@@ -107,7 +113,6 @@
                   {% render 'cora-filter-item', filter: filter, block: block %}
                 {%- endif -%}
               {%- endfor -%}
-
           {%- endcase -%}
         {%- endfor -%}
 
