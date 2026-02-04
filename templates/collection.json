@@ -12,6 +12,21 @@
     "main": {
       "type": "collection",
       "blocks": {
+        "price_range_H7Aeez": {
+          "type": "price_range",
+          "settings": {
+            "default_open": false
+          }
+        },
+        "filter_group_rXtDRY": {
+          "type": "filter_group",
+          "name": "Color",
+          "disabled": true,
+          "settings": {
+            "filter_name": "Color:",
+            "default_open": false
+          }
+        },
         "tag_group_bgfxT9": {
           "type": "tag_group",
           "settings": {
@@ -23,37 +38,16 @@
         "filter_group_KyHfaj": {
           "type": "filter_group",
           "name": "Delivery Time:",
+          "disabled": true,
           "settings": {
             "filter_name": "Delivery Time:",
             "default_open": true
           }
         },
-        "price_range_H7Aeez": {
-          "type": "price_range",
-          "settings": {
-            "default_open": false
-          }
-        },
-        "filter_group_GHR4wG": {
-          "type": "filter_group",
-          "name": "Material",
-          "disabled": true,
-          "settings": {
-            "filter_name": "Material",
-            "default_open": false
-          }
-        },
-        "filter_group_rXtDRY": {
-          "type": "filter_group",
-          "name": "Color",
-          "settings": {
-            "filter_name": "Color:",
-            "default_open": false
-          }
-        },
         "filter_group_gXF33m": {
           "type": "filter_group",
           "name": "Product type",
+          "disabled": true,
           "settings": {
             "filter_name": "Product type",
             "default_open": false
@@ -61,11 +55,10 @@
         }
       },
       "block_order": [
+        "price_range_H7Aeez",
+        "filter_group_rXtDRY",
         "tag_group_bgfxT9",
         "filter_group_KyHfaj",
-        "price_range_H7Aeez",
-        "filter_group_GHR4wG",
-        "filter_group_rXtDRY",
         "filter_group_gXF33m"
       ],
       "settings": {
