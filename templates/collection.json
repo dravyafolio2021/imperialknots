@@ -18,14 +18,6 @@
             "default_open": false
           }
         },
-        "tag_group_XwBU7F": {
-          "type": "tag_group",
-          "settings": {
-            "title": "Filter By Material",
-            "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
-            "default_open": false
-          }
-        },
         "tag_group_fVap7t": {
           "type": "tag_group",
           "settings": {
@@ -33,12 +25,20 @@
             "tag_list": "Runner|Round",
             "default_open": true
           }
+        },
+        "tag_group_XwBU7F": {
+          "type": "tag_group",
+          "settings": {
+            "title": "Filter By Material",
+            "tag_list": "WOOL|JUTE|VISCOSE|POLYESTER|COTTON|WOOL AND ART SILK",
+            "default_open": false
+          }
         }
       },
       "block_order": [
         "price_range_H7Aeez",
-        "tag_group_XwBU7F",
-        "tag_group_fVap7t"
+        "tag_group_fVap7t",
+        "tag_group_XwBU7F"
       ],
       "settings": {
         "products_per_page": 24,
