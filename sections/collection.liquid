@@ -28,7 +28,7 @@
         <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
       </div>
       
-      <form class="filter-form">
+      {% comment %} <form class="filter-form">
         {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -130,6 +130,114 @@
             {%- endif -%}
 
             {%- comment -%} If NOT rendered yet, show it now {%- endcomment -%}
+            {%- if rendered == false -%}
+              {% render 'cora-filter-item', filter: filter, default_open: false %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </form> {% endcomment %}
+      <form class="filter-form">
+        {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            
+            {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
+            {%- when 'text' -%}
+              <div class="sidebar-block sidebar-text" {{ block.shopify_attributes }}>
+                {% if block.settings.title != blank %}
+                  <h4>{{ block.settings.title }}</h4>
+                {% endif %}
+                <p>{{ block.settings.text }}</p>
+              </div>
+
+            {%- comment -%} BLOCK: PROMO IMAGE {%- endcomment -%}
+            {%- when 'image' -%}
+              <div class="sidebar-block sidebar-image" {{ block.shopify_attributes }}>
+                {% if block.settings.image %}
+                  <img src="{{ block.settings.image | img_url: '400x' }}" alt="Promo" loading="lazy" style="width:100%; border-radius:8px;">
+                {% endif %}
+              </div>
+
+            {%- comment -%} BLOCK: SPECIFIC FILTER (e.g. Color, Size, Availability) {%- endcomment -%}
+            {%- when 'filter_group' -%}
+              {%- assign target_filter = block.settings.filter_name | downcase -%}
+              {%- for filter in collection.filters -%}
+                {%- assign current_filter = filter.label | downcase -%}
+                {%- if current_filter == target_filter -%}
+                  {% render 'cora-filter-item', filter: filter, block: block %}
+                {%- endif -%}
+              {%- endfor -%}
+
+            {%- comment -%} BLOCK: MANUAL TAG LIST (e.g. Material) {%- endcomment -%}
+            {%- when 'tag_group' -%}
+              <div class="filter-group" {{ block.shopify_attributes }}>
+                <details {% if block.settings.default_open %} open {% endif %}>
+                  <summary class="filter-title">
+                    <span>{{ block.settings.title }}</span>
+                    <span class="icon-chevron"></span>
+                  </summary>
+                  <div class="filter-content">
+                    <ul class="filter-list">
+                      {%- assign custom_tags = block.settings.tag_list | split: '|' -%}
+                      {%- for tag in custom_tags -%}
+                        {%- assign clean_tag = tag | strip -%}
+                        {%- if collection.all_tags contains clean_tag -%}
+                          <li class="filter-item">
+                            {%- if current_tags contains clean_tag -%}
+                              {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
+                                <input type="checkbox" checked onclick="this.parentElement.click();">
+                                <span>{{ clean_tag }}</span>
+                              </a>
+                            {%- else -%}
+                              {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
+                                <input type="checkbox" onclick="this.parentElement.click();">
+                                <span>{{ clean_tag }}</span>
+                              </a>
+                            {%- endif -%}
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </details>
+              </div>
+
+            {%- comment -%} BLOCK: PRICE RANGE {%- endcomment -%}
+            {%- when 'price_range' -%}
+              {%- for filter in collection.filters -%}
+                {%- if filter.type == 'price_range' -%}
+                  {% render 'cora-filter-item', filter: filter, block: block %}
+                {%- endif -%}
+              {%- endfor -%}
+
+          {%- endcase -%}
+        {%- endfor -%}
+
+        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
+        {%- if section.settings.show_remaining -%}
+          {%- for filter in collection.filters -%}
+            {%- assign rendered = false -%}
+
+            {%- comment -%} Check if this filter was already rendered by a block above {%- endcomment -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'price_range' -%}{% assign rendered = true %}{%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- assign b_name = block.settings.filter_name | downcase -%}
+                {%- assign f_label = filter.label | downcase -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}
+                  {% assign rendered = true %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- comment -%} If NOT rendered yet, show it now (Closed by default) {%- endcomment -%}
             {%- if rendered == false -%}
               {% render 'cora-filter-item', filter: filter, default_open: false %}
             {%- endif -%}
