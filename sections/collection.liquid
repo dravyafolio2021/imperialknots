@@ -29,6 +29,8 @@
       </div>
 
       <form class="filter-form">
+        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
+
         {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -116,32 +118,6 @@
           {%- endcase -%}
         {%- endfor -%}
 
-        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
-        {% comment %} {%- if section.settings.show_remaining -%}
-          {%- for filter in collection.filters -%}
-            {%- assign rendered = false -%}
-
-            {%- comment -%} Check if this filter was already rendered by a block above {%- endcomment -%}
-            {%- if filter.type == 'price_range' -%}
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'price_range' -%}{% assign rendered = true %}{%- endif -%}
-              {%- endfor -%}
-            {%- else -%}
-              {%- for block in section.blocks -%}
-                {%- assign b_name = block.settings.filter_name | downcase -%}
-                {%- assign f_label = filter.label | downcase -%}
-                {%- if block.type == 'filter_group' and b_name == f_label -%}
-                  {% assign rendered = true %}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-
-            {%- comment -%} If NOT rendered yet, show it now (Closed by default) {%- endcomment -%}
-            {%- if rendered == false -%}
-              {% render 'cora-filter-item', filter: filter, default_open: false %}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%} {% endcomment %}
       </form>
     
     </div>
