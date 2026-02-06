@@ -1,41 +1,47 @@
 {% comment %}
   Snippet: cora-filter-price.liquid
-  Usage: Renders Price Ranges as Radio Buttons (e.g. Under 1000, 1000-2000).
-  Matches the style of the Availability filter.
+  Usage: Renders Price Ranges as VISIBLE Radio Buttons.
 {% endcomment %}
 
-{%- liquid
-  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
-  assign uses_comma_decimals = false
-  if currencies_using_comma_decimals contains cart.currency.iso_code
-    assign uses_comma_decimals = true
-  endif
--%}
-
 <style>
+  /* 1. Reset standard styles */
   .cora-price-group { padding: 15px 0; border-bottom: 1px solid #eee; }
   .cora-price-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; margin-bottom: 10px; }
   
-  /* List Styles to match Availability */
+  /* 2. List Styling */
   .cora-price-list { list-style: none; padding: 0; margin: 0; }
-  .cora-price-item { margin-bottom: 8px; font-size: 14px; color: #333; display: flex; align-items: center; cursor: pointer; }
-  .cora-price-item:hover { color: #EC7109; }
+  .cora-price-item { 
+    margin-bottom: 10px; 
+    font-size: 14px; 
+    color: #333; 
+    display: flex; 
+    align-items: center; 
+    cursor: pointer; 
+  }
   
-  /* Custom Radio Styling */
+  /* 3. FORCE RADIO VISIBILITY */
   .cora-price-radio { 
-    margin-right: 10px; 
-    accent-color: #EC7109; /* Matches your brand color */
-    width: 16px; 
-    height: 16px;
+    appearance: auto !important; /* Forces browser default radio look */
+    -webkit-appearance: radio !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-right: 10px !important;
+    width: 16px !important;
+    height: 16px !important;
+    accent-color: #EC7109; /* Your Brand Orange */
     cursor: pointer;
   }
 
-  /* Manual Input Toggle */
+  .cora-price-item label { cursor: pointer; width: 100%; }
+  .cora-price-item:hover { color: #EC7109; }
+
+  /* Manual Input Section */
   .cora-manual-toggle { margin-top: 10px; font-size: 12px; text-decoration: underline; cursor: pointer; color: #666; }
   .cora-manual-inputs { display: none; margin-top: 10px; gap: 10px; }
   .cora-manual-inputs.active { display: flex; }
-  .cora-price-input { width: 48%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
-  .cora-price-go { background: #000; color: #fff; border: none; padding: 0 10px; border-radius: 4px; cursor: pointer; }
+  .cora-price-input { width: 45%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+  .cora-price-go { background: #000; color: #fff; border: none; padding: 0 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
 </style>
 
 <div class="cora-price-group">
@@ -57,38 +63,36 @@
       </price-range>
 
       <ul class="cora-price-list">
+        
         <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-1" 
-                 onclick="setPrice(0, 1000)">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-1" onclick="setPrice(0, 1000)">
           <label for="pr-1">Under {{ 1000 | money_without_trailing_zeros }}</label>
         </li>
 
         <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-2" 
-                 onclick="setPrice(1000, 2500)">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-2" onclick="setPrice(1000, 2500)">
           <label for="pr-2">{{ 1000 | money_without_trailing_zeros }} - {{ 2500 | money_without_trailing_zeros }}</label>
         </li>
 
         <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-3" 
-                 onclick="setPrice(2500, 5000)">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-3" onclick="setPrice(2500, 5000)">
           <label for="pr-3">{{ 2500 | money_without_trailing_zeros }} - {{ 5000 | money_without_trailing_zeros }}</label>
         </li>
 
         <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-4" 
-                 onclick="setPrice(5000, null)">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-4" onclick="setPrice(5000, null)">
           <label for="pr-4">Above {{ 5000 | money_without_trailing_zeros }}</label>
         </li>
+
       </ul>
 
       <div class="cora-manual-toggle" onclick="document.querySelector('.cora-manual-inputs').classList.toggle('active')">
-        Enter custom price range
+        Custom Range +
       </div>
       <div class="cora-manual-inputs">
         <input type="number" placeholder="Min" id="Custom-Min" class="cora-price-input">
         <input type="number" placeholder="Max" id="Custom-Max" class="cora-price-input">
-        <button type="button" class="cora-price-go" onclick="applyCustomPrice()">Go</button>
+        <button type="button" class="cora-price-go" onclick="applyCustomPrice()">GO</button>
       </div>
 
     </div>
@@ -97,12 +101,11 @@
 
 <script>
   function setPrice(min, max) {
-    // 1. Set the hidden Shopify inputs
+    // 1. Update Hidden Inputs
     document.getElementById('Real-Min').value = min;
     document.getElementById('Real-Max').value = max ? max : '';
     
-    // 2. Submit the form automatically
-    // Finding the closest form (usually 'CollectionFiltersForm' or similar)
+    // 2. Submit Form
     var form = document.getElementById('Real-Min').closest('form');
     if(form) form.submit();
   }
@@ -113,7 +116,7 @@
     setPrice(min, max);
   }
   
-  // Highlight the active radio on load
+  // Highlight active selection on load
   document.addEventListener("DOMContentLoaded", function() {
     var currentMin = "{{ filter.min_value.value | divided_by: 100.00 | ceil }}";
     var currentMax = "{{ filter.max_value.value | divided_by: 100.00 | ceil }}";
