@@ -224,7 +224,7 @@
                 {%- endif %}
                 {% if product.featured_image %}
                   <img
-                    src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+                    src="{{ product.featured_image | img_url: '600x600' }}"
                     alt="{{ product.title }}"
                     loading="lazy"
                   >
