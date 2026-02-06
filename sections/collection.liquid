@@ -49,22 +49,22 @@
               {%- endfor -%}
             {%- endif -%}
 
-            {%- comment -%} 2. If NOT rendered yet, render Price or Availability only {%- endcomment -%}
+            {%- comment -%} 2. If NOT rendered yet, render ONLY Price or Availability {%- endcomment -%}
             {%- if rendered == false -%}
               {%- assign clean_label = filter.label | downcase -%}
               
               {%- if filter.type == 'price_range' -%}
-                {%- comment -%} FIX: Render Price Filter using its specific snippet {%- endcomment -%}
                 {% render 'cora-filter-price', filter: filter, default_open: true %}
                 
               {%- elsif clean_label == 'availability' -%}
-                {%- comment -%} FIX: Render Availability Filter {%- endcomment -%}
-                {% render 'cora-filter-item', filter: filter, default_open: true %}
-                
-                {%- comment -%} FIX: Hide "Out of Stock" (Value 0) using CSS {%- endcomment -%}
+                <div class="availability-filter-wrapper">
+                  {% render 'cora-filter-item', filter: filter, default_open: true %}
+                </div>
+
                 <style>
-                  /* This hides any list item that contains an input with value="0" (Out of Stock) */
-                  li:has(input[value="0"]) { display: none !important; }
+                  .availability-filter-wrapper li:has(input[value="0"]) { 
+                    display: none !important; 
+                  }
                 </style>
               {%- endif -%}
               
