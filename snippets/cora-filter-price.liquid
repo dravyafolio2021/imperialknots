@@ -1,79 +1,26 @@
 {% comment %}
   Snippet: cora-filter-price.liquid
-  Usage: Renders specific Price Range inputs for the collection filter.
+  Usage: Renders Price Range inputs using RAW numbers to prevent Currency/Comma errors.
 {% endcomment %}
 
+{%- liquid
+  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+  assign uses_comma_decimals = false
+  if currencies_using_comma_decimals contains cart.currency.iso_code
+    assign uses_comma_decimals = true
+  endif
+-%}
+
 <style>
-  /* Basic styling for the price filter to match your theme */
-  .cora-price-group {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-  }
-  .cora-price-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  .cora-price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .cora-price-field {
-    display: flex;
-    flex-direction: column;
-    width: 48%;
-  }
-  .cora-price-field label {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #666;
-    margin-bottom: 4px;
-  }
-  .cora-input-wrapper {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 8px;
-    border-radius: 4px;
-  }
-  .cora-currency {
-    font-size: 14px;
-    margin-right: 4px;
-    color: #333;
-  }
-  .cora-price-input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    padding: 0;
-    -moz-appearance: textfield;
-  }
-  .cora-price-input::-webkit-outer-spin-button,
-  .cora-price-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  .cora-apply-btn {
-    margin-top: 10px;
-    width: 100%;
-    padding: 8px;
-    background: #000;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    text-transform: uppercase;
-  }
-  .cora-apply-btn:hover {
-    opacity: 0.8;
-  }
+  .cora-price-group { padding: 15px 0; border-bottom: 1px solid #eee; }
+  .cora-price-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .cora-price-inputs { display: flex; align-items: center; gap: 10px; }
+  .cora-price-field { display: flex; flex-direction: column; width: 48%; }
+  .cora-price-field label { font-size: 11px; text-transform: uppercase; color: #666; margin-bottom: 4px; }
+  .cora-input-wrapper { display: flex; align-items: center; border: 1px solid #ccc; padding: 8px; border-radius: 4px; }
+  .cora-currency { font-size: 14px; margin-right: 4px; color: #333; }
+  .cora-price-input { width: 100%; border: none; outline: none; font-size: 14px; padding: 0; -moz-appearance: textfield; }
+  .cora-price-input::-webkit-outer-spin-button, .cora-price-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 </style>
 
 <div class="cora-price-group">
@@ -99,9 +46,9 @@
                 type="number"
                 placeholder="0"
                 min="0"
-                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                max="{{ filter.range_max | divided_by: 100.00 | ceil }}"
                 {% if filter.min_value.value %}
-                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                  value="{{ filter.min_value.value | divided_by: 100.00 | ceil }}"
                 {% endif %}
               >
             </div>
@@ -116,10 +63,10 @@
                 id="Filter-{{ filter.label | escape }}-LTE"
                 type="number"
                 min="0"
-                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                max="{{ filter.range_max | divided_by: 100.00 | ceil }}"
+                placeholder="{{ filter.range_max | divided_by: 100.00 | ceil }}"
                 {% if filter.max_value.value %}
-                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                  value="{{ filter.max_value.value | divided_by: 100.00 | ceil }}"
                 {% endif %}
               >
             </div>
@@ -127,10 +74,6 @@
 
         </div>
       </price-range>
-      
-      <noscript>
-        <button type="submit" class="cora-apply-btn">Apply</button>
-      </noscript>
     </div>
   </details>
 </div>
