@@ -30,11 +30,11 @@
 
       <form class="filter-form">
         {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
-         {%- if section.settings.show_remaining -%}
+        {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
 
-            {%- comment -%} 1. Check if this filter was already rendered by a block above {%- endcomment -%}
+            {%- comment -%} Check if this filter was already rendered by a custom block {%- endcomment -%}
             {%- if filter.type == 'price_range' -%}
               {%- for block in section.blocks -%}
                 {%- if block.type == 'price_range' -%}{% assign rendered = true %}{%- endif -%}
@@ -49,7 +49,7 @@
               {%- endfor -%}
             {%- endif -%}
 
-            {%- comment -%} 2. If NOT rendered yet, render ONLY Price or Availability {%- endcomment -%}
+            {%- comment -%} Render if NOT done yet (Only Price & Availability) {%- endcomment -%}
             {%- if rendered == false -%}
               {%- assign clean_label = filter.label | downcase -%}
               
