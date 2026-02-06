@@ -23,10 +23,7 @@
   {%- comment -%} SIDEBAR (Block-Based) {%- endcomment -%}
   <aside class="collection-sidebar">
     <div class="filter-wrapper">
-      <div class="filter-header">
-        <span class="filter-header-title">Filters</span>
-        <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
-      </div>
+      
 
       <form class="filter-form">
         {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
@@ -191,7 +188,10 @@
         {%- endfor -%}
 
       </form>
-    
+    <div class="filter-header">
+        <span class="filter-header-title">Filters</span>
+        <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
+      </div>
     </div>
   </aside>
 
