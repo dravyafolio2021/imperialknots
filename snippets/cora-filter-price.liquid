@@ -1,6 +1,7 @@
 {% comment %}
   Snippet: cora-filter-price.liquid
-  Usage: Renders Price Range inputs using RAW numbers to prevent Currency/Comma errors.
+  Usage: Renders Price Ranges as Radio Buttons (e.g. Under 1000, 1000-2000).
+  Matches the style of the Availability filter.
 {% endcomment %}
 
 {%- liquid
@@ -14,13 +15,27 @@
 <style>
   .cora-price-group { padding: 15px 0; border-bottom: 1px solid #eee; }
   .cora-price-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; margin-bottom: 10px; }
-  .cora-price-inputs { display: flex; align-items: center; gap: 10px; }
-  .cora-price-field { display: flex; flex-direction: column; width: 48%; }
-  .cora-price-field label { font-size: 11px; text-transform: uppercase; color: #666; margin-bottom: 4px; }
-  .cora-input-wrapper { display: flex; align-items: center; border: 1px solid #ccc; padding: 8px; border-radius: 4px; }
-  .cora-currency { font-size: 14px; margin-right: 4px; color: #333; }
-  .cora-price-input { width: 100%; border: none; outline: none; font-size: 14px; padding: 0; -moz-appearance: textfield; }
-  .cora-price-input::-webkit-outer-spin-button, .cora-price-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  
+  /* List Styles to match Availability */
+  .cora-price-list { list-style: none; padding: 0; margin: 0; }
+  .cora-price-item { margin-bottom: 8px; font-size: 14px; color: #333; display: flex; align-items: center; cursor: pointer; }
+  .cora-price-item:hover { color: #EC7109; }
+  
+  /* Custom Radio Styling */
+  .cora-price-radio { 
+    margin-right: 10px; 
+    accent-color: #EC7109; /* Matches your brand color */
+    width: 16px; 
+    height: 16px;
+    cursor: pointer;
+  }
+
+  /* Manual Input Toggle */
+  .cora-manual-toggle { margin-top: 10px; font-size: 12px; text-decoration: underline; cursor: pointer; color: #666; }
+  .cora-manual-inputs { display: none; margin-top: 10px; gap: 10px; }
+  .cora-manual-inputs.active { display: flex; }
+  .cora-price-input { width: 48%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+  .cora-price-go { background: #000; color: #fff; border: none; padding: 0 10px; border-radius: 4px; cursor: pointer; }
 </style>
 
 <div class="cora-price-group">
@@ -33,47 +48,79 @@
     </summary>
 
     <div class="cora-price-content">
-      <price-range class="facets__price">
-        <div class="cora-price-inputs">
-          
-          <div class="cora-price-field">
-            <label for="Filter-{{ filter.label | escape }}-GTE">Min</label>
-            <div class="cora-input-wrapper">
-              <span class="cora-currency">{{ cart.currency.symbol }}</span>
-              <input class="cora-price-input"
-                name="{{ filter.min_value.param_name }}"
-                id="Filter-{{ filter.label | escape }}-GTE"
-                type="number"
-                placeholder="0"
-                min="0"
-                max="{{ filter.range_max | divided_by: 100.00 | ceil }}"
-                {% if filter.min_value.value %}
-                  value="{{ filter.min_value.value | divided_by: 100.00 | ceil }}"
-                {% endif %}
-              >
-            </div>
-          </div>
-
-          <div class="cora-price-field">
-            <label for="Filter-{{ filter.label | escape }}-LTE">Max</label>
-            <div class="cora-input-wrapper">
-              <span class="cora-currency">{{ cart.currency.symbol }}</span>
-              <input class="cora-price-input"
-                name="{{ filter.max_value.param_name }}"
-                id="Filter-{{ filter.label | escape }}-LTE"
-                type="number"
-                min="0"
-                max="{{ filter.range_max | divided_by: 100.00 | ceil }}"
-                placeholder="{{ filter.range_max | divided_by: 100.00 | ceil }}"
-                {% if filter.max_value.value %}
-                  value="{{ filter.max_value.value | divided_by: 100.00 | ceil }}"
-                {% endif %}
-              >
-            </div>
-          </div>
-
-        </div>
+      
+      <price-range class="facets__price" style="display:none;">
+        <input name="{{ filter.min_value.param_name }}" id="Real-Min"
+          {% if filter.min_value.value %}value="{{ filter.min_value.value | divided_by: 100.00 | ceil }}"{% endif %}>
+        <input name="{{ filter.max_value.param_name }}" id="Real-Max"
+          {% if filter.max_value.value %}value="{{ filter.max_value.value | divided_by: 100.00 | ceil }}"{% endif %}>
       </price-range>
+
+      <ul class="cora-price-list">
+        <li class="cora-price-item">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-1" 
+                 onclick="setPrice(0, 1000)">
+          <label for="pr-1">Under {{ 1000 | money_without_trailing_zeros }}</label>
+        </li>
+
+        <li class="cora-price-item">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-2" 
+                 onclick="setPrice(1000, 2500)">
+          <label for="pr-2">{{ 1000 | money_without_trailing_zeros }} - {{ 2500 | money_without_trailing_zeros }}</label>
+        </li>
+
+        <li class="cora-price-item">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-3" 
+                 onclick="setPrice(2500, 5000)">
+          <label for="pr-3">{{ 2500 | money_without_trailing_zeros }} - {{ 5000 | money_without_trailing_zeros }}</label>
+        </li>
+
+        <li class="cora-price-item">
+          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-4" 
+                 onclick="setPrice(5000, null)">
+          <label for="pr-4">Above {{ 5000 | money_without_trailing_zeros }}</label>
+        </li>
+      </ul>
+
+      <div class="cora-manual-toggle" onclick="document.querySelector('.cora-manual-inputs').classList.toggle('active')">
+        Enter custom price range
+      </div>
+      <div class="cora-manual-inputs">
+        <input type="number" placeholder="Min" id="Custom-Min" class="cora-price-input">
+        <input type="number" placeholder="Max" id="Custom-Max" class="cora-price-input">
+        <button type="button" class="cora-price-go" onclick="applyCustomPrice()">Go</button>
+      </div>
+
     </div>
   </details>
 </div>
+
+<script>
+  function setPrice(min, max) {
+    // 1. Set the hidden Shopify inputs
+    document.getElementById('Real-Min').value = min;
+    document.getElementById('Real-Max').value = max ? max : '';
+    
+    // 2. Submit the form automatically
+    // Finding the closest form (usually 'CollectionFiltersForm' or similar)
+    var form = document.getElementById('Real-Min').closest('form');
+    if(form) form.submit();
+  }
+
+  function applyCustomPrice() {
+    var min = document.getElementById('Custom-Min').value;
+    var max = document.getElementById('Custom-Max').value;
+    setPrice(min, max);
+  }
+  
+  // Highlight the active radio on load
+  document.addEventListener("DOMContentLoaded", function() {
+    var currentMin = "{{ filter.min_value.value | divided_by: 100.00 | ceil }}";
+    var currentMax = "{{ filter.max_value.value | divided_by: 100.00 | ceil }}";
+
+    if(currentMin == "0" && currentMax == "1000") document.getElementById('pr-1').checked = true;
+    if(currentMin == "1000" && currentMax == "2500") document.getElementById('pr-2').checked = true;
+    if(currentMin == "2500" && currentMax == "5000") document.getElementById('pr-3').checked = true;
+    if(currentMin == "5000" && currentMax == "") document.getElementById('pr-4').checked = true;
+  });
+</script>
