@@ -1,7 +1,7 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
   Usage: Custom Price List (Collapsible) targeting Sale Price.
-  Updated: Uses JS to set active state and ensures "Radio" behavior.
+  Updated: Robust Number comparison for Active State
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
@@ -28,9 +28,6 @@
           {%- assign max_price = range_vals[1] | strip -%}
 
           <li class="price-list-item">
-            {%- comment -%} 
-              We assign data attributes (data-min, data-max) so JS can find the active one easily 
-            {%- endcomment -%}
             <div class="cora-radio-fake"
                  data-min="{{ min_price }}"
                  data-max="{{ max_price }}"
@@ -47,18 +44,22 @@
 </div>
 
 <script>
-  // 1. Function to Handle Clicks
+  // 1. Click Handler
   function applyCustomPrice(min, max, element) {
     const params = new URLSearchParams(window.location.search);
-    const currentMin = params.get('filter.v.price.gte');
-    const currentMax = params.get('filter.v.price.lte');
+    
+    // Convert to numbers for comparison to handle 50000 vs 50000.00
+    const currentMin = parseFloat(params.get('filter.v.price.gte'));
+    const currentMax = parseFloat(params.get('filter.v.price.lte'));
+    const targetMin = parseFloat(min);
+    const targetMax = parseFloat(max);
 
-    if (currentMin === min && currentMax === max) {
-      // Toggle OFF if clicking the active one
+    if (currentMin === targetMin && currentMax === targetMax) {
+      // Toggle OFF
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
-      // Set NEW Price Range
+      // Set NEW
       params.set('filter.v.price.gte', min);
       params.set('filter.v.price.lte', max);
     }
@@ -66,20 +67,36 @@
     window.location.href = '?' + params.toString();
   }
 
-  // 2. Function to Highlight Active Box on Load
-  document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const urlMin = params.get('filter.v.price.gte');
-    const urlMax = params.get('filter.v.price.lte');
+  // 2. Highlight Active Box (Auto-Run)
+  (function() {
+    function highlightActive() {
+      const params = new URLSearchParams(window.location.search);
+      // We accept 0 if parameter is missing/NaN to prevent errors
+      const urlMin = parseFloat(params.get('filter.v.price.gte')) || 0;
+      const urlMax = parseFloat(params.get('filter.v.price.lte')) || 0;
 
-    if (urlMin && urlMax) {
-      // Find the box that matches the current URL params
-      const activeBox = document.querySelector(`.cora-radio-fake[data-min="${urlMin}"][data-max="${urlMax}"]`);
-      if (activeBox) {
-        activeBox.classList.add('active');
-      }
+      const boxes = document.querySelectorAll('.cora-radio-fake');
+      
+      boxes.forEach(box => {
+        const boxMin = parseFloat(box.getAttribute('data-min')) || 0;
+        const boxMax = parseFloat(box.getAttribute('data-max')) || 0;
+
+        // If URL params match the box params (ignoring decimals)
+        if (urlMin === boxMin && urlMax === boxMax && urlMax > 0) {
+          box.classList.add('active');
+        } else {
+          box.classList.remove('active');
+        }
+      });
     }
-  });
+
+    // Run on Load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', highlightActive);
+    } else {
+      highlightActive();
+    }
+  })();
 </script>
 
 <style>
