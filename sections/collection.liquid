@@ -11,10 +11,47 @@
     grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: 12px;
   }
+  
+  /* Desktop Styles & Sticky Sidebar */
   @media (min-width: 768px) {
     #shopify-section-{{ section.id }} .product-grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
       gap: 12px;
+    }
+
+    /* STICKY SIDEBAR LOGIC */
+    .collection-container {
+      display: flex; /* Ensures sidebar and grid are side-by-side */
+      align-items: flex-start; /* Required for sticky to work in flex containers */
+      gap: 30px; /* Spacing between sidebar and grid */
+    }
+
+    .collection-sidebar {
+      position: -webkit-sticky; /* Safari support */
+      position: sticky;
+      top: 20px; /* Distance from top of screen */
+      z-index: 2;
+      width: 250px; /* Ensure consistent width */
+      flex-shrink: 0;
+      height: fit-content; /* Prevents sidebar from stretching full height */
+    }
+
+    .collection-main {
+      flex-grow: 1; /* Grid takes remaining space */
+    }
+
+    /* Scrollable filter area if filters are too tall for screen */
+    .filter-wrapper {
+      max-height: 90vh;
+      overflow-y: auto;
+      scrollbar-width: thin; /* Firefox */
+    }
+    .filter-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
+    .filter-wrapper::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 3px;
     }
   }
 {%- endstyle -%}
@@ -87,44 +124,6 @@
                   {%- endif -%}
                 {%- endunless -%}
               {%- endfor -%}
-
-            {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
-            {%- when 'tag_group' -%}
-              <div class="filter-group" {{ block.shopify_attributes }}>
-                <details {% if block.settings.default_open %}open{% endif %}>
-                  <summary class="filter-title">
-                    <span>{{ block.settings.title }}</span>
-                    <span class="icon-chevron"></span>
-                  </summary>
-                  <div class="filter-content">
-                    <ul class="filter-list">
-                      {%- assign custom_tags = block.settings.tag_list | split: '|' -%}
-                      {%- for tag in custom_tags -%}
-                        {%- assign clean_tag = tag | strip -%}
-                        {%- if collection.all_tags contains clean_tag -%}
-                          <li class="filter-item">
-                            {%- if current_tags contains clean_tag -%}
-                              {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
-                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
-                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
-                                <input type="checkbox" checked onclick="this.parentElement.click();">
-                                <span>{{ clean_tag }}</span>
-                              </a>
-                            {%- else -%}
-                              {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
-                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
-                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
-                                <input type="checkbox" onclick="this.parentElement.click();">
-                                <span>{{ clean_tag }}</span>
-                              </a>
-                            {%- endif -%}
-                          </li>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </ul>
-                  </div>
-                </details>
-              </div>
 
             {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
             {%- when 'price_range' -%}
