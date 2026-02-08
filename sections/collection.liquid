@@ -367,6 +367,25 @@
       ]
     },
     {
+      "type": "price_list",
+      "name": "Price List (Radio)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Price Range"
+        },
+        {
+          "type": "textarea",
+          "id": "price_ranges",
+          "label": "Price Ranges",
+          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
+          "info": "Format: Min-Max:Label (One per line). Use a huge number like 99999999 for 'Above X'"
+        }
+      ]
+    },
+    {
       "type": "tag_group",
       "name": "Tag List (Manual)",
       "settings": [
