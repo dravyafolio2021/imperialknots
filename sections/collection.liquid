@@ -12,23 +12,20 @@
     gap: 12px;
   }
 
-  /* --- MOBILE DRAWER STYLES --- */
+  /* --- MOBILE DRAWER & HEADER STYLES --- */
   .mobile-filter-trigger {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 20px;
+    padding: 0; /* Remove padding for icon-only button */
     background: #000;
     color: #fff;
     border: none;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
     cursor: pointer;
-    width: 100%;
-    margin-bottom: 15px;
-    text-transform: uppercase;
+    width: 44px; /* Fixed Square Width */
+    height: 44px; /* Fixed Square Height */
+    flex-shrink: 0; /* Prevent shrinking */
   }
   
   .mobile-drawer-header {
@@ -41,34 +38,53 @@
 
   /* Mobile Logic (Max Width 767px) */
   @media (max-width: 767px) {
-    /* Hide sidebar by default, turn into drawer */
+    /* Header Layout: Row with Icon + Dropdown */
+    .collection-header {
+      display: flex;
+      flex-direction: row; /* Horizontal alignment */
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .cora-sort-select {
+      flex-grow: 1; /* Dropdown takes remaining space */
+      width: auto;
+      height: 44px; /* Match button height */
+    }
+
+    .product-count {
+      display: none; /* Hide count on mobile to save space */
+    }
+
+    /* Drawer Logic */
     .collection-sidebar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 85vh; /* Takes up 85% of screen height */
+      height: 85vh; 
       background: #fff;
       z-index: 1000;
-      border-radius: 20px 20px 0 0; /* Rounded top corners */
+      border-radius: 20px 20px 0 0;
       box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-      transform: translateY(100%); /* Hidden initially */
+      transform: translateY(100%);
       transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
       display: flex;
       flex-direction: column;
     }
 
     .collection-sidebar.open {
-      transform: translateY(0); /* Slide up */
+      transform: translateY(0);
     }
 
     .filter-wrapper {
-      overflow-y: auto; /* Scrollable content */
+      overflow-y: auto;
       padding: 20px;
       flex-grow: 1;
     }
 
-    /* Header for the Drawer */
     .mobile-drawer-header {
       display: flex;
       justify-content: space-between;
@@ -81,7 +97,6 @@
     .mobile-drawer-title { font-weight: 700; font-size: 16px; text-transform: uppercase; }
     .mobile-drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; line-height: 1; }
 
-    /* Dark Overlay */
     .mobile-filter-overlay {
       display: block;
       position: fixed;
@@ -96,16 +111,6 @@
       opacity: 1;
       visibility: visible;
     }
-    
-    /* Adjust Header layout for mobile */
-    .collection-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .cora-sort-select {
-      width: 100%;
-    }
   }
   
   /* --- DESKTOP STYLES (Sticky Sidebar) --- */
@@ -119,7 +124,7 @@
 
     .collection-container {
       display: flex;
-      align-items: flex-start; /* Required for sticky */
+      align-items: flex-start; 
       gap: 30px;
     }
 
@@ -130,7 +135,7 @@
       width: 250px;
       flex-shrink: 0;
       z-index: 10;
-      transform: none !important; /* Reset mobile transform */
+      transform: none !important;
       height: fit-content;
       border-radius: 0;
       box-shadow: none;
@@ -151,7 +156,7 @@
   {%- comment -%} SIDEBAR (Acts as Sidebar on Desktop, Drawer on Mobile) {%- endcomment -%}
   <aside class="collection-sidebar" id="CollectionSidebar">
     
-    {%- comment -%} MOBILE DRAWER HEADER (Visible only on Mobile) {%- endcomment -%}
+    {%- comment -%} MOBILE DRAWER HEADER {%- endcomment -%}
     <div class="mobile-drawer-header">
       <span class="mobile-drawer-title">Filters</span>
       <button class="mobile-drawer-close" onclick="toggleFilterDrawer()">&times;</button>
@@ -168,7 +173,6 @@
         {%- for filter in collection.filters -%}
           {%- if filter.param_name == 'filter.v.availability' -%}
             <div class="availability-filter-pinned" style="margin-bottom: 20px;">
-              {%- comment -%} FORCE OPEN: Availability is the only one set to true {%- endcomment -%}
               {% render 'cora-filter-item', filter: filter, default_open: true %}
             </div>
             <style>
@@ -326,21 +330,18 @@
   <div class="collection-main">
     <div class="collection-header">
       
-      {%- comment -%} MOBILE FILTER TRIGGER BUTTON {%- endcomment -%}
-      <button class="mobile-filter-trigger" onclick="toggleFilterDrawer()">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {%- comment -%} MOBILE FILTER TRIGGER BUTTON (ICON ONLY) {%- endcomment -%}
+      <button class="mobile-filter-trigger" onclick="toggleFilterDrawer()" aria-label="Open Filters">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 4H14M4 8H12M6 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Filter & Sort
       </button>
 
       <span class="product-count">{{ collection.products_count }} Products</span>
       
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
-          {%- comment -%} 
-            FILTER OUT DATE AND ALPHABET OPTIONS 
-          {%- endcomment -%}
+          {%- comment -%} FILTER OUT DATE AND ALPHABET OPTIONS {%- endcomment -%}
           {%- unless option.value contains 'title' or option.value contains 'created' -%}
             <option
               value="?sort_by={{ option.value }}"
@@ -471,7 +472,6 @@
     if(sidebar && overlay) {
       sidebar.classList.toggle('open');
       overlay.classList.toggle('open');
-      // Prevent body scrolling when open
       document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
     }
   }
