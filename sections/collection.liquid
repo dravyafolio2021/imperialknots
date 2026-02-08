@@ -11,28 +11,129 @@
     grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: 12px;
   }
+
+  /* --- MOBILE DRAWER STYLES --- */
+  .mobile-filter-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
   
-  /* Desktop Layout & Sticky Sidebar */
+  .mobile-drawer-header {
+    display: none; /* Hidden on desktop */
+  }
+
+  .mobile-filter-overlay {
+    display: none;
+  }
+
+  /* Mobile Logic (Max Width 767px) */
+  @media (max-width: 767px) {
+    /* Hide sidebar by default, turn into drawer */
+    .collection-sidebar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 85vh; /* Takes up 85% of screen height */
+      background: #fff;
+      z-index: 1000;
+      border-radius: 20px 20px 0 0; /* Rounded top corners */
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+      transform: translateY(100%); /* Hidden initially */
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .collection-sidebar.open {
+      transform: translateY(0); /* Slide up */
+    }
+
+    .filter-wrapper {
+      overflow-y: auto; /* Scrollable content */
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    /* Header for the Drawer */
+    .mobile-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+    }
+    .mobile-drawer-title { font-weight: 700; font-size: 16px; text-transform: uppercase; }
+    .mobile-drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; line-height: 1; }
+
+    /* Dark Overlay */
+    .mobile-filter-overlay {
+      display: block;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+    }
+    .mobile-filter-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Adjust Header layout for mobile */
+    .collection-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .cora-sort-select {
+      width: 100%;
+    }
+  }
+  
+  /* --- DESKTOP STYLES (Sticky Sidebar) --- */
   @media (min-width: 768px) {
+    .mobile-filter-trigger { display: none; } /* Hide mobile button */
+
     #shopify-section-{{ section.id }} .product-grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
       gap: 12px;
     }
 
-    /* --- STICKY SIDEBAR CSS --- */
     .collection-container {
       display: flex;
-      align-items: flex-start; /* Required for sticky to work */
+      align-items: flex-start; /* Required for sticky */
       gap: 30px;
     }
 
     .collection-sidebar {
-      position: -webkit-sticky; /* Safari */
+      position: -webkit-sticky;
       position: sticky;
-      top: 20px; /* Offset from top */
+      top: 20px;
       width: 250px;
       flex-shrink: 0;
       z-index: 10;
+      transform: none !important; /* Reset mobile transform */
+      height: fit-content;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .collection-main {
@@ -43,8 +144,19 @@
 {%- endstyle -%}
 
 <div class="collection-container" id="shopify-section-{{ section.id }}">
-  {%- comment -%} SIDEBAR (Block-Based) {%- endcomment -%}
-  <aside class="collection-sidebar">
+  
+  {%- comment -%} MOBILE FILTER OVERLAY {%- endcomment -%}
+  <div class="mobile-filter-overlay" onclick="toggleFilterDrawer()"></div>
+
+  {%- comment -%} SIDEBAR (Acts as Sidebar on Desktop, Drawer on Mobile) {%- endcomment -%}
+  <aside class="collection-sidebar" id="CollectionSidebar">
+    
+    {%- comment -%} MOBILE DRAWER HEADER (Visible only on Mobile) {%- endcomment -%}
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-title">Filters</span>
+      <button class="mobile-drawer-close" onclick="toggleFilterDrawer()">&times;</button>
+    </div>
+
     <div class="filter-wrapper">
       <form class="filter-form">
         
@@ -213,12 +325,21 @@
   {%- comment -%} MAIN PRODUCT GRID {%- endcomment -%}
   <div class="collection-main">
     <div class="collection-header">
+      
+      {%- comment -%} MOBILE FILTER TRIGGER BUTTON {%- endcomment -%}
+      <button class="mobile-filter-trigger" onclick="toggleFilterDrawer()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 4H14M4 8H12M6 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Filter & Sort
+      </button>
+
       <span class="product-count">{{ collection.products_count }} Products</span>
+      
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
           {%- comment -%} 
             FILTER OUT DATE AND ALPHABET OPTIONS 
-            Shopify values: title-ascending, title-descending, created-ascending, created-descending
           {%- endcomment -%}
           {%- unless option.value contains 'title' or option.value contains 'created' -%}
             <option
@@ -259,37 +380,26 @@
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
               
-              {%- comment -%} 
-                SMART PRICE LOGIC: 
-                If a price filter is active, show the variant price that matches the filter.
-                Otherwise, show the default lowest price.
-              {%- endcomment -%}
-              
+              {%- comment -%} SMART PRICE LOGIC {%- endcomment -%}
               {%- assign displayed_price = product.price -%}
               {%- assign displayed_compare = product.compare_at_price -%}
               
-              {%- comment -%} 1. Find active price filter values {%- endcomment -%}
               {%- assign filter_min = 0 -%}
               {%- assign filter_max = 99999999999 -%}
               
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
-                  {%- if filter.min_value.value -%}
-                    {%- assign filter_min = filter.min_value.value -%}
-                  {%- endif -%}
-                  {%- if filter.max_value.value -%}
-                    {%- assign filter_max = filter.max_value.value -%}
-                  {%- endif -%}
+                  {%- if filter.min_value.value -%}{%- assign filter_min = filter.min_value.value -%}{%- endif -%}
+                  {%- if filter.max_value.value -%}{%- assign filter_max = filter.max_value.value -%}{%- endif -%}
                 {%- endif -%}
               {%- endfor -%}
 
-              {%- comment -%} 2. If filtering, find the matching variant {%- endcomment -%}
               {%- if filter_min > 0 or filter_max < 99999999999 -%}
                 {%- for variant in product.variants -%}
                   {%- if variant.price >= filter_min and variant.price <= filter_max -%}
                     {%- assign displayed_price = variant.price -%}
                     {%- assign displayed_compare = variant.compare_at_price -%}
-                    {%- break -%} {% comment %} Stop at the first match {% endcomment %}
+                    {%- break -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- endif -%}
@@ -310,16 +420,12 @@
           <div class="cora-pagination__left">
             {% if paginate.previous %}
               <a href="{{ paginate.previous.url }}" class="cora-pagination__btn cora-pagination__prev">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
                 <span>Previous</span>
               </a>
             {% else %}
               <span class="cora-pagination__btn cora-pagination__btn--disabled">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
                 <span>Previous</span>
               </span>
             {% endif %}
@@ -343,16 +449,12 @@
             {% if paginate.next %}
               <a href="{{ paginate.next.url }}" class="cora-pagination__btn cora-pagination__next">
                 <span>Next</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
               </a>
             {% else %}
               <span class="cora-pagination__btn cora-pagination__btn--disabled">
                 <span>Next</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>
               </span>
             {% endif %}
           </div>
@@ -361,6 +463,19 @@
     {% endpaginate %}
   </div>
 </div>
+
+<script>
+  function toggleFilterDrawer() {
+    const sidebar = document.getElementById('CollectionSidebar');
+    const overlay = document.querySelector('.mobile-filter-overlay');
+    if(sidebar && overlay) {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+      // Prevent body scrolling when open
+      document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+    }
+  }
+</script>
 
 {% schema %}
 {
