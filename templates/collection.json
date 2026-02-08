@@ -12,10 +12,11 @@
     "main": {
       "type": "collection",
       "blocks": {
-        "price_range_H7Aeez": {
-          "type": "price_range",
+        "price_list_ymytUK": {
+          "type": "price_list",
           "settings": {
-            "default_open": false
+            "title": "Price Range",
+            "price_ranges": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000"
           }
         },
         "tag_group_34hrhn": {
@@ -65,7 +66,7 @@
         }
       },
       "block_order": [
-        "price_range_H7Aeez",
+        "price_list_ymytUK",
         "tag_group_34hrhn",
         "tag_group_GnBqqw",
         "tag_group_fVap7t",
