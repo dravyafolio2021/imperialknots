@@ -264,6 +264,17 @@
   overflow: visible; 
 }
 
+
+.cmp-title {
+  font-family: 'Assistant', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
+}
+
+
 }
 
 /* Remove Spinner Arrows (Chrome, Safari, Edge, Opera) */
