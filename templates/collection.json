@@ -14,6 +14,7 @@
       "blocks": {
         "price_list_ymytUK": {
           "type": "price_list",
+          "disabled": true,
           "settings": {
             "title": "Price Range",
             "price_ranges": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000"
