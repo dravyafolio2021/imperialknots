@@ -11,10 +11,33 @@
     grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: 12px;
   }
+  
+  /* Desktop Layout & Sticky Sidebar */
   @media (min-width: 768px) {
     #shopify-section-{{ section.id }} .product-grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
       gap: 12px;
+    }
+
+    /* --- ADDED CSS FOR STICKY SIDEBAR --- */
+    .collection-container {
+      display: flex;
+      align-items: flex-start; /* Crucial: Prevents sidebar from stretching, allowing it to stick */
+      gap: 30px; /* Space between sidebar and products */
+    }
+
+    .collection-sidebar {
+      position: -webkit-sticky; /* Safari support */
+      position: sticky;
+      top: 20px; /* Distance from top of screen while scrolling */
+      width: 250px; /* Define a width for the sidebar */
+      flex-shrink: 0; /* Prevent sidebar from shrinking */
+      z-index: 10;
+    }
+
+    .collection-main {
+      flex-grow: 1; /* Product grid takes up remaining space */
+      width: 100%;
     }
   }
 {%- endstyle -%}
