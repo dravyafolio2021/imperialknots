@@ -1,165 +1,152 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
-  Usage: Renders a list of price ranges that act like radio buttons.
+  Usage: Custom Price List (Collapsible) with comma-safe active state check.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
-  <div class="filter-title">
-    <span>{{ block.settings.title }}</span>
-  </div>
+  {%- comment -%} Collapsible Details Element {%- endcomment -%}
+  <details {% if block.settings.default_open %}open{% endif %}>
+    <summary class="filter-title">
+      <span class="filter-heading-text">{{ block.settings.title }}</span>
+      <span class="icon-chevron">
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </summary>
 
-  <div class="filter-content">
-    <ul class="price-list-items">
-      {%- assign range_lines = block.settings.price_ranges | newline_to_br | split: '<br />' -%}
-      
-      {%- for line in range_lines -%}
-        {%- assign parts = line | split: ':' -%}
-        {%- assign range_vals = parts[0] | split: '-' -%}
-        {%- assign label_text = parts[1] | strip -%}
+    <div class="filter-content">
+      <ul class="price-list-items">
+        {%- assign range_lines = block.settings.price_ranges | newline_to_br | split: '<br />' -%}
         
-        {%- assign min_price = range_vals[0] | strip -%}
-        {%- assign max_price = range_vals[1] | strip -%}
-        
-        {%- comment -%} Check if active based on URL params {%- endcomment -%}
-        {%- assign is_active = false -%}
-        
-        {%- assign current_min = cart.currency.symbol -%} 
-        {%- comment -%} 
-           Note: We check URL params directly because collection.filters object 
-           might be using different formatting. 
-        {%- endcomment -%}
-        
-        {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
-        {%- assign min_param = 'filter.v.price.gte=' | append: min_price -%}
-        {%- assign max_param = 'filter.v.price.lte=' | append: max_price -%}
+        {%- for line in range_lines -%}
+          {%- assign parts = line | split: ':' -%}
+          {%- assign range_vals = parts[0] | split: '-' -%}
+          {%- assign label_text = parts[1] | strip -%}
+          
+          {%- assign min_price = range_vals[0] | strip -%}
+          {%- assign max_price = range_vals[1] | strip -%}
 
-        {%- if current_query contains min_param and current_query contains max_param -%}
-           {%- assign is_active = true -%}
-        {%- endif -%}
-
-        <li class="price-list-item">
-          <label class="cora-radio-label">
-            <input type="radio" 
-                   name="cora_price_radio" 
-                   value="{{ min_price }}-{{ max_price }}"
-                   {% if is_active %}checked{% endif %}
-                   onclick="applyPriceFilter('{{ min_price }}', '{{ max_price }}', this)"
-            >
-            <span class="cora-check-box"></span>
-            <span class="cora-label-text">{{ label_text }}</span>
-          </label>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
+          <li class="price-list-item">
+            <div class="cora-radio-fake"
+                 data-min="{{ min_price }}"
+                 data-max="{{ max_price }}"
+                 onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)"
+                 role="button">
+              <span class="cora-check-box"></span>
+              <span class="cora-label-text">{{ label_text }}</span>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </details>
 </div>
 
 <script>
-  function applyPriceFilter(min, max, element) {
-    // 1. Get current URL params
+  // Helper to safely parse numbers, removing commas (e.g. "1,00,000" -> 100000)
+  function parsePrice(val) {
+    if (!val) return 0;
+    return parseFloat(val.toString().replace(/,/g, '')) || 0;
+  }
+
+  function applyCustomPrice(min, max, element) {
     const params = new URLSearchParams(window.location.search);
+    
+    // Clean inputs before comparing
+    const currentMin = parsePrice(params.get('filter.v.price.gte'));
+    const currentMax = parsePrice(params.get('filter.v.price.lte'));
+    const targetMin = parsePrice(min);
+    const targetMax = parsePrice(max);
 
-    // 2. If the user clicks the ALREADY selected radio, we clear the filter (Toggle off)
-    // We detect this by checking if the URL already has these exact values
-    const currentMin = params.get('filter.v.price.gte');
-    const currentMax = params.get('filter.v.price.lte');
-
-    if (currentMin === min && currentMax === max) {
-        params.delete('filter.v.price.gte');
-        params.delete('filter.v.price.lte');
-        element.checked = false; // Visually uncheck
+    if (currentMin === targetMin && currentMax === targetMax) {
+      // Toggle OFF
+      params.delete('filter.v.price.gte');
+      params.delete('filter.v.price.lte');
     } else {
-        // 3. Set new values (Radio behavior: replaces existing price filters)
-        params.set('filter.v.price.gte', min);
-        params.set('filter.v.price.lte', max);
+      // Set NEW
+      params.set('filter.v.price.gte', parsePrice(min)); // Send clean number to URL
+      params.set('filter.v.price.lte', parsePrice(max)); // Send clean number to URL
+    }
+    params.delete('page');
+    window.location.href = '?' + params.toString();
+  }
+
+  // Highlight Active Box
+  (function() {
+    function highlightActive() {
+      const params = new URLSearchParams(window.location.search);
+      const urlMin = parsePrice(params.get('filter.v.price.gte'));
+      const urlMax = parsePrice(params.get('filter.v.price.lte'));
+
+      const boxes = document.querySelectorAll('.cora-radio-fake');
+      
+      boxes.forEach(box => {
+        const boxMin = parsePrice(box.getAttribute('data-min'));
+        const boxMax = parsePrice(box.getAttribute('data-max'));
+
+        // Match logic: ignores commas and slight formatting diffs
+        if (urlMin === boxMin && urlMax === boxMax && urlMax > 0) {
+          box.classList.add('active');
+        } else {
+          box.classList.remove('active');
+        }
+      });
     }
 
-    // 4. Reset pagination to page 1 to avoid empty results
-    params.delete('page');
-
-    // 5. Reload page with new params
-    window.location.search = params.toString();
-  }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', highlightActive);
+    } else {
+      highlightActive();
+    }
+  })();
 </script>
 
 <style>
-  .price-list-group .filter-title {
+  /* Force Details/Summary Layout */
+  .price-list-group details > summary {
+    list-style: none !important;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-bottom: 12px;
+    width: 100%;
+  }
+  .price-list-group details > summary::-webkit-details-marker { display: none !important; }
+  
+  /* Heading Style */
+  .price-list-group .filter-heading-text {
     font-weight: 600;
-    margin-bottom: 12px;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
   }
+
+  /* Chevron Icon */
+  .price-list-group .icon-chevron {
+    display: flex;
+    align-items: center;
+  }
+  .price-list-group .icon-chevron svg { 
+    transition: transform 0.3s ease; 
+    width: 12px; 
+    height: 12px; 
+  }
+  .price-list-group details[open] .icon-chevron svg { 
+    transform: rotate(180deg); 
+  }
+
+  /* List Styles */
+  .price-list-items { list-style: none; padding: 10px 0 0 0; margin: 0; }
+  .price-list-item { margin-bottom: 12px; }
+
+  /* Checkbox Fake Styles */
+  .cora-radio-fake { display: flex; align-items: center; cursor: pointer; font-size: 15px; color: #333; user-select: none; }
+  .cora-check-box { height: 18px; width: 18px; background-color: #fff; border: 1px solid #dcdcdc; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   
-  .price-list-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .price-list-item {
-    margin-bottom: 10px;
-  }
-
-  .cora-radio-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 15px;
-    color: #333;
-  }
-
-  /* Hide default radio input */
-  .cora-radio-label input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  /* Custom Square "Radio" (Looks like checkbox per user request) */
-  .cora-check-box {
-    height: 18px;
-    width: 18px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    flex-shrink: 0; /* Prevent squishing */
-  }
-
-  /* Hover effect */
-  .cora-radio-label:hover .cora-check-box {
-    border-color: #000;
-  }
-
-  /* Checked State */
-  .cora-radio-label input:checked ~ .cora-check-box {
-    background-color: #000;
-    border-color: #000;
-  }
-
-  /* Checkmark Icon (CSS Only) */
-  .cora-check-box::after {
-    content: "";
-    display: none;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    margin-bottom: 2px; /* Alignment tweak */
-  }
-
-  .cora-radio-label input:checked ~ .cora-check-box::after {
-    display: block;
-  }
-
-  .cora-label-text {
-    line-height: 1.4;
-  }
+  /* Active State */
+  .cora-radio-fake.active .cora-check-box { background-color: #000; border-color: #000; }
+  .cora-check-box::after { content: ""; display: none; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px; }
+  .cora-radio-fake.active .cora-check-box::after { display: block; }
 </style>
