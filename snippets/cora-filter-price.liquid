@@ -1,17 +1,12 @@
 {% comment %}
-  Snippet: cora-filter-price-list.liquid
-  Usage: Custom Price List (Collapsible) targeting Sale Price.
+  Snippet: cora-filter-item.liquid
+  Usage: Standard Filters (Color, Size, Availability) using URL-forcing logic.
 {% endcomment %}
 
-<div class="sidebar-block filter-group price-list-group">
-  {%- comment -%} 
-    COLLAPSIBLE WRAPPER 
-    We check block.settings.default_open to see if it should start open.
-  {%- endcomment -%}
-  <details {% if block.settings.default_open %}open{% endif %}>
+<div class="sidebar-block filter-group">
+  <details {% if default_open or filter.active_values.size > 0 %}open{% endif %}>
     <summary class="filter-title">
-      <span>{{ block.settings.title }}</span>
-      {%- comment -%} CHEVRON ICON {%- endcomment -%}
+      <span>{{ filter.label }}</span>
       <span class="icon-chevron">
         <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,38 +15,18 @@
     </summary>
 
     <div class="filter-content">
-      <ul class="price-list-items">
-        {%- assign range_lines = block.settings.price_ranges | newline_to_br | split: '<br />' -%}
-        
-        {%- for line in range_lines -%}
-          {%- assign parts = line | split: ':' -%}
-          {%- assign range_vals = parts[0] | split: '-' -%}
-          {%- assign label_text = parts[1] | strip -%}
-          
-          {%- assign min_price = range_vals[0] | strip -%}
-          {%- assign max_price = range_vals[1] | strip -%}
-          
-          {%- comment -%} Check active state {%- endcomment -%}
-          {%- assign is_active = false -%}
-          {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
-          
-          {%- comment -%} 
-            NOTE: 'filter.v.price' automatically targets the SALE PRICE (selling price).
-          {%- endcomment -%}
-          {%- assign min_check = 'filter.v.price.gte=' | append: min_price -%}
-          {%- assign max_check = 'filter.v.price.lte=' | append: max_price -%}
-
-          {%- if current_query contains min_check and current_query contains max_check -%}
-             {%- assign is_active = true -%}
-          {%- endif -%}
-
-          <li class="price-list-item">
-            <div class="cora-radio-fake {% if is_active %}active{% endif %}"
-                 onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)"
+      <ul class="filter-list">
+        {%- for value in filter.values -%}
+          <li class="filter-item">
+            <div class="cora-checkbox-fake {% if value.active %}active{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}"
+                 onclick="applyStandardFilter('{{ value.param_name }}', '{{ value.value }}', this)"
                  role="button">
               
               <span class="cora-check-box"></span>
-              <span class="cora-label-text">{{ label_text }}</span>
+              <span class="cora-label-text">
+                {{ value.label }}
+                <span class="count">({{ value.count }})</span>
+              </span>
             </div>
           </li>
         {%- endfor -%}
@@ -61,29 +36,38 @@
 </div>
 
 <script>
-  function applyCustomPrice(min, max, element) {
+  function applyStandardFilter(paramName, paramValue, element) {
     const params = new URLSearchParams(window.location.search);
-    const currentMin = params.get('filter.v.price.gte');
-    const currentMax = params.get('filter.v.price.lte');
-
-    if (currentMin === min && currentMax === max) {
-      // Toggle OFF if clicking the active one
-      params.delete('filter.v.price.gte');
-      params.delete('filter.v.price.lte');
-    } else {
-      // Set NEW Price Range (Sale Price)
-      params.set('filter.v.price.gte', min);
-      params.set('filter.v.price.lte', max);
+    
+    // Check if we are adding or removing
+    // Shopify allows multiple values for same param (e.g. Color=Red&Color=Blue)
+    
+    // We need to rebuild the params to toggle this specific value
+    let newParams = new URLSearchParams();
+    let found = false;
+    
+    // Loop through existing params to rebuild
+    for(const [key, value] of params.entries()) {
+      if(key === paramName && value === paramValue) {
+        // If match found, we SKIP it (Removing the filter)
+        found = true;
+      } else {
+        newParams.append(key, value);
+      }
     }
-    params.delete('page');
-    // Force reload
-    window.location.href = '?' + params.toString();
+    
+    // If we didn't find it to remove, we ADD it
+    if(!found) {
+      newParams.append(paramName, paramValue);
+    }
+    
+    newParams.delete('page'); // Reset pagination
+    window.location.href = '?' + newParams.toString();
   }
 </script>
 
 <style>
-  /* Reset Details/Summary Styles */
-  .price-list-group details > summary {
+  .filter-group details > summary {
     list-style: none;
     cursor: pointer;
     display: flex;
@@ -91,74 +75,23 @@
     align-items: center;
     padding-bottom: 12px;
   }
-  .price-list-group details > summary::-webkit-details-marker {
-    display: none;
-  }
-
-  /* Chevron Animation */
-  .price-list-group .icon-chevron svg {
-    transition: transform 0.3s ease;
-  }
-  .price-list-group details[open] .icon-chevron svg {
-    transform: rotate(180deg);
-  }
-
-  .price-list-group .filter-title {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    width: 100%;
-  }
+  .filter-group details > summary::-webkit-details-marker { display: none; }
+  .filter-group .icon-chevron svg { transition: transform 0.3s ease; }
+  .filter-group details[open] .icon-chevron svg { transform: rotate(180deg); }
+  .filter-group .filter-title { font-weight: 600; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; width: 100%; }
   
-  .price-list-items {
-    list-style: none;
-    padding: 10px 0 0 0;
-    margin: 0;
-  }
+  .filter-list { list-style: none; padding: 10px 0 0 0; margin: 0; }
+  .filter-item { margin-bottom: 10px; }
 
-  .price-list-item {
-    margin-bottom: 12px;
-  }
-
-  .cora-radio-fake {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 15px;
-    color: #333;
-    user-select: none;
-  }
-
-  .cora-check-box {
-    height: 18px;
-    width: 18px;
-    background-color: #fff;
-    border: 1px solid #dcdcdc;
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .cora-radio-fake.active .cora-check-box {
-    background-color: #000;
-    border-color: #000;
-  }
-
-  .cora-check-box::after {
-    content: "";
-    display: none;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    margin-bottom: 2px;
-  }
-
-  .cora-radio-fake.active .cora-check-box::after {
-    display: block;
-  }
+  .cora-checkbox-fake { display: flex; align-items: center; cursor: pointer; font-size: 15px; color: #333; user-select: none; }
+  .cora-checkbox-fake.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  
+  .cora-check-box { height: 18px; width: 18px; background-color: #fff; border: 1px solid #dcdcdc; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cora-checkbox-fake.active .cora-check-box { background-color: #000; border-color: #000; }
+  
+  /* Checkmark for Standard Filters */
+  .cora-checkbox-fake .cora-check-box::after { content: ""; display: none; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px; }
+  .cora-checkbox-fake.active .cora-check-box::after { display: block; }
+  
+  .count { color: #888; margin-left: 4px; font-size: 13px; }
 </style>
