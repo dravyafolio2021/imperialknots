@@ -1,13 +1,13 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
-  Usage: Custom Price List (Collapsible) targeting Sale Price.
-  Updated: Fixes Checkbox Active State & Logic.
+  Usage: Custom Price List (Collapsible) with comma-safe active state check.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
+  {%- comment -%} Collapsible Details Element {%- endcomment -%}
   <details {% if block.settings.default_open %}open{% endif %}>
     <summary class="filter-title">
-      <span>{{ block.settings.title }}</span>
+      <span class="filter-heading-text">{{ block.settings.title }}</span>
       <span class="icon-chevron">
         <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -44,44 +44,48 @@
 </div>
 
 <script>
-  // 1. Click Handler
+  // Helper to safely parse numbers, removing commas (e.g. "1,00,000" -> 100000)
+  function parsePrice(val) {
+    if (!val) return 0;
+    return parseFloat(val.toString().replace(/,/g, '')) || 0;
+  }
+
   function applyCustomPrice(min, max, element) {
     const params = new URLSearchParams(window.location.search);
     
-    // Convert to Floats to ensure accurate number comparison
-    const currentMin = parseFloat(params.get('filter.v.price.gte'));
-    const currentMax = parseFloat(params.get('filter.v.price.lte'));
-    const targetMin = parseFloat(min);
-    const targetMax = parseFloat(max);
+    // Clean inputs before comparing
+    const currentMin = parsePrice(params.get('filter.v.price.gte'));
+    const currentMax = parsePrice(params.get('filter.v.price.lte'));
+    const targetMin = parsePrice(min);
+    const targetMax = parsePrice(max);
 
     if (currentMin === targetMin && currentMax === targetMax) {
-      // Toggle OFF if clicking the active one
+      // Toggle OFF
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
-      // Set NEW Price Range
-      params.set('filter.v.price.gte', min);
-      params.set('filter.v.price.lte', max);
+      // Set NEW
+      params.set('filter.v.price.gte', parsePrice(min)); // Send clean number to URL
+      params.set('filter.v.price.lte', parsePrice(max)); // Send clean number to URL
     }
     params.delete('page');
     window.location.href = '?' + params.toString();
   }
 
-  // 2. Highlight Active Box (Runs Automatically)
+  // Highlight Active Box
   (function() {
     function highlightActive() {
       const params = new URLSearchParams(window.location.search);
-      // Use "|| 0" to handle missing params safely
-      const urlMin = parseFloat(params.get('filter.v.price.gte')) || 0;
-      const urlMax = parseFloat(params.get('filter.v.price.lte')) || 0;
+      const urlMin = parsePrice(params.get('filter.v.price.gte'));
+      const urlMax = parsePrice(params.get('filter.v.price.lte'));
 
       const boxes = document.querySelectorAll('.cora-radio-fake');
       
       boxes.forEach(box => {
-        const boxMin = parseFloat(box.getAttribute('data-min')) || 0;
-        const boxMax = parseFloat(box.getAttribute('data-max')) || 0;
+        const boxMin = parsePrice(box.getAttribute('data-min'));
+        const boxMax = parsePrice(box.getAttribute('data-max'));
 
-        // Check for match (ignoring slight formatting differences)
+        // Match logic: ignores commas and slight formatting diffs
         if (urlMin === boxMin && urlMax === boxMax && urlMax > 0) {
           box.classList.add('active');
         } else {
@@ -90,7 +94,6 @@
       });
     }
 
-    // Run when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', highlightActive);
     } else {
@@ -100,27 +103,49 @@
 </script>
 
 <style>
+  /* Force Details/Summary Layout */
   .price-list-group details > summary {
-    list-style: none;
+    list-style: none !important;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     padding-bottom: 12px;
+    width: 100%;
   }
-  .price-list-group details > summary::-webkit-details-marker { display: none; }
-  .price-list-group .icon-chevron svg { transition: transform 0.3s ease; }
-  .price-list-group details[open] .icon-chevron svg { transform: rotate(180deg); }
-  .price-list-group .filter-title { font-weight: 600; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; width: 100%; }
+  .price-list-group details > summary::-webkit-details-marker { display: none !important; }
   
+  /* Heading Style */
+  .price-list-group .filter-heading-text {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Chevron Icon */
+  .price-list-group .icon-chevron {
+    display: flex;
+    align-items: center;
+  }
+  .price-list-group .icon-chevron svg { 
+    transition: transform 0.3s ease; 
+    width: 12px; 
+    height: 12px; 
+  }
+  .price-list-group details[open] .icon-chevron svg { 
+    transform: rotate(180deg); 
+  }
+
+  /* List Styles */
   .price-list-items { list-style: none; padding: 10px 0 0 0; margin: 0; }
   .price-list-item { margin-bottom: 12px; }
 
+  /* Checkbox Fake Styles */
   .cora-radio-fake { display: flex; align-items: center; cursor: pointer; font-size: 15px; color: #333; user-select: none; }
-  
   .cora-check-box { height: 18px; width: 18px; background-color: #fff; border: 1px solid #dcdcdc; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   
-  /* Active State Styles */
+  /* Active State */
   .cora-radio-fake.active .cora-check-box { background-color: #000; border-color: #000; }
   .cora-check-box::after { content: ""; display: none; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px; }
   .cora-radio-fake.active .cora-check-box::after { display: block; }
