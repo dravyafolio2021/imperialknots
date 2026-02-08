@@ -19,24 +19,24 @@
       gap: 12px;
     }
 
-    /* --- ADDED CSS FOR STICKY SIDEBAR --- */
+    /* --- STICKY SIDEBAR CSS --- */
     .collection-container {
       display: flex;
-      align-items: flex-start; /* Crucial: Prevents sidebar from stretching, allowing it to stick */
-      gap: 30px; /* Space between sidebar and products */
+      align-items: flex-start; /* Required for sticky to work */
+      gap: 30px;
     }
 
     .collection-sidebar {
-      position: -webkit-sticky; /* Safari support */
+      position: -webkit-sticky; /* Safari */
       position: sticky;
-      top: 20px; /* Distance from top of screen while scrolling */
-      width: 250px; /* Define a width for the sidebar */
-      flex-shrink: 0; /* Prevent sidebar from shrinking */
+      top: 20px; /* Offset from top */
+      width: 250px;
+      flex-shrink: 0;
       z-index: 10;
     }
 
     .collection-main {
-      flex-grow: 1; /* Product grid takes up remaining space */
+      flex-grow: 1;
       width: 100%;
     }
   }
@@ -216,14 +216,20 @@
       <span class="product-count">{{ collection.products_count }} Products</span>
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
-          <option
-            value="?sort_by={{ option.value }}"
-            {% if option.value == collection.sort_by %}
-              selected
-            {% endif %}
-          >
-            {{ option.name }}
-          </option>
+          {%- comment -%} 
+            FILTER OUT DATE AND ALPHABET OPTIONS 
+            Shopify values: title-ascending, title-descending, created-ascending, created-descending
+          {%- endcomment -%}
+          {%- unless option.value contains 'title' or option.value contains 'created' -%}
+            <option
+              value="?sort_by={{ option.value }}"
+              {% if option.value == collection.sort_by %}
+                selected
+              {% endif %}
+            >
+              {{ option.name }}
+            </option>
+          {%- endunless -%}
         {% endfor %}
       </select>
     </div>
