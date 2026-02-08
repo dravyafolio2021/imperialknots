@@ -230,13 +230,60 @@
               <h3>
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
+              
+              {%- comment -%} 
+                SMART PRICE LOGIC: 
+                If a price filter is active, show the variant price that matches the filter.
+                Otherwise, show the default lowest price.
+              {%- endcomment -%}
+              
+              {%- assign displayed_price = product.price -%}
+              {%- assign displayed_compare = product.compare_at_price -%}
+              
+              {%- comment -%} 1. Find active price filter values {%- endcomment -%}
+              {%- assign filter_min = 0 -%}
+              {%- assign filter_max = 99999999999 -%}
+              
+              {%- for filter in collection.filters -%}
+                {%- if filter.type == 'price_range' -%}
+                  {%- if filter.min_value.value -%}
+                    {%- assign filter_min = filter.min_value.value -%}
+                  {%- endif -%}
+                  {%- if filter.max_value.value -%}
+                    {%- assign filter_max = filter.max_value.value -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- comment -%} 2. If filtering, find the matching variant {%- endcomment -%}
+              {%- if filter_min > 0 or filter_max < 99999999999 -%}
+                {%- for variant in product.variants -%}
+                  {%- if variant.price >= filter_min and variant.price <= filter_max -%}
+                    {%- assign displayed_price = variant.price -%}
+                    {%- assign displayed_compare = variant.compare_at_price -%}
+                    {%- break -%} {% comment %} Stop at the first match {% endcomment %}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              <div class="product-price">
+                <span>{{ displayed_price | money }}</span>
+                {% if displayed_compare > displayed_price %}
+                  <span class="price-compare">{{ displayed_compare | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+            {% comment %} <div class="product-info">
+              <h3>
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
               <div class="product-price">
                 <span>{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
                   <span class="price-compare">{{ product.compare_at_price | money }}</span>
                 {% endif %}
               </div>
-            </div>
+            </div> {% endcomment %}
           </div>
         {% endfor %}
       </div>
