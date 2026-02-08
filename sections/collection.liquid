@@ -187,7 +187,8 @@
                   </div>
                 </details>
               </div>
-
+{%- when 'price_list' -%}
+               {% render 'cora-filter-price-list', block: block %}
               {%- comment -%} BLOCK: PRICE RANGE {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
