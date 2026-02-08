@@ -15,21 +15,13 @@
         "accordion_FCpxbL": {
           "type": "accordion",
           "settings": {
-            "heading": "Material & Care",
-            "content": ""
-          }
-        },
-        "accordion_pCCHdx": {
-          "type": "accordion",
-          "settings": {
-            "heading": "Material & Care",
+            "heading": "Rug Care",
             "content": ""
           }
         }
       },
       "block_order": [
-        "accordion_FCpxbL",
-        "accordion_pCCHdx"
+        "accordion_FCpxbL"
       ],
       "settings": {}
     },
@@ -39,7 +31,7 @@
       "settings": {
         "text": "<p>PLEASE NOTE: THE IMAGES WE DISPLAY HAVE THE MOST ACCURATE COLOR POSSIBLE. DUE TO DIFFERENCES IN COMPUTER MONITORS, WE CANNOT BE RESPONSIBLE FOR VARIATIONS IN COLOR BETWEEN THE ACTUAL PRODUCT AND YOUR SCREEN. PLEASE BE ADVISED THAT IN SOME CASES PATTERNS AND COLORS MAY VARY ACCORDING TO SIZE. LENGTHS AND WIDTHS MAY VARY FROM THE PUBLISHED DIMENSIONS. WE DO OUR BEST TO PROVIDE YOU WITH AN ACCURATE MEASUREMENT, BUT PLEASE BE ADVISED THAT SOME VARIATION EXISTS IN HANDCRAFTED PRODUCTS AND THIS IS NOT A MANUFACTURING DEFECT. EACH HANDCRAFTED PRODUCT IS UNIQUE AND ONE OF A KIND AND CANNOT BE CONSIDERED DEFECTIVE. SLIGHT VARIATIONS ARE INHERENT IN THE MANUFACTURING OF ALL HANDCRAFTED PRODUCTS.</p><h3></h3>",
         "uppercase": true,
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "text_color": "#888888",
         "text_alignment": "left",
         "max_width": 1200,
