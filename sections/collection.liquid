@@ -1,6 +1,7 @@
 {{ 'component-collection-grid.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  /* Dynamic Background & Spacing */
   #shopify-section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
     padding-top: {{ section.settings.padding_top }}px;
@@ -19,65 +20,69 @@
 {%- endstyle -%}
 
 <div class="collection-container" id="shopify-section-{{ section.id }}">
+  {%- comment -%} SIDEBAR (Block-Based) {%- endcomment -%}
   <aside class="collection-sidebar">
     <div class="filter-wrapper">
       <form class="filter-form">
         
         {%- comment -%} 
-          =============================================
-          1. AVAILABILITY (Pinned Top, Always Open) 
-          =============================================
+          -------------------------------------------------------
+          0. PINNED FILTERS (Render Availability First) 
+          -------------------------------------------------------
         {%- endcomment -%}
         {%- for filter in collection.filters -%}
           {%- if filter.param_name == 'filter.v.availability' -%}
-            <div class="availability-pinned">
+            <div class="availability-filter-pinned" style="margin-bottom: 20px;">
               {% render 'cora-filter-item', filter: filter, default_open: true %}
             </div>
+            {%- comment -%} Hide "Out of stock" option if value is 0 (Optional style) {%- endcomment -%}
             <style>
-              .availability-pinned li:has(input[value="0"]) { display: none !important; }
+              .availability-filter-pinned li:has(input[value="0"]) {
+                display: none !important;
+              }
             </style>
           {%- endif -%}
         {%- endfor -%}
 
         {%- comment -%} 
-          =============================================
-          2. PRICE LIST (Pinned Second) 
-          =============================================
-        {%- endcomment -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'price_list' -%}
-            {% render 'cora-filter-price-list', block: block %}
-          {%- endif -%}
-        {%- endfor -%}
-
-        {%- comment -%} 
-          =============================================
-          3. REMAINING BLOCKS (Skip Price List) 
-          =============================================
+          -------------------------------------------------------
+          1. RENDER MANUAL BLOCKS (Theme Editor Order) 
+          -------------------------------------------------------
         {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
+              {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
             {%- when 'text' -%}
               <div class="sidebar-block sidebar-text" {{ block.shopify_attributes }}>
-                {% if block.settings.title != blank %}<h4>{{ block.settings.title }}</h4>{% endif %}
+                {% if block.settings.title != blank %}
+                  <h4>{{ block.settings.title }}</h4>
+                {% endif %}
                 <p>{{ block.settings.text }}</p>
               </div>
 
+              {%- comment -%} BLOCK: PROMO IMAGE {%- endcomment -%}
             {%- when 'image' -%}
               <div class="sidebar-block sidebar-image" {{ block.shopify_attributes }}>
                 {% if block.settings.image %}
-                  <img src="{{ block.settings.image | img_url: '400x' }}" alt="Promo" style="width:100%; border-radius:8px;">
+                  <img
+                    src="{{ block.settings.image | img_url: '400x' }}"
+                    alt="Promo"
+                    loading="lazy"
+                    style="width:100%; border-radius:8px;"
+                  >
                 {% endif %}
               </div>
 
-            {%- comment -%} SKIP PRICE LIST (Rendered Above) {%- endcomment -%}
+            {%- comment -%} BLOCK: CUSTOM PRICE LIST (Radio) {%- endcomment -%}
             {%- when 'price_list' -%}
-              {%- continue -%}
+               {% render 'cora-filter-price-list', block: block %}
 
+              {%- comment -%} BLOCK: SPECIFIC FILTER GROUP {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
               {%- for filter in collection.filters -%}
                 {%- assign current_filter = filter.label | downcase -%}
+                {%- comment -%} Skip Availability here since we pinned it to top {%- endcomment -%}
                 {%- unless filter.param_name == 'filter.v.availability' -%}
                   {%- if current_filter == target_filter -%}
                     {% render 'cora-filter-item', filter: filter, block: block %}
@@ -85,6 +90,7 @@
                 {%- endunless -%}
               {%- endfor -%}
 
+              {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
                 <details {% if block.settings.default_open %}open{% endif %}>
@@ -101,13 +107,15 @@
                           <li class="filter-item">
                             {%- if current_tags contains clean_tag -%}
                               {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
-                              <a href="{{ tag_html | split: 'href="' | last | split: '"' | first }}" class="filter-label">
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
                                 <input type="checkbox" checked onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
                             {%- else -%}
                               {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
-                              <a href="{{ tag_html | split: 'href="' | last | split: '"' | first }}" class="filter-label">
+                              {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
+                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
                                 <input type="checkbox" onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
@@ -120,6 +128,7 @@
                 </details>
               </div>
 
+              {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
@@ -130,36 +139,49 @@
         {%- endfor -%}
 
         {%- comment -%} 
-          =============================================
-          4. CLEANUP (Catch-all)
-          =============================================
+          -------------------------------------------------------
+          2. RENDER REMAINING (Cleanup) 
+          -------------------------------------------------------
         {%- endcomment -%}
         {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
+            
+            {%- comment -%} SKIP AVAILABILITY (Done at top) {%- endcomment -%}
+            {%- if filter.param_name == 'filter.v.availability' -%}
+              {%- continue -%} 
+            {%- endif -%}
 
-            {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
-
+            {%- comment -%} Check if rendered by block {%- endcomment -%}
             {%- if filter.type == 'price_range' -%}
                {%- for block in section.blocks -%}
-                  {%- if block.type == 'price_range' or block.type == 'price_list' -%}{% assign rendered = true %}{%- endif -%}
+                  {%- if block.type == 'price_range' or block.type == 'price_list' -%}
+                    {% assign rendered = true %}
+                  {%- endif -%}
                {%- endfor -%}
             {%- else -%}
               {%- for block in section.blocks -%}
                 {%- assign b_name = block.settings.filter_name | downcase -%}
                 {%- assign f_label = filter.label | downcase -%}
-                {%- if block.type == 'filter_group' and b_name == f_label -%}{% assign rendered = true %}{%- endif -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}
+                  {% assign rendered = true %}
+                {%- endif -%}
               {%- endfor -%}
             {%- endif -%}
 
+            {%- comment -%} Render if NOT done yet {%- endcomment -%}
             {%- if rendered == false -%}
-               {% render 'cora-filter-item', filter: filter, default_open: true %}
+              {%- if filter.type == 'price_range' -%}
+                {% render 'cora-filter-price', filter: filter, default_open: true %}
+              {%- else -%}
+                {% render 'cora-filter-item', filter: filter, default_open: true %}
+              {%- endif -%}
             {%- endif -%}
+
           {%- endfor -%}
         {%- endif -%}
-
       </form>
-      <div class="filter-header">
+      <div class="filter-header" style="font-family: Assitant;">
         <span class="filter-header-title">Filters</span>
         <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
       </div>
@@ -172,7 +194,12 @@
       <span class="product-count">{{ collection.products_count }} Products</span>
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
-          <option value="?sort_by={{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
+          <option
+            value="?sort_by={{ option.value }}"
+            {% if option.value == collection.sort_by %}
+              selected
+            {% endif %}
+          >
             {{ option.name }}
           </option>
         {% endfor %}
@@ -185,16 +212,24 @@
           <div class="product-card">
             <div class="product-image-wrapper">
               <a href="{{ product.url }}">
-                {% if product.compare_at_price > product.price -%}<span class="product-badge">Sale</span>{%- endif %}
+                {% if product.compare_at_price > product.price -%}
+                  <span class="product-badge">Sale</span>
+                {%- endif %}
                 {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" loading="lazy">
+                  <img
+                    src="{{ product.featured_image | img_url: '600x600' }}"
+                    alt="{{ product.title }}"
+                    loading="lazy"
+                  >
                 {% else %}
                   {{ 'product-1' | placeholder_svg_tag }}
                 {% endif %}
               </a>
             </div>
             <div class="product-info">
-              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <h3>
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
               <div class="product-price">
                 <span>{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
@@ -207,20 +242,55 @@
       </div>
 
       {% if paginate.pages > 1 %}
-        <nav class="cora-pagination">
+        <nav class="cora-pagination" role="navigation" aria-label="Pagination">
           <div class="cora-pagination__left">
             {% if paginate.previous %}
-              <a href="{{ paginate.previous.url }}" class="cora-pagination__btn">Previous</a>
+              <a href="{{ paginate.previous.url }}" class="cora-pagination__btn cora-pagination__prev">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+                <span>Previous</span>
+              </a>
+            {% else %}
+              <span class="cora-pagination__btn cora-pagination__btn--disabled">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+                <span>Previous</span>
+              </span>
             {% endif %}
           </div>
+
           <div class="cora-pagination__list">
             {% for part in paginate.parts %}
-              {% if part.is_link %}<a href="{{ part.url }}" class="cora-pagination__item">{{ part.title }}</a>
-              {% else %}<span class="cora-pagination__item cora-pagination__item--active">{{ part.title }}</span>{% endif %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}" class="cora-pagination__item">{{ part.title }}</a>
+              {% else %}
+                {% if part.title == paginate.current_page %}
+                  <span class="cora-pagination__item cora-pagination__item--active">{{ part.title }}</span>
+                {% else %}
+                  <span class="cora-pagination__item cora-pagination__item--dots">{{ part.title }}</span>
+                {% endif %}
+              {% endif %}
             {% endfor %}
           </div>
+
           <div class="cora-pagination__right">
-            {% if paginate.next %}<a href="{{ paginate.next.url }}" class="cora-pagination__btn">Next</a>{% endif %}
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="cora-pagination__btn cora-pagination__next">
+                <span>Next</span>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+              </a>
+            {% else %}
+              <span class="cora-pagination__btn cora-pagination__btn--disabled">
+                <span>Next</span>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+              </span>
+            {% endif %}
           </div>
         </nav>
       {% endif %}
@@ -232,10 +302,34 @@
 {
   "name": "Advanced Filter Grid",
   "settings": [
-    { "type": "range", "id": "products_per_page", "min": 8, "max": 48, "default": 16, "label": "Products per page" },
-    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "default": 3, "label": "Desktop Columns" },
-    { "type": "range", "id": "columns_mobile", "min": 2, "max": 4, "default": 2, "label": "Mobile Columns" },
-    { "type": "checkbox", "id": "show_remaining", "label": "Auto-show remaining filters", "default": true },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "Desktop Columns"
+    },
+    { "type": "range", "id": "columns_mobile", "min": 2, "max": 4, "step": 1, "default": 2, "label": "Mobile Columns" },
+    {
+      "type": "checkbox",
+      "id": "show_remaining",
+      "label": "Auto-show remaining filters",
+      "default": true,
+      "info": "Shows filters not explicitly added as blocks at the bottom."
+    },
+    { "type": "header", "content": "Spacing & Color" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 100, "default": 60, "label": "Top Padding" },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "default": 60, "label": "Bottom Padding" }
@@ -245,7 +339,13 @@
       "type": "filter_group",
       "name": "Filter Group",
       "settings": [
-        { "type": "text", "id": "filter_name", "label": "Filter Label", "default": "Color" },
+        {
+          "type": "text",
+          "id": "filter_name",
+          "label": "Filter Label",
+          "info": "Must match exact name in Search & Discovery (e.g. 'Color')",
+          "default": "Color"
+        },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
       ]
     },
@@ -253,27 +353,47 @@
       "type": "tag_group",
       "name": "Tag List (Manual)",
       "settings": [
-        { "type": "text", "id": "title", "label": "Filter Title", "default": "Material" },
-        { "type": "textarea", "id": "tag_list", "label": "Tags (Separated by |)", "default": "Cotton|Wool" },
+        { "type": "text", "id": "title", "label": "Filter Title", "default": "Filter By Material" },
+        {
+          "type": "textarea",
+          "id": "tag_list",
+          "label": "Tags to Show",
+          "default": "Wool|Jute|Cotton",
+          "info": "Separate exact tag names with a pipe '|'. Example: Wool|Cotton|Silk"
+        },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
       ]
     },
-    { "type": "price_range", "name": "Standard Slider", "settings": [] },
+    {
+      "type": "price_range",
+      "name": "Price Slider",
+      "settings": [{ "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }]
+    },
     {
       "type": "price_list",
       "name": "Price List (Radio)",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Price Range" },
-        { "type": "textarea", "id": "price_ranges", "label": "Ranges", "default": "0-20000:Under ₹20k\n20000-50000:₹20k - ₹50k" },
-        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Price Range"
+        },
+        {
+          "type": "textarea",
+          "id": "price_ranges",
+          "label": "Price Ranges",
+          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
+          "info": "Format: Min-Max:Label (One per line)."
+        }
       ]
     },
     {
       "type": "text",
       "name": "Text Box",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title" },
-        { "type": "textarea", "id": "text", "label": "Text" }
+        { "type": "text", "id": "title", "label": "Title", "default": "Need Help?" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Call us at..." }
       ]
     },
     {
