@@ -1,7 +1,7 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
   Usage: Custom Price List (Collapsible) targeting Sale Price.
-  Updated: Robust Number comparison for Active State
+  Updated: Fixes Checkbox Active State & Logic.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
@@ -48,18 +48,18 @@
   function applyCustomPrice(min, max, element) {
     const params = new URLSearchParams(window.location.search);
     
-    // Convert to numbers for comparison to handle 50000 vs 50000.00
+    // Convert to Floats to ensure accurate number comparison
     const currentMin = parseFloat(params.get('filter.v.price.gte'));
     const currentMax = parseFloat(params.get('filter.v.price.lte'));
     const targetMin = parseFloat(min);
     const targetMax = parseFloat(max);
 
     if (currentMin === targetMin && currentMax === targetMax) {
-      // Toggle OFF
+      // Toggle OFF if clicking the active one
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
-      // Set NEW
+      // Set NEW Price Range
       params.set('filter.v.price.gte', min);
       params.set('filter.v.price.lte', max);
     }
@@ -67,11 +67,11 @@
     window.location.href = '?' + params.toString();
   }
 
-  // 2. Highlight Active Box (Auto-Run)
+  // 2. Highlight Active Box (Runs Automatically)
   (function() {
     function highlightActive() {
       const params = new URLSearchParams(window.location.search);
-      // We accept 0 if parameter is missing/NaN to prevent errors
+      // Use "|| 0" to handle missing params safely
       const urlMin = parseFloat(params.get('filter.v.price.gte')) || 0;
       const urlMax = parseFloat(params.get('filter.v.price.lte')) || 0;
 
@@ -81,7 +81,7 @@
         const boxMin = parseFloat(box.getAttribute('data-min')) || 0;
         const boxMax = parseFloat(box.getAttribute('data-max')) || 0;
 
-        // If URL params match the box params (ignoring decimals)
+        // Check for match (ignoring slight formatting differences)
         if (urlMin === boxMin && urlMax === boxMax && urlMax > 0) {
           box.classList.add('active');
         } else {
@@ -90,7 +90,7 @@
       });
     }
 
-    // Run on Load
+    // Run when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', highlightActive);
     } else {
