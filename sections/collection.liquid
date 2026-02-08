@@ -24,50 +24,6 @@
   <aside class="collection-sidebar">
     <div class="filter-wrapper">
       <form class="filter-form">
-        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
-        {%- if section.settings.show_remaining -%}
-          {%- for filter in collection.filters -%}
-            {%- assign rendered = false -%}
-
-            {%- comment -%} 1. Check Previous Blocks {%- endcomment -%}
-            {%- if filter.type == 'price_range' -%}
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'price_range' -%}{% assign rendered = true %}{%- endif -%}
-              {%- endfor -%}
-            {%- else -%}
-              {%- for block in section.blocks -%}
-                {%- assign b_name = block.settings.filter_name | downcase -%}
-                {%- assign f_label = filter.label | downcase -%}
-                {%- if block.type == 'filter_group' and b_name == f_label -%}
-                  {% assign rendered = true %}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-
-            {%- comment -%} 2. Render Remaining (Price + Availability) {%- endcomment -%}
-            {%- if rendered == false -%}
-              {%- assign clean_label = filter.label | downcase -%}
-
-              {%- if filter.type == 'price_range' -%}
-                {% render 'cora-filter-price', filter: filter, default_open: true %}
-
-              {%- elsif clean_label == 'availability' -%}
-                <div class="availability-filter-wrapper">
-                  {% render 'cora-filter-item', filter: filter, default_open: true %}
-                </div>
-
-                <style>
-                  .availability-filter-wrapper li:has(input[value="0"]) {
-                    display: none !important;
-                  }
-                </style>
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%}
-
- 
-
         {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -93,6 +49,10 @@
                 {% endif %}
               </div>
 
+            {%- comment -%} BLOCK: NEW CUSTOM PRICE LIST {%- endcomment -%}
+            {%- when 'price_list' -%}
+               {% render 'cora-filter-price-list', block: block %}
+
               {%- comment -%} BLOCK: SPECIFIC FILTER (e.g. Color, Size, Availability) {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
@@ -106,11 +66,7 @@
               {%- comment -%} BLOCK: MANUAL TAG LIST (e.g. Material) {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
-                <details
-                  {% if block.settings.default_open %}
-                    open
-                  {% endif %}
-                >
+                <details {% if block.settings.default_open %}open{% endif %}>
                   <summary class="filter-title">
                     <span>{{ block.settings.title }}</span>
                     <span class="icon-chevron"></span>
@@ -144,9 +100,8 @@
                   </div>
                 </details>
               </div>
-{%- when 'price_list' -%}
-               {% render 'cora-filter-price-list', block: block %}
-              {%- comment -%} BLOCK: PRICE RANGE {%- endcomment -%}
+
+              {%- comment -%} BLOCK: PRICE RANGE (Standard Slider) {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
@@ -155,6 +110,53 @@
               {%- endfor -%}
           {%- endcase -%}
         {%- endfor -%}
+
+        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
+        {%- if section.settings.show_remaining -%}
+          {%- for filter in collection.filters -%}
+            {%- assign rendered = false -%}
+
+            {%- comment -%} Check if this filter was already rendered by a custom block {%- endcomment -%}
+            {%- if filter.type == 'price_range' -%}
+               {%- comment -%} Check both price block types {%- endcomment -%}
+               {%- for block in section.blocks -%}
+                  {%- if block.type == 'price_range' or block.type == 'price_list' -%}
+                    {% assign rendered = true %}
+                  {%- endif -%}
+               {%- endfor -%}
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- assign b_name = block.settings.filter_name | downcase -%}
+                {%- assign f_label = filter.label | downcase -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}
+                  {% assign rendered = true %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- comment -%} Render if NOT done yet (Only Price & Availability) {%- endcomment -%}
+            {%- if rendered == false -%}
+              {%- assign clean_label = filter.label | downcase -%}
+
+              {%- if filter.type == 'price_range' -%}
+                {% render 'cora-filter-price', filter: filter, default_open: true %}
+
+              {%- elsif clean_label == 'availability' -%}
+                <div class="availability-filter-wrapper">
+                  {% render 'cora-filter-item', filter: filter, default_open: true %}
+                </div>
+
+                <style>
+                  .availability-filter-wrapper li:has(input[value="0"]) {
+                    display: none !important;
+                  }
+                </style>
+              {%- endif -%}
+
+            {%- endif -%}
+
+          {%- endfor -%}
+        {%- endif -%}
       </form>
       <div class="filter-header" style="font-family: Assitant;">
         <span class="filter-header-title">Filters</span>
@@ -325,25 +327,6 @@
       ]
     },
     {
-      "type": "price_list",
-      "name": "Price List (Radio)",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Price Range"
-        },
-        {
-          "type": "textarea",
-          "id": "price_ranges",
-          "label": "Price Ranges",
-          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
-          "info": "Format: Min-Max:Label (One per line). Use a huge number like 99999999 for 'Above X'"
-        }
-      ]
-    },
-    {
       "type": "tag_group",
       "name": "Tag List (Manual)",
       "settings": [
@@ -362,6 +345,25 @@
       "type": "price_range",
       "name": "Price Slider",
       "settings": [{ "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }]
+    },
+    {
+      "type": "price_list",
+      "name": "Price List (Radio)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Price Range"
+        },
+        {
+          "type": "textarea",
+          "id": "price_ranges",
+          "label": "Price Ranges",
+          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
+          "info": "Format: Min-Max:Label (One per line)."
+        }
+      ]
     },
     {
       "type": "text",
