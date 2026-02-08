@@ -1,129 +1,205 @@
 {% comment %}
   Snippet: cora-filter-price.liquid
-  Usage: Renders Price Ranges as VISIBLE Radio Buttons.
+  Usage: Custom Price Buckets (Ranges) for Shopify OS 2.0
 {% endcomment %}
 
-<style>
-  /* 1. Reset standard styles */
-  .cora-price-group { padding: 15px 0; border-bottom: 1px solid #eee; }
-  .cora-price-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; margin-bottom: 10px; }
-  
-  /* 2. List Styling */
-  .cora-price-list { list-style: none; padding: 0; margin: 0; }
-  .cora-price-item { 
-    margin-bottom: 10px; 
-    font-size: 14px; 
-    color: #333; 
-    display: flex; 
-    align-items: center; 
-    cursor: pointer; 
-  }
-  
-  /* 3. FORCE RADIO VISIBILITY */
-  .cora-price-radio { 
-    appearance: auto !important; /* Forces browser default radio look */
-    -webkit-appearance: radio !important;
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    margin-right: 10px !important;
-    width: 16px !important;
-    height: 16px !important;
-    accent-color: #EC7109; /* Your Brand Orange */
-    cursor: pointer;
-  }
+<div class="filter-group price-bucket-group">
+  <div class="filter-title">
+    <span>PRICE RANGE</span>
+  </div>
 
-  .cora-price-item label { cursor: pointer; width: 100%; }
-  .cora-price-item:hover { color: #EC7109; }
-
-  /* Manual Input Section */
-  .cora-manual-toggle { margin-top: 10px; font-size: 12px; text-decoration: underline; cursor: pointer; color: #666; }
-  .cora-manual-inputs { display: none; margin-top: 10px; gap: 10px; }
-  .cora-manual-inputs.active { display: flex; }
-  .cora-price-input { width: 45%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
-  .cora-price-go { background: #000; color: #fff; border: none; padding: 0 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
-</style>
-
-<div class="cora-price-group">
-  <details {% if default_open %}open{% endif %}>
-    <summary class="cora-price-header">
-      <span>{{ filter.label | escape }}</span>
-      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6" style="width: 10px;">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-      </svg>
-    </summary>
-
-    <div class="cora-price-content">
+  <div class="filter-content">
+    <ul class="price-bucket-list">
       
-      <price-range class="facets__price" style="display:none;">
-        <input name="{{ filter.min_value.param_name }}" id="Real-Min"
-          {% if filter.min_value.value %}value="{{ filter.min_value.value | divided_by: 100.00 | ceil }}"{% endif %}>
-        <input name="{{ filter.max_value.param_name }}" id="Real-Max"
-          {% if filter.max_value.value %}value="{{ filter.max_value.value | divided_by: 100.00 | ceil }}"{% endif %}>
-      </price-range>
+      {%- comment -%} 
+        CONFIGURATION: Define your ranges here.
+        Format: Min | Max | Label
+      {%- endcomment -%}
+      
+      {%- capture price_ranges -%}
+        0|20000|Under - ₹20,000
+        20000|50000|₹20,000 - ₹50,000
+        50000|100000|₹50,000 - ₹1,00,000
+        100000|200000|₹1,00,000 - ₹2,00,000
+        200000|300000|₹2,00,000 - ₹3,00,000
+      {%- endcapture -%}
 
-      <ul class="cora-price-list">
+      {%- assign ranges = price_ranges | newline_to_br | split: '<br />' -%}
+
+      {%- for range in ranges -%}
+        {%- assign parts = range | split: '|' -%}
+        {%- assign min_val = parts[0] | strip | times: 100 -%} {% comment %} Shopify uses cents {% endcomment %}
+        {%- assign max_val = parts[1] | strip | times: 100 -%}
+        {%- assign label = parts[2] | strip -%}
         
-        <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-1" onclick="setPrice(0, 1000)">
-          <label for="pr-1">Under {{ 1000 | money_without_trailing_zeros }}</label>
+        {%- comment -%} Check if this range is currently active in the URL {%- endcomment -%}
+        {%- assign is_active = false -%}
+        {%- if filter.min_value.value == min_val and filter.max_value.value == max_val -%}
+          {%- assign is_active = true -%}
+        {%- endif -%}
+
+        <li class="price-item">
+          <label class="checkbox-label">
+            <input type="checkbox" 
+                   class="price-bucket-input" 
+                   value="{{ min_val }}-{{ max_val }}"
+                   {% if is_active %}checked{% endif %}>
+            <span class="custom-checkbox"></span>
+            <span class="text">{{ label }}</span>
+          </label>
         </li>
+      {%- endfor -%}
+    </ul>
+    
+    <a href="#" class="price-load-more">Load More</a>
 
-        <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-2" onclick="setPrice(1000, 2500)">
-          <label for="pr-2">{{ 1000 | money_without_trailing_zeros }} - {{ 2500 | money_without_trailing_zeros }}</label>
-        </li>
-
-        <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-3" onclick="setPrice(2500, 5000)">
-          <label for="pr-3">{{ 2500 | money_without_trailing_zeros }} - {{ 5000 | money_without_trailing_zeros }}</label>
-        </li>
-
-        <li class="cora-price-item">
-          <input type="radio" name="price_radio" class="cora-price-radio" id="pr-4" onclick="setPrice(5000, null)">
-          <label for="pr-4">Above {{ 5000 | money_without_trailing_zeros }}</label>
-        </li>
-
-      </ul>
-
-      <div class="cora-manual-toggle" onclick="document.querySelector('.cora-manual-inputs').classList.toggle('active')">
-        Custom Range +
-      </div>
-      <div class="cora-manual-inputs">
-        <input type="number" placeholder="Min" id="Custom-Min" class="cora-price-input">
-        <input type="number" placeholder="Max" id="Custom-Max" class="cora-price-input">
-        <button type="button" class="cora-price-go" onclick="applyCustomPrice()">GO</button>
-      </div>
-
+    {%- comment -%} 
+      HIDDEN NATIVE INPUTS 
+      These are the actual inputs Shopify reads to filter the collection.
+    {%- endcomment -%}
+    <div class="price-range-hidden" style="display:none;">
+      <input name="{{ filter.min_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-GTE"
+        {%- if filter.min_value.value -%}
+          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+        {%- endif -%}
+        type="number"
+        placeholder="0"
+        min="0"
+        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+      >
+      <input name="{{ filter.max_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-LTE"
+        {%- if filter.max_value.value -%}
+          value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+        {%- endif -%}
+        type="number"
+        min="0"
+        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+        placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+      >
     </div>
-  </details>
+
+  </div>
 </div>
 
+<style>
+  /* CSS to match the image provided */
+  .price-bucket-group .filter-title {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+
+  .price-bucket-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .price-item {
+    margin-bottom: 12px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    color: #333;
+  }
+
+  /* Hide default checkbox */
+  .price-bucket-input {
+    display: none; 
+  }
+
+  /* Custom Box */
+  .custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #dcdcdc; /* Light grey border */
+    margin-right: 12px;
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    transition: all 0.2s;
+  }
+
+  /* Checked State */
+  .price-bucket-input:checked + .custom-checkbox {
+    background-color: #000; /* Or your theme color */
+    border-color: #000;
+  }
+
+  /* Checkmark */
+  .price-bucket-input:checked + .custom-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .price-load-more {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    text-decoration: underline;
+    color: #000;
+    font-style: italic;
+  }
+</style>
+
 <script>
-  function setPrice(min, max) {
-    // 1. Update Hidden Inputs
-    document.getElementById('Real-Min').value = min;
-    document.getElementById('Real-Max').value = max ? max : '';
-    
-    // 2. Submit Form
-    var form = document.getElementById('Real-Min').closest('form');
-    if(form) form.submit();
-  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const buckets = document.querySelectorAll('.price-bucket-input');
+    const minInput = document.getElementById('Filter-{{ filter.label | escape }}-GTE');
+    const maxInput = document.getElementById('Filter-{{ filter.label | escape }}-LTE');
+    const form = minInput.closest('form');
 
-  function applyCustomPrice() {
-    var min = document.getElementById('Custom-Min').value;
-    var max = document.getElementById('Custom-Max').value;
-    setPrice(min, max);
-  }
-  
-  // Highlight active selection on load
-  document.addEventListener("DOMContentLoaded", function() {
-    var currentMin = "{{ filter.min_value.value | divided_by: 100.00 | ceil }}";
-    var currentMax = "{{ filter.max_value.value | divided_by: 100.00 | ceil }}";
+    buckets.forEach(bucket => {
+      bucket.addEventListener('change', function() {
+        if (this.checked) {
+          // 1. Uncheck all other boxes (Single select behavior mimics radio)
+          buckets.forEach(b => {
+            if (b !== this) b.checked = false;
+          });
 
-    if(currentMin == "0" && currentMax == "1000") document.getElementById('pr-1').checked = true;
-    if(currentMin == "1000" && currentMax == "2500") document.getElementById('pr-2').checked = true;
-    if(currentMin == "2500" && currentMax == "5000") document.getElementById('pr-3').checked = true;
-    if(currentMin == "5000" && currentMax == "") document.getElementById('pr-4').checked = true;
+          // 2. Get values from the clicked bucket
+          const values = this.value.split('-');
+          // Convert from cents (Shopify default) to whole numbers for the input
+          const min = values[0] / 100; 
+          const max = values[1] / 100;
+
+          // 3. Set the hidden native inputs
+          minInput.value = min;
+          maxInput.value = max;
+        } else {
+          // If unchecking the active box, clear filters
+          minInput.value = '';
+          maxInput.value = '';
+        }
+
+        // 4. Submit the form (The parent 'filter-form')
+        // We use a small timeout to ensure values populate
+        setTimeout(() => {
+          // Trigger the standard theme event for form submission
+          // Most themes use a custom event or just submit()
+          // Try standard submit first:
+           const event = new Event('input', { bubbles: true });
+           minInput.dispatchEvent(event); // Trigger theme listeners
+           
+           // Fallback if theme doesn't auto-submit on input change
+           // form.submit(); 
+        }, 50);
+      });
+    });
   });
 </script>
