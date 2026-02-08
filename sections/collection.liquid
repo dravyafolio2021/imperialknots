@@ -115,26 +115,7 @@
         {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
-
-            {%- comment -%} Check if this filter was already rendered by a custom block {%- endcomment -%}
-            {%- if filter.type == 'price_range' -%}
-               {%- comment -%} Check both price block types {%- endcomment -%}
-               {%- for block in section.blocks -%}
-                  {%- if block.type == 'price_range' or block.type == 'price_list' -%}
-                    {% assign rendered = true %}
-                  {%- endif -%}
-               {%- endfor -%}
-            {%- else -%}
-              {%- for block in section.blocks -%}
-                {%- assign b_name = block.settings.filter_name | downcase -%}
-                {%- assign f_label = filter.label | downcase -%}
-                {%- if block.type == 'filter_group' and b_name == f_label -%}
-                  {% assign rendered = true %}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-
-            {%- comment -%} Render if NOT done yet (Only Price & Availability) {%- endcomment -%}
+   {%- comment -%} Render if NOT done yet (Only Price & Availability) {%- endcomment -%}
             {%- if rendered == false -%}
               {%- assign clean_label = filter.label | downcase -%}
 
@@ -154,6 +135,25 @@
               {%- endif -%}
 
             {%- endif -%}
+            {%- comment -%} Check if this filter was already rendered by a custom block {%- endcomment -%}
+            {%- if filter.type == 'price_range' -%}
+               {%- comment -%} Check both price block types {%- endcomment -%}
+               {%- for block in section.blocks -%}
+                  {%- if block.type == 'price_range' or block.type == 'price_list' -%}
+                    {% assign rendered = true %}
+                  {%- endif -%}
+               {%- endfor -%}
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- assign b_name = block.settings.filter_name | downcase -%}
+                {%- assign f_label = filter.label | downcase -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}
+                  {% assign rendered = true %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+         
 
           {%- endfor -%}
         {%- endif -%}
