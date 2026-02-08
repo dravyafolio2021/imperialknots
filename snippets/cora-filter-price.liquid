@@ -1,6 +1,6 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
-  Usage: Custom Price List that bypasses Theme AJAX to force a URL update.
+  Usage: Custom Price List (Radio Style) that forces URL updates, bypassing Theme AJAX.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
@@ -22,20 +22,27 @@
         
         {%- comment -%} Check active state from URL {%- endcomment -%}
         {%- assign is_active = false -%}
+        
+        {%- comment -%} 
+          We must check the URL parameters directly to see if this specific range is active.
+        {%- endcomment -%}
         {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
-        {%- assign min_param = 'filter.v.price.gte=' | append: min_price -%}
-        {%- assign max_param = 'filter.v.price.lte=' | append: max_price -%}
+        {%- assign min_check = 'filter.v.price.gte=' | append: min_price -%}
+        {%- assign max_check = 'filter.v.price.lte=' | append: max_price -%}
 
-        {%- if current_query contains min_param and current_query contains max_param -%}
+        {%- if current_query contains min_check and current_query contains max_check -%}
            {%- assign is_active = true -%}
         {%- endif -%}
 
         <li class="price-list-item">
           {%- comment -%} 
-            Using DIV instead of LABEL/INPUT to prevent Theme JS from interfering 
+            IMPORTANT: We use a DIV with onClick, not an INPUT. 
+            This prevents the Theme's AJAX from "hijacking" the click.
           {%- endcomment -%}
           <div class="cora-radio-fake {% if is_active %}active{% endif %}"
-               onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)">
+               onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)"
+               role="button"
+               tabindex="0">
             
             <span class="cora-check-box"></span>
             <span class="cora-label-text">{{ label_text }}</span>
@@ -51,24 +58,24 @@
     // 1. Get current URL params
     const params = new URLSearchParams(window.location.search);
 
-    // 2. Check if we are clicking the already active item (Toggle OFF)
+    // 2. Check if we are clicking the already active item
     const currentMin = params.get('filter.v.price.gte');
     const currentMax = params.get('filter.v.price.lte');
 
     if (currentMin === min && currentMax === max) {
-      // User clicked the active filter -> Remove it
+      // User clicked the active filter -> Toggle OFF (Remove params)
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
-      // User clicked a new filter -> Set it
+      // User clicked a new filter -> Set new params
       params.set('filter.v.price.gte', min);
       params.set('filter.v.price.lte', max);
     }
 
-    // 3. Reset pagination to page 1
+    // 3. Reset pagination to avoid empty pages
     params.delete('page');
 
-    // 4. FORCE RELOAD (Bypassing theme AJAX)
+    // 4. FORCE RELOAD to apply filters
     window.location.href = '?' + params.toString();
   }
 </script>
@@ -76,7 +83,7 @@
 <style>
   .price-list-group .filter-title {
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -89,7 +96,7 @@
   }
 
   .price-list-item {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   /* Fake Radio Styles */
@@ -99,14 +106,14 @@
     cursor: pointer;
     font-size: 15px;
     color: #333;
-    user-select: none; /* Prevents text highlighting on quick clicks */
+    user-select: none;
   }
 
   .cora-check-box {
     height: 18px;
     width: 18px;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #dcdcdc;
     margin-right: 12px;
     display: flex;
     align-items: center;
