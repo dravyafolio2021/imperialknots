@@ -33,9 +33,9 @@
         {%- for filter in collection.filters -%}
           {%- if filter.param_name == 'filter.v.availability' -%}
             <div class="availability-filter-pinned" style="margin-bottom: 20px;">
+              {%- comment -%} FORCE OPEN: Availability is the only one set to true {%- endcomment -%}
               {% render 'cora-filter-item', filter: filter, default_open: true %}
             </div>
-            {%- comment -%} Hide "Out of stock" option if value is 0 (Optional style) {%- endcomment -%}
             <style>
               .availability-filter-pinned li:has(input[value="0"]) {
                 display: none !important;
@@ -49,9 +49,9 @@
           1. RENDER MANUAL BLOCKS (Theme Editor Order) 
           -------------------------------------------------------
         {%- endcomment -%}
+        
         {%- for block in section.blocks -%}
           {%- case block.type -%}
-              {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
             {%- when 'text' -%}
               <div class="sidebar-block sidebar-text" {{ block.shopify_attributes }}>
                 {% if block.settings.title != blank %}
@@ -60,7 +60,6 @@
                 <p>{{ block.settings.text }}</p>
               </div>
 
-              {%- comment -%} BLOCK: PROMO IMAGE {%- endcomment -%}
             {%- when 'image' -%}
               <div class="sidebar-block sidebar-image" {{ block.shopify_attributes }}>
                 {% if block.settings.image %}
@@ -77,12 +76,11 @@
             {%- when 'price_list' -%}
                {% render 'cora-filter-price-list', block: block %}
 
-              {%- comment -%} BLOCK: SPECIFIC FILTER GROUP {%- endcomment -%}
+            {%- comment -%} BLOCK: SPECIFIC FILTER GROUP {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
               {%- for filter in collection.filters -%}
                 {%- assign current_filter = filter.label | downcase -%}
-                {%- comment -%} Skip Availability here since we pinned it to top {%- endcomment -%}
                 {%- unless filter.param_name == 'filter.v.availability' -%}
                   {%- if current_filter == target_filter -%}
                     {% render 'cora-filter-item', filter: filter, block: block %}
@@ -90,7 +88,7 @@
                 {%- endunless -%}
               {%- endfor -%}
 
-              {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
+            {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
                 <details {% if block.settings.default_open %}open{% endif %}>
@@ -128,7 +126,7 @@
                 </details>
               </div>
 
-              {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
+            {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
@@ -172,9 +170,10 @@
             {%- comment -%} Render if NOT done yet {%- endcomment -%}
             {%- if rendered == false -%}
               {%- if filter.type == 'price_range' -%}
-                {% render 'cora-filter-price', filter: filter, default_open: true %}
+                {% render 'cora-filter-price', filter: filter, default_open: false %}
               {%- else -%}
-                {% render 'cora-filter-item', filter: filter, default_open: true %}
+                 {%- comment -%} FORCE CLOSE: default_open set to false {%- endcomment -%}
+                 {% render 'cora-filter-item', filter: filter, default_open: false %}
               {%- endif -%}
             {%- endif -%}
 
@@ -273,17 +272,6 @@
                 {% endif %}
               </div>
             </div>
-            {% comment %} <div class="product-info">
-              <h3>
-                <a href="{{ product.url }}">{{ product.title }}</a>
-              </h3>
-              <div class="product-price">
-                <span>{{ product.price | money }}</span>
-                {% if product.compare_at_price > product.price %}
-                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
-                {% endif %}
-              </div>
-            </div> {% endcomment %}
           </div>
         {% endfor %}
       </div>
@@ -393,7 +381,7 @@
           "info": "Must match exact name in Search & Discovery (e.g. 'Color')",
           "default": "Color"
         },
-        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
+        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
     },
     {
@@ -408,13 +396,13 @@
           "default": "Wool|Jute|Cotton",
           "info": "Separate exact tag names with a pipe '|'. Example: Wool|Cotton|Silk"
         },
-        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }
+        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
     },
     {
       "type": "price_range",
       "name": "Price Slider",
-      "settings": [{ "type": "checkbox", "id": "default_open", "label": "Open by default", "default": true }]
+      "settings": [{ "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }]
     },
     {
       "type": "price_list",
@@ -432,7 +420,8 @@
           "label": "Price Ranges",
           "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
           "info": "Format: Min-Max:Label (One per line)."
-        }
+        },
+        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
     },
     {
