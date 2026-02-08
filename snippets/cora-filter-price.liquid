@@ -1,10 +1,14 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
-  Usage: Custom Price List (Collapsible) with URL-forcing logic.
+  Usage: Custom Price List (Collapsible) targeting Sale Price.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
-  <details open>
+  {%- comment -%} 
+    COLLAPSIBLE WRAPPER 
+    We check block.settings.default_open to see if it should start open.
+  {%- endcomment -%}
+  <details {% if block.settings.default_open %}open{% endif %}>
     <summary class="filter-title">
       <span>{{ block.settings.title }}</span>
       {%- comment -%} CHEVRON ICON {%- endcomment -%}
@@ -30,6 +34,10 @@
           {%- comment -%} Check active state {%- endcomment -%}
           {%- assign is_active = false -%}
           {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
+          
+          {%- comment -%} 
+            NOTE: 'filter.v.price' automatically targets the SALE PRICE (selling price).
+          {%- endcomment -%}
           {%- assign min_check = 'filter.v.price.gte=' | append: min_price -%}
           {%- assign max_check = 'filter.v.price.lte=' | append: max_price -%}
 
@@ -59,13 +67,16 @@
     const currentMax = params.get('filter.v.price.lte');
 
     if (currentMin === min && currentMax === max) {
+      // Toggle OFF if clicking the active one
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
+      // Set NEW Price Range (Sale Price)
       params.set('filter.v.price.gte', min);
       params.set('filter.v.price.lte', max);
     }
     params.delete('page');
+    // Force reload
     window.location.href = '?' + params.toString();
   }
 </script>
@@ -84,7 +95,7 @@
     display: none;
   }
 
-  /* Chevron Rotation */
+  /* Chevron Animation */
   .price-list-group .icon-chevron svg {
     transition: transform 0.3s ease;
   }
