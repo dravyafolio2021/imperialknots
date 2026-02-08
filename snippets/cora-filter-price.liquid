@@ -1,97 +1,108 @@
 {% comment %}
   Snippet: cora-filter-price-list.liquid
-  Usage: Custom Price List (Radio Style) that forces URL updates, bypassing Theme AJAX.
+  Usage: Custom Price List (Collapsible) with URL-forcing logic.
 {% endcomment %}
 
 <div class="sidebar-block filter-group price-list-group">
-  <div class="filter-title">
-    <span>{{ block.settings.title }}</span>
-  </div>
+  <details open>
+    <summary class="filter-title">
+      <span>{{ block.settings.title }}</span>
+      {%- comment -%} CHEVRON ICON {%- endcomment -%}
+      <span class="icon-chevron">
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </summary>
 
-  <div class="filter-content">
-    <ul class="price-list-items">
-      {%- assign range_lines = block.settings.price_ranges | newline_to_br | split: '<br />' -%}
-      
-      {%- for line in range_lines -%}
-        {%- assign parts = line | split: ':' -%}
-        {%- assign range_vals = parts[0] | split: '-' -%}
-        {%- assign label_text = parts[1] | strip -%}
+    <div class="filter-content">
+      <ul class="price-list-items">
+        {%- assign range_lines = block.settings.price_ranges | newline_to_br | split: '<br />' -%}
         
-        {%- assign min_price = range_vals[0] | strip -%}
-        {%- assign max_price = range_vals[1] | strip -%}
-        
-        {%- comment -%} Check active state from URL {%- endcomment -%}
-        {%- assign is_active = false -%}
-        
-        {%- comment -%} 
-          We must check the URL parameters directly to see if this specific range is active.
-        {%- endcomment -%}
-        {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
-        {%- assign min_check = 'filter.v.price.gte=' | append: min_price -%}
-        {%- assign max_check = 'filter.v.price.lte=' | append: max_price -%}
+        {%- for line in range_lines -%}
+          {%- assign parts = line | split: ':' -%}
+          {%- assign range_vals = parts[0] | split: '-' -%}
+          {%- assign label_text = parts[1] | strip -%}
+          
+          {%- assign min_price = range_vals[0] | strip -%}
+          {%- assign max_price = range_vals[1] | strip -%}
+          
+          {%- comment -%} Check active state {%- endcomment -%}
+          {%- assign is_active = false -%}
+          {%- capture current_query -%}{{ request.query_string }}{%- endcapture -%}
+          {%- assign min_check = 'filter.v.price.gte=' | append: min_price -%}
+          {%- assign max_check = 'filter.v.price.lte=' | append: max_price -%}
 
-        {%- if current_query contains min_check and current_query contains max_check -%}
-           {%- assign is_active = true -%}
-        {%- endif -%}
+          {%- if current_query contains min_check and current_query contains max_check -%}
+             {%- assign is_active = true -%}
+          {%- endif -%}
 
-        <li class="price-list-item">
-          {%- comment -%} 
-            IMPORTANT: We use a DIV with onClick, not an INPUT. 
-            This prevents the Theme's AJAX from "hijacking" the click.
-          {%- endcomment -%}
-          <div class="cora-radio-fake {% if is_active %}active{% endif %}"
-               onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)"
-               role="button"
-               tabindex="0">
-            
-            <span class="cora-check-box"></span>
-            <span class="cora-label-text">{{ label_text }}</span>
-          </div>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
+          <li class="price-list-item">
+            <div class="cora-radio-fake {% if is_active %}active{% endif %}"
+                 onclick="applyCustomPrice('{{ min_price }}', '{{ max_price }}', this)"
+                 role="button">
+              
+              <span class="cora-check-box"></span>
+              <span class="cora-label-text">{{ label_text }}</span>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </details>
 </div>
 
 <script>
   function applyCustomPrice(min, max, element) {
-    // 1. Get current URL params
     const params = new URLSearchParams(window.location.search);
-
-    // 2. Check if we are clicking the already active item
     const currentMin = params.get('filter.v.price.gte');
     const currentMax = params.get('filter.v.price.lte');
 
     if (currentMin === min && currentMax === max) {
-      // User clicked the active filter -> Toggle OFF (Remove params)
       params.delete('filter.v.price.gte');
       params.delete('filter.v.price.lte');
     } else {
-      // User clicked a new filter -> Set new params
       params.set('filter.v.price.gte', min);
       params.set('filter.v.price.lte', max);
     }
-
-    // 3. Reset pagination to avoid empty pages
     params.delete('page');
-
-    // 4. FORCE RELOAD to apply filters
     window.location.href = '?' + params.toString();
   }
 </script>
 
 <style>
+  /* Reset Details/Summary Styles */
+  .price-list-group details > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+  .price-list-group details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Chevron Rotation */
+  .price-list-group .icon-chevron svg {
+    transition: transform 0.3s ease;
+  }
+  .price-list-group details[open] .icon-chevron svg {
+    transform: rotate(180deg);
+  }
+
   .price-list-group .filter-title {
     font-weight: 600;
-    margin-bottom: 15px;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
+    width: 100%;
   }
   
   .price-list-items {
     list-style: none;
-    padding: 0;
+    padding: 10px 0 0 0;
     margin: 0;
   }
 
@@ -99,7 +110,6 @@
     margin-bottom: 12px;
   }
 
-  /* Fake Radio Styles */
   .cora-radio-fake {
     display: flex;
     align-items: center;
@@ -118,22 +128,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
     flex-shrink: 0;
   }
 
-  /* Hover effect */
-  .cora-radio-fake:hover .cora-check-box {
-    border-color: #000;
-  }
-
-  /* Active State (Simulating Checked) */
   .cora-radio-fake.active .cora-check-box {
     background-color: #000;
     border-color: #000;
   }
 
-  /* Checkmark Icon */
   .cora-check-box::after {
     content: "";
     display: none;
@@ -147,9 +149,5 @@
 
   .cora-radio-fake.active .cora-check-box::after {
     display: block;
-  }
-
-  .cora-label-text {
-    line-height: 1.4;
   }
 </style>
