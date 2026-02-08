@@ -24,7 +24,31 @@
   <aside class="collection-sidebar">
     <div class="filter-wrapper">
       <form class="filter-form">
-        {%- comment -%} 1. RENDER MANUAL BLOCKS FIRST (Controlled by Theme Editor Order) {%- endcomment -%}
+        
+        {%- comment -%} 
+          -------------------------------------------------------
+          0. PINNED FILTERS (Render Availability First) 
+          -------------------------------------------------------
+        {%- endcomment -%}
+        {%- for filter in collection.filters -%}
+          {%- if filter.param_name == 'filter.v.availability' -%}
+            <div class="availability-filter-pinned" style="margin-bottom: 20px;">
+              {% render 'cora-filter-item', filter: filter, default_open: true %}
+            </div>
+            {%- comment -%} Hide "Out of stock" option if value is 0 (Optional style) {%- endcomment -%}
+            <style>
+              .availability-filter-pinned li:has(input[value="0"]) {
+                display: none !important;
+              }
+            </style>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%} 
+          -------------------------------------------------------
+          1. RENDER MANUAL BLOCKS (Theme Editor Order) 
+          -------------------------------------------------------
+        {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
               {%- comment -%} BLOCK: TEXT / NOTE {%- endcomment -%}
@@ -49,21 +73,24 @@
                 {% endif %}
               </div>
 
-            {%- comment -%} BLOCK: NEW CUSTOM PRICE LIST {%- endcomment -%}
+            {%- comment -%} BLOCK: CUSTOM PRICE LIST (Radio) {%- endcomment -%}
             {%- when 'price_list' -%}
                {% render 'cora-filter-price-list', block: block %}
 
-              {%- comment -%} BLOCK: SPECIFIC FILTER (e.g. Color, Size, Availability) {%- endcomment -%}
+              {%- comment -%} BLOCK: SPECIFIC FILTER GROUP {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
               {%- for filter in collection.filters -%}
                 {%- assign current_filter = filter.label | downcase -%}
-                {%- if current_filter == target_filter -%}
-                  {% render 'cora-filter-item', filter: filter, block: block %}
-                {%- endif -%}
+                {%- comment -%} Skip Availability here since we pinned it to top {%- endcomment -%}
+                {%- unless filter.param_name == 'filter.v.availability' -%}
+                  {%- if current_filter == target_filter -%}
+                    {% render 'cora-filter-item', filter: filter, block: block %}
+                  {%- endif -%}
+                {%- endunless -%}
               {%- endfor -%}
 
-              {%- comment -%} BLOCK: MANUAL TAG LIST (e.g. Material) {%- endcomment -%}
+              {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
                 <details {% if block.settings.default_open %}open{% endif %}>
@@ -101,7 +128,7 @@
                 </details>
               </div>
 
-              {%- comment -%} BLOCK: PRICE RANGE (Standard Slider) {%- endcomment -%}
+              {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
@@ -111,14 +138,22 @@
           {%- endcase -%}
         {%- endfor -%}
 
-        {%- comment -%} 2. RENDER REMAINING FILTERS AT THE END (ONCE) {%- endcomment -%}
+        {%- comment -%} 
+          -------------------------------------------------------
+          2. RENDER REMAINING (Cleanup) 
+          -------------------------------------------------------
+        {%- endcomment -%}
         {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
+            
+            {%- comment -%} SKIP AVAILABILITY (Done at top) {%- endcomment -%}
+            {%- if filter.param_name == 'filter.v.availability' -%}
+              {%- continue -%} 
+            {%- endif -%}
 
-            {%- comment -%} Check if this filter was already rendered by a custom block {%- endcomment -%}
+            {%- comment -%} Check if rendered by block {%- endcomment -%}
             {%- if filter.type == 'price_range' -%}
-               {%- comment -%} Check both price block types {%- endcomment -%}
                {%- for block in section.blocks -%}
                   {%- if block.type == 'price_range' or block.type == 'price_list' -%}
                     {% assign rendered = true %}
@@ -134,25 +169,13 @@
               {%- endfor -%}
             {%- endif -%}
 
-            {%- comment -%} Render if NOT done yet (Only Price & Availability) {%- endcomment -%}
+            {%- comment -%} Render if NOT done yet {%- endcomment -%}
             {%- if rendered == false -%}
-              {%- assign clean_label = filter.label | downcase -%}
-
               {%- if filter.type == 'price_range' -%}
                 {% render 'cora-filter-price', filter: filter, default_open: true %}
-
-              {%- elsif clean_label == 'availability' -%}
-                <div class="availability-filter-wrapper">
-                  {% render 'cora-filter-item', filter: filter, default_open: true %}
-                </div>
-
-                <style>
-                  .availability-filter-wrapper li:has(input[value="0"]) {
-                    display: none !important;
-                  }
-                </style>
+              {%- else -%}
+                {% render 'cora-filter-item', filter: filter, default_open: true %}
               {%- endif -%}
-
             {%- endif -%}
 
           {%- endfor -%}
