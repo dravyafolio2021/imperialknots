@@ -340,20 +340,32 @@
 
       <span class="product-count">{{ collection.products_count }} Products</span>
       
-      <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
+     <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
-          {%- comment -%} FILTER OUT DATE AND ALPHABET OPTIONS {%- endcomment -%}
-          {% comment %} {%- unless option.value contains 'title' or option.value contains 'created' -%} {% endcomment %}
-           {%- unless option.value contains 'title' -%}
+          
+          {%- comment -%} 
+            LOGIC: 
+            1. Hide 'title' (A-Z, Z-A).
+            2. Hide 'created-ascending' (Date, old to new).
+            3. Show everything else (including 'created-descending' aka Newest).
+          {%- endcomment -%}
+          
+          {%- unless option.value contains 'title' or option.value contains 'created-ascending' -%}
             <option
               value="?sort_by={{ option.value }}"
               {% if option.value == collection.sort_by %}
                 selected
               {% endif %}
             >
-              {{ option.name }}
+              {%- comment -%} Rename "Date, new to old" to "Newest" {%- endcomment -%}
+              {%- if option.value == 'created-descending' -%}
+                Newest
+              {%- else -%}
+                {{ option.name }}
+              {%- endif -%}
             </option>
           {%- endunless -%}
+          
         {% endfor %}
       </select>
     </div>
