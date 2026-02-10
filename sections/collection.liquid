@@ -343,7 +343,8 @@
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
           {%- comment -%} FILTER OUT DATE AND ALPHABET OPTIONS {%- endcomment -%}
-          {%- unless option.value contains 'title' or option.value contains 'created' -%}
+          {% comment %} {%- unless option.value contains 'title' or option.value contains 'created' -%} {% endcomment %}
+           {%- unless option.value contains 'title' -%}
             <option
               value="?sort_by={{ option.value }}"
               {% if option.value == collection.sort_by %}
