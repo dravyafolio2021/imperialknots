@@ -55,8 +55,14 @@
 
     <div class="cmp-info">
       <div class="cmp-meta">
-        {%- if product.collections.first -%}
+        {% comment %} {%- if product.collections.first -%}
           <span class="cmp-category">{{ product.collections.first.title }}</span>
+        {%- endif -%} {% endcomment %}
+
+        {%- if product.collections.first -%}
+          <a href="{{ product.collections.first.url }}" class="cmp-category" style="text-decoration: none; color: inherit;">
+            {{ product.collections.first.title }}
+          </a>
         {%- endif -%}
         {%- assign current_variant = product.selected_or_first_available_variant -%}
         <span class="cmp-sku"
