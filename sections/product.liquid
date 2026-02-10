@@ -29,9 +29,11 @@
 <section class="cmp-section" id="MainProduct-{{ section.id }}">
   <div class="cmp-container">
     <div class="cmp-gallery">
-      <div class="cmp-meta">
+     <div class="cmp-meta">
         {%- if product.collections.first -%}
-          <span class="cmp-category">{{ product.collections.first.title }}</span>
+          <a href="{{ product.collections.first.url }}" class="cmp-category" style="text-decoration: none; color: inherit; cursor: pointer;">
+            {{ product.collections.first.title }}
+          </a>
         {%- endif -%}
       </div>
       <div class="cmp-main-image">
