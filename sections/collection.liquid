@@ -367,7 +367,7 @@
                 {%- endif %} {% endcomment %}
                  {% if product.compare_at_price > product.price %}
   {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
-  <span class="product-badge">{{ discount }}% OFF</span>
+  <span class="product-badge">- {{ discount }}% </span>
 {% endif %}
                 {% if product.featured_image %}
                   <img
