@@ -288,3 +288,44 @@
 .cmp-qty-input {
   -moz-appearance: textfield;
 }
+
+
+
+/* --- 7. PRODUCT DESCRIPTION TABLE STYLES --- */
+.cmp-accordion-inner table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.cmp-accordion-inner td, 
+.cmp-accordion-inner th {
+  padding: 10px 12px;
+  border: 1px solid #e5e5e5; /* Adds the grid lines */
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Optional: Make the first column (labels) slightly bold or gray */
+.cmp-accordion-inner td:first-child {
+  font-weight: 600;
+  background-color: #fafafa; /* Light gray background for labels */
+  width: 40%; /* Keeps labels from squishing */
+}
+
+/* Mobile Fix for Tables */
+@media (max-width: 600px) {
+  .cmp-accordion-inner td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .cmp-accordion-inner td:first-child {
+    background-color: #f4f4f4;
+    font-weight: 700;
+    border-bottom: none; /* Merge visual look with value below */
+  }
+}
