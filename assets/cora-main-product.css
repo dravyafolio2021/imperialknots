@@ -1,6 +1,6 @@
 /* ASSET: cora-main-product.css 
   Purpose: Styles for the Split-Screen Product Page (Imperial Knots Design)
-  Updated: Gallery is now STICKY, Info scrolls.
+  Updated: Sticky Gallery, Scrolling Info, and Mobile-Friendly Tables.
 */
 
 /* --- 1. LAYOUT STRUCTURE --- */
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-/* LEFT COLUMN (Gallery) - NOW STICKY */
+/* LEFT COLUMN (Gallery) - STICKY */
 .cmp-gallery {
   flex: 1 1 400px !important;
   width: 50%;
@@ -36,7 +36,7 @@
   position: sticky;
   top: 40px; /* Distance from top of screen */
   align-self: flex-start;
-  height: fit-content; /* Important: prevents gallery from stretching to full height of container */
+  height: fit-content; 
   z-index: 10;
 }
 
@@ -44,7 +44,7 @@
 .cmp-info {
   flex: 0 0 450px !important; 
   width: 450px;
-  position: relative; /* Removed sticky from here */
+  position: relative; 
 }
 
 /* --- 2. GALLERY STYLES --- */
@@ -251,30 +251,26 @@
 .cmp-accordion-inner { padding-bottom: 20px; }
 .cmp-accordion-item[open] .cmp-accordion-icon { transform: rotate(45deg); }
 
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- MOBILE RESPONSIVENESS (Layout) --- */
 @media (max-width: 1024px) {
   .cmp-gallery {
     /* Disable sticky on mobile so it doesn't overlap/float weirdly in a stack */
     position: static; 
   }
   .cmp-section {
-  background-color: #fff;
-  padding: 40px 0;
-  /* Ensure no overflow hidden on parent, or sticky won't work */
-  overflow: visible; 
-}
+    background-color: #fff;
+    padding: 40px 0;
+    overflow: visible; 
+  }
 
-
-.cmp-title {
-  font-family: 'Assistant', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 10px 0;
-  color: #1a1a1a;
-}
-
-
+  .cmp-title {
+    font-family: 'Assistant', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+    color: #1a1a1a;
+  }
 }
 
 /* Remove Spinner Arrows (Chrome, Safari, Edge, Opera) */
@@ -289,43 +285,51 @@
   -moz-appearance: textfield;
 }
 
-
-
-/* --- 7. PRODUCT DESCRIPTION TABLE STYLES --- */
+/* --- 7. PRODUCT DESCRIPTION TABLE STYLES (Fixed for Mobile) --- */
 .cmp-accordion-inner table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
+  table-layout: fixed; /* Prevents expansion */
 }
 
 .cmp-accordion-inner td, 
 .cmp-accordion-inner th {
   padding: 10px 12px;
-  border: 1px solid #e5e5e5; /* Adds the grid lines */
+  border: 1px solid #e5e5e5;
   color: #333;
   vertical-align: middle;
+  word-wrap: break-word; /* Ensures text wraps */
 }
 
-/* Optional: Make the first column (labels) slightly bold or gray */
+/* First Column (Labels) */
 .cmp-accordion-inner td:first-child {
   font-weight: 600;
-  background-color: #fafafa; /* Light gray background for labels */
-  width: 40%; /* Keeps labels from squishing */
+  background-color: #fafafa;
+  width: 35%; /* Fixed width for labels */
+  color: #555;
 }
 
-/* Mobile Fix for Tables */
+/* Second Column (Values) */
+.cmp-accordion-inner td:last-child {
+  width: 65%;
+}
+
+/* Mobile Adjustments */
 @media (max-width: 600px) {
-  .cmp-accordion-inner td {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
+  .cmp-accordion-inner table {
+    font-size: 13px; /* Slightly smaller text */
+  }
+
+  .cmp-accordion-inner td, 
+  .cmp-accordion-inner th {
+    padding: 8px 10px; /* Tighter padding */
   }
   
-  .cmp-accordion-inner td:first-child {
-    background-color: #f4f4f4;
-    font-weight: 700;
-    border-bottom: none; /* Merge visual look with value below */
+  /* FORCE side-by-side display */
+  .cmp-accordion-inner td {
+    display: table-cell !important; 
   }
 }
