@@ -362,9 +362,13 @@
           <div class="product-card">
             <div class="product-image-wrapper">
               <a href="{{ product.url }}">
-                {% if product.compare_at_price > product.price -%}
+                {% comment %} {% if product.compare_at_price > product.price -%}
                   <span class="product-badge">Sale</span>
-                {%- endif %}
+                {%- endif %} {% endcomment %}
+                 {% if product.compare_at_price > product.price %}
+  {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+  <span class="product-badge">{{ discount }}% OFF</span>
+{% endif %}
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | img_url: '600x600' }}"
