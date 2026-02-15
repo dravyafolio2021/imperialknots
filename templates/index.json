@@ -783,7 +783,7 @@
           "type": "question",
           "settings": {
             "title": "What makes Imperial Knots carpets different?",
-            "answer": "<p>Handcrafted by skilled Indian artisans, using premium natural materials and ethical, small-batch production. Expect authentic techniques, durable construction, and timeless design.</p>"
+            "answer": "<p>Handcrafted by skilled Indian artisans, using premium natural materials and ethical, small-<br/>batch production. Expect authentic techniques, durable construction, and timeless design.</p>"
           }
         },
         "question_Kfh38c": {
