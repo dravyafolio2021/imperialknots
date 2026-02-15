@@ -786,6 +786,13 @@
             "answer": "<p>Handcrafted by skilled Indian artisans, using premium natural materials and ethical, small-<br/>batch production. Expect authentic techniques, durable construction, and timeless design.</p>"
           }
         },
+        "question_hEWNGA": {
+          "type": "question",
+          "settings": {
+            "title": "Where are Imperial Knots rugs made?",
+            "answer": "<p>In India, by artisan weaving communities using traditional knotting and weaving methods.</p>"
+          }
+        },
         "question_Kfh38c": {
           "type": "question",
           "settings": {
@@ -1106,6 +1113,7 @@
       "block_order": [
         "category_CWJGQf",
         "question_ifmTAG",
+        "question_hEWNGA",
         "question_Kfh38c",
         "question_w7EUxV",
         "category_7K3jmc",
