@@ -103,7 +103,7 @@
   }
   
   .cas-container {
-    flex-direction: column-reverse; /* Puts image on top */
+    flex-direction: column; /* Puts image on top */
     gap: 40px;
     text-align: center;
     align-items: center; /* Revert to center for mobile stack */
