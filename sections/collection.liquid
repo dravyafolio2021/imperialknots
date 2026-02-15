@@ -376,13 +376,29 @@
           <div class="product-card">
             <div class="product-image-wrapper">
               <a href="{{ product.url }}">
-                {% comment %} {% if product.compare_at_price > product.price -%}
-                  <span class="product-badge">Sale</span>
-                {%- endif %} {% endcomment %}
-                 {% if product.compare_at_price > product.price %}
-  {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
-  <span class="product-badge"> {{ discount }}% off </span>
-{% endif %}
+               
+                {% comment %} {% if product.compare_at_price > product.price %}
+                  {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+                  <span class="product-badge"> {{ discount }}% off </span>
+                {% endif %} {% endcomment %}
+                 {%- assign has_instock_tag = false -%}
+
+{%- comment -%} 1. Scan tags and normalize them (lowercase, remove spaces and dashes) {%- endcomment -%}
+{%- for tag in product.tags -%}
+  {%- assign clean_tag = tag | downcase | replace: '-', '' | replace: ' ', '' -%}
+  {%- if clean_tag == 'instock' -%}
+    {%- assign has_instock_tag = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} 2. Display 'In Stock' if tag exists, otherwise show % OFF {%- endcomment -%}
+{%- if has_instock_tag -%}
+  <span class="product-badge">In Stock</span>
+{%- elsif product.compare_at_price > product.price -%}
+  {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+  <span class="product-badge">{{ discount }}% OFF</span>
+{%- endif -%}
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | img_url: '600x600' }}"
