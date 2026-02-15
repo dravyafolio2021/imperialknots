@@ -789,15 +789,15 @@
         "question_Kfh38c": {
           "type": "question",
           "settings": {
-            "title": "Where are Imperial Knots rugs made?",
-            "answer": "<p>In India, by artisan weaving communities using traditional knotting and weaving methods.<br/><br/></p>"
+            "title": "Do you offer international shipping?",
+            "answer": "<p>Yes, we ship worldwide. Rates and delivery times vary by destination and rug size; details<br/>appear at checkout.</p>"
           }
         },
         "question_w7EUxV": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?2",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "What social initiatives does Imperial Knots support in the weavers' community?",
+            "answer": "<p>Fair wages, safer workplaces, healthcare support, and education initiatives for artisan<br/>families—sustaining heritage crafts. Imperial is also the founding member of Care & Fare.</p>"
           }
         },
         "category_7K3jmc": {
@@ -864,15 +864,15 @@
         "question_ah3RWq": {
           "type": "question",
           "settings": {
-            "title": "Will I see the exact carpet I’m ordering?",
-            "answer": "<p>Yes—ready-made listings show the actual rug. For custom rugs, we share approval images; minor tone/texture variations are natural with hand-dyed fibers.</p>"
+            "title": "Why is wool (or silk) the best material for a carpet?",
+            "answer": "<p>Wool: naturally resilient, stain-resistant, fire-resistant, and cozy.<br/>Silk: fine detail and luxurious sheen. Both are long-lasting and premium.</p>"
           }
         },
         "question_79y7kn": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "Will I see the exact carpet I’m ordering?",
+            "answer": "<p>Yes—ready-made listings show the actual rug. For custom rugs, we share approval images;<br/>minor tone/texture variations are natural with hand-dyed fibers.</p>"
           }
         },
         "category_ViDb9y": {

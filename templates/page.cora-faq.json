@@ -47,14 +47,21 @@
           "type": "question",
           "settings": {
             "title": "Where are Imperial Knots rugs made?",
-            "answer": "<p>In India, by artisan weaving communities using traditional knotting and weaving methods.<br/><br/></p>"
+            "answer": "<p>In India, by artisan weaving communities using traditional knotting and weaving methods.</p>"
           }
         },
         "question_pQqmde": {
           "type": "question",
           "settings": {
-            "title": "What is your return policy?2",
-            "answer": "<p>We accept returns within 30 days of purchase.</p>"
+            "title": "Do you offer international shipping?",
+            "answer": "<p>Yes, we ship worldwide. Rates and delivery times vary by destination and rug size; details<br/>appear at checkout.</p>"
+          }
+        },
+        "question_dkM8nh": {
+          "type": "question",
+          "settings": {
+            "title": "What social initiatives does Imperial Knots support in the weavers' community?",
+            "answer": "<p>Fair wages, safer workplaces, healthcare support, and education initiatives for artisan<br/>families—sustaining heritage crafts. Imperial is also the founding member of Care & Fare.</p>"
           }
         },
         "category_UPVRgm": {
@@ -365,6 +372,7 @@
         "question_tELCWF",
         "question_G9W76P",
         "question_pQqmde",
+        "question_dkM8nh",
         "category_UPVRgm",
         "question_7WqVm4",
         "question_ezmE6P",
