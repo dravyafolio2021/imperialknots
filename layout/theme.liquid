@@ -25,6 +25,9 @@
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
+    {% if request.query_string != blank %}
+  <meta name="robots" content="noindex, follow">
+{% endif %}
   </head>
 
   <body>
