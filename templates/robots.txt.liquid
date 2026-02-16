@@ -1,7 +1,24 @@
-# Custom Rules to Reduce Crawl Waste
+# Standard Shopify Rules
+{%- for group in robots.default_groups -%}
+  {{- group.user_agent -}}
+
+  {%- for rule in group.rules -%}
+    {{- rule -}}
+  {%- endfor -%}
+
+  {%- if group.sitemap != blank -%}
+    {{- group.sitemap -}}
+  {%- endif -%}
+{%- endfor -%}
+
+# --- CUSTOM FIXES TO REDUCE CRAWL WASTE ---
+# These rules stop bots from crawling duplicate filter/sort combinations [cite: 30, 47]
+
 Disallow: /*?*filter* [cite: 41]
 Disallow: /*?*sort_by* [cite: 42]
 Disallow: /*?*variant* [cite: 43]
 Disallow: /*?*page= [cite: 44]
 Disallow: /search [cite: 45]
 Disallow: /collections/*+* [cite: 46]
+
+# ------------------------------------------
