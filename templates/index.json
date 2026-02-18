@@ -31,13 +31,13 @@
             "image_mobile": "shopify://shop_images/ImageWithFallback.png",
             "image_alt": "Elevate your space with luxury rugs",
             "subtitle": "",
-            "heading": "Elevate your space with luxury rugsElevate your space with luxury rugs",
+            "heading": "Elevate your space with luxury rugs",
             "text": "Handcrafted with premium materials and sustainable practices",
             "primary_button_text": "Shop Rugs",
             "primary_button_link": "shopify://collections/all",
             "secondary_button_text": "Customize Your Rug",
             "secondary_button_link": "",
-            "content_align": "left",
+            "content_align": "center",
             "content_width": 50,
             "overlay_opacity": 0.4
           }
