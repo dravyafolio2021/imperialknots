@@ -329,7 +329,7 @@
       ],
       "name": "Collection Grid",
       "settings": {
-        "aria_label": "Explore by styles",
+        "aria_label": "Explore by Styles",
         "bg_color": "#ffffff",
         "padding_top": 24,
         "padding_bottom": 24,
