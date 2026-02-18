@@ -91,7 +91,7 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3/4;
 }
 .cora-product-grid__media-wrap img {
   width: 100%;
