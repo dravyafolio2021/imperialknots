@@ -1174,6 +1174,11 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "pagefly-home": {
+      "type": "pagefly-home",
+      "disabled": true,
+      "settings": {}
     }
   },
   "order": [
@@ -1187,6 +1192,7 @@
     "cora_blog_gHJL3D",
     "cora_faq_section_R8KehB",
     "1769237259ca68f108",
-    "cora_faq_v2_XWXtm4"
+    "cora_faq_v2_XWXtm4",
+    "pagefly-home"
   ]
 }
