@@ -46,6 +46,10 @@
       "block_order": [
         "slide_ribDea"
       ],
+      "custom_css": [
+        ".cora-slider__content {text-align: center; --cora-content-align: center;}",
+        ".cora-slider__buttons {justify-content: center;}"
+      ],
       "name": "Slider  ",
       "settings": {
         "aria_label": "Homepage slider",
