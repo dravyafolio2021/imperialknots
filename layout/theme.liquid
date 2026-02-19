@@ -35,7 +35,11 @@
     {% if request.query_string != blank %}
   <meta name="robots" content="noindex, follow">
 {% endif %}
-  {%- render 'foxify-head' -%}</head>
+  {%- render 'foxify-head' -%}{% capture the_snippet_beae-global-theme-setting %}{% include 'beae-global-theme-setting' %}{% endcapture %}
+            {% unless the_snippet_beae-global-theme-setting contains 'Liquid error' %}
+                {{ the_snippet_beae-global-theme-setting }}
+            {% endunless %}
+</head>
 
   <body>{% sections 'foxify-header-group' %}
     {% sections 'header-group' %}

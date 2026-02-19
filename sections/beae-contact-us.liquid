@@ -1,0 +1,202 @@
+
+                {% assign beae_root_url = routes.root_url %}
+                {% if beae_root_url != '/'%}
+                    {% assign beae_root_url = routes.root_url | append: '/' %}
+                {% endif %}
+            {%capture section_id %}beae-contact-us{% endcapture%}{% if section_id == section.id %}{% if shop.metafields.beae.global_css %}
+                <!--BEAE-EMBED-->
+                <link href="data:text/css;base64,{{-shop.metafields.beae.global_css-}}" rel="stylesheet" id="beae-global-css"/>
+                <!--/BEAE-EMBED-->
+            {% endif %}
+{{ content_for_header }}
+{% render 'beae_header', BEAE_THEME: true %}{% endif %}<link rel="stylesheet" media="all" href="{{"beae-64e6e60bdfb79a1c93040697.css" | asset_url}}"><link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><div class="beae-builder"><div class="beae-sections"><style type="text/css">.beae-bg-lazy{background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==') !important;background-repeat: repeat !important;background-color: #fafafa !important;}.beae-swiper-container:not(.beae-swiper-interactived){visibility: hidden;}</style>
+            <script type="text/javascript">
+            (function(){let f=Element.prototype.appendChild;Element.prototype.appendChild=function(){if(arguments[0].tagName=='SCRIPT'){arguments[0].removeAttribute('async');arguments[0].setAttribute('defer','')}return f.apply(this,arguments)};let resizeImgs=[],beaeLazy=(selector)=>{let lazys=[].slice.call(document.querySelectorAll(selector));if("IntersectionObserver"in window){let lazyObserver=new IntersectionObserver(function(entries,observer){entries.forEach(function(entry){if(entry.isIntersecting){if(entry.target.classList.contains('beae-bg-lazy')){entry.target.classList.remove("beae-bg-lazy");lazyObserver.unobserve(entry.target)}if(entry.target.classList.contains('beae-img-lazy')){entry.target.removeAttribute("loading");entry.target.classList.remove("beae-img-lazy");if(entry.target.getAttribute('data-src')){entry.target.setAttribute('src',entry.target.getAttribute('data-src'));entry.target.removeAttribute("data-src")}if(entry.target.getAttribute('data-srcset')){entry.target.setAttribute('srcset',entry.target.getAttribute('data-srcset'));entry.target.removeAttribute("data-srcset");if(entry.target.getAttribute('sizes')=='0px'){buildLazy(entry.target)}}lazyObserver.unobserve(entry.target)}if(entry.target.classList.contains('beae-iframe-lazy')){entry.target.classList.remove("beae-iframe-lazy");entry.target.setAttribute('src',entry.target.getAttribute('data-src'));entry.target.removeAttribute('data-src')}}})});lazys.forEach(function(lazy){if(lazy.tagName=='IMG'||lazy.tagName=='SOURCE'&&lazy.getAttribute('data-src')){buildLazy(lazy);resizeImgs.push(lazy)}if(!lazy.inited){lazyObserver.observe(lazy);lazy.inited=true}})}},buildLazy=(lazy)=>{let size=lazy.tagName=='IMG'?lazy.offsetWidth:lazy.parentNode.offsetWidth,prx=lazy.classList.contains('beae-img-lazy')?'data-':'',src=lazy.getAttribute(prx+'src'),ratio=1,height=src.match(/height=([\d]+)/)?src.match(/height=([\d]+)/)[1]:'',width=src.match(/width=([\d]+)/)?src.match(/width=([\d]+)/)[1]:'',crop=src.match(/crop=([\w]+)/)?'&crop='+src.match(/crop=([\w]+)/)[1]:'',srcset='';if(size==0){function getVisible(child){try{var node=child.parentNode;while(node!=null){if(window.getComputedStyle(node).display=='none'){return node}node=node.parentNode}}catch(error){}return null}const parent=getVisible(lazy);if(parent){let oldDisplay=parent.style.display;parent.style.display='block';size=lazy.tagName=='IMG'?lazy.offsetWidth:lazy.parentNode.offsetWidth;parent.style.display=oldDisplay}if(size==0){size=500}}src=src.replace(/(https:\/\/via.placeholder.com\/[\d]*x[\d]*)([\s\S]*)/,"$1").replace(/_([\d]*x[\d]*)\.(jpg|png|gif|svg|webp|jpeg)/,".$2").split('?')[0];if(height&&width){if(width<size){size=width}ratio=height/width;srcset=src+'?width='+size+'&height='+size*ratio+crop+' 1x, '+src+'?width='+(size*2)+'&height='+(size*ratio*2)+crop+' 2x'}else{srcset=src+'?width='+size+crop+' 1x, '+src+'?width='+(size*2)+crop+' 2x'}lazy.setAttribute('sizes',size+'px');lazy.setAttribute(prx+'srcset',srcset)},interactive=()=>{window.removeEventListener('scroll',interactive);document.removeEventListener('mousemove',interactive);if(window.innerWidth<=767){beaeLazy(".beae-bg-lazy, .beae-img-lazy, .beae-iframe-lazy")}else{beaeLazy(".beae-iframe-lazy")}};{% if request.design_mode %} if(!window.beaeLazy) { window.beaeLazy = beaeLazy; document.querySelectorAll('.beae-swiper-container').forEach(sw => {sw.classList.add('beae-swiper-interactived')});};{% endif %};document.addEventListener("DOMContentLoaded",function(){window.addEventListener('scroll',interactive);document.addEventListener('mousemove',interactive);beaeLazy(".beae-img-lazy, .beae-bg-lazy");window.beaeLazy=beaeLazy;document.querySelectorAll('.beae-swiper-container').forEach(sw=>{sw.classList.add('beae-swiper-interactived')})});let deboundTimer;window.addEventListener('resize',()=>{clearTimeout(deboundTimer);deboundTimer=setTimeout(()=>{if(resizeImgs.length){resizeImgs.forEach(img=>buildLazy(img))}},250)})})()
+            </script>
+            {%capture lzsvg %}data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000px' height='1000px' fill='%23ccc'%3E%3Crect x='0' y='0' width='1000' height='1000' /%3E%3C/svg%3E{% endcapture%}<section class="beae-row beae-core beae-section beae-6znm41ha" data-beaeis="section"><div class="core__row--columns"><div class="beae-column beae-core core__column--first core__column--last beae-44h398u4" data-beaeis="column" style="z-index: 1; outline-offset: -1px;"><div class="core__column--wrapper"><div class="core__blocks" data-beaeis="blocks"><div class="core__blocks--body"><div class="beae-block beae-core core__block elmspace beae-l5c8140x" data-beaeis="block" data-core-is="block"><div class="beae__element element__heading beae-html"><div class="beae-core core__microelement mce--title core__micro--title"><div class="mce--wrp" data-beaeis="micro"><h2 class="beae-mce__title" placeholder="Enter heading text ...">Contact Us</h2></div></div></div></div><div class="beae-block beae-core core__block elmspace beae-gbuxhmrt" data-beaeis="block" data-core-is="block"><div class="beae-element beae-shopify-elements beae__breadcrumb" deep="1">
+                    
+                    {%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+                    {%- assign t = template | split: '.' | first -%}
+
+                    <nav class="beae-breadcrumbs" role="navigation" aria-label="beae-breadcrumbs">
+                    <ol class="beae-breadcrumbs__list">
+                        <li class="beae-breadcrumbs__item">
+                            <a class="beae-breadcrumbs__link" href="/">Home</a>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                    {%- case t -%}
+                    {%- when 'page' -%}
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link">{{ page.title }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                    {%- when 'product' -%}
+                        {%- if collection.url -%}
+                        <li class="beae-breadcrumbs__item">
+                            {{ collection.title | link_to: collection.url }}
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        {%- endif -%}
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link">{{ product.title }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                    {%- when 'collection' and collection.handle -%}
+                        {%- if current_tags -%}
+                        <li class="beae-breadcrumbs__item">
+                            {{ collection.title | link_to: collection.url }}
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        <li class="beae-breadcrumbs__item">
+                            {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+                            <span class="beae-breadcrumbs__link">{{ current_tags | join: " + "}}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        {%- else -%}
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link">{{ collection.title }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        {%- endif -%}
+                    {%- when 'blog' -%}
+                        {%- if current_tags -%}
+                        <li class="beae-breadcrumbs__item">
+                            {{ blog.title | link_to: blog.url }}
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        <li class="beae-breadcrumbs__item">
+                            {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                            <span class="beae-breadcrumbs__link" >{{ current_tags | join: " + " }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        {%- else -%}
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link" >{{ blog.title }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        {%- endif -%}
+                    {%- when 'article' -%}
+                        <li class="beae-breadcrumbs__item">
+                            {{ blog.title | link_to: blog.url }}
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link" >{{ article.title }}</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                        
+                    {%- else -%}
+                        <li class="beae-breadcrumbs__item">
+                            <span class="beae-breadcrumbs__link" >Contact Us</span>
+                            <span class="beae-breadcrumbs__item--separator">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            </span>
+                        </li>
+                    {%- endcase -%}
+                </ol>
+                </nav>
+                    {%- endunless -%}</div></div></div></div></div></div></div><div class="beae-section__overlay"><div class="beae-overlay"></div></div></section><section class="beae-row beae-core beae-section beae-9l7c5r0n" data-beaeis="section"><div class="core__row--columns"><div class="beae-column beae-core core__column--first core__column--last beae-h203a7vx" data-beaeis="column" style="z-index: 1; outline-offset: -1px;"><div class="core__column--wrapper"><div class="core__blocks" data-beaeis="blocks"><div class="core__blocks--body"><div class="beae-block beae-core core__block elmspace beae-x6nvtln3" data-beaeis="block" data-core-is="row"><div class="beae-row beae-core core__block beae-fgu7gsha" data-beaeis="row"><div class="core__row--columns"><div class="beae-column beae-core core__column--first beae-r7kxhj0p" data-beaeis="column" style="z-index: 1; outline-offset: -1px;"><div class="core__column--wrapper"><div class="core__blocks" data-beaeis="blocks"><div class="core__blocks--body"><div class="beae-block beae-core core__block beae-82jbxatx" data-beaeis="block" data-core-is="block"><div class="beae__element element__heading beae-html"><div class="beae-core core__microelement mce--title core__micro--title"><div class="mce--wrp" data-beaeis="micro"><h3 class="beae-mce__title" placeholder="Enter heading text ...">infomation</h3></div></div></div></div><div class="beae-block beae-core core__block beae-5ijtbpkq" data-beaeis="block" data-core-is="block"><div class="beae__element beae-element element__featured beae-html" deep="2"><div class="element__featured--wrapper"><div class="element__featured--box"><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--icon core__micro--icon"><div class="mce--wrp" data-beaeis="micro"><span class="beae-mce__icon"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span></div></div></div><div class="element__featured--box-content"><div class="element__featured--box-content-flex"></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--title core__micro--title_title"><div class="mce--wrp" data-beaeis="micro"><h6 class="beae-mce__title element__featured--box-title" placeholder="Enter heading text ...">Address</h6></div></div></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--text core__micro--text"><div class="mce--wrp" data-beaeis="micro"><div class="beae-mce__text text-content beae-html element__featured--box-text" placeholder="Enter text ...">Imperial  Mastercrafts&nbsp;<div>T 21/5 DLF Phase 3</div><div>Gurgaon  122002</div><div>India</div></div></div></div></div><div class="beae-button-default"><div class="beae-core core__microelement mce--button core__micro--button"><div class="mce--wrp" data-beaeis="micro"></div></div></div></div></div></div></div></div><div class="beae-block beae-core core__block beae-anh7loim" data-beaeis="block" data-core-is="block"><div class="beae__element beae-element element__featured beae-html" deep="2"><div class="element__featured--wrapper"><div class="element__featured--box"><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--icon core__micro--icon"><div class="mce--wrp" data-beaeis="micro"><span class="beae-mce__icon"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></div></div></div><div class="element__featured--box-content"><div class="element__featured--box-content-flex"></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--title core__micro--title_title"><div class="mce--wrp" data-beaeis="micro"><h6 class="beae-mce__title element__featured--box-title" placeholder="Enter heading text ...">Phone</h6></div></div></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--text core__micro--text"><div class="mce--wrp" data-beaeis="micro"><div class="beae-mce__text text-content beae-html element__featured--box-text" placeholder="Enter text ...">(+91) 95553-26200</div></div></div></div><div class="beae-button-default"><div class="beae-core core__microelement mce--button core__micro--button"><div class="mce--wrp" data-beaeis="micro"></div></div></div></div></div></div></div></div><div class="beae-block beae-core core__block beae-ev8uwyf1" data-beaeis="block" data-core-is="block"><div class="beae__element beae-element element__featured beae-html" deep="2"><div class="element__featured--wrapper"><div class="element__featured--box"><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--icon core__micro--icon"><div class="mce--wrp" data-beaeis="micro"><span class="beae-mce__icon"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span></div></div></div><div class="element__featured--box-content"><div class="element__featured--box-content-flex"></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--title core__micro--title_title"><div class="mce--wrp" data-beaeis="micro"><h6 class="beae-mce__title element__featured--box-title" placeholder="Enter heading text ...">Email</h6></div></div></div><div class="element__featured--box-content-flex"><div class="beae-core core__microelement mce--text core__micro--text"><div class="mce--wrp" data-beaeis="micro"><div class="beae-mce__text text-content beae-html element__featured--box-text" placeholder="Enter text ...">Imperial.knots@gmail.com</div></div></div></div><div class="beae-button-default"><div class="beae-core core__microelement mce--button core__micro--button"><div class="mce--wrp" data-beaeis="micro"></div></div></div></div></div></div></div></div></div></div></div></div><div class="beae-column beae-core core__column--last beae-7esymamb" data-beaeis="column" style="z-index: 1; outline-offset: -1px;"><div class="core__column--wrapper"><div class="core__blocks" data-beaeis="blocks"><div class="core__blocks--body"><div class="beae-block beae-core core__block beae-fkuojmeo" data-beaeis="block" data-core-is="block"><div class="beae__element element__heading beae-html"><div class="beae-core core__microelement mce--title core__micro--title"><div class="mce--wrp" data-beaeis="micro"><h3 class="beae-mce__title" placeholder="Enter heading text ...">Get intouch</h3></div></div></div></div><div class="beae-block beae-core core__block beae-gpsht4mk" data-beaeis="block" data-core-is="block"><div class="beae-element beae-shopify-elements beae__form" deep="2"><div class="beae__form-wrapper"><div class="beae__form-container">{%- comment-%}<form id="beae-contact-form-beae-gpsht4mk" class="beae__form" enctype="multipart/form-data">{%- endcomment -%}{% form 'contact', class: 'beae-contact-form', id: 'beae-contact-form-beae-gpsht4mk', enctype: 'multipart/form-data'  %}<div>
+                        {%- if form.posted_successfully? or BeaeBuilderMode == true -%}
+                        <div class="beae__form-form-notice beae__form-form-success" tabindex="-1" autofocus>
+                            Successfully message
+                        </div>
+                        {% endif %}
+                        {%- if form.errors or BeaeBuilderMode == true -%}
+                            <div class="beae__form-form-message">
+                                <div class="beae__form-form-notice beae__form-form-status" role="alert" tabindex="-1" autofocus>
+                                Oops!. An error has occured
+                                </div>
+                            </div>
+                            <ul class="beae__form-form-status-list" role="list">
+                                  {% for field in form.errors %}
+                                    <li>
+                                    {% if field == 'form' %}
+                                        {{ form.errors.messages[field] }}
+                                    {% else %}
+                                        {{ form.errors.translated_fields[field] }} - {{ form.errors.messages[field] }}
+                                    {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {%- endif -%}
+                    </div><div class="beae__form-fields"><input class="beae__input-hidden" type="hidden" name="contact[url]"><div class="beae__form-field beae-html beae-template__type" style="width: calc(50% - 10px);"><label for="contact[name]" class="beae__form-field-label"><span>Your name</span><span class="beae__form-field-required">*</span></label><input aria-label="input" type="text" name="contact[name]" class="beae__form-form--input beae__form-form-text" required="" placeholder="Your name"></div><div class="beae__form-field beae-html beae-template__type" style="width: calc(50% - 10px);"><label for="contact[email]" class="beae__form-field-label"><span>Your Email</span><span class="beae__form-field-required">*</span></label><input aria-label="input" type="email" name="contact[email]" class="beae__form-form--input beae__form-form-email" required="" placeholder="Email"></div><div class="beae__form-field beae-html beae-template__type" style="width: calc(100% + 0px);"><label for="contact[message]" class="beae__form-field-label"><span>Your message</span><span class="beae__form-field-required">*</span></label><textarea name="contact[message]" class="beae__form-form-textarea" placeholder="Your message" required=""></textarea></div><div class="beae__form-form-action"><button aria-label="button" class="beae__form-form-button">Send message</button></div></div>{% endform %}{%- comment-%}</form>{%- endcomment-%}</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></section><!---This page has been built by Beae Builder (www.beae.com)--->
+</div></div>{% if section_id == section.id %}{% endif%}<script  type="text/javascript" id="beae-vendors-section_helper" src="https://cdn.beae.com/vendors/js/section-helper.js" async></script>
+<script src="{{'beae-64e6e60bdfb79a1c93040697.js'  | asset_url }}" defer></script>
+
+{% schema %}
+{
+    "name": "BEAE BUILDER APP",
+    "locales": {
+        "en": {}
+    },
+    "settings": [
+        {
+            "type": "header",
+            "content": "The section was generated by BEAE BUILDER",
+            "info": "\n                            Beae is a flexible page builder app on Shopify AppStore.\n                            It provides 100+ Shopify Elements and pre-built templates library, \n                            so you can build unlimited pages that you can imagine with it.\n                        "
+        },
+        {
+            "type": "header",
+            "content": "[EDIT WITH BEAE APP \u2192](https:\/\/e6ff03-2.myshopify.com\/admin\/apps\/beae-flexible-page-builder\/next\/classic\/page\/64e6e60bdfb79a1c93040697)",
+            "info": "(*You must install the app to start editing this section [Learn more](https:\/\/docs.beae.com\/en\/article\/quick-start-guide-dkoesy\/))"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "@app"
+        }
+    ]
+}
+{% endschema %}
