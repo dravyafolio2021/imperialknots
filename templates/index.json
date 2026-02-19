@@ -34,9 +34,9 @@
             "heading": "Elevate your space with luxury rugs",
             "text": "Handcrafted with premium materials and sustainable practices",
             "primary_button_text": "Shop Rugs",
-            "primary_button_link": "shopify://collections/all",
+            "primary_button_link": "https://www.imperialknots.com/collections/in-stock",
             "secondary_button_text": "Customize Your Rug",
-            "secondary_button_link": "",
+            "secondary_button_link": "shopify://pages/custom-rugs",
             "content_align": "left",
             "content_width": 50,
             "overlay_opacity": 0.4
@@ -47,8 +47,7 @@
         "slide_ribDea"
       ],
       "custom_css": [
-        ".cora-slider__content {text-align: center; --cora-content-align: center;}",
-        ".cora-slider__buttons {justify-content: center;}"
+        "/* */"
       ],
       "name": "Slider  ",
       "settings": {
