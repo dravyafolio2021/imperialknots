@@ -1,19 +1,16 @@
 {{ 'cora-main-product.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-    /* --- 7. MOBILE RESPONSIVENESS --- */
   @media screen and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .cmp-container {
       flex-direction: column !important;
       gap: 30px !important;
     }
-
     #shopify-section-{{ section.id }} .cmp-info {
       width: 100% !important;
       flex: auto !important;
       position: static !important;
     }
-
     .cmp-gallery {
       width: 100% !important;
       max-width: 100% !important;
@@ -28,17 +25,18 @@
         {%- if product.featured_image -%}
           <img
             id="MainImg-{{ section.id }}"
-            width=""
-            height=""
             src="{{ product.featured_image | img_url: '1200x' }}"
             alt="{{ product.title }}"
             loading="eager"
+            width="1200"
+            height="1600"
           >
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag }}
         {%- endif -%}
         <div class="cmp-image-counter">1 / {{ product.images.size }}</div>
       </div>
+      
       {%- if product.images.size > 1 -%}
         <div class="cmp-thumbnails">
           {%- for media in product.images -%}
@@ -46,7 +44,7 @@
               class="cmp-thumb {% if forloop.first %}active{% endif %}"
               onclick="changeImage('{{ media | img_url: '1200x' }}', this)"
             >
-              <img src="{{ media | img_url: '200x' }}" width="" height="" alt="{{ media.alt }}">
+              <img src="{{ media | img_url: '200x' }}" alt="{{ media.alt }}" width="200" height="200">
             </div>
           {%- endfor -%}
         </div>
@@ -55,26 +53,71 @@
 
     <div class="cmp-info">
       <div class="cmp-meta">
-        {% comment %} {%- if product.collections.first -%}
-          <span class="cmp-category">{{ product.collections.first.title }}</span>
-        {%- endif -%} {% endcomment %}
-
         {%- if product.collections.first -%}
           <a href="{{ product.collections.first.url }}" class="cmp-category" style="text-decoration: none; color: inherit;">
             {{ product.collections.first.title }}
           </a>
         {%- endif -%}
         {%- assign current_variant = product.selected_or_first_available_variant -%}
-        <span class="cmp-sku"
-          >SKU: <span id="Sku-{{ section.id }}">{{ current_variant.sku | default: 'N/A' }}</span></span
-        >
+        <span class="cmp-sku">
+          SKU: <span id="Sku-{{ section.id }}">{{ current_variant.sku | default: 'N/A' }}</span>
+        </span>
       </div>
 
       <h1 class="cmp-title">{{ product.title }}</h1>
+
+      <div class="cmp-price-area" id="Price-{{ section.id }}">
+        <span class="cmp-price">{{ current_variant.price | money }}</span>
+      </div>
+
       <div class="cmp-emi">Easy EMI options available at Checkout</div>
 
+      {%- unless product.has_only_default_variant -%}
+        <div class="cmp-variants">
+          {%- for option in product.options_with_values -%}
+            <div class="cmp-form-group">
+              <div class="cmp-option-header">
+                <span class="cmp-option-name">{{ option.name }}</span>
+              </div>
+              <div class="cmp-pills">
+                {%- for value in option.values -%}
+                  <input 
+                    type="radio" 
+                    id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" 
+                    name="{{ option.name }}" 
+                    value="{{ value | escape }}" 
+                    class="cmp-option-input"
+                    {% if option.selected_value == value %}checked{% endif %}
+                  >
+                  <label class="cmp-pill-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                    {{ value }}
+                  </label>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+      <div class="cmp-actions-row">
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" id="MasterSelect-{{ section.id }}" value="{{ current_variant.id }}">
+          
+          <div class="cmp-qty-label">Quantity</div>
+          <div class="cmp-qty-wrapper">
+            <button type="button" class="cmp-qty-btn" onclick="this.parentNode.querySelector('input').stepDown()">−</button>
+            <input type="number" name="quantity" value="1" min="1" class="cmp-qty-input">
+            <button type="button" class="cmp-qty-btn" onclick="this.parentNode.querySelector('input').stepUp()">+</button>
+          </div>
+
+          <button type="submit" name="add" id="AddToCart-{{ section.id }}" class="cmp-atc-btn" {% unless current_variant.available %}disabled{% endunless %}>
+            <span>{% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}</span>
+          </button>
+        </form>
+      </div>
+
       <div class="cmp-accordions">
-        <div class="cmp-accordion-item">
+        {% comment %} <div class="cmp-accordion-item">
           <div class="cmp-accordion-header" onclick="toggleAccordion(this)">
             Description
             <span class="cmp-accordion-icon">+</span>
@@ -82,7 +125,7 @@
           <div class="cmp-accordion-content">
             <div class="cmp-accordion-inner">{{ product.description }}</div>
           </div>
-        </div>
+        </div> {% endcomment %}
 
         {%- for block in section.blocks -%}
           <div class="cmp-accordion-item">
@@ -143,12 +186,15 @@
 
         if (matchedVariant) {
           document.getElementById('MasterSelect-{{ section.id }}').value = matchedVariant.id;
-
-          // Use innerHTML for Money so Bucks can read the <span>
           var price = (matchedVariant.price / 100).toFixed(2);
           var symbol = '{{ cart.currency.symbol }}';
-          document.getElementById('Price-{{ section.id }}').innerHTML =
-            '<span class="money">' + symbol + price + '</span>';
+          
+          document.getElementById('Price-{{ section.id }}').innerHTML = 
+            '<span class="cmp-price">' + symbol + price + '</span>';
+          
+          if(matchedVariant.sku) {
+             document.getElementById('Sku-{{ section.id }}').innerText = matchedVariant.sku;
+          }
 
           var btn = document.getElementById('AddToCart-{{ section.id }}');
           if (matchedVariant.available) {
@@ -158,7 +204,6 @@
             btn.disabled = true;
             btn.querySelector('span').innerText = 'Sold Out';
           }
-
           window.history.replaceState(null, null, '?variant=' + matchedVariant.id);
         }
       });
