@@ -40,6 +40,7 @@
         },
         "phone_Y6zwzW": {
           "type": "phone",
+          "disabled": true,
           "settings": {
             "label": "Call",
             "phone_number": "+91 96504 27850",
