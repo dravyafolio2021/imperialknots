@@ -47,7 +47,7 @@
         
         {%- comment -%} 4. PHONE CALL BLOCK {%- endcomment -%}
         {%- when 'phone' -%}
-          <a href="tel:{{ block.settings.phone_number }}" class="cora-bar-item" {{ block.shopify_attributes }}>
+          <a href="mailto:{{ block.settings.phone_number }}" class="cora-bar-item" {{ block.shopify_attributes }}>
             <div class="cora-bar-icon">
               {% if block.settings.custom_svg != blank %}
                 {{ block.settings.custom_svg }}
@@ -100,8 +100,8 @@
       "type": "phone",
       "name": "Call Button",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Call" },
-        { "type": "text", "id": "phone_number", "label": "Phone Number" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Email" },
+        { "type": "text", "id": "phone_number", "label": "Email" },
         { "type": "html", "id": "custom_svg", "label": "Custom SVG (Optional)" }
       ]
     }
