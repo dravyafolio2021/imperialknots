@@ -261,7 +261,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* --------------------------
+   /* --------------------------
        5. MOBILE MENU (Drawer)
     --------------------------- */
     .header-mobile-toggle {
@@ -278,54 +278,136 @@
       position: fixed;
       top: 0; left: -100%;
       width: 85%;
-      max-width: 350px;
+      max-width: 400px;
       height: 100vh;
       background: #fff;
       z-index: 2000;
-      transition: left 0.3s ease-in-out;
-      padding: 2rem;
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 2.5rem 2rem;
       overflow-y: auto;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
     }
 
-    .mobile-drawer.active { left: 0; }
+    .mobile-drawer.active { 
+      left: 0; 
+    }
 
     .mobile-overlay {
       position: fixed; top: 0;
       left: 0; width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px); /* Slight blur effect */
       z-index: 1999;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s;
+      transition: all 0.3s ease;
     }
-    .mobile-overlay.active { opacity: 1; visibility: visible; }
+    
+    .mobile-overlay.active { 
+      opacity: 1; 
+      visibility: visible; 
+    }
 
     .drawer-close {
-      position: absolute; top: 1rem;
-      right: 1rem;
-      background: none;
+      position: absolute; 
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #f5f5f5;
       border: none;
-      font-size: 1.5rem; cursor: pointer;
+      font-size: 1.2rem; 
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    
+    .drawer-close:hover {
+      background: #e5e5e5;
     }
 
-    .mobile-nav-list { list-style: none; padding: 0; margin-top: 2rem; }
-    .mobile-nav-item { border-bottom: 1px solid #eee; }
+    .mobile-nav-list { 
+      list-style: none; 
+      padding: 0; 
+      margin-top: 2.5rem; 
+    }
+    
+    .mobile-nav-item { 
+      border-bottom: 1px solid #f0f0f0; 
+    }
 
     .mobile-link {
       display: flex;
       justify-content: space-between;
-      width: 100%; padding: 1rem 0;
-      text-decoration: none; color: #000;
-      font-size: 1.1rem; font-weight: 500;
-      background: none; border: none;
-      text-align: left; cursor: pointer;
+      align-items: center;
+      width: 100%; 
+      padding: 1.2rem 0;
+      text-decoration: none; 
+      color: #121212;
+      font-size: 0.95rem; 
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: none; 
+      border: none;
+      text-align: left; 
+      cursor: pointer;
     }
 
-    .mobile-submenu { display: none; padding-left: 1rem; background: #f9f9f9; }
-    .mobile-submenu.open { display: block; }
-    .mobile-submenu a { display: block; padding: 0.8rem 0; text-decoration: none; color: #555; }
+    /* Style the + / - icons */
+    .mobile-link span {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #888;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-submenu { 
+      display: none; 
+      padding: 0.5rem 0 1.5rem 0; 
+      background: #ffffff; 
+    }
+    
+    .mobile-submenu.open { 
+      display: block; 
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    /* Modern indented look instead of gray background */
+    .mobile-submenu a { 
+      display: block; 
+      padding: 0.7rem 1rem; 
+      text-decoration: none; 
+      color: #555;
+      font-size: 1rem;
+      border-left: 2px solid #eee;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-submenu a:hover {
+      color: #000;
+      border-left-color: #000;
+      background: #fafafa;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     @media screen and (max-width: 989px) {
       .header-mobile-toggle { display: block; }

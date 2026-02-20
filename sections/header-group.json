@@ -86,6 +86,7 @@
         "logo": "shopify://shop_images/Logo.svg",
         "logo_width": 160,
         "menu": "new-menu",
+        "mobile_menu": "mobile-menu",
         "header_height": 80,
         "bg_color": "#ffffff",
         "text_color": "#000000"
