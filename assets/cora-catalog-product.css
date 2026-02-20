@@ -22,7 +22,7 @@
 
 .cora-main-image-container {
   width: 100%;
-  aspect-ratio: 4/5; /* Luxury portrait ratio */
+  /* aspect-ratio: 4/5; Luxury portrait ratio */
   background-color: #f4f4f4;
   overflow: hidden;
   margin-bottom: 20px;
