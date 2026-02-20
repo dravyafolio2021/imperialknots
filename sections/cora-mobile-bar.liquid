@@ -6,8 +6,18 @@
       
       {%- case block.type -%}
         
-        {%- comment -%} 1. MENU TRIGGER (Opens Existing Header Drawer) {%- endcomment -%}
+{%- comment -%} 1. MENU TRIGGER (Opens Existing Header Drawer) {%- endcomment -%}
         {%- when 'menu_trigger' -%}
+          <button onclick="toggleDrawer()" class="cora-bar-item" {{ block.shopify_attributes }}>
+            <div class="cora-bar-icon">
+              {% if block.settings.custom_svg != blank %}
+                {{ block.settings.custom_svg }}
+              {% else %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+              {% endif %}
+            </div>
+            <span class="cora-bar-label">{{ block.settings.label }}</span>
+          </button>        {% comment %} {%- when 'menu_trigger' -%}
           <label for="cora-nav-toggle" class="cora-bar-item" {{ block.shopify_attributes }}>
             <div class="cora-bar-icon">
               {% if block.settings.custom_svg != blank %}
@@ -17,7 +27,7 @@
               {% endif %}
             </div>
             <span class="cora-bar-label">{{ block.settings.label }}</span>
-          </label>
+          </label> {% endcomment %}
 
         {%- comment -%} 2. STANDARD LINK (Categories, etc.) {%- endcomment -%}
         {%- when 'link' -%}
