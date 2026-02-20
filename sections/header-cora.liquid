@@ -112,7 +112,8 @@
       position: absolute;
       top: 100%;
       left: 0;
-      width: 100%; /* Default Full Width */
+      width: 100%;
+      /* Default Full Width */
       background: #ffffff;
       border-top: 1px solid #e5e5e5;
       border-bottom: 1px solid #e5e5e5;
@@ -124,12 +125,15 @@
 
     /* Override for Compact Dropdowns (The New Block) */
     .nav-item.is-dropdown .mega-menu-container {
-      width: max-content; /* Shrink to fit content */
+      width: max-content;
+      /* Shrink to fit content */
       min-width: 200px;
       padding: 0 36px;
       max-width: 90vw;
-      left: 0; /* Align with left edge of link */
-      border: 1px solid #e5e5e5; /* Full border for floating dropdown */
+      left: 0;
+      /* Align with left edge of link */
+      border: 1px solid #e5e5e5;
+      /* Full border for floating dropdown */
     }
 
     .nav-item:hover .mega-menu-container {
@@ -155,7 +159,8 @@
       display: flex;
       flex-direction: column;
       align-items: center; /* Centers items horizontally */
-      text-align: center;  /* Centers text inside items */
+      text-align: center;
+      /* Centers text inside items */
       width: 100%;
     }
 
@@ -197,7 +202,8 @@
       text-transform: uppercase;
       white-space: nowrap; /* Prevent breaking lines in compact mode */
     }
-    .mm-column a:hover { color: #000; text-decoration: underline; }
+    .mm-column a:hover { color: #000;
+      text-decoration: underline; }
 
     /* Layout: Simple Flex Columns (If used) */
     .mega-menu-inner.simple-columns {
@@ -271,7 +277,8 @@
     .mobile-drawer {
       position: fixed;
       top: 0; left: -100%;
-      width: 85%; max-width: 350px;
+      width: 85%;
+      max-width: 350px;
       height: 100vh;
       background: #fff;
       z-index: 2000;
@@ -285,7 +292,8 @@
 
     .mobile-overlay {
       position: fixed; top: 0;
-      left: 0; width: 100%; height: 100%;
+      left: 0; width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.5);
       z-index: 1999;
       opacity: 0;
@@ -297,7 +305,8 @@
     .drawer-close {
       position: absolute; top: 1rem;
       right: 1rem;
-      background: none; border: none;
+      background: none;
+      border: none;
       font-size: 1.5rem; cursor: pointer;
     }
 
@@ -332,7 +341,8 @@
     .icon-link { color: currentColor; text-decoration: none; position: relative; }
     .cart-count-bubble {
       position: absolute; top: -5px; right: -8px;
-      background: #000; color: #fff;
+      background: #000;
+      color: #fff;
       font-size: 10px;
       font-weight: bold;
       height: 18px; width: 18px;
@@ -371,6 +381,7 @@
           Logic moved UP to wrap the nav-item correctly for styling
         {% endcomment %}
         {% assign mega_block = null %}
+        
         {% assign link_handle = link.title | handleize %}
 
         {% for block in section.blocks %}
@@ -453,7 +464,7 @@
                         {% endfor %}
                       </ul>
                     {% else %}
-                      <p>Select a menu in block settings.</p>
+                       <p>Select a menu in block settings.</p>
                     {% endif %}
                   </div>
 
@@ -470,7 +481,7 @@
                     {% elsif link.links.size > 1 %}
                       {% assign child_2 = link.links[1] %}
                       <h4>
-                        <a href="{{ child_2.url }}">{{ child_2.title }}</a>
+                         <a href="{{ child_2.url }}">{{ child_2.title }}</a>
                       </h4>
                       <ul>
                         {% for grand_child in child_2.links %}
@@ -553,7 +564,8 @@
 <div class="mobile-drawer" id="mobileDrawer">
   <button class="drawer-close" onclick="toggleDrawer()">&times;</button>
   <ul class="mobile-nav-list">
-    {% for link in linklists[section.settings.menu].links %}
+    {% assign mobile_menu_handle = section.settings.mobile_menu | default: section.settings.menu %}
+    {% for link in linklists[mobile_menu_handle].links %}
       <li class="mobile-nav-item">
         {% if link.links != blank %}
           <button class="mobile-link" onclick="toggleSubmenu(this)">
@@ -595,7 +607,8 @@
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 5, "default": 140, "label": "Logo Width" },
-    { "type": "link_list", "id": "menu", "label": "Main Menu", "default": "main-menu" },
+    { "type": "link_list", "id": "menu", "label": "Desktop Menu", "default": "main-menu" },
+    { "type": "link_list", "id": "mobile_menu", "label": "Mobile Menu", "info": "If left blank, the Desktop Menu will be used." },
     { "type": "range", "id": "header_height", "min": 50, "max": 120, "step": 5, "default": 80, "label": "Height" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#121212" }
