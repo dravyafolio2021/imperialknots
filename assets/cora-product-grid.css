@@ -91,7 +91,7 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 3/4;
+  /* aspect-ratio: 3/4; */
 }
 .cora-product-grid__media-wrap img {
   width: 100%;
@@ -173,7 +173,7 @@
   }
   
   .cora-product-grid__media-wrap {
-    aspect-ratio: 3/4; /* Kept 3:4 ratio as requested */
+    /* aspect-ratio: 3/4; Kept 3:4 ratio as requested */
   }
   
   .cora-product-grid__title {

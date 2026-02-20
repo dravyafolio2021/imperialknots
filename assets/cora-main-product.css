@@ -54,7 +54,7 @@
   border-radius: 8px;
   overflow: hidden;
   background-color: #f4f4f4;
-  aspect-ratio: 3/4;
+  /* aspect-ratio: 3/4; */
   margin-bottom: 20px;
 }
 

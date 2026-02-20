@@ -61,7 +61,7 @@
 .crp-image-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 3/4; /* Portrait Ratio */
+  /* aspect-ratio: 3/4; Portrait Ratio */
   background-color: #f4f4f4;
   border-radius: 8px;
   overflow: hidden;

@@ -47,7 +47,7 @@
 }
 .cora-collection-grid__media {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  /* aspect-ratio: 3 / 4; */
   overflow: hidden;
   border-radius: 12px;
   background: #f6f6f6;

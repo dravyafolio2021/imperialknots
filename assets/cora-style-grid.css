@@ -89,7 +89,7 @@
 /* media */
 .cora-style-grid__media {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  /* aspect-ratio: 3 / 4; */
   border-radius: 12px;
   overflow: hidden;
   display: block;
@@ -188,7 +188,7 @@
     font-size: 18px;
   }
   .cora-style-grid__media {
-    aspect-ratio: 3 / 4;
+    /* aspect-ratio: 3 / 4; */
     border-radius: 10px;
   }
   .cora-style-grid__inner {
