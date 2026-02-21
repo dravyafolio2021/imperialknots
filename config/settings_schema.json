@@ -1,7 +1,7 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Cora Imperial Knots",
+    "theme_name": "Dawn",
     "theme_version": "2.1.0",
     "theme_author": "Shopify",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
@@ -77,6 +77,57 @@
         "unit": "px",
         "label": "t:labels.input_corner_radius",
         "default": 4
+      }
+    ]
+  },
+  {
+    "name": "Mega Menu",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Appearance"
+      },
+      {
+        "type": "color",
+        "id": "mega_menu_bg",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "mega_menu_text",
+        "label": "Text Color",
+        "default": "#333333"
+      },
+      {
+        "type": "range",
+        "id": "mega_menu_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Background Opacity",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "mega_menu_min_height",
+        "min": 200,
+        "max": 800,
+        "step": 50,
+        "unit": "px",
+        "label": "Minimum Height",
+        "default": 300
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_show_images",
+        "label": "Show Collection Images",
+        "default": true
       }
     ]
   }
