@@ -52,6 +52,11 @@
       }
     }
   },
+  "presets": {
+    "Dawn": {
+      "name": "Dawn by Imperial Knots"
+    }
+  },
   "platform_customizations": {
     "custom_css": [
       "body {margin: 0; overflow-x: hidden;}"
