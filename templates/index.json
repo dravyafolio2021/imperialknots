@@ -51,7 +51,7 @@
       "settings": {
         "aria_label": "Homepage slider",
         "autoplay": false,
-        "autoplay_speed": 5000000,
+        "autoplay_speed": 500000000,
         "infinite": false,
         "show_arrows": false,
         "show_dots": false,
