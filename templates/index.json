@@ -46,6 +46,7 @@
       "block_order": [
         "slide_ribDea"
       ],
+      "disabled": true,
       "custom_css": [
         "/* */"
       ],
