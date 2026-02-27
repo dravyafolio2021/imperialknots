@@ -27,7 +27,7 @@
         "slide_ribDea": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/width1350_2.jpg",
+            "image": "shopify://shop_images/resized_1350x552_optimized.jpg",
             "image_mobile": "shopify://shop_images/mobile_390x580_optimized.webp",
             "image_alt": "Elevate your space with luxury rugs",
             "subtitle": "",
