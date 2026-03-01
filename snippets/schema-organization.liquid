@@ -2,119 +2,43 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+
     {
       "@type": "Organization",
       "@id": "https://www.imperialknots.com/#organization",
       "name": "Imperial Knots",
       "url": "https://www.imperialknots.com",
       "logo": "https://www.imperialknots.com/logo.png",
-      "description": "Imperial Knots is a premium rug brand specializing in handmade and custom rugs crafted from natural materials such as wool, cotton, silk, and jute. The brand offers worldwide shipping and bespoke rug solutions.",
+      "description": "Imperial Knots is a custom manufacturer of luxury handmade carpets, hand-knotted rugs, hand-tufted rugs, kilims, flatweave rugs, and bespoke custom rugs since 1977, serving residential, commercial, and international clients worldwide.",
+      "foundingDate": "1977",
       "sameAs": [
-        "https://www.instagram.com/imperialknots",
+        "https://www.instagram.com/imperial.knots",
         "https://www.facebook.com/imperialknots",
         "https://www.pinterest.com/imperialknots"
       ],
       "areaServed": [
-        {
-          "@type": "Country",
-          "name": "India",
-          "containsPlace": [
-            { "@type": "City", "name": "Delhi" },
-            { "@type": "City", "name": "Mumbai" },
-            { "@type": "City", "name": "Ahmedabad" },
-            { "@type": "City", "name": "Surat" },
-            { "@type": "City", "name": "Vadodara" },
-            { "@type": "City", "name": "Bengaluru" },
-            { "@type": "City", "name": "Hyderabad" },
-            { "@type": "City", "name": "Kolkata" },
-            { "@type": "City", "name": "Chennai" },
-            { "@type": "City", "name": "Pune" },
-            { "@type": "City", "name": "Jaipur" },
-            { "@type": "City", "name": "Kochi" },
-            { "@type": "City", "name": "Noida" },
-            { "@type": "City", "name": "Goa" },
-            { "@type": "City", "name": "Coimbatore" },
-            { "@type": "City", "name": "Bhubaneswar" },
-            { "@type": "City", "name": "Mangaluru" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "United Kingdom",
-          "containsPlace": [
-            { "@type": "City", "name": "London" },
-            { "@type": "City", "name": "Leeds" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "United Arab Emirates",
-          "containsPlace": [
-            { "@type": "City", "name": "Dubai" },
-            { "@type": "City", "name": "Abu Dhabi" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Australia",
-          "containsPlace": [
-            { "@type": "City", "name": "Sydney" },
-            { "@type": "City", "name": "Melbourne" },
-            { "@type": "City", "name": "Brisbane" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Singapore",
-          "containsPlace": [
-            { "@type": "City", "name": "Singapore" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Germany",
-          "containsPlace": [
-            { "@type": "City", "name": "Berlin" },
-            { "@type": "City", "name": "Hamburg" },
-            { "@type": "City", "name": "Frankfurt" },
-            { "@type": "City", "name": "Munich" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "France",
-          "containsPlace": [
-            { "@type": "City", "name": "Paris" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Italy",
-          "containsPlace": [
-            { "@type": "City", "name": "Milan" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Spain",
-          "containsPlace": [
-            { "@type": "City", "name": "Barcelona" },
-            { "@type": "City", "name": "Madrid" }
-          ]
-        },
-        {
-          "@type": "Country",
-          "name": "Canada",
-          "containsPlace": [
-            { "@type": "City", "name": "Toronto" },
-            { "@type": "City", "name": "Vancouver" }
-          ]
-        }
-      ],
-      "hasOfferCatalog": {
-        "@id": "https://www.imperialknots.com/#catalog"
-      }
+        { "@type": "Country", "name": "India" },
+        { "@type": "Country", "name": "United Kingdom" },
+        { "@type": "Country", "name": "United Arab Emirates" },
+        { "@type": "Country", "name": "Australia" },
+        { "@type": "Country", "name": "Singapore" },
+        { "@type": "Country", "name": "Canada" },
+        { "@type": "Country", "name": "Germany" },
+        { "@type": "Country", "name": "France" },
+        { "@type": "Country", "name": "Italy" },
+        { "@type": "Country", "name": "Spain" },
+        { "@type": "Country", "name": "Belgium" },
+        { "@type": "Country", "name": "Poland" },
+        { "@type": "Country", "name": "Russia" },
+        { "@type": "Country", "name": "Denmark" },
+        { "@type": "Country", "name": "Sweden" },
+        { "@type": "Country", "name": "Netherlands" },
+        { "@type": "Country", "name": "South Africa" },
+        { "@type": "Country", "name": "Brazil" },
+        { "@type": "Country", "name": "Monaco" }
+      ]
     },
+
     {
       "@type": "WebSite",
       "@id": "https://www.imperialknots.com/#website",
@@ -129,60 +53,89 @@
         "query-input": "required name=search_term_string"
       }
     },
-    {
-      "@type": "OfferCatalog",
-      "@id": "https://www.imperialknots.com/#catalog",
-      "name": "Imperial Knots Rug Collections"
-    },
+
     {
       "@type": "ItemList",
       "@id": "https://www.imperialknots.com/collections",
       "name": "Imperial Knots Rug & Carpet Collections",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Living Room Rugs",
-          "url": "https://www.imperialknots.com/collections/rugs-online-for-living-room"
+        { "@type": "ListItem", "position": 1, "name": "Rugs for Living Room", "url": "https://www.imperialknots.com/collections/living-room-rugs" },
+        { "@type": "ListItem", "position": 2, "name": "Hand Tufted Rugs", "url": "https://www.imperialknots.com/collections/hand-tufted-rugs" },
+        { "@type": "ListItem", "position": 3, "name": "Jute Rugs", "url": "https://www.imperialknots.com/collections/jute-rugs" },
+        { "@type": "ListItem", "position": 4, "name": "Area Rugs", "url": "https://www.imperialknots.com/collections/area-rugs" },
+        { "@type": "ListItem", "position": 5, "name": "Bhadohi Handmade Carpets", "url": "https://www.imperialknots.com/collections/bhadohi-handmade-carpets" },
+        { "@type": "ListItem", "position": 6, "name": "Luxury Handmade Rugs", "url": "https://www.imperialknots.com/collections/luxury-handmade-rugs" },
+        { "@type": "ListItem", "position": 7, "name": "Affordable Rugs India", "url": "https://www.imperialknots.com/collections/affordable-rugs-india" },
+        { "@type": "ListItem", "position": 8, "name": "Round Rugs", "url": "https://www.imperialknots.com/collections/round-rugs" },
+        { "@type": "ListItem", "position": 9, "name": "Premium Carpets in India", "url": "https://www.imperialknots.com/collections/best-carpet-brand-in-india" },
+        { "@type": "ListItem", "position": 10, "name": "Best Carpet Manufacturer", "url": "https://www.imperialknots.com/collections/best-carpet-rugs-manufacturer-india" },
+        { "@type": "ListItem", "position": 11, "name": "Flatweave Rugs", "url": "https://www.imperialknots.com/collections/flatweave-rugs-india" },
+        { "@type": "ListItem", "position": 12, "name": "Bespoke Custom Rugs", "url": "https://www.imperialknots.com/collections/bespoke" }
+      ]
+    },
+
+    {
+      "@type": "OfferShippingDetails",
+      "@id": "https://www.imperialknots.com/#shipping",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": [
+          "IN","GB","AE","AU","SG","CA","DE","FR","IT","ES",
+          "BE","PL","RU","DK","SE","NL","ZA","BR","MC"
+        ]
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 7,
+          "unitCode": "DAY"
         },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Hand Knotted Rugs",
-          "url": "https://www.imperialknots.com/collections/hand-knotted"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Handmade Carpets",
-          "url": "https://www.imperialknots.com/collections/handmade-carpets"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Hand Tufted Rugs",
-          "url": "https://www.imperialknots.com/collections/hand-tufted-rugs"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "name": "Jute Rugs",
-          "url": "https://www.imperialknots.com/collections/jute-rugs"
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "name": "Kilim & Flatweave Rugs",
-          "url": "https://www.imperialknots.com/collections/kilims"
-        },
-        {
-          "@type": "ListItem",
-          "position": 7,
-          "name": "Bespoke & Custom Rugs",
-          "url": "https://www.imperialknots.com/collections/bespoke"
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 5,
+          "maxValue": 28,
+          "unitCode": "DAY"
         }
+      }
+    },
+
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.imperialknots.com/#faq",
+      "mainEntity": [
+
+        {
+          "@type": "Question",
+          "name": "Do you ship rugs internationally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Imperial Knots ships handmade rugs and carpets worldwide across Europe, Middle East, Asia, Australia, Africa, and the Americas."
+          }
+        },
+
+        {
+          "@type": "Question",
+          "name": "What makes Imperial Knots a trusted carpet manufacturer since 1977?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Imperial Knots combines traditional Indian hand-knotting craftsmanship with modern design expertise, producing luxury handmade carpets and custom rugs for residential and commercial projects worldwide."
+          }
+        },
+
+        {
+          "@type": "Question",
+          "name": "What types of rugs do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Imperial Knots manufactures hand-knotted rugs, hand-tufted rugs, kilims, flatweave rugs, area rugs, and bespoke custom carpets in wool, silk, jute, and blended materials."
+          }
+        }
+
       ]
     }
+
   ]
 }
 </script>
