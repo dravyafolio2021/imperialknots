@@ -70,9 +70,9 @@
         <span class="cmp-price">{{ current_variant.price | money }}</span>
       </div> {% endcomment %}
 
-      <div class="cmp-emi">Easy EMI options available at Checkout</div>
+      {% comment %} <div class="cmp-emi">Easy EMI options available at Checkout</div> {% endcomment %}
 
-      {%- unless product.has_only_default_variant -%}
+      {% comment %} {%- unless product.has_only_default_variant -%}
         <div class="cmp-variants">
           {%- for option in product.options_with_values -%}
             <div class="cmp-form-group">
@@ -97,9 +97,9 @@
             </div>
           {%- endfor -%}
         </div>
-      {%- endunless -%}
+      {%- endunless -%} {% endcomment %}
 
-      <div class="cmp-actions-row">
+      {% comment %} <div class="cmp-actions-row">
         <form method="post" action="/cart/add">
           <input type="hidden" name="id" id="MasterSelect-{{ section.id }}" value="{{ current_variant.id }}">
           
@@ -114,7 +114,7 @@
             <span>{% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}</span>
           </button>
         </form>
-      </div>
+      </div> {% endcomment %}
 
       <div class="cmp-accordions">
         {% comment %} <div class="cmp-accordion-item">
