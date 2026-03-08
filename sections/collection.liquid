@@ -121,33 +121,33 @@
         {%- comment -%}
           MODIFIED: Manual "In-Stock" Filter that points to your collection
         {%- endcomment -%}
-        <div class="availability-filter-pinned" style="margin-bottom: 20px;">
-          <div class="filter-group">
-            <details open>
-              <summary class="filter-title">
-                <span>Availability</span>
-                <span class="icon-chevron"></span>
-              </summary>
-              <div class="filter-content">
-                <ul class="filter-list">
-                  <li class="filter-item">
-                    <label class="filter-label" style="cursor:pointer;">
-                      <input
-                        type="checkbox"
-                        class="in-stock-redirect"
-                        {% if collection.handle == 'in-stock' %}
-                          checked
-                        {% endif %}
-                        onclick="window.location.href='/collections/in-stock'"
-                      >
-                      <span>In stock</span>
-                    </label>
-                  </li>
-                </ul>
+      <div class="availability-filter-pinned" style="margin-bottom: 20px;">
+  <div class="filter-group">
+    <details open>
+      <summary class="filter-title">
+        <span>Availability</span>
+        <span class="icon-chevron"></span>
+      </summary>
+      <div class="filter-content">
+        <ul class="filter-list">
+          <li class="filter-item">
+            <label class="filter-label" style="cursor:pointer; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" 
+                       class="in-stock-toggle"
+                       {% if collection.handle == 'in-stock' %}checked{% endif %}
+                       onchange="toggleInStock(this)">
+                <span>In stock</span>
               </div>
-            </details>
-          </div>
-        </div>
+              {%- comment -%} Pull count specifically for the in-stock collection {%- endcomment -%}
+              <span class="filter-count">{{ collections['in-stock'].products_count }}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</div>
 
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -381,28 +381,38 @@
 </div>
 
 <script>
+  // Drawer Toggle Logic
   function toggleFilterDrawer() {
     const sidebar = document.getElementById('CollectionSidebar');
     const overlay = document.querySelector('.mobile-filter-overlay');
-    if (sidebar && overlay) {
+    if(sidebar && overlay) {
       sidebar.classList.toggle('open');
       overlay.classList.toggle('open');
       document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  // Toggles between In-Stock collection and All Products
+  function toggleInStock(checkbox) {
+    if (checkbox.checked) {
+      window.location.href = '/collections/in-stock';
+    } else {
+      // If unchecked, redirect back to the 'all' collection or main store
+      window.location.href = '/collections/all';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('CollectionFilterForm');
     if (filterForm) {
-      filterForm.addEventListener('change', function (e) {
-        // Prevent auto-submit if the click was on the in-stock redirect
-        if (e.target.classList.contains('in-stock-redirect')) return;
-        this.submit();
+      filterForm.addEventListener('change', function(e) {
+        // Stop the auto-submit if it's the toggle, otherwise normal filters refresh
+        if (e.target.classList.contains('in-stock-toggle')) return;
+        this.submit(); 
       });
     }
   });
 </script>
-
 {% schema %}
 {
   "name": "Advanced Filter Grid",
