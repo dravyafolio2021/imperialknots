@@ -7,8 +7,7 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
-  #shopify-section-{{ section.id }}
-  .product-grid {
+  #shopify-section-{{ section.id }} .product-grid {
     grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: 12px;
   }
@@ -18,48 +17,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0; /* Remove padding for icon-only button */
+    padding: 0;
     background: #000;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 44px; /* Fixed Square Width */
-    height: 44px; /* Fixed Square Height */
-    flex-shrink: 0; /* Prevent shrinking */
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
   }
 
-  .mobile-drawer-header {
-    display: none; /* Hidden on desktop */
-  }
+  .mobile-drawer-header { display: none; }
+  .mobile-filter-overlay { display: none; }
 
-  .mobile-filter-overlay {
-    display: none;
-  }
-
-  /* Mobile Logic (Max Width 767px) */
   @media (max-width: 767px) {
-    /* Header Layout: Row with Icon + Dropdown */
     .collection-header {
       display: flex;
-      flex-direction: row; /* Horizontal alignment */
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       margin-bottom: 15px;
     }
-
-    .cora-sort-select {
-      flex-grow: 1; /* Dropdown takes remaining space */
-      width: auto;
-      height: 44px; /* Match button height */
-    }
-
-    .product-count {
-      display: none; /* Hide count on mobile to save space */
-    }
-
-    /* Drawer Logic */
+    .cora-sort-select { flex-grow: 1; width: auto; height: 44px; }
+    .product-count { display: none; }
     .collection-sidebar {
       position: fixed;
       bottom: 0;
@@ -75,17 +57,8 @@
       display: flex;
       flex-direction: column;
     }
-
-    .collection-sidebar.open {
-      transform: translateY(0);
-    }
-
-    .filter-wrapper {
-      overflow-y: auto;
-      padding: 20px;
-      flex-grow: 1;
-    }
-
+    .collection-sidebar.open { transform: translateY(0); }
+    .filter-wrapper { overflow-y: auto; padding: 20px; flex-grow: 1; }
     .mobile-drawer-header {
       display: flex;
       justify-content: space-between;
@@ -97,38 +70,27 @@
     }
     .mobile-drawer-title { font-weight: 700; font-size: 16px; text-transform: uppercase; }
     .mobile-drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; line-height: 1; }
-
     .mobile-filter-overlay {
       display: block;
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5);
       z-index: 999;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s;
     }
-    .mobile-filter-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
+    .mobile-filter-overlay.open { opacity: 1; visibility: visible; }
   }
 
-  /* --- DESKTOP STYLES (Sticky Sidebar) --- */
   @media (min-width: 768px) {
-    .mobile-filter-trigger { display: none; } /* Hide mobile button */
-
+    .mobile-filter-trigger { display: none; }
     #shopify-section-{{ section.id }} .product-grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
       gap: 12px;
     }
-
-    .collection-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 30px;
-    }
-
+    .collection-container { display: flex; align-items: flex-start; gap: 30px; }
     .collection-sidebar {
       position: -webkit-sticky;
       position: sticky;
@@ -141,51 +103,51 @@
       border-radius: 0;
       box-shadow: none;
     }
-
-    .collection-main {
-      flex-grow: 1;
-      width: 100%;
-    }
+    .collection-main { flex-grow: 1; width: 100%; }
   }
 {%- endstyle -%}
 
 <div class="collection-container" id="shopify-section-{{ section.id }}">
-  {%- comment -%} MOBILE FILTER OVERLAY {%- endcomment -%}
   <div class="mobile-filter-overlay" onclick="toggleFilterDrawer()"></div>
 
-  {%- comment -%} SIDEBAR (Acts as Sidebar on Desktop, Drawer on Mobile) {%- endcomment -%}
   <aside class="collection-sidebar" id="CollectionSidebar">
-    {%- comment -%} MOBILE DRAWER HEADER {%- endcomment -%}
     <div class="mobile-drawer-header">
       <span class="mobile-drawer-title">Filters</span>
       <button class="mobile-drawer-close" onclick="toggleFilterDrawer()">&times;</button>
     </div>
 
     <div class="filter-wrapper">
-      <form class="filter-form">
+      <form class="filter-form" id="CollectionFilterForm">
         {%- comment -%}
-          -------------------------------------------------------
-          0. PINNED FILTERS (Render Availability First)
-          -------------------------------------------------------
+          MODIFIED: Manual "In-Stock" Filter that points to your collection
         {%- endcomment -%}
-        {%- for filter in collection.filters -%}
-          {%- if filter.param_name == 'filter.v.availability' -%}
-            <div class="availability-filter-pinned" style="margin-bottom: 20px;">
-              {% render 'cora-filter-item', filter: filter, default_open: true %}
-            </div>
-            <style>
-              .availability-filter-pinned li:has(input[value="0"]) {
-                display: none !important;
-              }
-            </style>
-          {%- endif -%}
-        {%- endfor -%}
-
-        {%- comment -%}
-          -------------------------------------------------------
-          1. RENDER MANUAL BLOCKS (Theme Editor Order)
-          -------------------------------------------------------
-        {%- endcomment -%}
+        <div class="availability-filter-pinned" style="margin-bottom: 20px;">
+          <div class="filter-group">
+            <details open>
+              <summary class="filter-title">
+                <span>Availability</span>
+                <span class="icon-chevron"></span>
+              </summary>
+              <div class="filter-content">
+                <ul class="filter-list">
+                  <li class="filter-item">
+                    <label class="filter-label" style="cursor:pointer;">
+                      <input
+                        type="checkbox"
+                        class="in-stock-redirect"
+                        {% if collection.handle == 'in-stock' %}
+                          checked
+                        {% endif %}
+                        onclick="window.location.href='/collections/in-stock'"
+                      >
+                      <span>In stock</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
 
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -196,7 +158,6 @@
                 {% endif %}
                 <p>{{ block.settings.text }}</p>
               </div>
-
             {%- when 'image' -%}
               <div class="sidebar-block sidebar-image" {{ block.shopify_attributes }}>
                 {% if block.settings.image %}
@@ -208,12 +169,8 @@
                   >
                 {% endif %}
               </div>
-
-              {%- comment -%} BLOCK: CUSTOM PRICE LIST (Radio) {%- endcomment -%}
             {%- when 'price_list' -%}
               {% render 'cora-filter-price-list', block: block %}
-
-              {%- comment -%} BLOCK: SPECIFIC FILTER GROUP {%- endcomment -%}
             {%- when 'filter_group' -%}
               {%- assign target_filter = block.settings.filter_name | downcase -%}
               {%- for filter in collection.filters -%}
@@ -224,8 +181,6 @@
                   {%- endif -%}
                 {%- endunless -%}
               {%- endfor -%}
-
-              {%- comment -%} BLOCK: MANUAL TAG LIST {%- endcomment -%}
             {%- when 'tag_group' -%}
               <div class="filter-group" {{ block.shopify_attributes }}>
                 <details
@@ -247,14 +202,14 @@
                             {%- if current_tags contains clean_tag -%}
                               {%- assign tag_html = clean_tag | link_to_remove_tag: clean_tag -%}
                               {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
-                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
+                              <a href="{{ tag_url }}" class="filter-label">
                                 <input type="checkbox" checked onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
                             {%- else -%}
                               {%- assign tag_html = clean_tag | link_to_add_tag: clean_tag -%}
                               {%- assign tag_url = tag_html | split: 'href="' | last | split: '"' | first -%}
-                              <a href="{{ tag_url }}" class="filter-label" style="text-decoration: none !important;">
+                              <a href="{{ tag_url }}" class="filter-label">
                                 <input type="checkbox" onclick="this.parentElement.click();">
                                 <span>{{ clean_tag }}</span>
                               </a>
@@ -266,8 +221,6 @@
                   </div>
                 </details>
               </div>
-
-              {%- comment -%} BLOCK: STANDARD PRICE SLIDER {%- endcomment -%}
             {%- when 'price_range' -%}
               {%- for filter in collection.filters -%}
                 {%- if filter.type == 'price_range' -%}
@@ -277,21 +230,10 @@
           {%- endcase -%}
         {%- endfor -%}
 
-        {%- comment -%}
-          -------------------------------------------------------
-          2. RENDER REMAINING (Cleanup)
-          -------------------------------------------------------
-        {%- endcomment -%}
         {%- if section.settings.show_remaining -%}
           {%- for filter in collection.filters -%}
             {%- assign rendered = false -%}
-
-            {%- comment -%} SKIP AVAILABILITY (Done at top) {%- endcomment -%}
-            {%- if filter.param_name == 'filter.v.availability' -%}
-              {%- continue -%}
-            {%- endif -%}
-
-            {%- comment -%} Check if rendered by block {%- endcomment -%}
+            {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
             {%- if filter.type == 'price_range' -%}
               {%- for block in section.blocks -%}
                 {%- if block.type == 'price_range' or block.type == 'price_list' -%}
@@ -302,35 +244,28 @@
               {%- for block in section.blocks -%}
                 {%- assign b_name = block.settings.filter_name | downcase -%}
                 {%- assign f_label = filter.label | downcase -%}
-                {%- if block.type == 'filter_group' and b_name == f_label -%}
-                  {% assign rendered = true %}
-                {%- endif -%}
+                {%- if block.type == 'filter_group' and b_name == f_label -%}{% assign rendered = true %}{%- endif -%}
               {%- endfor -%}
             {%- endif -%}
-
-            {%- comment -%} Render if NOT done yet {%- endcomment -%}
             {%- if rendered == false -%}
               {%- if filter.type == 'price_range' -%}
                 {% render 'cora-filter-price', filter: filter, default_open: false %}
               {%- else -%}
-                {%- comment -%} FORCE CLOSE: default_open set to false {%- endcomment -%}
                 {% render 'cora-filter-item', filter: filter, default_open: false %}
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
       </form>
-      <div class="filter-header" style="font-family: Assitant;">
+      <div class="filter-header" style="font-family: Assistant;">
         <span class="filter-header-title">Filters</span>
         <a href="{{ collection.url }}" class="filter-clear-all">Clear All</a>
       </div>
     </div>
   </aside>
 
-  {%- comment -%} MAIN PRODUCT GRID {%- endcomment -%}
   <div class="collection-main">
     <div class="collection-header">
-      {%- comment -%} MOBILE FILTER TRIGGER BUTTON (ICON ONLY) {%- endcomment -%}
       <button class="mobile-filter-trigger" onclick="toggleFilterDrawer()" aria-label="Open Filters">
         <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 4H14M4 8H12M6 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -341,13 +276,6 @@
 
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
         {% for option in collection.sort_options %}
-          {%- comment -%}
-            LOGIC:
-            1. Hide 'title' (A-Z, Z-A).
-            2. Hide 'created-ascending' (Date, old to new).
-            3. Show everything else (including 'created-descending' aka Newest).
-          {%- endcomment -%}
-
           {%- unless option.value contains 'title' or option.value contains 'created-ascending' -%}
             <option
               value="?sort_by={{ option.value }}"
@@ -355,12 +283,7 @@
                 selected
               {% endif %}
             >
-              {%- comment -%} Rename "Date, new to old" to "Newest" {%- endcomment -%}
-              {%- if option.value == 'created-descending' -%}
-                Newest
-              {%- else -%}
-                {{ option.name }}
-              {%- endif -%}
+              {%- if option.value == 'created-descending' -%}Newest{%- else -%}{{ option.name }}{%- endif -%}
             </option>
           {%- endunless -%}
         {% endfor %}
@@ -373,15 +296,7 @@
           <div class="product-card">
             <div class="product-image-wrapper">
               <a href="{{ product.url }}">
-                {% comment %}
-                  {% if product.compare_at_price > product.price %}
-                    {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
-                    <span class="product-badge"> {{ discount }}% off </span>
-                  {% endif %}
-                {% endcomment %}
                 {%- assign has_instock_tag = false -%}
-
-                {%- comment -%} 1. Scan tags and normalize them (lowercase, remove spaces and dashes) {%- endcomment -%}
                 {%- for tag in product.tags -%}
                   {%- assign clean_tag = tag | downcase | replace: '-', '' | replace: ' ', '' -%}
                   {%- if clean_tag == 'instock' -%}
@@ -390,9 +305,8 @@
                   {%- endif -%}
                 {%- endfor -%}
 
-                {%- comment -%} 2. Display 'In Stock' if tag exists, otherwise show % OFF {%- endcomment -%}
                 {%- if has_instock_tag -%}
-                  <span class="product-badge">In Stock</span>
+                  <span class="product-badge" style="background: #E87034;">In Stock</span>
                 {%- elsif product.compare_at_price > product.price -%}
                   {%- assign discount = product.compare_at_price
                     | minus: product.price
@@ -402,12 +316,9 @@
                   -%}
                   <span class="product-badge">{{ discount }}% OFF</span>
                 {%- endif -%}
+
                 {% if product.featured_image %}
-                  <img
-                    src="{{ product.featured_image | img_url: '600x600' }}"
-                    alt="{{ product.title }}"
-                    loading="lazy"
-                  >
+                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" loading="lazy">
                 {% else %}
                   {{ 'product-1' | placeholder_svg_tag }}
                 {% endif %}
@@ -417,31 +328,8 @@
               <h3>
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
-
-              {%- comment -%} SMART PRICE LOGIC {%- endcomment -%}
               {%- assign displayed_price = product.price -%}
               {%- assign displayed_compare = product.compare_at_price -%}
-
-              {%- assign filter_min = 0 -%}
-              {%- assign filter_max = 99999999999 -%}
-
-              {%- for filter in collection.filters -%}
-                {%- if filter.type == 'price_range' -%}
-                  {%- if filter.min_value.value -%}{%- assign filter_min = filter.min_value.value -%}{%- endif -%}
-                  {%- if filter.max_value.value -%}{%- assign filter_max = filter.max_value.value -%}{%- endif -%}
-                {%- endif -%}
-              {%- endfor -%}
-
-              {%- if filter_min > 0 or filter_max < 99999999999 -%}
-                {%- for variant in product.variants -%}
-                  {%- if variant.price >= filter_min and variant.price <= filter_max -%}
-                    {%- assign displayed_price = variant.price -%}
-                    {%- assign displayed_compare = variant.compare_at_price -%}
-                    {%- break -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              {%- endif -%}
-
               <div class="product-price">
                 <span>{{ displayed_price | money }}</span>
                 {% if displayed_compare > displayed_price %}
@@ -454,54 +342,36 @@
       </div>
 
       {% if paginate.pages > 1 %}
-        <nav class="cora-pagination" role="navigation" aria-label="Pagination">
+        <nav class="cora-pagination">
           <div class="cora-pagination__left">
             {% if paginate.previous %}
               <a href="{{ paginate.previous.url }}" class="cora-pagination__btn cora-pagination__prev">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor"/>
                 </svg>
                 <span>Previous</span>
               </a>
-            {% else %}
-              <span class="cora-pagination__btn cora-pagination__btn--disabled">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
-                <span>Previous</span>
-              </span>
             {% endif %}
           </div>
-
           <div class="cora-pagination__list">
             {% for part in paginate.parts %}
-              {% if part.is_link %}
+              {% if part.is_link -%}
                 <a href="{{ part.url }}" class="cora-pagination__item">{{ part.title }}</a>
-              {% else %}
-                {% if part.title == paginate.current_page %}
-                  <span class="cora-pagination__item cora-pagination__item--active">{{ part.title }}</span>
-                {% else %}
-                  <span class="cora-pagination__item cora-pagination__item--dots">{{ part.title }}</span>
-                {% endif %}
+              {% else -%}
+                <span class="cora-pagination__item {% if part.title == paginate.current_page %}cora-pagination__item--active{% endif %}">
+                  {{- part.title -}}
+                </span>
               {% endif %}
             {% endfor %}
           </div>
-
           <div class="cora-pagination__right">
             {% if paginate.next %}
               <a href="{{ paginate.next.url }}" class="cora-pagination__btn cora-pagination__next">
                 <span>Next</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor"/>
                 </svg>
               </a>
-            {% else %}
-              <span class="cora-pagination__btn cora-pagination__btn--disabled">
-                <span>Next</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
-              </span>
             {% endif %}
           </div>
         </nav>
@@ -510,7 +380,7 @@
   </div>
 </div>
 
-{% comment %} <script>
+<script>
   function toggleFilterDrawer() {
     const sidebar = document.getElementById('CollectionSidebar');
     const overlay = document.querySelector('.mobile-filter-overlay');
@@ -520,27 +390,14 @@
       document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
     }
   }
-</script> {% endcomment %}
-<script>
-  // Your existing drawer toggle code
-  function toggleFilterDrawer() {
-    const sidebar = document.getElementById('CollectionSidebar');
-    const overlay = document.querySelector('.mobile-filter-overlay');
-    if(sidebar && overlay) {
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('open');
-      document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
-    }
-  }
 
-  // NEW CODE: Auto-submit the form when a filter is changed
-  document.addEventListener('DOMContentLoaded', function() {
-    const filterForm = document.querySelector('.filter-form');
-    
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterForm = document.getElementById('CollectionFilterForm');
     if (filterForm) {
-      filterForm.addEventListener('change', function() {
-        // Submits the form automatically, appending the filter to the URL
-        this.submit(); 
+      filterForm.addEventListener('change', function (e) {
+        // Prevent auto-submit if the click was on the in-stock redirect
+        if (e.target.classList.contains('in-stock-redirect')) return;
+        this.submit();
       });
     }
   });
@@ -570,13 +427,7 @@
       "label": "Desktop Columns"
     },
     { "type": "range", "id": "columns_mobile", "min": 2, "max": 4, "step": 1, "default": 2, "label": "Mobile Columns" },
-    {
-      "type": "checkbox",
-      "id": "show_remaining",
-      "label": "Auto-show remaining filters",
-      "default": true,
-      "info": "Shows filters not explicitly added as blocks at the bottom."
-    },
+    { "type": "checkbox", "id": "show_remaining", "label": "Auto-show remaining filters", "default": true },
     { "type": "header", "content": "Spacing & Color" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 100, "default": 60, "label": "Top Padding" },
@@ -587,13 +438,7 @@
       "type": "filter_group",
       "name": "Filter Group",
       "settings": [
-        {
-          "type": "text",
-          "id": "filter_name",
-          "label": "Filter Label",
-          "info": "Must match exact name in Search & Discovery (e.g. 'Color')",
-          "default": "Color"
-        },
+        { "type": "text", "id": "filter_name", "label": "Filter Label", "default": "Color" },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
     },
@@ -602,13 +447,7 @@
       "name": "Tag List (Manual)",
       "settings": [
         { "type": "text", "id": "title", "label": "Filter Title", "default": "Filter By Material" },
-        {
-          "type": "textarea",
-          "id": "tag_list",
-          "label": "Tags to Show",
-          "default": "Wool|Jute|Cotton",
-          "info": "Separate exact tag names with a pipe '|'. Example: Wool|Cotton|Silk"
-        },
+        { "type": "textarea", "id": "tag_list", "label": "Tags to Show", "default": "Wool|Jute|Cotton" },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
     },
@@ -621,18 +460,12 @@
       "type": "price_list",
       "name": "Price List (Radio)",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Price Range"
-        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Price Range" },
         {
           "type": "textarea",
           "id": "price_ranges",
           "label": "Price Ranges",
-          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
-          "info": "Format: Min-Max:Label (One per line)."
+          "default": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000"
         },
         { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false }
       ]
