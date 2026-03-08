@@ -65,7 +65,9 @@
       </div>
 
       <h1 class="cmp-title">{{ product.title }}</h1>
-
+ <button type="submit" name="add"   class="cmp-atc-btn" {% unless current_variant.available %}disabled{% endunless %}>
+            <a> Ask for Price </a>
+          </button>
       {% comment %} <div class="cmp-price-area" id="Price-{{ section.id }}">
         <span class="cmp-price">{{ current_variant.price | money }}</span>
       </div> {% endcomment %}
