@@ -306,7 +306,7 @@
                 {%- endfor -%}
 
                 {%- if has_instock_tag -%}
-                  <span class="product-badge" style="background: #E87034;">In Stock</span>
+                  <span class="product-badge" style="background:rgb(255, 255, 255);">In Stock</span>
                 {%- elsif product.compare_at_price > product.price -%}
                   {%- assign discount = product.compare_at_price
                     | minus: product.price
