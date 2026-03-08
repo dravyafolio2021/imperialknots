@@ -1,43 +1,21 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
-<!-- BEAE-GLOBAL-FONT --> 
-{% comment %} <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}" type="image/x-icon"> {% endcomment %}
-<!-- Favicons -->
-<link rel="icon" href="{{ 'favicon.ico' | asset_url }}" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon.ico' | asset_url }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon.ico' | asset_url }}">
-<link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
-<link rel="icon" type="image/png" href="{{ 'favicon.ico' | asset_url }}">
-<link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
-<link rel="apple-touch-icon" href="{{ 'favicon.ico' | asset_url }}">
-{%- if settings.favicon != blank -%}
-  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-  <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
-  <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-{%- endif -%}
-<link rel="icon" sizes="32x32" href="{{ 'favicon.ico' | asset_url }}">
-<link rel="icon" sizes="16x16" href="{{ 'favicon.ico' | asset_url }}">
-{% capture the_snippet_global_font %}{% include 'beae-global-font' %}{% endcapture %} {% unless the_snippet_global_font contains 'Liquid error' %} {{ the_snippet_global_font }} {% endunless %} 
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+    {%- endif -%}
 
- 
- 
- 
     {% render 'css-variables' %}
-
-    {% comment %}
-      Font preloading:
-      1. Preconnect to font CDN for faster connection
-      2. Preload only the critical font variant (base weight)
-      3. Additional variants load on-demand via @font-face
-    {% endcomment %}
-     <link rel="canonical" href="{{ shop.url }}{{ product.url }}">
+ 
+    <link rel="canonical" href="{{ shop.url }}{{ product.url }}">
     {% unless settings.type_primary_font.system? %}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 
-      {% comment %} Preload the base font variant for initial page render {% endcomment %}
-      {% comment %} {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }} {% endcomment %}
-    {% endunless %}
+     {% endunless %}
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
@@ -47,45 +25,47 @@
 
     {{ content_for_header }}
     {% if request.query_string != blank %}
-  <meta name="robots" content="noindex, follow">
-{% endif %}
-  {%- render 'foxify-head' -%}{% capture the_snippet_beae-global-theme-setting %}{% include 'beae-global-theme-setting' %}{% endcapture %}
-            {% unless the_snippet_beae-global-theme-setting contains 'Liquid error' %}
-                {{ the_snippet_beae-global-theme-setting }}
-            {% endunless %}
-</head>
+      <meta name="robots" content="noindex, follow">
+    {% endif %}
+    {%- render 'foxify-head' -%}
+    {% capture the_snippet_beae-global-theme-setting %}{% include 'beae-global-theme-setting' %}{% endcapture %}
+    {% unless the_snippet_beae-global-theme-setting contains 'Liquid error' %}
+      {{ the_snippet_beae-global-theme-setting }}
+    {% endunless %}
+  </head>
 
-  <body>{% sections 'foxify-header-group' %}
+  <body>
+    {% sections 'foxify-header-group' %}
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
-  {%- render 'foxify-footer' -%}{% sections 'foxify-footer-group' %}{%- render "ecom_footer"-%}
-<!-- BEAE-FOOTER --> 
-{%- render 'beae_footer' -%}
-<!-- END BEAE-FOOTER -->
-<!-- BEAE-AB-SNIPPET --> 
-{%- render 'beae_ab_snippet' -%}
-<!-- END BEAE-AB-SNIPPET --></body>
+    {%- render 'foxify-footer' -%}
+    {% sections 'foxify-footer-group' %}
+    {%- render 'ecom_footer' -%}
+    <!-- BEAE-FOOTER -->
+    {%- render 'beae_footer' -%}
+    <!-- END BEAE-FOOTER -->
+    <!-- BEAE-AB-SNIPPET -->
+    {%- render 'beae_ab_snippet' -%}
+    <!-- END BEAE-AB-SNIPPET -->
+  </body>
 </html>
 
-
-
 {%- if template.name == 'collection' -%}
-    {% render 'schema-collection' %}
-  {%- endif -%}
+  {% render 'schema-collection' %}
+{%- endif -%}
 
+{%- if page.handle == 'faqs' or page.handle == 'frequently-asked-questions' -%}
+  {% render 'schema-faq' %}
+{%- endif -%}
 
-  {%- if page.handle == 'faqs' or page.handle == 'frequently-asked-questions' -%}
-    {% render 'schema-faq' %}
-  {%- endif -%}
-
-  {% comment %} Load Organization Schema only on Homepage {% endcomment %}
-  {%- if template.name == 'index' -%}
-    {% render 'schema-organization' %}
-  {%- endif -%}
-  {% comment %} Load Product Schema only on Product pages {% endcomment %}
-  {%- if template.name == 'product' -%}
-    {% render 'schema-product' %}
-  {%- endif -%}
+{% comment %} Load Organization Schema only on Homepage {% endcomment %}
+{%- if template.name == 'index' -%}
+  {% render 'schema-organization' %}
+{%- endif -%}
+{% comment %} Load Product Schema only on Product pages {% endcomment %}
+{%- if template.name == 'product' -%}
+  {% render 'schema-product' %}
+{%- endif -%}
