@@ -27,8 +27,146 @@
         "pb_mobile": 40
       }
     },
+    "cora_collection_grid_YatfjX": {
+      "type": "cora-collection-grid",
+      "blocks": {
+        "card_bpqVeh": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TIM-2197_5X8_6.jpg",
+            "image_alt": "Suzani",
+            "title": "Suzani",
+            "link": "shopify://collections/suzani"
+          }
+        },
+        "card_maiYNi": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/KCJ-300.jpg",
+            "image_alt": "Solids",
+            "title": "Solids",
+            "link": "https://www.imperialknots.com/collections/solids"
+          }
+        },
+        "card_3KKaN3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/lg_-_2025-12-10T154114.837.jpg",
+            "image_alt": "Floral",
+            "title": "Floral",
+            "link": "https://www.imperialknots.com/collections/floral-carpets"
+          }
+        },
+        "card_BkAGqt": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ivory_red_stripes_hand_woven_dhurrie_rug_closeup.jpg",
+            "image_alt": "Stripes",
+            "title": "Stripes",
+            "link": "https://www.imperialknots.com/collections/striped-rugs-india"
+          }
+        },
+        "card_JmMhp8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/IKD-10747.jpg",
+            "image_alt": "Geometric",
+            "title": "Geometric",
+            "link": "https://www.imperialknots.com/collections/geometric-rugs"
+          }
+        },
+        "card_ihmfMR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ST-1707_2.jpg",
+            "image_alt": "Kids",
+            "title": "Kids",
+            "link": "https://www.imperialknots.com/collections/kids"
+          }
+        },
+        "card_A7tJKe": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/ST-1232_3_9012325f-66ad-46ce-a390-0af287664682.jpg",
+            "image_alt": "Moroccan",
+            "title": "Moroccan",
+            "link": "https://www.imperialknots.com/collections/moroccan-carpets"
+          }
+        },
+        "card_ifUE4b": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TM-26_57-69.jpg",
+            "image_alt": "",
+            "title": "Traditional",
+            "link": ""
+          }
+        },
+        "card_MbWAQw": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/IMT-25-2937.jpg",
+            "image_alt": "Bespoke",
+            "title": "Bespoke",
+            "link": "https://www.imperialknots.com/collections/broadloom-carpets-india"
+          }
+        },
+        "card_74mKbw": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/IMP6_IKT-280402_2.jpg",
+            "image_alt": "Modern",
+            "title": "Modern",
+            "link": "https://www.imperialknots.com/collections/modern-rugs"
+          }
+        },
+        "card_rpn7TQ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/DIM-471_2.jpg",
+            "image_alt": "Chevron",
+            "title": "Chevron",
+            "link": "https://www.imperialknots.com/collections/chevron-rugs"
+          }
+        },
+        "card_rc78L3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/KCD-126_5X8_6.jpg",
+            "image_alt": "Kilims",
+            "title": "Kilims",
+            "link": "https://www.imperialknots.com/collections/kilims"
+          }
+        }
+      },
+      "block_order": [
+        "card_bpqVeh",
+        "card_maiYNi",
+        "card_3KKaN3",
+        "card_BkAGqt",
+        "card_JmMhp8",
+        "card_ihmfMR",
+        "card_A7tJKe",
+        "card_ifUE4b",
+        "card_MbWAQw",
+        "card_74mKbw",
+        "card_rpn7TQ",
+        "card_rc78L3"
+      ],
+      "name": "Collection Grid",
+      "settings": {
+        "aria_label": "",
+        "bg_color": "#ffffff",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "show_link_cta": false,
+        "cta_text": "",
+        "cta_url": ""
+      }
+    },
     "main": {
       "type": "collections",
+      "disabled": true,
       "custom_css": [
         "{overflow-x: hidden;}"
       ],
@@ -57,6 +195,7 @@
   },
   "order": [
     "cora_catalog_banner_YRWeUa",
+    "cora_collection_grid_YatfjX",
     "main"
   ]
 }
