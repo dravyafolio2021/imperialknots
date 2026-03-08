@@ -30,6 +30,15 @@
     "cora_collection_grid_YatfjX": {
       "type": "cora-collection-grid",
       "blocks": {
+        "card_BQCdRx": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_6hn0326hn0326hn0.png",
+            "image_alt": "imperial knots",
+            "title": "Ready to Ship",
+            "link": "shopify://collections/in-stock"
+          }
+        },
         "card_bpqVeh": {
           "type": "card",
           "settings": {
@@ -102,15 +111,6 @@
             "link": ""
           }
         },
-        "card_MbWAQw": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/IMT-25-2937.jpg",
-            "image_alt": "Bespoke",
-            "title": "Bespoke",
-            "link": "https://www.imperialknots.com/collections/broadloom-carpets-india"
-          }
-        },
         "card_74mKbw": {
           "type": "card",
           "settings": {
@@ -140,6 +140,7 @@
         }
       },
       "block_order": [
+        "card_BQCdRx",
         "card_bpqVeh",
         "card_maiYNi",
         "card_3KKaN3",
@@ -148,7 +149,6 @@
         "card_ihmfMR",
         "card_A7tJKe",
         "card_ifUE4b",
-        "card_MbWAQw",
         "card_74mKbw",
         "card_rpn7TQ",
         "card_rc78L3"
