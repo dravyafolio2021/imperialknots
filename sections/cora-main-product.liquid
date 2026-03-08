@@ -66,9 +66,9 @@
 
       <h1 class="cmp-title">{{ product.title }}</h1>
 
-      <div class="cmp-price-area" id="Price-{{ section.id }}">
+      {% comment %} <div class="cmp-price-area" id="Price-{{ section.id }}">
         <span class="cmp-price">{{ current_variant.price | money }}</span>
-      </div>
+      </div> {% endcomment %}
 
       <div class="cmp-emi">Easy EMI options available at Checkout</div>
 
