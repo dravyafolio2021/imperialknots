@@ -2,12 +2,12 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
     {%- if settings.favicon != blank -%}
-<link rel="icon" type="image/png" sizes="96x96" href="{{ settings.favicon | image_url: width: 96 }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | image_url: width: 180 }}">
-<link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
-<meta property="og:image" content="{{ settings.favicon | image_url: width: 512 }}">
-{%- endif -%}
-
+      <link rel="icon" type="image/png" sizes="96x96" href="{{ settings.favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | image_url: width: 180 }}">
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
+      <meta property="og:image" content="{{ settings.favicon | image_url: width: 512 }}">
+      <link rel="icon" href="{{ settings.favicon | image_url: width: 512 }}">
+    {%- endif -%}
     {% render 'css-variables' %}
 
     <link rel="canonical" href="{{ canonical_url }}">
