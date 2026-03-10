@@ -128,7 +128,7 @@
             "label": "Head Office",
             "value": "Gurgaon, Haryana, India",
             "subtext": "Visit our showroom",
-            "link_text": "View on Map",
+            "link_text": "",
             "link_url": ""
           }
         },
@@ -139,7 +139,7 @@
             "label": "Email",
             "value": "care@imperialknots.com",
             "subtext": "Send us an email",
-            "link_text": "Send Email",
+            "link_text": "",
             "link_url": ""
           }
         },
@@ -148,9 +148,9 @@
           "settings": {
             "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"></path></svg>",
             "label": "Phone",
-            "value": "+91 XXXXXXXXXX",
+            "value": "+91 9555326200",
             "subtext": "Call us directly",
-            "link_text": "Call Now",
+            "link_text": "",
             "link_url": ""
           }
         },
@@ -161,8 +161,8 @@
             "label": "WhatsApp",
             "value": "Chat with us instantly",
             "subtext": "Quick responses",
-            "link_text": "Start Chat",
-            "link_url": ""
+            "link_text": "",
+            "link_url": "https://wa.me/919555326200"
           }
         }
       },
