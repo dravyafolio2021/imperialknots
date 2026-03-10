@@ -76,6 +76,8 @@
 
       <h1 class="cmp-title">{{ product.title }}</h1>
       <div class="cmp-price" id="Price-{{ section.id }}">{{ current_variant.price | money }}</div>
+      <div class="cmp-emi">Inclusive of all taxes</div>
+      
       <div class="cmp-emi">Easy EMI options available at Checkout</div>
 
       {% form 'product', product, id: 'product-form' %}
