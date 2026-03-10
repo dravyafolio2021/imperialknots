@@ -18,10 +18,10 @@
         "show_breadcrumbs": true,
         "bg_color": "#000000",
         "overlay_opacity": 0,
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "text_align": "center",
         "show_wave": false,
-        "wave_color": "#FFFFFF",
+        "wave_color": "#ffffff",
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
         "padding_top_mobile": 40,
@@ -34,10 +34,34 @@
       "settings": {
         "bg_color": "#ffffff"
       }
+    },
+    "cora_rich_text_6iDPrb": {
+      "type": "cora-rich-text",
+      "blocks": {
+        "text_NYhzMR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Imperial Mastercrafts (Imperial Knots)<br/>GSTIN: 06AAFFI5790N1ZT<br/>Address: Crossroad Complex, Nathupur, DLF Phase 3, Gurugram, Haryana 122002, India<br/>Email: <a href=\"mailto:care@imperialknots.com\" target=\"_blank\">care@imperialknots.com<br/></a>Grievance Officer: Mr Karan<br/>Contact: +91-9555326200 <br/>Email: <a href=\"mailto:grievance@imperialknots.com\" target=\"_blank\">grievance@imperialknots.com</a>/<a href=\"mailto:karan@imperialknots.com\" target=\"_blank\">karan@imperialknots.com</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_NYhzMR"
+      ],
+      "name": "Cora Rich Text",
+      "settings": {
+        "width": "cora-width-wide",
+        "text_alignment": "left",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "cora_page_banner_8eEL9D",
-    "cora_privacy_policy_HwgAzN"
+    "cora_privacy_policy_HwgAzN",
+    "cora_rich_text_6iDPrb"
   ]
 }
