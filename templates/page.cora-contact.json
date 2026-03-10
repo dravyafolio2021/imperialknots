@@ -121,17 +121,6 @@
     "cora_contact_grid_Krbjb9": {
       "type": "cora-contact-grid",
       "blocks": {
-        "contact_card_Nxx97x": {
-          "type": "contact_card",
-          "settings": {
-            "svg_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\"></path><circle cx=\"12\" cy=\"10\" r=\"3\"></circle></svg>",
-            "label": "Head Office",
-            "value": "Gurgaon, Haryana, India",
-            "subtext": "Visit our showroom",
-            "link_text": "",
-            "link_url": ""
-          }
-        },
         "contact_card_jqfNiw": {
           "type": "contact_card",
           "settings": {
@@ -167,7 +156,6 @@
         }
       },
       "block_order": [
-        "contact_card_Nxx97x",
         "contact_card_jqfNiw",
         "contact_card_CYePXG",
         "contact_card_MAxaUr"
