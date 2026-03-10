@@ -33,7 +33,7 @@
           "type": "whatsapp",
           "settings": {
             "label": "WhatsApp",
-            "phone_number": "919555326200",
+            "phone_number": "9555326200",
             "message": "Hi, I need help with...",
             "custom_svg": ""
           }
