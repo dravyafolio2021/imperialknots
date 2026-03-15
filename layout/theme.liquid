@@ -58,6 +58,9 @@
 {%- if page.handle == 'faqs' or page.handle == 'frequently-asked-questions' -%}
   {% render 'schema-faq' %}
 {%- endif -%}
+{%- if page.handle == 'custom-rugs'   -%}
+  {% render 'schema-custom' %}
+{%- endif -%}
 
 {% comment %} Load Organization Schema only on Homepage {% endcomment %}
 {%- if template.name == 'index' -%}
