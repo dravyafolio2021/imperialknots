@@ -1,352 +1,134 @@
-{
-&quot;@context&quot;:&quot;https://schema.org&quot;,
-&quot;@graph&quot;:[
+<script type="application/ld+json">
+  { "@context":"https://schema.org", "@graph":[
 
-{
-&quot;@type&quot;:&quot;Organization&quot;,
-&quot;@id&quot;:&quot;https://www.imperialknots.com/#organization&quot;,
-&quot;name&quot;:&quot;Imperial Knots&quot;,
-&quot;url&quot;:&quot;https://www.imperialknots.com&quot;,
-&quot;description&quot;:&quot;Imperial Knots is a luxury handmade rug brand specializing in bespoke rugs, custom
-carpets and artisan handcrafted floor coverings.&quot;,
-&quot;sameAs&quot;:[
-&quot;https://www.instagram.com/imperial.knots&quot;,
-&quot;https://www.facebook.com/imperialknots&quot;,
-&quot;https://www.pinterest.com/imperialknots&quot;
-]
-},
+  { "@type":"Organization", "@id":"https://www.imperialknots.com/#organization", "name":"Imperial Knots",
+  "url":"https://www.imperialknots.com", "description":"Imperial Knots is a luxury handmade rug brand specializing in
+  bespoke rugs, custom carpets and artisan handcrafted floor coverings.", "sameAs":[
+  "https://www.instagram.com/imperial.knots", "https://www.facebook.com/imperialknots",
+  "https://www.pinterest.com/imperialknots" ] },
 
-{
-&quot;@type&quot;:&quot;WebSite&quot;,
-&quot;@id&quot;:&quot;https://www.imperialknots.com/#website&quot;,
-&quot;url&quot;:&quot;https://www.imperialknots.com&quot;,
-&quot;name&quot;:&quot;Imperial Knots&quot;,
-&quot;publisher&quot;:{
-&quot;@id&quot;:&quot;https://www.imperialknots.com/#organization&quot;
-},
-&quot;potentialAction&quot;:{
-&quot;@type&quot;:&quot;SearchAction&quot;,
-&quot;target&quot;:&quot;https://www.imperialknots.com/search?q={search_term_string}&quot;,
-&quot;query-input&quot;:&quot;required name=search_term_string&quot;
-}
+  { "@type":"WebSite", "@id":"https://www.imperialknots.com/#website", "url":"https://www.imperialknots.com",
+  "name":"Imperial Knots", "publisher":{ "@id":"https://www.imperialknots.com/#organization" }, "potentialAction":{
+  "@type":"SearchAction", "target":"https://www.imperialknots.com/search?q={search_term_string}", "query-input":"required
+  name=search_term_string" } },
 
-},
+  { "@type":"WebPage", "@id":"https://www.imperialknots.com/pages/custom-rugs/#webpage",
+  "url":"https://www.imperialknots.com/pages/custom-rugs", "name":"Custom Rugs | Bespoke Handmade Rugs",
+  "description":"Design custom handmade rugs with Imperial Knots. Create bespoke rugs in wool, silk, jute, viscose and
+  flatweave constructions.", "isPartOf":{ "@id":"https://www.imperialknots.com/#website" }, "about":{
+  "@id":"https://www.imperialknots.com/pages/custom-rugs/#service" }, "breadcrumb":{
+  "@id":"https://www.imperialknots.com/pages/custom-rugs/#breadcrumb" } },
 
-{
-&quot;@type&quot;:&quot;WebPage&quot;,
-&quot;@id&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs/#webpage&quot;,
-&quot;url&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs&quot;,
-&quot;name&quot;:&quot;Custom Rugs | Bespoke Handmade Rugs&quot;,
-&quot;description&quot;:&quot;Design custom handmade rugs with Imperial Knots. Create bespoke rugs in wool, silk,
-jute, viscose and flatweave constructions.&quot;,
-&quot;isPartOf&quot;:{
-&quot;@id&quot;:&quot;https://www.imperialknots.com/#website&quot;
-},
-&quot;about&quot;:{
-&quot;@id&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs/#service&quot;
-},
-&quot;breadcrumb&quot;:{
-&quot;@id&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs/#breadcrumb&quot;
-}
-},
+  { "@type":"Service", "@id":"https://www.imperialknots.com/pages/custom-rugs/#service", "name":"Custom Handmade Rug
+  Design", "provider":{ "@id":"https://www.imperialknots.com/#organization" }, "description":"Bespoke rug design service
+  allowing customers to create handmade rugs customized by size, pattern, color, material and weaving technique.",
+  "serviceType":"Custom Rug Manufacturing", "areaServed":{ "@type":"Place", "name":"Worldwide" }, "offers":{
+  "@type":"Offer", "url":"https://www.imperialknots.com/pages/custom-rugs", "availability":"https://schema.org/InStock" }
+  },
 
-{
-&quot;@type&quot;:&quot;Service&quot;,
-&quot;@id&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs/#service&quot;,
-&quot;name&quot;:&quot;Custom Handmade Rug Design&quot;,
-&quot;provider&quot;:{
-&quot;@id&quot;:&quot;https://www.imperialknots.com/#organization&quot;
-},
-&quot;description&quot;:&quot;Bespoke rug design service allowing customers to create handmade rugs customized
-by size, pattern, color, material and weaving technique.&quot;,
-&quot;serviceType&quot;:&quot;Custom Rug Manufacturing&quot;,
-&quot;areaServed&quot;:{
-&quot;@type&quot;:&quot;Place&quot;,
+  { "@type":"ItemList", "name":"Types of Custom Rugs", "itemListElement":[
 
-&quot;name&quot;:&quot;Worldwide&quot;
-},
-&quot;offers&quot;:{
-&quot;@type&quot;:&quot;Offer&quot;,
-&quot;url&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs&quot;,
-&quot;availability&quot;:&quot;https://schema.org/InStock&quot;
-}
-},
+  { "@type":"ListItem", "position":1, "name":"Custom Hand Tufted Rugs" },
 
-{
-&quot;@type&quot;:&quot;ItemList&quot;,
-&quot;name&quot;:&quot;Types of Custom Rugs&quot;,
-&quot;itemListElement&quot;:[
+  { "@type":"ListItem", "position":2, "name":"Custom Kilims" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:1,
-&quot;name&quot;:&quot;Custom Hand Tufted Rugs&quot;
-},
+  { "@type":"ListItem", "position":3, "name":"Custom Handmade Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:2,
-&quot;name&quot;:&quot;Custom Kilims&quot;
-},
+  { "@type":"ListItem", "position":4, "name":"Custom Carpets" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:3,
-&quot;name&quot;:&quot;Custom Handmade Rugs&quot;
-},
+  { "@type":"ListItem", "position":5, "name":"Custom Area Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:4,
-&quot;name&quot;:&quot;Custom Carpets&quot;
-},
+  { "@type":"ListItem", "position":6, "name":"Custom Flatweave Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:5,
-&quot;name&quot;:&quot;Custom Area Rugs&quot;
-},
+  { "@type":"ListItem", "position":7, "name":"Custom Jute Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:6,
-&quot;name&quot;:&quot;Custom Flatweave Rugs&quot;
-},
+  { "@type":"ListItem", "position":8, "name":"Custom Viscose Rugs" }
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:7,
-&quot;name&quot;:&quot;Custom Jute Rugs&quot;
-},
+  ] },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:8,
-&quot;name&quot;:&quot;Custom Viscose Rugs&quot;
-}
+  { "@type":"DefinedTermSet", "name":"Custom Rug Types", "description":"Types of bespoke rugs manufactured by Imperial
+  Knots.", "hasDefinedTerm":[
 
-]
-},
+  { "@type":"DefinedTerm", "name":"Custom Hand Tufted Rugs", "description":"Hand tufted rugs designed to custom
+  specifications." },
 
-{
-&quot;@type&quot;:&quot;DefinedTermSet&quot;,
-&quot;name&quot;:&quot;Custom Rug Types&quot;,
-&quot;description&quot;:&quot;Types of bespoke rugs manufactured by Imperial Knots.&quot;,
-&quot;hasDefinedTerm&quot;:[
+  { "@type":"DefinedTerm", "name":"Custom Kilims", "description":"Flatwoven kilim rugs produced to custom sizes and
+  colors." },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Hand Tufted Rugs&quot;,
-&quot;description&quot;:&quot;Hand tufted rugs designed to custom specifications.&quot;
-},
+  { "@type":"DefinedTerm", "name":"Custom Handmade Rugs", "description":"Handcrafted rugs produced using traditional
+  weaving techniques." },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Kilims&quot;,
-&quot;description&quot;:&quot;Flatwoven kilim rugs produced to custom sizes and colors.&quot;
-},
+  { "@type":"DefinedTerm", "name":"Custom Carpets", "description":"Bespoke carpets designed for residential and commercial
+  interiors." },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Handmade Rugs&quot;,
-&quot;description&quot;:&quot;Handcrafted rugs produced using traditional weaving techniques.&quot;
-},
+  { "@type":"DefinedTerm", "name":"Custom Area Rugs", "description":"Custom sized area rugs designed to complement
+  interior spaces." },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Carpets&quot;,
-&quot;description&quot;:&quot;Bespoke carpets designed for residential and commercial interiors.&quot;
+  { "@type":"DefinedTerm", "name":"Custom Flatweave Rugs", "description":"Flatweave rugs made using handwoven techniques."
+  },
 
-},
+  { "@type":"DefinedTerm", "name":"Custom Jute Rugs", "description":"Natural fiber rugs made from handwoven jute." },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Area Rugs&quot;,
-&quot;description&quot;:&quot;Custom sized area rugs designed to complement interior spaces.&quot;
-},
+  { "@type":"DefinedTerm", "name":"Custom Viscose Rugs", "description":"Custom rugs crafted using viscose fibers for a
+  silk-like sheen." }
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Flatweave Rugs&quot;,
-&quot;description&quot;:&quot;Flatweave rugs made using handwoven techniques.&quot;
-},
+  ] },
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Jute Rugs&quot;,
-&quot;description&quot;:&quot;Natural fiber rugs made from handwoven jute.&quot;
-},
+  { "@type":"ItemList", "name":"Materials Used in Custom Rugs", "itemListElement":[
 
-{
-&quot;@type&quot;:&quot;DefinedTerm&quot;,
-&quot;name&quot;:&quot;Custom Viscose Rugs&quot;,
-&quot;description&quot;:&quot;Custom rugs crafted using viscose fibers for a silk-like sheen.&quot;
-}
+  { "@type":"ListItem", "position":1, "name":"Wool Rugs" },
 
-]
-},
+  { "@type":"ListItem", "position":2, "name":"Silk Rugs" },
 
-{
-&quot;@type&quot;:&quot;ItemList&quot;,
+  { "@type":"ListItem", "position":3, "name":"Bamboo Silk Rugs" },
 
-&quot;name&quot;:&quot;Materials Used in Custom Rugs&quot;,
-&quot;itemListElement&quot;:[
+  { "@type":"ListItem", "position":4, "name":"Viscose Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:1,
-&quot;name&quot;:&quot;Wool Rugs&quot;
-},
+  { "@type":"ListItem", "position":5, "name":"Jute Rugs" },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:2,
-&quot;name&quot;:&quot;Silk Rugs&quot;
-},
+  { "@type":"ListItem", "position":6, "name":"Cotton Rugs" }
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:3,
-&quot;name&quot;:&quot;Bamboo Silk Rugs&quot;
-},
+  ] },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:4,
-&quot;name&quot;:&quot;Viscose Rugs&quot;
-},
+  { "@type":"Audience", "audienceType":[ "Interior Designers", "Architects", "Luxury Homeowners", "Hospitality Designers",
+  "Commercial Interior Designers" ] },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:5,
-&quot;name&quot;:&quot;Jute Rugs&quot;
+  { "@type":"HowTo", "name":"How to Order a Custom Rug", "description":"Step by step process to design and order a bespoke
+  handmade rug.", "step":[
 
-},
+  { "@type":"HowToStep", "name":"Share Your Rug Design", "text":"Provide rug size, colors, materials and inspiration
+  images." },
 
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:6,
-&quot;name&quot;:&quot;Cotton Rugs&quot;
-}
+  { "@type":"HowToStep", "name":"Design Development", "text":"Imperial Knots designers create a visualization or CAD of
+  the rug." },
 
-]
-},
+  { "@type":"HowToStep", "name":"Approve the Design", "text":"Customer reviews and confirms the final design." },
 
-{
-&quot;@type&quot;:&quot;Audience&quot;,
-&quot;audienceType&quot;:[
-&quot;Interior Designers&quot;,
-&quot;Architects&quot;,
-&quot;Luxury Homeowners&quot;,
-&quot;Hospitality Designers&quot;,
-&quot;Commercial Interior Designers&quot;
-]
-},
+  { "@type":"HowToStep", "name":"Handcrafted Production", "text":"Artisans weave the rug using traditional techniques." },
 
-{
-&quot;@type&quot;:&quot;HowTo&quot;,
-&quot;name&quot;:&quot;How to Order a Custom Rug&quot;,
-&quot;description&quot;:&quot;Step by step process to design and order a bespoke handmade rug.&quot;,
-&quot;step&quot;:[
+  { "@type":"HowToStep", "name":"Delivery", "text":"The finished custom rug is inspected and delivered to the customer." }
 
-{
-&quot;@type&quot;:&quot;HowToStep&quot;,
-&quot;name&quot;:&quot;Share Your Rug Design&quot;,
+  ] },
 
-&quot;text&quot;:&quot;Provide rug size, colors, materials and inspiration images.&quot;
-},
+  { "@type":"FAQPage", "mainEntity":[
 
-{
-&quot;@type&quot;:&quot;HowToStep&quot;,
-&quot;name&quot;:&quot;Design Development&quot;,
-&quot;text&quot;:&quot;Imperial Knots designers create a visualization or CAD of the rug.&quot;
-},
+  { "@type":"Question", "name":"Do you make custom rugs?", "acceptedAnswer":{ "@type":"Answer", "text":"Yes. Imperial
+  Knots creates bespoke handmade rugs customized by size, color, pattern and material." } },
 
-{
-&quot;@type&quot;:&quot;HowToStep&quot;,
-&quot;name&quot;:&quot;Approve the Design&quot;,
-&quot;text&quot;:&quot;Customer reviews and confirms the final design.&quot;
-},
+  { "@type":"Question", "name":"What materials are used for custom rugs?", "acceptedAnswer":{ "@type":"Answer",
+  "text":"Custom rugs can be made using wool, silk, bamboo silk, viscose, jute and cotton." } },
 
-{
-&quot;@type&quot;:&quot;HowToStep&quot;,
-&quot;name&quot;:&quot;Handcrafted Production&quot;,
-&quot;text&quot;:&quot;Artisans weave the rug using traditional techniques.&quot;
-},
+  { "@type":"Question", "name":"How long does it take to make a custom rug?", "acceptedAnswer":{ "@type":"Answer",
+  "text":"Custom rugs typically take between 5 and 12 weeks depending on size and complexity." } },
 
-{
-&quot;@type&quot;:&quot;HowToStep&quot;,
-&quot;name&quot;:&quot;Delivery&quot;,
-&quot;text&quot;:&quot;The finished custom rug is inspected and delivered to the customer.&quot;
-}
+  { "@type":"Question", "name":"Can I design my own rug?", "acceptedAnswer":{ "@type":"Answer", "text":"Yes. Customers can
+  submit inspiration images, sketches or artwork to create their own custom rug design." } }
 
-]
-},
+  ] },
 
-{
+  { "@type":"BreadcrumbList", "@id":"https://www.imperialknots.com/pages/custom-rugs/#breadcrumb", "itemListElement":[ {
+  "@type":"ListItem", "position":1, "name":"Home", "item":"https://www.imperialknots.com" }, { "@type":"ListItem",
+  "position":2, "name":"Custom Rugs", "item":"https://www.imperialknots.com/pages/custom-rugs" } ] }
 
-&quot;@type&quot;:&quot;FAQPage&quot;,
-&quot;mainEntity&quot;:[
-
-{
-&quot;@type&quot;:&quot;Question&quot;,
-&quot;name&quot;:&quot;Do you make custom rugs?&quot;,
-&quot;acceptedAnswer&quot;:{
-&quot;@type&quot;:&quot;Answer&quot;,
-&quot;text&quot;:&quot;Yes. Imperial Knots creates bespoke handmade rugs customized by size, color, pattern and
-material.&quot;
-}
-},
-
-{
-&quot;@type&quot;:&quot;Question&quot;,
-&quot;name&quot;:&quot;What materials are used for custom rugs?&quot;,
-&quot;acceptedAnswer&quot;:{
-&quot;@type&quot;:&quot;Answer&quot;,
-&quot;text&quot;:&quot;Custom rugs can be made using wool, silk, bamboo silk, viscose, jute and cotton.&quot;
-}
-},
-
-{
-&quot;@type&quot;:&quot;Question&quot;,
-&quot;name&quot;:&quot;How long does it take to make a custom rug?&quot;,
-&quot;acceptedAnswer&quot;:{
-&quot;@type&quot;:&quot;Answer&quot;,
-&quot;text&quot;:&quot;Custom rugs typically take between 5 and 12 weeks depending on size and complexity.&quot;
-}
-},
-
-{
-&quot;@type&quot;:&quot;Question&quot;,
-&quot;name&quot;:&quot;Can I design my own rug?&quot;,
-&quot;acceptedAnswer&quot;:{
-&quot;@type&quot;:&quot;Answer&quot;,
-&quot;text&quot;:&quot;Yes. Customers can submit inspiration images, sketches or artwork to create their own
-custom rug design.&quot;
-}
-}
-
-]
-},
-
-{
-&quot;@type&quot;:&quot;BreadcrumbList&quot;,
-&quot;@id&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs/#breadcrumb&quot;,
-&quot;itemListElement&quot;:[
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:1,
-&quot;name&quot;:&quot;Home&quot;,
-&quot;item&quot;:&quot;https://www.imperialknots.com&quot;
-},
-{
-&quot;@type&quot;:&quot;ListItem&quot;,
-&quot;position&quot;:2,
-&quot;name&quot;:&quot;Custom Rugs&quot;,
-&quot;item&quot;:&quot;https://www.imperialknots.com/pages/custom-rugs&quot;
-}
-]
-}
-
-]
-}
+  ] }
+</script>
