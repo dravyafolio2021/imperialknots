@@ -11,6 +11,25 @@
   "type": "footer",
   "name": "t:general.footer",
   "sections": {
+    "blocks_XbHcJc": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7026512_bUmQMi": {
+          "type": "ai_gen_block_7026512",
+          "settings": {
+            "custom_liquid": "<style>\n\n.cora-rte-section {\n    background-color: #f9f9f9 !important; \n    font-family: 'Segoe UI', Arial, sans-serif;\n    line-height: 1.8;\n}\n\n.cora-rte-container {\n    max-width: 800px;\n    margin: 0 auto;\n}\n\n.cora-rte-body {\n    background: #ffffff;\n    padding: 40px;\n    border-radius: 4px;\n    border-top: 4px solid #1a1a1a; \n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);\n    color: #333;\n    font-size: 15px;\n}\n\n.cora-rte-body p {\n    margin: 0;\n}\n\n\n.cora-rte-body br + br {\n    display: block;\n    content: \"\";\n    margin-top: 15px;\n}\n\n.cora-rte-body a {\n    color: #1a1a1a;\n    text-decoration: none;\n    font-weight: 600;\n    transition: color 0.2s ease-in-out;\n    border-bottom: 1px solid #ddd;\n}\n\n.cora-rte-body a:hover {\n    color: #b8860b; \n    border-bottom-color: #b8860b;\n}\n\n@media (max-width: 600px) {\n    .cora-rte-body {\n        padding: 25px;\n        font-size: 14px;\n    }\n}\n</style>",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7026512_bUmQMi"
+      ],
+      "custom_css": [],
+      "name": "Custom liquid",
+      "settings": {}
+    },
     "cora_mobile_bar_CjRGRt": {
       "type": "cora-mobile-bar",
       "blocks": {
@@ -148,6 +167,7 @@
     }
   },
   "order": [
+    "blocks_XbHcJc",
     "cora_mobile_bar_CjRGRt",
     "footer_7fh9kJ"
   ]
