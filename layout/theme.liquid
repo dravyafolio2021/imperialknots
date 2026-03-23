@@ -61,25 +61,23 @@
 {%- if page.handle == 'faqs' or page.handle == 'best-rugs-in-india' -%}
   {% render 'schema-bestcoll' %}
 {%- endif -%}
- {%- if page.handle == 'faqs' or page.handle == 'carpets-rugs-hyderabad' -%}
-  {% render 'schema-rug-hyd ' %}
+{%- if page.handle == 'faqs' or page.handle == 'carpets-rugs-hyderabad' -%}
+  {% render 'schema-rug-hyd' %}
 {%- endif -%}
 
-{%- if page.handle == 'custom-rugs'   -%}
+{%- if page.handle == 'custom-rugs' -%}
   {% render 'schema-custom' %}
 {%- endif -%}
 
-{%- if page.handle == 'best-carpet-rugs-manufacturer-india'   -%}
+{%- if page.handle == 'best-carpet-rugs-manufacturer-india' -%}
   {% render 'schema-man' %}
 {%- endif -%}
 
 
-
-{% comment %} Load Organization Schema only on Homepage {% endcomment %}
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
 {%- endif -%}
- 
+
 {% comment %} Load Product Schema only on Product pages {% endcomment %}
 {%- if template.name == 'product' -%}
   {% render 'schema-product' %}
