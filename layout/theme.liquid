@@ -58,6 +58,10 @@
 {%- if page.handle == 'faqs' or page.handle == 'frequently-asked-questions' -%}
   {% render 'schema-faq' %}
 {%- endif -%}
+{%- if page.handle == 'faqs' or page.handle == 'best-rugs-in-india' -%}
+  {% render 'schema-bestcoll' %}
+{%- endif -%}
+ 
 {%- if page.handle == 'custom-rugs'   -%}
   {% render 'schema-custom' %}
 {%- endif -%}
@@ -66,6 +70,7 @@
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
 {%- endif -%}
+ 
 {% comment %} Load Product Schema only on Product pages {% endcomment %}
 {%- if template.name == 'product' -%}
   {% render 'schema-product' %}
