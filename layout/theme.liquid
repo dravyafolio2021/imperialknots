@@ -98,6 +98,10 @@
   {% render 'schema-juterugs' %}
 {%- endif -%}
 
+{%- if page.handle == 'carpets-london' -%}
+  {% render 'schema-london' %}
+{%- endif -%}
+
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
 {%- endif -%}
