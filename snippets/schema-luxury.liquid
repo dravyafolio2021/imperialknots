@@ -1,190 +1,178 @@
 <script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@graph":[
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.imperialknots.com/#organization",
+        "name": "Imperial Knots",
+        "url": "https://www.imperialknots.com",
+        "description": "Imperial Knots is a luxury handmade rug brand specializing in premium carpets, bespoke rugs and artisan handcrafted floor coverings."
+      },
 
-{
-"@type":"Organization",
-"@id":"https://www.imperialknots.com/#organization",
-"name":"Imperial Knots",
-"url":"https://www.imperialknots.com",
-"description":"Imperial Knots is a luxury handmade rug brand specializing in premium carpets, bespoke rugs and artisan handcrafted floor coverings."
-},
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.imperialknots.com/collections/luxury-handmade-rugs/#collectionpage",
+        "url": "https://www.imperialknots.com/collections/luxury-handmade-rugs",
+        "name": "Luxury Handmade Rugs | Premium Designer Carpets",
+        "description": "Shop luxury handmade rugs from Imperial Knots. Discover premium rugs including hand knotted carpets, custom rugs, silk rugs, wool rugs and designer rugs crafted by skilled artisans.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Imperial Knots",
+          "url": "https://www.imperialknots.com"
+        },
+        "about": {
+          "@type": "Product",
+          "name": "Luxury Handmade Rugs"
+        },
+        "breadcrumb": {
+          "@id": "https://www.imperialknots.com/collections/luxury-handmade-rugs/#breadcrumb"
+        }
+      },
 
-{
-"@type":"CollectionPage",
-"@id":"https://www.imperialknots.com/collections/luxury-handmade-rugs/#collectionpage",
-"url":"https://www.imperialknots.com/collections/luxury-handmade-rugs",
-"name":"Luxury Handmade Rugs | Premium Designer Carpets",
-"description":"Shop luxury handmade rugs from Imperial Knots. Discover premium rugs including hand knotted carpets, custom rugs, silk rugs, wool rugs and designer rugs crafted by skilled artisans.",
-"isPartOf":{
-"@type":"WebSite",
-"name":"Imperial Knots",
-"url":"https://www.imperialknots.com"
-},
-"about":{
-"@type":"Product",
-"name":"Luxury Handmade Rugs"
-},
-"breadcrumb":{
-"@id":"https://www.imperialknots.com/collections/luxury-handmade-rugs/#breadcrumb"
-}
-},
+      {
+        "@type": "OfferCatalog",
+        "name": "Luxury Handmade Rugs Collection",
+        "url": "https://www.imperialknots.com/collections/luxury-handmade-rugs",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Luxury Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Hand Knotted Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Hand Tufted Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Custom Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Silk Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Wool Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Viscose Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Modern Designer Rugs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Traditional Carpets" } }
+        ]
+      },
 
-{
-"@type":"OfferCatalog",
-"name":"Luxury Handmade Rugs Collection",
-"url":"https://www.imperialknots.com/collections/luxury-handmade-rugs",
-"itemListElement":[
+      {
+        "@type": "ItemList",
+        "name": "Luxury Handmade Rugs",
+        "numberOfItems": "100+",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Luxury Rugs" },
+          { "@type": "ListItem", "position": 2, "name": "Hand Knotted Rugs" },
+          { "@type": "ListItem", "position": 3, "name": "Hand Tufted Rugs" },
+          { "@type": "ListItem", "position": 4, "name": "Custom Rugs" },
+          { "@type": "ListItem", "position": 5, "name": "Silk Rugs" },
+          { "@type": "ListItem", "position": 6, "name": "Wool Rugs" },
+          { "@type": "ListItem", "position": 7, "name": "Designer Rugs" }
+        ]
+      },
 
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Luxury Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Hand Knotted Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Hand Tufted Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Custom Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Silk Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Wool Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Viscose Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Modern Designer Rugs"}},
-{"@type":"Offer","itemOffered":{"@type":"Product","name":"Traditional Carpets"}}
+      {
+        "@type": "DefinedTermSet",
+        "name": "Luxury Rug Styles",
+        "hasDefinedTerm": [
+          { "@type": "DefinedTerm", "name": "Modern Rugs" },
+          { "@type": "DefinedTerm", "name": "Geometric Rugs" },
+          { "@type": "DefinedTerm", "name": "Floral Rugs" },
+          { "@type": "DefinedTerm", "name": "Moroccan Rugs" },
+          { "@type": "DefinedTerm", "name": "Abstract Rugs" },
+          { "@type": "DefinedTerm", "name": "Traditional Rugs" }
+        ]
+      },
 
-]
-},
+      {
+        "@type": "ItemList",
+        "name": "Premium Materials Used in Luxury Rugs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Wool" },
+          { "@type": "ListItem", "position": 2, "name": "Silk" },
+          { "@type": "ListItem", "position": 3, "name": "Bamboo Silk" },
+          { "@type": "ListItem", "position": 4, "name": "Viscose" },
+          { "@type": "ListItem", "position": 5, "name": "Cotton" },
+          { "@type": "ListItem", "position": 6, "name": "Jute" }
+        ]
+      },
 
-{
-"@type":"ItemList",
-"name":"Luxury Handmade Rugs",
-"numberOfItems":"100+",
-"itemListElement":[
+      {
+        "@type": "Audience",
+        "audienceType": [
+          "Interior Designers",
+          "Luxury Homeowners",
+          "Architects",
+          "High-End Residential Projects",
+          "Hospitality Designers"
+        ]
+      },
 
-{"@type":"ListItem","position":1,"name":"Luxury Rugs"},
-{"@type":"ListItem","position":2,"name":"Hand Knotted Rugs"},
-{"@type":"ListItem","position":3,"name":"Hand Tufted Rugs"},
-{"@type":"ListItem","position":4,"name":"Custom Rugs"},
-{"@type":"ListItem","position":5,"name":"Silk Rugs"},
-{"@type":"ListItem","position":6,"name":"Wool Rugs"},
-{"@type":"ListItem","position":7,"name":"Designer Rugs"}
+      {
+        "@type": "Service",
+        "name": "Luxury Rug Customization Service",
+        "provider": {
+          "@id": "https://www.imperialknots.com/#organization"
+        },
+        "description": "Custom design service for luxury handmade rugs allowing clients to create bespoke rugs with specific sizes, materials, colors and patterns."
+      },
 
-]
-},
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are luxury handmade rugs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Luxury handmade rugs are premium carpets crafted by skilled artisans using high-quality materials such as wool and silk, offering superior durability and design."
+            }
+          },
 
-{
-"@type":"DefinedTermSet",
-"name":"Luxury Rug Styles",
-"hasDefinedTerm":[
+          {
+            "@type": "Question",
+            "name": "Are handmade rugs worth buying?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, handmade rugs are more durable, unique and long-lasting compared to machine-made rugs, making them a valuable investment."
+            }
+          },
 
-{"@type":"DefinedTerm","name":"Modern Rugs"},
-{"@type":"DefinedTerm","name":"Geometric Rugs"},
-{"@type":"DefinedTerm","name":"Floral Rugs"},
-{"@type":"DefinedTerm","name":"Moroccan Rugs"},
-{"@type":"DefinedTerm","name":"Abstract Rugs"},
-{"@type":"DefinedTerm","name":"Traditional Rugs"}
+          {
+            "@type": "Question",
+            "name": "Can I customize a luxury rug?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Imperial Knots offers custom luxury rugs where you can choose size, material, colors and design to create a bespoke rug."
+            }
+          },
 
-]
-},
+          {
+            "@type": "Question",
+            "name": "What materials are used in luxury rugs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Luxury rugs are made using wool, silk, bamboo silk, viscose, cotton and jute depending on design and usage."
+            }
+          }
+        ]
+      },
 
-{
-"@type":"ItemList",
-"name":"Premium Materials Used in Luxury Rugs",
-"itemListElement":[
-
-{"@type":"ListItem","position":1,"name":"Wool"},
-{"@type":"ListItem","position":2,"name":"Silk"},
-{"@type":"ListItem","position":3,"name":"Bamboo Silk"},
-{"@type":"ListItem","position":4,"name":"Viscose"},
-{"@type":"ListItem","position":5,"name":"Cotton"},
-{"@type":"ListItem","position":6,"name":"Jute"}
-
-]
-},
-
-{
-"@type":"Audience",
-"audienceType":[
-"Interior Designers",
-"Luxury Homeowners",
-"Architects",
-"High-End Residential Projects",
-"Hospitality Designers"
-]
-},
-
-{
-"@type":"Service",
-"name":"Luxury Rug Customization Service",
-"provider":{
-"@id":"https://www.imperialknots.com/#organization"
-},
-"description":"Custom design service for luxury handmade rugs allowing clients to create bespoke rugs with specific sizes, materials, colors and patterns."
-},
-
-{
-"@type":"FAQPage",
-"mainEntity":[
-
-{
-"@type":"Question",
-"name":"What are luxury handmade rugs?",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"Luxury handmade rugs are premium carpets crafted by skilled artisans using high-quality materials such as wool and silk, offering superior durability and design."
-}
-},
-
-{
-"@type":"Question",
-"name":"Are handmade rugs worth buying?",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"Yes, handmade rugs are more durable, unique and long-lasting compared to machine-made rugs, making them a valuable investment."
-}
-},
-
-{
-"@type":"Question",
-"name":"Can I customize a luxury rug?",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"Yes, Imperial Knots offers custom luxury rugs where you can choose size, material, colors and design to create a bespoke rug."
-}
-},
-
-{
-"@type":"Question",
-"name":"What materials are used in luxury rugs?",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"Luxury rugs are made using wool, silk, bamboo silk, viscose, cotton and jute depending on design and usage."
-}
-}
-
-]
-},
-
-{
-"@type":"BreadcrumbList",
-"@id":"https://www.imperialknots.com/collections/luxury-handmade-rugs/#breadcrumb",
-"itemListElement":[
-{
-"@type":"ListItem",
-"position":1,
-"name":"Home",
-"item":"https://www.imperialknots.com"
-},
-{
-"@type":"ListItem",
-"position":2,
-"name":"Collections",
-"item":"https://www.imperialknots.com/collections"
-},
-{
-"@type":"ListItem",
-"position":3,
-"name":"Luxury Handmade Rugs",
-"item":"https://www.imperialknots.com/collections/luxury-handmade-rugs"
-}
-]
-}
-
-]
-}
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.imperialknots.com/collections/luxury-handmade-rugs/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.imperialknots.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Collections",
+            "item": "https://www.imperialknots.com/collections"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Luxury Handmade Rugs",
+            "item": "https://www.imperialknots.com/collections/luxury-handmade-rugs"
+          }
+        ]
+      }
+    ]
+  }
 </script>
