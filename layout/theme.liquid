@@ -110,6 +110,10 @@
   {% render 'Schema-bhadohi' %}
 {%- endif -%}
 
+{%- if page.handle == 'area-rugs' -%}
+  {% render 'schema-arearugs' %}
+{%- endif -%}
+
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
 {%- endif -%}
