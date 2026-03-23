@@ -73,6 +73,10 @@
   {% render 'schema-man' %}
 {%- endif -%}
 
+{%- if page.handle == 'carpets-rugs-delhi' -%}
+  {% render 'schema-delhi' %}
+{%- endif -%}
+
 
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
