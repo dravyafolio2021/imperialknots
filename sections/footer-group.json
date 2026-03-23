@@ -14,6 +14,15 @@
     "blocks_XbHcJc": {
       "type": "_blocks",
       "blocks": {
+        "ai_gen_block_7026512_gMnfHU": {
+          "type": "ai_gen_block_7026512",
+          "name": "Custom liquid",
+          "settings": {
+            "custom_liquid": "@media and screen (max-width:764px){\n#ShopifyChat{ margin-bottom:24px; !important}\n\n}",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        },
         "ai_gen_block_7026512_bUmQMi": {
           "type": "ai_gen_block_7026512",
           "settings": {
@@ -24,6 +33,7 @@
         }
       },
       "block_order": [
+        "ai_gen_block_7026512_gMnfHU",
         "ai_gen_block_7026512_bUmQMi"
       ],
       "custom_css": [],
