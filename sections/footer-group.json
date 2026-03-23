@@ -18,7 +18,7 @@
           "type": "ai_gen_block_7026512",
           "name": "Custom liquid",
           "settings": {
-            "custom_liquid": "@media and screen (max-width:764px){\n#ShopifyChat{ margin-bottom:24px; !important}\n\n}",
+            "custom_liquid": "<style>\n\n@media and screen (max-width:764px){\n#ShopifyChat{ margin-bottom:24px; !important}\n\n}\n</style>",
             "desktop_width_percent": 100
           },
           "blocks": {}
