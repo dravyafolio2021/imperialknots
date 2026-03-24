@@ -19,10 +19,29 @@
       "settings": {
         "heading": "You May Also Like"
       }
+    },
+    "blocks_X4iYj7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7026512_cnp4ax": {
+          "type": "ai_gen_block_7026512",
+          "settings": {
+            "custom_liquid": "<script>\n  if (window.location.pathname.includes('/products/giftcard')) {\n    document.addEventListener('DOMContentLoaded', function () {\n      const el = document.querySelector('.cmp-accordions');\n      if (el) {\n        el.style.display = 'none';\n      }\n    });\n  }\n</script>",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7026512_cnp4ax"
+      ],
+      "name": "Custom liquid",
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "cora_related_products_cc3cHE"
+    "cora_related_products_cc3cHE",
+    "blocks_X4iYj7"
   ]
 }
