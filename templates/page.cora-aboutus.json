@@ -88,6 +88,9 @@
       "block_order": [
         "text_HPhRxU"
       ],
+      "custom_css": [
+        ".cora-rte-body {font-family: Assistant,sans-serif;}"
+      ],
       "name": "Cora Rich Text",
       "settings": {
         "width": "cora-width-wide",
