@@ -92,11 +92,13 @@
   {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
+{% comment %}
 <link
   rel="canonical"
   href="{{ canonical_url }}"
 >
-
+{% endcomment %}
+ 
 {% if page_description %}
   <meta
     name="description"
