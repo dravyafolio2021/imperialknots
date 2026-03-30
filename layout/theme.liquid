@@ -132,7 +132,7 @@ document.addEventListener('contextmenu', function(e) {
 {%- endif -%}
 
 
-{% if request.page_type == 'page' and page.handle == 'planning-a-project' %}
+{% if template == 'page.planning-a-project' %}
   {% render 'schema_projects' %}
 {% endif %}
 
