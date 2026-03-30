@@ -131,6 +131,9 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-kolkotta' %}
 {%- endif -%}
 
+{%- if page.handle == 'black-white-carpets-india' -%}
+  {% render 'schema-blackwhiterugs' %}
+{%- endif -%}
 
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
