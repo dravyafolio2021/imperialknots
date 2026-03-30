@@ -1,0 +1,127 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+
+    {
+      "@type": "CollectionPage",
+      "@id": "{{ shop.url }}{{ collection.url }}",
+      "name": "{{ collection.title }}",
+      "url": "{{ shop.url }}{{ collection.url }}",
+      "description": "{{ collection.description | strip_html | escape }}",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "{{ shop.name }}",
+        "url": "{{ shop.url }}"
+      }
+    },
+
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ shop.url }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Collections",
+          "item": "{{ shop.url }}/collections"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ collection.title }}",
+          "item": "{{ shop.url }}{{ collection.url }}"
+        }
+      ]
+    },
+
+    {
+      "@type": "ItemList",
+      "name": "{{ collection.title }} Products",
+      "itemListElement": [
+        {% for product in collection.products limit: 20 %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": "{{ shop.url }}{{ product.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    },
+
+    {% for product in collection.products limit: 20 %}
+    {
+      "@type": "Product",
+      "name": "{{ product.title | escape }}",
+      "url": "{{ shop.url }}{{ product.url }}",
+      "image": "{{ product.featured_image | img_url: 'master' }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "{{ shop.name }}"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "{{ shop.currency }}",
+        "price": "{{ product.price | money_without_currency }}",
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": "{{ shop.url }}{{ product.url }}"
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %},
+
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+
+        {
+          "@type": "Question",
+          "name": "What are black and white carpets best used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Black and white carpets are ideal for modern, minimalist, and contemporary interiors, adding contrast and elegance to living rooms, bedrooms, and commercial spaces."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are black and white rugs suitable for high-traffic areas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, depending on material and weave, black and white rugs can be highly durable and suitable for high-traffic areas like living rooms and hallways."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do black and white carpets get dirty easily?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Black and white rugs can show dust or stains more easily, but regular vacuuming and maintenance help keep them clean and long-lasting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I customize black and white rugs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, custom black and white rugs can be made in different sizes, patterns, and materials to match your interior design requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are handmade black and white carpets durable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, handmade carpets are known for their durability and craftsmanship, making them a long-term investment."
+          }
+        }
+
+      ]
+    }
+
+  ]
+}
+</script>
