@@ -131,6 +131,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-kolkotta' %}
 {%- endif -%}
 
+{%- if page.handle == 'pages/planning-a-project' -%}
+  {% render 'schema_projects' %}
+{%- endif -%}
+
 {%- if template.name == 'index' -%}
   {% render 'schema-organization' %}
 {%- endif -%}
