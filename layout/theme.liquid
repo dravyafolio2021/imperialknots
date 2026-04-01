@@ -145,6 +145,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-johannesburg' %}
 {%- endif -%}
 
+{%- if page.handle == 'handmade-rugs-sydney' -%}
+  {% render 'schema-sydney' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
