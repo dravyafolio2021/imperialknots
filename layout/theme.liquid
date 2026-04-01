@@ -135,6 +135,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-blackwhiterugs' %}
 {%- endif -%}
 
+{%- if page.handle == 'luxury-rugs-melbourne' -%}
+  {% render 'schema-melbourne' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
