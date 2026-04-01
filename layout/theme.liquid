@@ -153,6 +153,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-dubai' %}
 {%- endif -%}
 
+{%- if page.handle == 'luxury-rugs-doha' -%}
+  {% render 'schema-doha' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
