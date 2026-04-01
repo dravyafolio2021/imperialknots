@@ -63,9 +63,11 @@ document.addEventListener('contextmenu', function(e) {
 {%- if page.handle == 'faqs' or page.handle == 'frequently-asked-questions' -%}
   {% render 'schema-faq' %}
 {%- endif -%}
-{%- if page.handle == 'faqs' or page.handle == 'best-rugs-in-india' -%}
+
+{%- if page.handle == 'best-rugs-in-india' -%}
   {% render 'schema-bestcoll' %}
 {%- endif -%}
+
 {%- if page.handle == 'faqs' or page.handle == 'carpets-rugs-hyderabad' -%}
   {% render 'schema-rug-hyd' %}
 {%- endif -%}
