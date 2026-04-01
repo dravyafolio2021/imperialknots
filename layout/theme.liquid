@@ -157,6 +157,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-doha' %}
 {%- endif -%}
 
+{%- if page.handle == 'carpets-luxury-rugs-riyadh' -%}
+  {% render 'schema-riyadh' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
