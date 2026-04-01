@@ -161,6 +161,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-riyadh' %}
 {%- endif -%}
 
+{%- if page.handle == 'luxury-rugs-abu-dhabi' -%}
+  {% render 'schema-abudhabi' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
