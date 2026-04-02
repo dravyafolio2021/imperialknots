@@ -86,15 +86,10 @@
     <div class="cb-overlay"></div>
 
     <div class="cb-content">
-      <h1 class="cb-heading">
-        {%- if section.settings.heading != blank -%}
-          {{ section.settings.heading }}
-        {%- else -%}
-          {{ collection.title }}
-        {%- endif -%}
-      </h1>
+      <h1 class="cb-heading">{{ collection.title }}</h1>
+        
 
-      <div class="cb-subheading">
+     <div class="cb-subheading">
         {%- if section.settings.subheading != blank -%}
           {{ section.settings.subheading }}
         {%- else -%}
