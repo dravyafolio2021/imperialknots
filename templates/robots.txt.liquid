@@ -3,7 +3,9 @@ Imperial Knots - robots.txt
 Clean + SEO optimized + correct formatting
 {% endcomment %}
 
-# Standard Shopify Rules
+# ----------------------------------
+# STANDARD SHOPIFY RULES
+# ----------------------------------
 
 {% for group in robots.default_groups %}
 {{ group.user_agent }}
@@ -19,39 +21,59 @@ Clean + SEO optimized + correct formatting
 {% endfor %}
 
 # ----------------------------------
-
 # CUSTOM SEO RULES (IMPORTANT)
-
 # ----------------------------------
 
 User-agent: *
+
+# -------------------------------
+# BLOCK FILTERS & PARAMETERS
+# -------------------------------
+
 Disallow: /*?*filter*
 Disallow: /*?*sort_by*
 Disallow: /*?*variant*
 Disallow: /*?*page=
-Disallow: /search
+Disallow: /*?*size=
+Disallow: /*?*color=
+Disallow: /*?*q=
 
-# Optional: block encoded/duplicate collection URLs
+# Fallback: block any unknown parameters (optional but safe)
+Disallow: /*?*
 
+# -------------------------------
+# BLOCK FACETED COLLECTION URLS
+# (CRITICAL FIX)
+# -------------------------------
+
+Disallow: /collections/*/*
 Disallow: /collections/*+*
 Disallow: /collections/*%2B*
 Disallow: /collections/*%2b*
 
-# Block unnecessary Shopify system paths
+# -------------------------------
+# BLOCK SEARCH & SYSTEM PATHS
+# -------------------------------
 
+Disallow: /search
 Disallow: /apple-app-site-association
 Disallow: /.well-known/shopify/monorail
 Disallow: /cdn/wpm/
 
-# Allow key pages
+# -------------------------------
+# ALLOW IMPORTANT PAGES
+# -------------------------------
 
 Allow: /collections/
+Allow: /collections/*.json
+Allow: /collections/*/products/
 Allow: /products/
 Allow: /blogs/
 Allow: /pages/
 
-# Sitemap
+# -------------------------------
+# SITEMAP
+# -------------------------------
 
 Sitemap: https://www.imperialknots.com/sitemap.xml
-
 
