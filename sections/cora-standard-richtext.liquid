@@ -3,9 +3,9 @@
 <section id="cora-standard-richtext-{{ section.id }}" class="cora-standard-richtext">
   <div class="cora-standard-richtext__inner">
     {% if page and page.title != blank %}
-      <h1 class="cora-standard-richtext__title">{{ page.title }}</h1>
+      <h2 class="cora-standard-richtext__title">{{ page.title }}</h2>
     {% elsif section.settings.title != blank %}
-      <h1 class="cora-standard-richtext__title">{{ section.settings.title }}</h1>
+      <h2 class="cora-standard-richtext__title">{{ section.settings.title }}</h2>
     {% endif %}
 
     {% if section.settings.show_updated %}
