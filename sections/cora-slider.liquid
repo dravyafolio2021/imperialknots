@@ -41,6 +41,10 @@
             style="background: rgba(0,0,0, {{ block.settings.overlay_opacity | default: 0.35 }} );"
           ></div>
 
+          {% if forloop.first %}
+            <h1 class="cora-slider-heading">Luxury Handmade Rugs & Carpets in India | Imperial Knots</h1>
+          {% endif %}
+
           <div
             class="cora-slider__content"
             style="--cora-content-align: {{ block.settings.content_align | default: 'left' }}; --cora-content-width: {{ block.settings.content_width | default: 50 }}%;"
@@ -200,8 +204,24 @@
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
     { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#000000" },
-    { "type": "range", "id": "padding_top", "label": "Padding top (px)", "min": 0, "step": 2 , "max": 200, "default": 0 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (px)", "min": 0,  "step": 2 , "max": 200, "default": 0 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "step": 2,
+      "max": 200,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "step": 2,
+      "max": 200,
+      "default": 0
+    }
   ],
   "blocks": [
     {
