@@ -38,9 +38,9 @@
                 <div class="cora-product-grid__media-wrap">
                   {% comment %} image override preferred; else product featured image {% endcomment %}
                   {% if block.settings.override_image %}
-                    <img src="{{ block.settings.override_image | img_url: '720x720' }}" alt="{{ block.settings.override_image_alt | default: all_products[block.settings.product].title }}" loading="lazy" width="720" height="720">
+                    <img src="{{ block.settings.override_image | img_url: '720x720' }}" alt="{{ block.settings.override_image_alt | default: all_products[block.settings.product].title }}luxury rug India" loading="lazy" width="720" height="720">
                   {% else %}
-                    <img src="{{ all_products[block.settings.product].featured_image | img_url: '720x720' }}" alt="{{ all_products[block.settings.product].title }}" loading="lazy" width="720" height="720">
+                    <img src="{{ all_products[block.settings.product].featured_image | img_url: '720x720' }}" alt="{{ all_products[block.settings.product].title }}luxury rug India" loading="lazy" width="720" height="720">
                   {% endif %}
                   {% if block.settings.badge_text != blank %}
                     <span class="cora-product-grid__badge" style="background: {{ block.settings.badge_bg | default: '#ffffff' }}; color: {{ block.settings.badge_color | default: '#111111' }};">{{ block.settings.badge_text }}</span>
