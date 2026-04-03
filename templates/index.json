@@ -46,7 +46,9 @@
       "block_order": [
         "slide_ribDea"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".cora-slider__image img{height: 100%}"
+      ],
       "name": "Slider  ",
       "settings": {
         "aria_label": "Homepage slider",
