@@ -24,10 +24,10 @@
           {% if block.settings.image %}
             <picture class="cora-slider__image">
               {% if block.settings.image_mobile %}
-                <source media="(max-width: 900px)" srcset="{{ block.settings.image_mobile | img_url: '800x' }}">
+                <source media="(max-width: 900px)" srcset="{{ block.settings.image_mobile | image_url: '800x' }}">
               {% endif %}
               <img
-                src="{{ block.settings.image | img_url: '2000x' }}"
+                src="{{ block.settings.image | image_url: '2000x' }}"
                 alt="{{ block.settings.image_alt | default: block.settings.heading }}"
                 loading="lazy"
                 width="2000"
