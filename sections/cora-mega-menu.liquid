@@ -44,7 +44,7 @@
             {% if block.settings[img_key] != blank %}
               <a href="{{ block.settings[url_key] }}" class="cora-mm-card">
                 <div class="cora-mm-img">
-                   <img src="{{ block.settings[img_key] | image_url: '400x500' }}" alt="{{ block.settings[txt_key] | escape }}" width="400" height="500" loading="lazy">
+                   <img src="{{ block.settings[img_key] | image_url: width: 400, height: 500, crop: 'center' }}" alt="{{ block.settings[txt_key] | escape }}" width="400" height="500" loading="lazy">
                 </div>
                 <span class="cora-mm-label">{{ block.settings[txt_key] }}</span>
               </a>
