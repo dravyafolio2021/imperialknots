@@ -16,7 +16,8 @@
           "type": "price_list",
           "settings": {
             "title": "Price Range",
-            "price_ranges": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000"
+            "price_ranges": "0-20000:Under ₹20,000\n20000-50000:₹20,000 - ₹50,000\n50000-100000:₹50,000 - ₹1,00,000\n100000-200000:₹1,00,000 - ₹2,00,000\n200000-99999999:Above ₹2,00,000",
+            "default_open": false
           }
         },
         "tag_group_34hrhn": {
@@ -72,6 +73,9 @@
         "tag_group_fVap7t",
         "tag_group_C7cfgt",
         "tag_group_XwBU7F"
+      ],
+      "custom_css": [
+        "[data-product-id=\"10061082427699\"],li[data-id=\"10061082427699\"] {display: none !important;}"
       ],
       "settings": {
         "products_per_page": 24,
