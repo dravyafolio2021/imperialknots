@@ -6,7 +6,7 @@
 {{ 'cora-main-product.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-    /* --- 7. MOBILE RESPONSIVENESS --- */
+  /* --- 7. MOBILE RESPONSIVENESS --- */
   @media screen and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .cmp-container {
       flex-direction: column !important;
@@ -29,13 +29,18 @@
 <section class="cmp-section" id="MainProduct-{{ section.id }}">
   <div class="cmp-container">
     <div class="cmp-gallery">
-     <div class="cmp-meta">
+      <div class="cmp-meta">
         {%- if product.collections.first -%}
-          <a href="{{ product.collections.first.url }}" class="cmp-category" style="text-decoration: none; color: inherit; cursor: pointer;">
+          <a
+            href="{{ product.collections.first.url }}"
+            class="cmp-category"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+          >
             {{ product.collections.first.title }}
           </a>
         {%- endif -%}
       </div>
+
       <div class="cmp-main-image">
         {%- if product.featured_image -%}
           <img
@@ -70,16 +75,20 @@
       <div class="cmp-meta">
         {%- assign current_variant = product.selected_or_first_available_variant -%}
         <span class="cmp-sku"
-          >SKU: <span id="Sku-{{ section.id }}">{{ current_variant.sku | default: 'N/A' }}</span></span
+          >SKU:
+          <span id="Sku-{{ section.id }}">
+            {{ current_variant.sku | default: 'N/A' }}
+          </span></span
         >
       </div>
 
       <h1 class="cmp-title">{{ product.title }}</h1>
-      <div class="cmp-price" id="Price-{{ section.id }}">{{ current_variant.price | money }}</div>
-<div class=" " style="font-size: 13px; color: #707070; font-weight: 500; letter-spacing: 0.2px;">
- 
-  (Inclusive of all taxes)
-</div>      
+      <div class="cmp-price" id="Price-{{ section.id }}">
+        {{ current_variant.price | money }}
+      </div>
+      <div class=" " style="font-size: 13px; color: #707070; font-weight: 500; letter-spacing: 0.2px;">
+        (Inclusive of all taxes)
+      </div>
       <div class="cmp-emi">Easy EMI options available at Checkout</div>
 
       {% form 'product', product, id: 'product-form' %}
@@ -228,12 +237,14 @@
         if (matchedVariant) {
           document.getElementById('MasterSelect-{{ section.id }}').value = matchedVariant.id;
 
+          // Update SKU dynamically based on selected variant
+          document.getElementById('Sku-{{ section.id }}').innerText = matchedVariant.sku || 'N/A';
+
           // Use innerHTML for Money so Bucks can read the <span>
           var price = (matchedVariant.price / 100).toFixed(2);
           var symbol = '{{ cart.currency.symbol }}';
           document.getElementById('Price-{{ section.id }}').innerHTML =
             '<span class="money">' + symbol + price + '</span>';
-
           var btn = document.getElementById('AddToCart-{{ section.id }}');
           if (matchedVariant.available) {
             btn.disabled = false;
