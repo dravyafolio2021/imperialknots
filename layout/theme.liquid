@@ -183,6 +183,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-redrugs' %}
 {%- endif -%}
 
+{%- if page.handle == 'beige-carpets-rugs-india' -%}
+  {% render 'schema-beigerugs' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
