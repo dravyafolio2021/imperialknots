@@ -171,6 +171,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-yellow' %}
 {%- endif -%}
 
+{%- if page.handle == 'grey-rugs-india' -%}
+  {% render 'schema-greyrugs' %}
+{%- endif -%}
+
 {%- if page.handle == 'blue-carpets-india' -%}
   {% render 'schema-bluerugs' %}
 {%- endif -%}
