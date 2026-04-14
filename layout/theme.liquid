@@ -179,6 +179,10 @@ document.addEventListener('contextmenu', function(e) {
   {% render 'schema-bluerugs' %}
 {%- endif -%}
 
+{%- if page.handle == 'red-carpets-india' -%}
+  {% render 'schema-redrugs' %}
+{%- endif -%}
+
 {%- if page.handle == 'planning-a-project' -%}
   {% render 'schema-projects' %}
 {%- endif -%}
