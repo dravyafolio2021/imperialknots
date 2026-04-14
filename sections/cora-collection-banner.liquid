@@ -94,13 +94,9 @@
     <div class="cb-content">
       <h1 class="cb-heading">{{ collection.title }}</h1>
 
-      <div class="cb-subheading">
-        {%- if section.settings.subheading != blank -%}
-          {{ section.settings.subheading }}
-        {%- else -%}
-          {{ collection.description }}
-        {%- endif -%}
-      </div>
+      {%- if section.settings.subheading != blank -%}
+        <div class="cb-subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
     </div>
 
   </div>
@@ -121,7 +117,7 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Description",
-      "info": "Leave blank to use Collection Description."
+      "info": "Leave blank to hide description completely."
     },
 
     { "type": "header", "content": "Images" },
