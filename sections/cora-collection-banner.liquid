@@ -56,6 +56,8 @@
 
 <section id="cb-root-{{ section.id }}" class="collection-banner-section" aria-label="Collection Banner">
   <div class="cb-container section-{{ section.id }}-padding">
+
+    <!-- Background Image -->
     <div class="cb-bg">
       {%- if section.settings.image_desktop != blank -%}
         <picture>
@@ -70,6 +72,7 @@
             height="800"
           >
         </picture>
+
       {%- elsif collection.image != blank -%}
         <img
           src="{{ collection.image | img_url: '2000x' }}"
@@ -78,18 +81,20 @@
           width="2000"
           height="800"
         >
+
       {%- else -%}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     </div>
 
+    <!-- Overlay -->
     <div class="cb-overlay"></div>
 
+    <!-- Content -->
     <div class="cb-content">
       <h1 class="cb-heading">{{ collection.title }}</h1>
-        
 
-     <div class="cb-subheading">
+      <div class="cb-subheading">
         {%- if section.settings.subheading != blank -%}
           {{ section.settings.subheading }}
         {%- else -%}
@@ -97,6 +102,7 @@
         {%- endif -%}
       </div>
     </div>
+
   </div>
 </section>
 
@@ -188,6 +194,8 @@
       "default": 100
     }
   ],
-  "presets": [{ "name": "Collection Banner" }]
+  "presets": [
+    { "name": "Collection Banner" }
+  ]
 }
 {% endschema %}
