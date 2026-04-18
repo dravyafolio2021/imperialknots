@@ -274,12 +274,16 @@
 
       <span class="product-count">{{ collection.products_count }} Products</span>
 
+     
       <select id="sort-by" onchange="location = this.value;" class="cora-sort-select">
+        {%- comment -%} Assign default to newest if no URL parameter is active {%- endcomment -%}
+        {%- assign current_sort = collection.sort_by | default: 'created-descending' -%}
+        
         {% for option in collection.sort_options %}
           {%- unless option.value contains 'title' or option.value contains 'created-ascending' -%}
             <option
               value="?sort_by={{ option.value }}"
-              {% if option.value == collection.sort_by %}
+              {% if option.value == current_sort %}
                 selected
               {% endif %}
             >
